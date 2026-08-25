@@ -96,9 +96,10 @@ Make global SGDM runnable and reproducible from the existing `train.py` entry po
 - Expose all new scalar settings through the current configuration mechanism.
 - Make the random seed an explicit configuration value rather than relying on a hard-coded training seed.
 - Ensure optimizer selection works both in a configuration file and through an explicit command-line override such as `--optimizer_name=adamw` or `--optimizer_name=global_sgdm`.
-- Include optimizer identity, momentum convention, parameter-group audit, matrix/auxiliary settings, random seed, model architecture and parameter count, dataset and tokenizer identifiers, sequence length, batch size and gradient accumulation, precision, processed-token count, and optimizer-step count in checkpoint/run metadata.
+- Include optimizer identity, momentum convention, parameter-group audit, matrix/auxiliary settings, random seed, Git commit hash, model architecture and parameter count, dataset and tokenizer identifiers, sequence length, batch size and gradient accumulation, precision, processed-token count, optimizer-step count, and hardware information in checkpoint/run metadata.
 - Update checkpoint resume logic to validate optimizer type and compatible group structure before loading state.
 - Log both effective matrix LR and auxiliary LR.
+- Record training and validation loss, processed tokens, total wall-clock time, mean optimizer-step time, peak GPU memory, divergence or numerical-instability status, and gradient-clipping frequency for each run. Mark GPU-only measurements as not applicable during CPU runs rather than inventing values.
 - Preserve gradient accumulation, gradient clipping, GradScaler, DDP wrapping, evaluation, and W&B behavior.
 - Create a dedicated tiny smoke-test configuration only if existing configuration options cannot provide a simple and repeatable test run.
 
@@ -109,6 +110,8 @@ Make global SGDM runnable and reproducible from the existing `train.py` entry po
 - Configuration saved in the checkpoint is sufficient to reconstruct the optimizer choice and settings.
 - The saved run configuration is sufficient to identify the seed, model, data, batching, precision, optimizer groups, and processed training budget used by the run.
 - Processed tokens are derived from effective batch size and iteration count and are available for comparison.
+- A smoke run records training/validation loss, processed tokens, wall-clock time, mean optimizer-step time, clipping frequency, and numerical status; it also records peak GPU memory on GPU or explicitly marks that field as not applicable on CPU.
+- Run metadata records the Git commit hash and available hardware information.
 - Default AdamW smoke behavior remains functional.
 - Omitted `optimizer_name` and explicit `--optimizer_name=adamw` pass an equivalence regression test under the same seed and inputs.
 - A checkpoint records the selected optimizer name, and resume rejects an incompatible optimizer selection with a clear error.
@@ -122,8 +125,8 @@ Confirm that eligible matrices receive the intended global SGDM updates and prov
 ### Required changes
 
 - Add optional per-matrix diagnostics that are disabled by default.
-- Allow diagnostics to run only at configured training steps and for selected eligible matrices.
-- Record weight, gradient, momentum, and intended parameter-update Frobenius norms; update-to-weight norm ratio; and the scheduled global SGDM learning rate.
+- Allow diagnostics to run only at configured training steps.
+- At each configured diagnostic step, record scalar measurements for every eligible matrix: weight, gradient, momentum, and actual applied-update Frobenius norms; update-to-weight norm ratio; and the scheduled global SGDM learning rate.
 - Record update spectral norms only for explicitly selected matrices and steps because they are more expensive to calculate.
 - Do not save complete gradients, momentum matrices, or parameter updates.
 - Report weight-decay contributions separately if they are part of the update.
@@ -131,7 +134,8 @@ Confirm that eligible matrices receive the intended global SGDM updates and prov
 ### Task passing criteria
 
 - A deterministic unit test verifies every reported value through direct tensor calculations.
-- A short smoke run produces diagnostics only at the configured steps and for the configured matrices.
+- A deterministic test confirms that each reported applied-update norm equals the observed before/after parameter change.
+- A short smoke run produces the required scalar diagnostics for every eligible matrix only at the configured steps, and produces spectral norms only for the configured subset.
 - Disabling diagnostics avoids additional matrix-norm calculations.
 - All eligible matrices still use the same global SGDM learning rate.
 - Diagnostic collection does not change model parameters or optimizer results.
@@ -149,6 +153,7 @@ Define how global SGDM and AdamW will be evaluated fairly before running any exp
 - Define the maximum number of tuning runs and processed tokens allowed per run.
 - Use validation loss at the same processed-token checkpoint to select configurations.
 - Define a matched AdamW comparison using the same model architecture and initialization, dataset, tokenizer, sequence length, data order, batch size and gradient accumulation, processed-token budget, learning-rate schedule and warmup policy, weight decay and other regularization, eligible/auxiliary parameter definitions where applicable, auxiliary AdamW settings, evaluation frequency and checkpoints, numerical precision, gradient clipping, and random seed.
+- Define a deterministic preflight check that compares AdamW and global SGDM runs with the same seed and training configuration before optimizer-specific updates, confirming identical initialized model parameters and the same sequence of sampled training batches.
 - Reserve a comparable tuning budget for the future Muon baseline.
 - Separate exploratory single-seed runs from final multi-seed confirmation runs.
 - Require at least three seeds for the final selected global SGDM configuration and for any configuration used to support a reported performance claim.
@@ -160,6 +165,7 @@ Define how global SGDM and AdamW will be evaluated fairly before running any exp
 - The number of permitted tuning runs is explicit.
 - Global SGDM, AdamW, and future Muon comparisons use the same processed-token and evaluation protocol.
 - The protocol explicitly lists every matched control and explains any setting that cannot be identical across optimizer families.
+- For the same seed and training configuration, a preflight test confirms that AdamW and global SGDM begin from identical model parameters and consume the same sequence of training batches.
 - Exploratory tuning may use one seed, but final reported configurations require at least three seeds.
 - Another researcher could reproduce the search and select the same winning configuration from the documented rules.
 - No tuning sweep is executed as part of this task.
@@ -178,7 +184,7 @@ Run the separately approved tuning protocol and establish the best tuned global 
 - Record completed, failed, divergent, and interrupted runs; do not silently discard unsuccessful configurations.
 - Select the best exploratory configuration using the predefined validation-loss criterion at the fixed processed-token checkpoint.
 - Run the selected final configuration with at least three predefined seeds.
-- Report validation loss and required secondary measurements for each seed, together with mean and standard deviation.
+- Report validation loss and every run-level measurement defined in Task 1.3 for each seed, together with mean and standard deviation where applicable.
 - Preserve the complete configurations, checkpoints, logs, parameter-group audits, and run metadata needed to reproduce the result.
 - Do not make a causal SGDM-versus-Muon claim until full Muon has been implemented and tuned with a comparable budget.
 
