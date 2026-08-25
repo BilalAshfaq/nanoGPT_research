@@ -11,7 +11,14 @@ M_t = beta * M_(t-1) + (1 - beta) * G_t
 Delta W_t = -eta * M_t
 ```
 
-The implemented momentum convention, weight-decay placement, and optional Nesterov behavior must be stated explicitly and verified from the code.
+This variant must use the momentum equation shown above. Nesterov momentum is disabled so the implemented update has one unambiguous definition. The placement and mathematical effect of weight decay must be stated explicitly and verified from the code.
+
+## Phase 0 baseline status
+
+- The current repository provides AdamW through `GPT.configure_optimizers`.
+- The current repository does not provide an SGDM implementation, a Muon implementation, or a split experimental-optimizer/auxiliary-AdamW path to reproduce.
+- These implementation tasks may proceed in the approved sequence because the missing baselines cannot yet be reproduced.
+- Do not run or interpret causal comparisons between SGDM and Muon until tuned global SGDM and full Muon have both been implemented, mechanically verified, and tuned with comparable budgets.
 
 ## Scope constraints
 
@@ -60,8 +67,8 @@ Implement the exact global SGDM update for eligible matrices and coordinate it w
 
 - Add the common string selector `optimizer_name`, initially supporting `adamw` and `global_sgdm` and designed to accept later variant names without changing the training loop.
 - Keep the AdamW branch routed through the existing `GPT.configure_optimizers` behavior unless an approved compatibility wrapper is required; do not reimplement AdamW mathematics.
-- Implement SGDM momentum using the convention in this document, or document an intentionally selected alternative before coding.
-- Add explicit configuration for matrix learning rate, momentum, weight decay, and Nesterov behavior.
+- Implement the exact convention `M_t = beta * M_(t-1) + (1 - beta) * G_t`, followed by `Delta W_t = -eta * M_t` when weight decay is disabled.
+- Add explicit configuration for matrix learning rate, momentum, and weight decay. Keep Nesterov momentum disabled for this variant.
 - Keep auxiliary AdamW settings separately configurable and identical in meaning across later variants.
 - Provide a single training-loop-facing optimizer interface supporting `step`, `zero_grad`, `param_groups`, `state_dict`, and `load_state_dict` so AMP and checkpointing continue to work.
 - Ensure LR scheduling changes the intended matrix and auxiliary rates without accidentally replacing their relative scales.
@@ -69,8 +76,9 @@ Implement the exact global SGDM update for eligible matrices and coordinate it w
 
 ### Task passing criteria
 
-- On a synthetic matrix with known gradients, the first and subsequent updates match the documented SGDM equations within numerical tolerance.
-- Tests cover zero momentum, nonzero momentum, weight decay, and the selected Nesterov behavior.
+- On a synthetic matrix with known gradients, the first and subsequent observed parameter changes match the documented SGDM equations within numerical tolerance.
+- Tests compare the expected update with the actual before/after parameter difference, rather than validating only an intermediate candidate update.
+- Tests cover zero momentum, nonzero momentum, and the documented weight-decay behavior, and confirm that no Nesterov modification is applied.
 - Auxiliary parameters change only through AdamW; eligible matrices change only through SGDM.
 - `zero_grad(set_to_none=True)` works across both parameter sets.
 - Optimizer state can be serialized, restored, and used to produce the same next update as an uninterrupted run.
@@ -86,8 +94,9 @@ Make global SGDM runnable and reproducible from the existing `train.py` entry po
 ### Required changes
 
 - Expose all new scalar settings through the current configuration mechanism.
+- Make the random seed an explicit configuration value rather than relying on a hard-coded training seed.
 - Ensure optimizer selection works both in a configuration file and through an explicit command-line override such as `--optimizer_name=adamw` or `--optimizer_name=global_sgdm`.
-- Include optimizer identity, momentum convention, parameter-group audit, matrix/auxiliary settings, seed, token count, and effective batch information in checkpoint/run metadata.
+- Include optimizer identity, momentum convention, parameter-group audit, matrix/auxiliary settings, random seed, model architecture and parameter count, dataset and tokenizer identifiers, sequence length, batch size and gradient accumulation, precision, processed-token count, and optimizer-step count in checkpoint/run metadata.
 - Update checkpoint resume logic to validate optimizer type and compatible group structure before loading state.
 - Log both effective matrix LR and auxiliary LR.
 - Preserve gradient accumulation, gradient clipping, GradScaler, DDP wrapping, evaluation, and W&B behavior.
@@ -98,6 +107,7 @@ Make global SGDM runnable and reproducible from the existing `train.py` entry po
 - A short CPU or available-device smoke run completes forward, backward, clipping, optimizer step, evaluation, and checkpoint save.
 - A resume smoke test loads the checkpoint and continues without resetting momentum or auxiliary AdamW state.
 - Configuration saved in the checkpoint is sufficient to reconstruct the optimizer choice and settings.
+- The saved run configuration is sufficient to identify the seed, model, data, batching, precision, optimizer groups, and processed training budget used by the run.
 - Processed tokens are derived from effective batch size and iteration count and are available for comparison.
 - Default AdamW smoke behavior remains functional.
 - Omitted `optimizer_name` and explicit `--optimizer_name=adamw` pass an equivalence regression test under the same seed and inputs.
@@ -138,9 +148,10 @@ Define how global SGDM and AdamW will be evaluated fairly before running any exp
 - State whether weight decay, warmup, and learning-rate schedule settings are fixed or tuned.
 - Define the maximum number of tuning runs and processed tokens allowed per run.
 - Use validation loss at the same processed-token checkpoint to select configurations.
-- Define a matched AdamW comparison using the same model and initialization, data order, batch size and gradient accumulation, processed-token budget, evaluation checkpoints, precision, and gradient clipping.
+- Define a matched AdamW comparison using the same model architecture and initialization, dataset, tokenizer, sequence length, data order, batch size and gradient accumulation, processed-token budget, learning-rate schedule and warmup policy, weight decay and other regularization, eligible/auxiliary parameter definitions where applicable, auxiliary AdamW settings, evaluation frequency and checkpoints, numerical precision, gradient clipping, and random seed.
 - Reserve a comparable tuning budget for the future Muon baseline.
 - Separate exploratory single-seed runs from final multi-seed confirmation runs.
+- Require at least three seeds for the final selected global SGDM configuration and for any configuration used to support a reported performance claim.
 - Define run names and saved metadata containing optimizer, model, learning rate, momentum, weight decay, seed, and scaling rule.
 
 ### Task passing criteria
@@ -148,14 +159,44 @@ Define how global SGDM and AdamW will be evaluated fairly before running any exp
 - The complete set of candidate configurations, or the exact rule used to generate them, is documented.
 - The number of permitted tuning runs is explicit.
 - Global SGDM, AdamW, and future Muon comparisons use the same processed-token and evaluation protocol.
+- The protocol explicitly lists every matched control and explains any setting that cannot be identical across optimizer families.
+- Exploratory tuning may use one seed, but final reported configurations require at least three seeds.
 - Another researcher could reproduce the search and select the same winning configuration from the documented rules.
 - No tuning sweep is executed as part of this task.
 
+## Task 1.6 — Execute the approved baseline tuning protocol
+
+### Task goal
+
+Run the separately approved tuning protocol and establish the best tuned global SGDM baseline without changing the predefined search or selection rules after results are observed.
+
+### Required changes
+
+- Start this task only after Tasks 1.1 through 1.5 are approved and the user explicitly authorizes the tuning runs and their compute budget.
+- Materialize and save the complete run manifest before launching, including every candidate configuration, seed, processed-token limit, and evaluation checkpoint.
+- Run each approved configuration under the matched controls defined in Task 1.5.
+- Record completed, failed, divergent, and interrupted runs; do not silently discard unsuccessful configurations.
+- Select the best exploratory configuration using the predefined validation-loss criterion at the fixed processed-token checkpoint.
+- Run the selected final configuration with at least three predefined seeds.
+- Report validation loss and required secondary measurements for each seed, together with mean and standard deviation.
+- Preserve the complete configurations, checkpoints, logs, parameter-group audits, and run metadata needed to reproduce the result.
+- Do not make a causal SGDM-versus-Muon claim until full Muon has been implemented and tuned with a comparable budget.
+
+### Task passing criteria
+
+- Every entry in the approved run manifest has a recorded outcome.
+- All successful tuning runs use the same matched controls and processed-token selection checkpoint.
+- The winning exploratory configuration is selected solely by the predefined rule.
+- The final selected configuration has results from at least three seeds.
+- The final report includes individual-seed results, mean, standard deviation, failures or instability, and the exact winning configuration.
+- No unapproved configurations or additional tuning runs are introduced after results are inspected.
+- Results are reported as baseline measurements without unsupported causal claims about Muon.
+
 ## Variant completion criteria
 
-- Tasks 1.1 through 1.5 are completed and approved sequentially.
+- Tasks 1.1 through 1.6 are completed and approved sequentially; Task 1.6 additionally requires explicit authorization for its compute budget.
 - Global SGDM uses one common rate for every eligible matrix and auxiliary AdamW for all other parameters.
 - Update mechanics, grouping, checkpoint/resume behavior, and diagnostics are covered by tests.
 - Existing AdamW behavior remains the default.
 - AdamW can always be selected explicitly with `optimizer_name = 'adamw'` and remains available after every later variant is added.
-- A reproducible tuning protocol is ready, but large sweeps require separate approval.
+- The approved tuning protocol has been executed, the final configuration has been evaluated with at least three seeds, and large or additional sweeps still require separate approval.
