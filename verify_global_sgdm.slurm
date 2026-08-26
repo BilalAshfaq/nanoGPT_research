@@ -12,16 +12,27 @@
 
 set -euo pipefail
 
-REPO_DIR="/shared/home/bilal.ashfaq/nano research/nanoGPT_research"
+REPO_DIR="$SLURM_SUBMIT_DIR"
 CONDA_ENV="nanogpt"
 CONDA_SH="/shared/home/bilal.ashfaq/miniconda3/etc/profile.d/conda.sh"
 SMOKE_ROOT="/shared/home/bilal.ashfaq/nanogpt-smoke-runs"
+ENV_FREEZE="$REPO_DIR/cluster_environment.freeze.txt"
 
 cd "$REPO_DIR"
 source "$CONDA_SH"
 conda activate "$CONDA_ENV"
 
 export PYTHONUNBUFFERED=1
+
+if [[ ! -f "$ENV_FREEZE" ]]; then
+    echo "ERROR: Missing $ENV_FREEZE; run bash setup_nanogpt_env.sh first."
+    exit 1
+fi
+
+CURRENT_FREEZE="$(mktemp)"
+trap 'rm -f "$CURRENT_FREEZE"' EXIT
+python -m pip freeze > "$CURRENT_FREEZE"
+diff -u "$ENV_FREEZE" "$CURRENT_FREEZE"
 
 echo "===== JOB INFORMATION ====="
 echo "Job ID: $SLURM_JOB_ID"
@@ -81,6 +92,7 @@ fi
 
 SMOKE_OUT_DIR="$SMOKE_ROOT/global-sgdm-$SLURM_JOB_ID"
 mkdir -p "$SMOKE_OUT_DIR"
+cp "$ENV_FREEZE" "$SMOKE_OUT_DIR/cluster_environment.freeze.txt"
 
 echo "===== TWO-GPU GLOBAL SGDM SMOKE TEST ====="
 echo "Output directory: $SMOKE_OUT_DIR"
