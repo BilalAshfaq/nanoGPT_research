@@ -46,6 +46,14 @@ from shared_utils.run_metadata import (
     validate_resume_compatibility,
     write_run_summary,
 )
+from shared_utils.parameter_partition import partition_optimizer_parameters
+from tuned_global_sgdm.utils.diagnostics import (
+    GlobalSGDMDiagnostics,
+    append_diagnostic_record,
+    initialize_diagnostic_log,
+    parse_diagnostic_matrix_names,
+    parse_diagnostic_steps,
+)
 
 # -----------------------------------------------------------------------------
 # default config values designed to train a gpt2 (124M) on OpenWebText
@@ -94,6 +102,11 @@ auxiliary_weight_decay = 1e-1
 auxiliary_beta1 = 0.9
 auxiliary_beta2 = 0.95
 auxiliary_weight_decay_mode = 'adamw_decoupled'
+# optional global-SGDM matrix diagnostics
+diagnostics_enabled = False
+diagnostic_steps = '' # comma-separated optimizer-step indices
+diagnostic_spectral_matrix_names = '' # comma-separated exact parameter names
+diagnostics_epsilon = 1e-12
 grad_clip = 1.0 # clip gradients at this value, or disable if == 0.0
 # learning rate decay settings
 decay_lr = True # whether to decay the learning rate
@@ -112,6 +125,14 @@ config_keys = [k for k,v in globals().items() if not k.startswith('_') and isins
 exec(open('configurator.py').read()) # overrides from command line or config file
 config = {k: globals()[k] for k in config_keys} # will be useful for logging
 validate_optimizer_name(optimizer_name) # fail before model construction or data loading
+parsed_diagnostic_steps = parse_diagnostic_steps(diagnostic_steps)
+parsed_diagnostic_spectral_names = parse_diagnostic_matrix_names(
+    diagnostic_spectral_matrix_names
+)
+if diagnostics_enabled and optimizer_name != 'global_sgdm':
+    raise ValueError(
+        "global SGDM diagnostics require optimizer_name='global_sgdm'"
+    )
 if optimizer_name != 'adamw' and decay_lr and learning_rate <= 0.0:
     raise ValueError(
         "learning_rate must be positive because it defines the shared "
@@ -279,6 +300,22 @@ else:
         'auxiliary_weight_decay': auxiliary_weight_decay,
         'auxiliary_weight_decay_mode': auxiliary_weight_decay_mode,
     }
+
+diagnostics = GlobalSGDMDiagnostics(
+    enabled=diagnostics_enabled,
+    steps=parsed_diagnostic_steps,
+    spectral_matrix_names=parsed_diagnostic_spectral_names,
+    epsilon=diagnostics_epsilon,
+)
+diagnostic_eligible_parameters = (
+    partition_optimizer_parameters(model).eligible_matrices
+    if diagnostics_enabled
+    else ()
+)
+if diagnostics_enabled:
+    diagnostics.validate_parameter_names(diagnostic_eligible_parameters)
+    if master_process:
+        initialize_diagnostic_log(out_dir, resume=init_from == 'resume')
 
 if init_from == 'resume':
     validate_resume_compatibility(
@@ -519,6 +556,7 @@ while True:
         # backward pass, with gradient scaling if training in fp16
         scaler.scale(loss).backward()
     # clip the gradient
+    collect_diagnostics = master_process and diagnostics.should_collect(iter_num)
     if grad_clip != 0.0:
         scaler.unscale_(optimizer)
         total_gradient_norm = torch.nn.utils.clip_grad_norm_(
@@ -531,6 +569,18 @@ while True:
         else:
             numerical_status = 'nonfinite_gradient_norm'
             numerical_event_count += 1
+    elif collect_diagnostics:
+        # Diagnostics must observe the same unscaled gradient used by the optimizer.
+        scaler.unscale_(optimizer)
+    diagnostic_context = (
+        diagnostics.begin_step(
+            iter_num,
+            diagnostic_eligible_parameters,
+            optimizer.matrix_optimizer,
+        )
+        if collect_diagnostics
+        else None
+    )
     # step the optimizer and scaler if training in fp16
     previous_scale = scaler.get_scale() if scaler.is_enabled() else None
     optimizer_step_timer.start()
@@ -546,6 +596,20 @@ while True:
         numerical_event_count += 1
     else:
         successful_optimizer_steps += 1
+    if diagnostic_context is not None:
+        diagnostic_record = diagnostics.end_step(
+            diagnostic_context,
+            optimizer.matrix_optimizer,
+            optimizer_step_applied=not step_was_skipped,
+        )
+        diagnostic_record['processed_tokens_before_step'] = (
+            iter_num * tokens_per_iter
+        )
+        diagnostic_record['processed_tokens_after_step'] = (
+            (iter_num + 1) * tokens_per_iter
+        )
+        append_diagnostic_record(out_dir, diagnostic_record)
+        diagnostic_context = None # release temporary parameter snapshots promptly
     # flush the gradients as soon as we can, no need for this memory anymore
     optimizer.zero_grad(set_to_none=True)
 
