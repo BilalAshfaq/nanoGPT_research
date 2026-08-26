@@ -43,9 +43,10 @@ Every exploratory and confirmation run uses these controls:
 | Dataset | prepared OpenWebText files from `data/openwebtext` |
 | Sequence length | 1,024 |
 | Micro-batch size | 12 |
-| Global gradient accumulation | 40 |
+| Global gradient accumulation | 40 micro-steps across all ranks (20 per rank) |
 | Effective batch | 480 sequences, 491,520 tokens |
-| DDP world size | 8 |
+| DDP world size | 2 |
+| Hardware | Two NVIDIA RTX PRO 6000 Blackwell GPUs on one Martin cluster node |
 | Precision | bfloat16 |
 | Compilation | enabled |
 | Gradient clipping | global norm 1.0 |
@@ -57,14 +58,18 @@ Every exploratory and confirmation run uses these controls:
 | Auxiliary weight decay | 0.1, AdamW decoupled |
 | Evaluation | 200 batches at steps 0, 333, 666, and 999 |
 | Checkpoint policy | always save at evaluation after step 0 |
+| W&B logging | disabled |
 | Diagnostics | disabled during broad tuning |
 | Exploratory seed | 1,337 |
 | Confirmation seeds | 1,337; 2,027; 4,099 |
 
-All candidates must run on the same hardware class, DDP world size, PyTorch
-version, precision, compilation setting, and prepared dataset files. Record
-the hardware and Git metadata already emitted by `train.py`. A run with a
-different control is invalid rather than an additional candidate.
+All candidates must run on two GPUs of the stated hardware class on one node,
+with the same DDP world size, PyTorch version, precision, compilation setting,
+and prepared dataset files. `train.py` divides the configured global gradient
+accumulation by the DDP world size, so `gradient_accumulation_steps = 40`
+becomes 20 micro-steps per rank while preserving 491,520 tokens per optimizer
+update. Record the hardware and Git metadata already emitted by `train.py`. A
+run with a different control is invalid rather than an additional candidate.
 
 For global SGDM, the common schedule multiplier is generated with
 `learning_rate = 6e-4` and `min_lr = 6e-5`; it scales both the matrix and

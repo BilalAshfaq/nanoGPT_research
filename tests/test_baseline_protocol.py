@@ -41,6 +41,9 @@ class BaselineProtocolTests(unittest.TestCase):
     def test_matched_controls_and_authorization_boundary_are_documented(self):
         required_text = (
             'does not authorize or\nlaunch any tuning run',
+            '| DDP world size | 2 |',
+            '40 micro-steps across all ranks (20 per rank)',
+            '| W&B logging | disabled |',
             'identical model architecture and initialization seed',
             'identical sampled data order for each shared seed',
             'identical selection and maximum processed-token budgets',
