@@ -143,6 +143,8 @@ def build_parameter_group_audit(
     eligible_weight_decay,
     auxiliary_weight_decay,
     auxiliary_optimizer="adamw",
+    eligible_weight_decay_semantics="unspecified",
+    auxiliary_weight_decay_semantics="adamw_decoupled",
 ):
     """Return a deterministic, serializable optimizer-assignment audit.
 
@@ -163,11 +165,13 @@ def build_parameter_group_audit(
             if group_name == "eligible_matrix":
                 optimizer_name = eligible_optimizer
                 weight_decay = eligible_weight_decay
+                weight_decay_semantics = eligible_weight_decay_semantics
             else:
                 optimizer_name = auxiliary_optimizer
                 weight_decay = (
                     auxiliary_weight_decay if item.parameter.ndim >= 2 else 0.0
                 )
+                weight_decay_semantics = auxiliary_weight_decay_semantics
             entries.append(
                 {
                     "name": item.name,
@@ -176,6 +180,7 @@ def build_parameter_group_audit(
                     "group": group_name,
                     "optimizer": optimizer_name,
                     "weight_decay": weight_decay,
+                    "weight_decay_semantics": weight_decay_semantics,
                     "weight_decay_treatment": (
                         "decay" if weight_decay != 0.0 else "no_decay"
                     ),

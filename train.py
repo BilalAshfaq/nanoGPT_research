@@ -20,6 +20,7 @@ import os
 import time
 import math
 import pickle
+import json
 from contextlib import nullcontext
 
 import numpy as np
@@ -28,6 +29,11 @@ from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.distributed import init_process_group, destroy_process_group
 
 from model import GPTConfig, GPT
+from shared_utils.optimizer_factory import (
+    configure_optimizer,
+    set_optimizer_learning_rates,
+    validate_optimizer_name,
+)
 
 # -----------------------------------------------------------------------------
 # default config values designed to train a gpt2 (124M) on OpenWebText
@@ -54,12 +60,27 @@ n_head = 12
 n_embd = 768
 dropout = 0.0 # for pretraining 0 is good, for finetuning try 0.1+
 bias = False # do we use bias inside LayerNorm and Linear layers?
-# adamw optimizer
+# optimizer selection; AdamW remains the protected default
+optimizer_name = 'adamw'
+# original AdamW baseline
 learning_rate = 6e-4 # max learning rate
 max_iters = 600000 # total number of training iterations
 weight_decay = 1e-1
 beta1 = 0.9
 beta2 = 0.95
+# global SGDM eligible-matrix settings
+matrix_learning_rate = 6e-4
+matrix_momentum = 0.9
+matrix_weight_decay = 0.0
+matrix_momentum_convention = 'ema'
+matrix_weight_decay_mode = 'decoupled'
+matrix_nesterov = False
+# auxiliary AdamW settings used with experimental matrix optimizers
+auxiliary_learning_rate = 6e-4
+auxiliary_weight_decay = 1e-1
+auxiliary_beta1 = 0.9
+auxiliary_beta2 = 0.95
+auxiliary_weight_decay_mode = 'adamw_decoupled'
 grad_clip = 1.0 # clip gradients at this value, or disable if == 0.0
 # learning rate decay settings
 decay_lr = True # whether to decay the learning rate
@@ -76,6 +97,12 @@ compile = True # use PyTorch 2.0 to compile the model to be faster
 config_keys = [k for k,v in globals().items() if not k.startswith('_') and isinstance(v, (int, float, bool, str))]
 exec(open('configurator.py').read()) # overrides from command line or config file
 config = {k: globals()[k] for k in config_keys} # will be useful for logging
+validate_optimizer_name(optimizer_name) # fail before model construction or data loading
+if optimizer_name != 'adamw' and decay_lr and learning_rate <= 0.0:
+    raise ValueError(
+        "learning_rate must be positive because it defines the shared "
+        "experimental LR schedule scale"
+    )
 # -----------------------------------------------------------------------------
 
 # various inits, derived attributes, I/O setup
@@ -196,7 +223,27 @@ model.to(device)
 scaler = torch.cuda.amp.GradScaler(enabled=(dtype == 'float16'))
 
 # optimizer
-optimizer = model.configure_optimizers(weight_decay, learning_rate, (beta1, beta2), device_type)
+optimizer, optimizer_audit = configure_optimizer(
+    model=model,
+    optimizer_name=optimizer_name,
+    device_type=device_type,
+    adamw_learning_rate=learning_rate,
+    adamw_weight_decay=weight_decay,
+    adamw_betas=(beta1, beta2),
+    matrix_learning_rate=matrix_learning_rate,
+    matrix_momentum=matrix_momentum,
+    matrix_weight_decay=matrix_weight_decay,
+    auxiliary_learning_rate=auxiliary_learning_rate,
+    auxiliary_weight_decay=auxiliary_weight_decay,
+    auxiliary_betas=(auxiliary_beta1, auxiliary_beta2),
+    matrix_momentum_convention=matrix_momentum_convention,
+    matrix_weight_decay_mode=matrix_weight_decay_mode,
+    auxiliary_weight_decay_mode=auxiliary_weight_decay_mode,
+    matrix_nesterov=matrix_nesterov,
+)
+if optimizer_audit is not None and master_process:
+    print("optimizer parameter audit:")
+    print(json.dumps(optimizer_audit, indent=2, sort_keys=True))
 if init_from == 'resume':
     optimizer.load_state_dict(checkpoint['optimizer'])
 checkpoint = None # free up memory
@@ -256,8 +303,18 @@ while True:
 
     # determine and set the learning rate for this iteration
     lr = get_lr(iter_num) if decay_lr else learning_rate
-    for param_group in optimizer.param_groups:
-        param_group['lr'] = lr
+    # Experimental matrix and auxiliary rates share this dimensionless shape.
+    schedule_scale = (
+        lr / learning_rate
+        if optimizer_name != 'adamw' and decay_lr
+        else 1.0
+    )
+    set_optimizer_learning_rates(
+        optimizer,
+        optimizer_name=optimizer_name,
+        adamw_learning_rate=lr,
+        experimental_schedule_scale=schedule_scale,
+    )
 
     # evaluate the loss on train/val sets and write checkpoints
     if iter_num % eval_interval == 0 and master_process:
