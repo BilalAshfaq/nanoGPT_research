@@ -37,11 +37,13 @@ from shared_utils.optimizer_factory import (
 )
 from shared_utils.run_metadata import (
     OptimizerStepTimer,
+    append_evaluation_record,
     build_optimizer_group_signature,
     build_run_metadata,
     get_git_commit_hash,
     get_hardware_metadata,
     get_peak_gpu_memory_metadata,
+    initialize_evaluation_log,
     snapshot_run_metadata,
     validate_resume_compatibility,
     write_run_summary,
@@ -316,6 +318,8 @@ if diagnostics_enabled:
     diagnostics.validate_parameter_names(diagnostic_eligible_parameters)
     if master_process:
         initialize_diagnostic_log(out_dir, resume=init_from == 'resume')
+if master_process:
+    initialize_evaluation_log(out_dir, resume=init_from == 'resume')
 
 if init_from == 'resume':
     validate_resume_compatibility(
@@ -415,6 +419,7 @@ divergence_status = previous_metrics.get('divergence_status', 'not_observed')
 latest_training_loss = previous_metrics.get('latest_training_loss')
 latest_evaluation_train_loss = previous_metrics.get('latest_evaluation_train_loss')
 latest_validation_loss = previous_metrics.get('latest_validation_loss')
+latest_evaluation_step = previous_metrics.get('latest_evaluation_step')
 successful_optimizer_steps = previous_progress.get('optimizer_steps', iter_num)
 optimizer_step_timer = OptimizerStepTimer(
     torch,
@@ -451,6 +456,7 @@ def current_run_metadata():
         'latest_training_loss': latest_training_loss,
         'latest_evaluation_train_loss': latest_evaluation_train_loss,
         'latest_validation_loss': latest_validation_loss,
+        'latest_evaluation_step': latest_evaluation_step,
         'effective_matrix_learning_rate': effective_lrs['matrix'],
         'effective_auxiliary_learning_rate': effective_lrs['auxiliary'],
         'total_wall_time_seconds': total_wall_time,
@@ -500,6 +506,7 @@ while True:
         losses = estimate_loss()
         latest_evaluation_train_loss = float(losses['train'])
         latest_validation_loss = float(losses['val'])
+        latest_evaluation_step = iter_num
         if not (
             math.isfinite(latest_evaluation_train_loss)
             and math.isfinite(latest_validation_loss)
@@ -508,6 +515,17 @@ while True:
             divergence_status = 'observed'
             numerical_event_count += 1
         print(f"step {iter_num}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
+        append_evaluation_record(
+            out_dir,
+            {
+                'step': iter_num,
+                'processed_tokens': iter_num * tokens_per_iter,
+                'train_loss': latest_evaluation_train_loss,
+                'validation_loss': latest_validation_loss,
+                'matrix_learning_rate': effective_lrs['matrix'],
+                'auxiliary_learning_rate': effective_lrs['auxiliary'],
+            },
+        )
         if wandb_log:
             wandb_metrics = {
                 "iter": iter_num,

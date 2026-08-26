@@ -10,11 +10,13 @@ from unittest import mock
 
 from shared_utils.run_metadata import (
     OptimizerStepTimer,
+    append_evaluation_record,
     build_optimizer_group_signature,
     build_run_metadata,
     get_git_commit_hash,
     get_hardware_metadata,
     get_peak_gpu_memory_metadata,
+    initialize_evaluation_log,
     snapshot_run_metadata,
     validate_resume_compatibility,
     write_run_summary,
@@ -188,6 +190,30 @@ class RunMetadataTests(unittest.TestCase):
             summary_path = os.path.join(output_directory, 'run_summary.json')
             with open(summary_path, encoding='utf-8') as summary_file:
                 self.assertEqual(json.load(summary_file), metadata)
+
+    def test_evaluation_log_is_structured_and_resume_appends(self):
+        first = {
+            'step': 0,
+            'processed_tokens': 0,
+            'train_loss': 4.0,
+            'validation_loss': 4.1,
+        }
+        second = {
+            'step': 10,
+            'processed_tokens': 160,
+            'train_loss': 3.0,
+            'validation_loss': 3.1,
+        }
+        with tempfile.TemporaryDirectory() as output_directory:
+            path = initialize_evaluation_log(output_directory, resume=False)
+            append_evaluation_record(output_directory, first)
+            initialize_evaluation_log(output_directory, resume=True)
+            append_evaluation_record(output_directory, second)
+
+            with open(path, encoding='utf-8') as evaluation_file:
+                records = [json.loads(line) for line in evaluation_file]
+
+        self.assertEqual(records, [first, second])
 
     def test_train_defaults_and_validation_precede_first_batch(self):
         repository_root = os.path.dirname(os.path.dirname(__file__))

@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "manifest_id": "global-sgdm-pilot-v1",
+  "purpose": "pilot",
+  "launch_authorized": true,
+  "counts_toward_study_budget": false,
+  "config_file": "config/pilot_global_sgdm.py",
+  "environment_lock": "cluster_environment.freeze.txt",
+  "preflight_tests": ["tests.test_baseline_preflight"],
+  "dataset": {
+    "name": "shakespeare_char",
+    "files": [
+      "data/shakespeare_char/train.bin",
+      "data/shakespeare_char/val.bin"
+    ],
+    "lock_file": "data/shakespeare_char/dataset_fingerprints.json",
+    "require_lock": false
+  },
+  "resources": {
+    "world_size": 2,
+    "device_name_contains": "NVIDIA RTX PRO 6000 Blackwell"
+  },
+  "output_root": "/shared/home/bilal.ashfaq/nanogpt-pilot-runs",
+  "expected_run_count": 1,
+  "selection": null,
+  "runs": [
+    {
+      "run_id": "global_sgdm_pilot_seed1337",
+      "run_name": "global_sgdm_pilot_seed1337",
+      "optimizer_name": "global_sgdm",
+      "seed": 1337,
+      "max_iters": 500,
+      "tokens_per_update": 16384,
+      "selection_tokens": null,
+      "max_processed_tokens": 8208384,
+      "evaluation_steps": [0, 100, 200, 300, 400, 500],
+      "selection_step": null,
+      "selection_values": {},
+      "overrides": {}
+    }
+  ]
+}

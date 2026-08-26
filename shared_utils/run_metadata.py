@@ -197,6 +197,23 @@ def write_run_summary(output_directory, run_metadata):
         summary_file.write("\n")
 
 
+def initialize_evaluation_log(output_directory, resume):
+    """Create a fresh structured evaluation log unless resuming a run."""
+
+    path = os.path.join(output_directory, "evaluation_metrics.jsonl")
+    if not resume:
+        with open(path, "w", encoding="utf-8"):
+            pass
+    return path
+
+
+def append_evaluation_record(output_directory, record):
+    path = os.path.join(output_directory, "evaluation_metrics.jsonl")
+    with open(path, "a", encoding="utf-8") as output_file:
+        json.dump(record, output_file, sort_keys=True)
+        output_file.write("\n")
+
+
 class OptimizerStepTimer:
     """Accumulate CPU or CUDA optimizer-step wall time without per-step sync."""
 
