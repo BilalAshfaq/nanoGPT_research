@@ -91,7 +91,17 @@ def configure_optimizer(
             adamw_betas,
             device_type,
         )
-        return optimizer, None
+        partition = partition_optimizer_parameters(model)
+        audit = build_parameter_group_audit(
+            partition,
+            eligible_optimizer="adamw",
+            eligible_weight_decay=adamw_weight_decay,
+            auxiliary_weight_decay=adamw_weight_decay,
+            auxiliary_optimizer="adamw",
+            eligible_weight_decay_semantics=AUXILIARY_ADAMW_WEIGHT_DECAY_MODE,
+            auxiliary_weight_decay_semantics=AUXILIARY_ADAMW_WEIGHT_DECAY_MODE,
+        )
+        return optimizer, audit
 
     if matrix_momentum_convention != GLOBAL_SGDM_MOMENTUM_CONVENTION:
         raise ValueError("global_sgdm requires EMA momentum convention")
@@ -147,3 +157,31 @@ def set_optimizer_learning_rates(
 
     for group in optimizer.param_groups:
         group["lr"] = group["base_lr"] * experimental_schedule_scale
+
+
+def get_effective_learning_rates(optimizer, optimizer_name):
+    """Return the currently applied matrix and auxiliary learning rates."""
+
+    validate_optimizer_name(optimizer_name)
+    if optimizer_name == "adamw":
+        learning_rates = {group["lr"] for group in optimizer.param_groups}
+        if len(learning_rates) != 1:
+            raise ValueError("protected AdamW groups must share one learning rate")
+        return {"matrix": None, "auxiliary": learning_rates.pop()}
+
+    matrix_rates = {
+        group["lr"]
+        for group in optimizer.param_groups
+        if group["optimizer_role"] == "matrix"
+    }
+    auxiliary_rates = {
+        group["lr"]
+        for group in optimizer.param_groups
+        if group["optimizer_role"] == "auxiliary"
+    }
+    if len(matrix_rates) != 1 or len(auxiliary_rates) != 1:
+        raise ValueError("matrix and auxiliary groups must each share one rate")
+    return {
+        "matrix": matrix_rates.pop(),
+        "auxiliary": auxiliary_rates.pop(),
+    }

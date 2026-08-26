@@ -290,7 +290,11 @@ class OptimizerIntegrationTests(unittest.TestCase):
         optimizer, audit = configure(model, optimizer_name="adamw")
 
         self.assertIsInstance(optimizer, torch.optim.AdamW)
-        self.assertIsNone(audit)
+        self.assertTrue(audit["tied_parameters"]["counted_once"])
+        self.assertEqual(
+            {entry["optimizer"] for entry in audit["parameters"]},
+            {"adamw"},
+        )
         self.assertEqual(
             {
                 id(parameter)
@@ -327,6 +331,30 @@ class OptimizerIntegrationTests(unittest.TestCase):
     def test_nesterov_is_rejected(self):
         with self.assertRaisesRegex(ValueError, "Nesterov momentum is disabled"):
             configure(make_model(), matrix_nesterov=True)
+
+    def test_default_and_explicit_adamw_updates_are_equivalent(self):
+        torch.manual_seed(321)
+        default_model = make_model()
+        explicit_model = make_model()
+        explicit_model.load_state_dict(default_model.state_dict())
+        default_optimizer, _ = configure(
+            default_model, optimizer_name="adamw"
+        )
+        explicit_optimizer, _ = configure(
+            explicit_model, optimizer_name="adamw"
+        )
+        for parameter in default_model.parameters():
+            parameter.grad = torch.full_like(parameter, 0.125)
+        for parameter in explicit_model.parameters():
+            parameter.grad = torch.full_like(parameter, 0.125)
+
+        default_optimizer.step()
+        explicit_optimizer.step()
+
+        for default_parameter, explicit_parameter in zip(
+            default_model.parameters(), explicit_model.parameters()
+        ):
+            torch.testing.assert_close(default_parameter, explicit_parameter)
 
     def test_unknown_optimizer_name_is_rejected(self):
         with self.assertRaisesRegex(ValueError, "unknown optimizer_name"):

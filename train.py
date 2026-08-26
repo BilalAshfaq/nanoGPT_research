@@ -31,8 +31,20 @@ from torch.distributed import init_process_group, destroy_process_group
 from model import GPTConfig, GPT
 from shared_utils.optimizer_factory import (
     configure_optimizer,
+    get_effective_learning_rates,
     set_optimizer_learning_rates,
     validate_optimizer_name,
+)
+from shared_utils.run_metadata import (
+    OptimizerStepTimer,
+    build_optimizer_group_signature,
+    build_run_metadata,
+    get_git_commit_hash,
+    get_hardware_metadata,
+    get_peak_gpu_memory_metadata,
+    snapshot_run_metadata,
+    validate_resume_compatibility,
+    write_run_summary,
 )
 
 # -----------------------------------------------------------------------------
@@ -51,6 +63,7 @@ wandb_project = 'owt'
 wandb_run_name = 'gpt2' # 'run' + str(time.time())
 # data
 dataset = 'openwebtext'
+tokenizer = 'gpt2'
 gradient_accumulation_steps = 5 * 8 # used to simulate larger batch sizes
 batch_size = 12 # if gradient_accumulation_steps > 1, this is the micro-batch size
 block_size = 1024
@@ -90,6 +103,7 @@ min_lr = 6e-5 # minimum learning rate, should be ~= learning_rate/10 per Chinchi
 # DDP settings
 backend = 'nccl' # 'nccl', 'gloo', etc.
 # system
+seed = 1337
 device = 'cuda' # examples: 'cpu', 'cuda', 'cuda:0', 'cuda:1' etc., or try 'mps' on macbooks
 dtype = 'bfloat16' if torch.cuda.is_available() and torch.cuda.is_bf16_supported() else 'float16' # 'float32', 'bfloat16', or 'float16', the latter will auto implement a GradScaler
 compile = True # use PyTorch 2.0 to compile the model to be faster
@@ -130,7 +144,7 @@ print(f"tokens per iteration will be: {tokens_per_iter:,}")
 
 if master_process:
     os.makedirs(out_dir, exist_ok=True)
-torch.manual_seed(1337 + seed_offset)
+torch.manual_seed(seed + seed_offset)
 torch.backends.cuda.matmul.allow_tf32 = True # allow tf32 on matmul
 torch.backends.cudnn.allow_tf32 = True # allow tf32 on cudnn
 device_type = 'cuda' if 'cuda' in device else 'cpu' # for later use in torch.autocast
@@ -241,11 +255,71 @@ optimizer, optimizer_audit = configure_optimizer(
     auxiliary_weight_decay_mode=auxiliary_weight_decay_mode,
     matrix_nesterov=matrix_nesterov,
 )
-if optimizer_audit is not None and master_process:
+optimizer_group_signature = build_optimizer_group_signature(model, optimizer)
+if master_process:
     print("optimizer parameter audit:")
     print(json.dumps(optimizer_audit, indent=2, sort_keys=True))
+if optimizer_name == 'adamw':
+    optimizer_settings = {
+        'learning_rate': learning_rate,
+        'betas': [beta1, beta2],
+        'weight_decay': weight_decay,
+        'weight_decay_mode': 'adamw_decoupled',
+    }
+else:
+    optimizer_settings = {
+        'matrix_learning_rate': matrix_learning_rate,
+        'matrix_momentum': matrix_momentum,
+        'matrix_momentum_convention': matrix_momentum_convention,
+        'matrix_nesterov': matrix_nesterov,
+        'matrix_weight_decay': matrix_weight_decay,
+        'matrix_weight_decay_mode': matrix_weight_decay_mode,
+        'auxiliary_learning_rate': auxiliary_learning_rate,
+        'auxiliary_betas': [auxiliary_beta1, auxiliary_beta2],
+        'auxiliary_weight_decay': auxiliary_weight_decay,
+        'auxiliary_weight_decay_mode': auxiliary_weight_decay_mode,
+    }
+
 if init_from == 'resume':
+    validate_resume_compatibility(
+        checkpoint,
+        optimizer_name=optimizer_name,
+        optimizer_group_signature=optimizer_group_signature,
+        optimizer_settings=optimizer_settings,
+    )
     optimizer.load_state_dict(checkpoint['optimizer'])
+    previous_run_metadata = checkpoint['run_metadata']
+else:
+    previous_run_metadata = {}
+
+base_run_metadata = build_run_metadata(
+    config=config,
+    git_commit=get_git_commit_hash(os.getcwd()),
+    model_args=model_args,
+    trainable_parameter_count=sum(
+        parameter.numel()
+        for parameter in model.parameters()
+        if parameter.requires_grad
+    ),
+    optimizer_name=optimizer_name,
+    optimizer_settings=optimizer_settings,
+    optimizer_group_signature=optimizer_group_signature,
+    parameter_group_audit=optimizer_audit,
+    seed=seed,
+    dataset=dataset,
+    tokenizer=tokenizer,
+    block_size=block_size,
+    batch_size=batch_size,
+    gradient_accumulation_steps=gradient_accumulation_steps,
+    ddp_world_size=ddp_world_size,
+    tokens_per_iteration=tokens_per_iter,
+    precision={
+        'dtype': dtype,
+        'grad_scaler_enabled': scaler.is_enabled(),
+        'allow_tf32': True,
+    },
+    hardware=get_hardware_metadata(torch, device, device_type),
+)
 checkpoint = None # free up memory
 
 # compile the model
@@ -293,6 +367,70 @@ if wandb_log and master_process:
     import wandb
     wandb.init(project=wandb_project, name=wandb_run_name, config=config)
 
+# measurements persisted in checkpoints and the run summary
+previous_metrics = previous_run_metadata.get('metrics', {})
+previous_progress = previous_run_metadata.get('progress', {})
+completed_wall_time = previous_metrics.get('total_wall_time_seconds', 0.0)
+gradient_clipping_count = previous_metrics.get('gradient_clipping_count', 0)
+numerical_event_count = previous_metrics.get('numerical_event_count', 0)
+numerical_status = previous_metrics.get('numerical_status', 'ok')
+divergence_status = previous_metrics.get('divergence_status', 'not_observed')
+latest_training_loss = previous_metrics.get('latest_training_loss')
+latest_evaluation_train_loss = previous_metrics.get('latest_evaluation_train_loss')
+latest_validation_loss = previous_metrics.get('latest_validation_loss')
+successful_optimizer_steps = previous_progress.get('optimizer_steps', iter_num)
+optimizer_step_timer = OptimizerStepTimer(
+    torch,
+    device_type=device_type,
+    initial_total_seconds=previous_metrics.get(
+        'optimizer_step_time_total_seconds', 0.0
+    ),
+    initial_step_count=previous_metrics.get('optimizer_step_time_samples', 0),
+)
+if device_type == 'cuda':
+    torch.cuda.reset_peak_memory_stats(device)
+run_session_start = time.perf_counter()
+
+def current_run_metadata():
+    optimizer_step_timer.flush()
+    effective_lrs = get_effective_learning_rates(optimizer, optimizer_name)
+    peak_memory = get_peak_gpu_memory_metadata(torch, device, device_type)
+    total_wall_time = (
+        completed_wall_time + time.perf_counter() - run_session_start
+    )
+    clipping_frequency = (
+        gradient_clipping_count / iter_num if iter_num > 0 else 0.0
+    )
+    progress = {
+        'optimizer_step_attempts': iter_num,
+        'optimizer_steps': successful_optimizer_steps,
+        'processed_tokens': iter_num * tokens_per_iter,
+        'configured_max_iters': max_iters,
+        # Preserve nanoGPT's existing inclusive max_iters termination behavior.
+        'planned_optimizer_step_attempts': max_iters + 1,
+        'configured_token_budget': (max_iters + 1) * tokens_per_iter,
+    }
+    metrics = {
+        'latest_training_loss': latest_training_loss,
+        'latest_evaluation_train_loss': latest_evaluation_train_loss,
+        'latest_validation_loss': latest_validation_loss,
+        'effective_matrix_learning_rate': effective_lrs['matrix'],
+        'effective_auxiliary_learning_rate': effective_lrs['auxiliary'],
+        'total_wall_time_seconds': total_wall_time,
+        'mean_optimizer_step_time_seconds': optimizer_step_timer.mean_seconds,
+        'optimizer_step_time_total_seconds': optimizer_step_timer.total_seconds,
+        'optimizer_step_time_samples': optimizer_step_timer.step_count,
+        'gradient_clipping_enabled': grad_clip != 0.0,
+        'gradient_clipping_count': gradient_clipping_count,
+        'gradient_clipping_frequency': clipping_frequency,
+        'numerical_event_count': numerical_event_count,
+        'numerical_status': numerical_status,
+        'divergence_status': divergence_status,
+        'peak_gpu_memory_bytes': peak_memory['bytes'],
+        'peak_gpu_memory_status': peak_memory['status'],
+    }
+    return snapshot_run_metadata(base_run_metadata, progress, metrics)
+
 # training loop
 X, Y = get_batch('train') # fetch the very first batch
 t0 = time.time()
@@ -315,19 +453,38 @@ while True:
         adamw_learning_rate=lr,
         experimental_schedule_scale=schedule_scale,
     )
+    effective_lrs = get_effective_learning_rates(optimizer, optimizer_name)
+
+    if iter_num % eval_interval == 0:
+        optimizer_step_timer.flush()
 
     # evaluate the loss on train/val sets and write checkpoints
     if iter_num % eval_interval == 0 and master_process:
         losses = estimate_loss()
+        latest_evaluation_train_loss = float(losses['train'])
+        latest_validation_loss = float(losses['val'])
+        if not (
+            math.isfinite(latest_evaluation_train_loss)
+            and math.isfinite(latest_validation_loss)
+        ):
+            numerical_status = 'nonfinite_evaluation_loss'
+            divergence_status = 'observed'
+            numerical_event_count += 1
         print(f"step {iter_num}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
         if wandb_log:
-            wandb.log({
+            wandb_metrics = {
                 "iter": iter_num,
                 "train/loss": losses['train'],
                 "val/loss": losses['val'],
                 "lr": lr,
+                "optimizer/auxiliary_lr": effective_lrs['auxiliary'],
                 "mfu": running_mfu*100, # convert to percentage
-            })
+            }
+            if effective_lrs['matrix'] is not None:
+                wandb_metrics["optimizer/matrix_lr"] = effective_lrs['matrix']
+            wandb.log(wandb_metrics)
+        run_metadata = current_run_metadata()
+        write_run_summary(out_dir, run_metadata)
         if losses['val'] < best_val_loss or always_save_checkpoint:
             best_val_loss = losses['val']
             if iter_num > 0:
@@ -338,6 +495,7 @@ while True:
                     'iter_num': iter_num,
                     'best_val_loss': best_val_loss,
                     'config': config,
+                    'run_metadata': run_metadata,
                 }
                 print(f"saving checkpoint to {out_dir}")
                 torch.save(checkpoint, os.path.join(out_dir, 'ckpt.pt'))
@@ -363,10 +521,31 @@ while True:
     # clip the gradient
     if grad_clip != 0.0:
         scaler.unscale_(optimizer)
-        torch.nn.utils.clip_grad_norm_(model.parameters(), grad_clip)
+        total_gradient_norm = torch.nn.utils.clip_grad_norm_(
+            model.parameters(), grad_clip
+        )
+        total_gradient_norm_value = float(total_gradient_norm)
+        if math.isfinite(total_gradient_norm_value):
+            if total_gradient_norm_value > grad_clip:
+                gradient_clipping_count += 1
+        else:
+            numerical_status = 'nonfinite_gradient_norm'
+            numerical_event_count += 1
     # step the optimizer and scaler if training in fp16
+    previous_scale = scaler.get_scale() if scaler.is_enabled() else None
+    optimizer_step_timer.start()
     scaler.step(optimizer)
     scaler.update()
+    optimizer_step_timer.stop()
+    step_was_skipped = (
+        previous_scale is not None
+        and scaler.get_scale() < previous_scale
+    )
+    if step_was_skipped:
+        numerical_status = 'grad_scaler_backoff'
+        numerical_event_count += 1
+    else:
+        successful_optimizer_steps += 1
     # flush the gradients as soon as we can, no need for this memory anymore
     optimizer.zero_grad(set_to_none=True)
 
@@ -378,16 +557,34 @@ while True:
         # get loss as float. note: this is a CPU-GPU sync point
         # scale up to undo the division above, approximating the true total loss (exact would have been a sum)
         lossf = loss.item() * gradient_accumulation_steps
+        latest_training_loss = lossf
+        if not math.isfinite(lossf):
+            numerical_status = 'nonfinite_training_loss'
+            divergence_status = 'observed'
+            numerical_event_count += 1
         if local_iter_num >= 5: # let the training loop settle a bit
             mfu = raw_model.estimate_mfu(batch_size * gradient_accumulation_steps, dt)
             running_mfu = mfu if running_mfu == -1.0 else 0.9*running_mfu + 0.1*mfu
-        print(f"iter {iter_num}: loss {lossf:.4f}, time {dt*1000:.2f}ms, mfu {running_mfu*100:.2f}%")
+        matrix_lr_text = (
+            'not_applicable'
+            if effective_lrs['matrix'] is None
+            else f"{effective_lrs['matrix']:.6g}"
+        )
+        print(
+            f"iter {iter_num}: loss {lossf:.4f}, time {dt*1000:.2f}ms, "
+            f"mfu {running_mfu*100:.2f}%, matrix lr {matrix_lr_text}, "
+            f"auxiliary lr {effective_lrs['auxiliary']:.6g}"
+        )
     iter_num += 1
     local_iter_num += 1
 
     # termination conditions
     if iter_num > max_iters:
         break
+
+optimizer_step_timer.flush()
+if master_process:
+    write_run_summary(out_dir, current_run_metadata())
 
 if ddp:
     destroy_process_group()
