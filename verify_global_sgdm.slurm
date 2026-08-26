@@ -7,12 +7,12 @@
 #SBATCH --time=00:30:00
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=64G
-#SBATCH --output=/shared/home/bilal.ashfaq/nanogpt-job-logs/%x-%j.out
-#SBATCH --error=/shared/home/bilal.ashfaq/nanogpt-job-logs/%x-%j.err
+#SBATCH --output=sgdm_verify-%j.out
+#SBATCH --error=sgdm_verify-%j.err
 
 set -euo pipefail
 
-REPO_DIR="/shared/home/bilal.ashfaq/nanoGPT_research"
+REPO_DIR="/shared/home/bilal.ashfaq/nano research/nanoGPT_research"
 CONDA_ENV="nanogpt"
 CONDA_SH="/shared/home/bilal.ashfaq/miniconda3/etc/profile.d/conda.sh"
 SMOKE_ROOT="/shared/home/bilal.ashfaq/nanogpt-smoke-runs"
