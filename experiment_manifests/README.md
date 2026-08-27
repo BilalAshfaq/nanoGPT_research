@@ -26,13 +26,17 @@ bash setup_nanogpt_env.sh
 df -h /shared/home/bilal.ashfaq
 mkdir -p /shared/home/bilal.ashfaq/nanogpt-job-logs
 
-PREP_JOB_ID=$(sbatch --parsable prepare_openwebtext.slurm)
+PREP_JOB_ID=$(sbatch --parsable \
+  --export=ALL,NANOGPT_HF_HOME=/shared/home/bilal.ashfaq/huggingface-cache \
+  prepare_openwebtext.slurm)
 echo "OpenWebText preparation job: $PREP_JOB_ID"
 ```
 
 The preparation job downloads and tokenizes OpenWebText, creates
 `data/openwebtext/train.bin` and `val.bin`, fingerprints both files, and
-validates the exploratory manifest. It does not request a GPU. Monitor it with:
+validates the exploratory manifest. `NANOGPT_HF_HOME` deliberately overrides
+any cluster-wide `HF_HOME` that points to a read-only cache. The job does not
+request a GPU. Monitor it with:
 
 ```bash
 squeue -j "$PREP_JOB_ID"

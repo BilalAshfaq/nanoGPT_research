@@ -16,7 +16,7 @@ REPO_DIR="$SLURM_SUBMIT_DIR"
 CONDA_ENV="nanogpt"
 CONDA_SH="/shared/home/bilal.ashfaq/miniconda3/etc/profile.d/conda.sh"
 MANIFEST_PATH="${MANIFEST_PATH:-experiment_manifests/task_1_6_exploratory.json}"
-HF_HOME="${HF_HOME:-/shared/home/bilal.ashfaq/huggingface-cache}"
+HF_HOME="${NANOGPT_HF_HOME:-/shared/home/bilal.ashfaq/huggingface-cache}"
 TRAIN_DATA="$REPO_DIR/data/openwebtext/train.bin"
 VAL_DATA="$REPO_DIR/data/openwebtext/val.bin"
 
