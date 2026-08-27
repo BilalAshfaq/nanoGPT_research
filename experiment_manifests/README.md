@@ -17,26 +17,55 @@ sbatch \
 ## Task 1.6 preparation
 
 Prepare OpenWebText, freeze the Python environment, and record the dataset
-fingerprints before requesting study authorization:
+fingerprints from the repository root on Martin. OpenWebText requires roughly
+54 GB for the Hugging Face cache plus roughly 17 GB for `train.bin`, so check
+the available space first:
 
 ```bash
 bash setup_nanogpt_env.sh
-python -m shared_utils.experiment_manifest fingerprint-data \
-  experiment_manifests/task_1_6_exploratory.json
-python -m shared_utils.experiment_manifest validate \
-  experiment_manifests/task_1_6_exploratory.json
+df -h /shared/home/bilal.ashfaq
+mkdir -p /shared/home/bilal.ashfaq/nanogpt-job-logs
+
+PREP_JOB_ID=$(sbatch --parsable prepare_openwebtext.slurm)
+echo "OpenWebText preparation job: $PREP_JOB_ID"
 ```
 
-The checked-in exploratory manifest intentionally has
-`"launch_authorized": false`. It must remain false until the user explicitly
-authorizes the Task 1.6 compute budget. Once authorized, the same generic
-runner can execute every pending entry sequentially:
+The preparation job downloads and tokenizes OpenWebText, creates
+`data/openwebtext/train.bin` and `val.bin`, fingerprints both files, and
+validates the exploratory manifest. It does not request a GPU. Monitor it with:
 
 ```bash
-sbatch \
+squeue -j "$PREP_JOB_ID"
+tail -f "/shared/home/bilal.ashfaq/nanogpt-job-logs/owt_prepare-${PREP_JOB_ID}.out"
+```
+
+## Task 1.6 exploratory study
+
+The exploratory manifest must have `"launch_authorized": true` before the
+study can run. To queue the study immediately and start it only after dataset
+preparation succeeds:
+
+```bash
+STUDY_JOB_ID=$(sbatch --parsable \
+  --dependency=afterok:"$PREP_JOB_ID" \
   --time=3-00:00:00 \
   --export=ALL,MANIFEST_PATH=experiment_manifests/task_1_6_exploratory.json \
-  run_optimizer_manifest.slurm
+  run_optimizer_manifest.slurm)
+
+echo "Task 1.6 study job: $STUDY_JOB_ID"
+squeue -j "$PREP_JOB_ID","$STUDY_JOB_ID"
+```
+
+If preparation has already completed successfully, submit the study without a
+dependency:
+
+```bash
+STUDY_JOB_ID=$(sbatch --parsable \
+  --time=3-00:00:00 \
+  --export=ALL,MANIFEST_PATH=experiment_manifests/task_1_6_exploratory.json \
+  run_optimizer_manifest.slurm)
+
+echo "Task 1.6 study job: $STUDY_JOB_ID"
 ```
 
 To execute one approved entry, add its manifest run id:
