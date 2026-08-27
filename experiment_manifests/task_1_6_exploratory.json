@@ -2,7 +2,7 @@
   "schema_version": 1,
   "manifest_id": "task-1.6-exploratory-v1",
   "purpose": "study",
-  "launch_authorized": false,
+  "launch_authorized": true,
   "counts_toward_study_budget": true,
   "config_file": "config/task_1_6_baseline.py",
   "environment_lock": "cluster_environment.freeze.txt",
