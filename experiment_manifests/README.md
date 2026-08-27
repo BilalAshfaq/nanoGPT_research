@@ -36,7 +36,10 @@ The preparation job downloads and tokenizes OpenWebText, creates
 `data/openwebtext/train.bin` and `val.bin`, fingerprints both files, and
 validates the exploratory manifest. `NANOGPT_HF_HOME` deliberately overrides
 any cluster-wide `HF_HOME` that points to a read-only cache. The job does not
-request a GPU. Monitor it with:
+request a GPU. Before downloading, it verifies the pinned
+`Skylion007/openwebtext` source has the expected `text` field and 8,013,769
+documents. Before fingerprinting, it verifies nanoGPT's expected train and
+validation token counts. Monitor it with:
 
 ```bash
 squeue -j "$PREP_JOB_ID"

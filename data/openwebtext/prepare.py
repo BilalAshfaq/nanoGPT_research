@@ -20,7 +20,13 @@ enc = tiktoken.get_encoding("gpt2")
 
 if __name__ == '__main__':
     # takes 54GB in huggingface .cache dir, about 8M documents (8,013,769)
-    dataset = load_dataset("openwebtext", num_proc=num_proc_load_dataset)
+    # changing starts here: Datasets 5 requires an explicit Hub namespace; pin the upstream dataset revision for reproducibility.
+    dataset = load_dataset(
+        "Skylion007/openwebtext",
+        revision="79d93d786212f7344586290adb811d4ae6a1762c",
+        num_proc=num_proc_load_dataset,
+    )
+    # ends here
 
     # owt by default only contains the 'train' split, so create a test split
     split_dataset = dataset["train"].train_test_split(test_size=0.0005, seed=2357, shuffle=True)

@@ -9,6 +9,12 @@ after running `prepare.py` (preprocess) we get:
 
 this came from 8,013,769 documents in total.
 
+The preparation script pins the Hugging Face dataset
+`Skylion007/openwebtext` at revision
+`79d93d786212f7344586290adb811d4ae6a1762c`. The Slurm preparation job checks
+this document count and the expected train and validation token counts before
+recording dataset fingerprints.
+
 references:
 
 - OpenAI's WebText dataset is discussed in [GPT-2 paper](https://d4mucfpksywv.cloudfront.net/better-language-models/language_models_are_unsupervised_multitask_learners.pdf)
