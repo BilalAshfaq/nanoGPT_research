@@ -39,7 +39,9 @@ any cluster-wide `HF_HOME` that points to a read-only cache. The job does not
 request a GPU. Before downloading, it verifies the pinned
 `Skylion007/openwebtext` source has the expected `text` field and 8,013,769
 documents. Before fingerprinting, it verifies nanoGPT's expected train and
-validation token counts. Monitor it with:
+validation token counts for this pinned modern pipeline: 9,035,582,489 and
+4,434,606 respectively. Their 9,040,017,095-token total matches nanoGPT's
+historical corpus total. Monitor it with:
 
 ```bash
 squeue -j "$PREP_JOB_ID"
