@@ -9,10 +9,13 @@ from shared_utils.parameter_partition import (
     build_parameter_group_audit,
     partition_optimizer_parameters,
 )
+from static_per_matrix_sgdm.utils.static_multipliers import (
+    resolve_static_multipliers,
+)
 from tuned_global_sgdm.utils.global_sgdm import GlobalSGDM
 
 
-SUPPORTED_OPTIMIZERS = ("adamw", "global_sgdm")
+SUPPORTED_OPTIMIZERS = ("adamw", "global_sgdm", "static_per_matrix_sgdm")
 GLOBAL_SGDM_MOMENTUM_CONVENTION = "ema"
 GLOBAL_SGDM_WEIGHT_DECAY_MODE = "decoupled"
 AUXILIARY_ADAMW_WEIGHT_DECAY_MODE = "adamw_decoupled"
@@ -80,6 +83,9 @@ def configure_optimizer(
     matrix_weight_decay_mode=GLOBAL_SGDM_WEIGHT_DECAY_MODE,
     auxiliary_weight_decay_mode=AUXILIARY_ADAMW_WEIGHT_DECAY_MODE,
     matrix_nesterov=False,
+    static_default_multiplier=1.0,
+    static_matrix_type_multipliers=None,
+    static_exact_parameter_multipliers=None,
 ):
     """Construct the selected optimizer and its optional partition audit."""
 
@@ -104,15 +110,25 @@ def configure_optimizer(
         return optimizer, audit
 
     if matrix_momentum_convention != GLOBAL_SGDM_MOMENTUM_CONVENTION:
-        raise ValueError("global_sgdm requires EMA momentum convention")
+        raise ValueError("experimental SGDM variants require EMA momentum convention")
     if matrix_weight_decay_mode != GLOBAL_SGDM_WEIGHT_DECAY_MODE:
-        raise ValueError("global_sgdm requires decoupled matrix weight decay")
+        raise ValueError(
+            "experimental SGDM variants require decoupled matrix weight decay"
+        )
     if auxiliary_weight_decay_mode != AUXILIARY_ADAMW_WEIGHT_DECAY_MODE:
         raise ValueError("auxiliary parameters require AdamW decoupled weight decay")
     if matrix_nesterov:
-        raise ValueError("Nesterov momentum is disabled for global_sgdm")
+        raise ValueError("Nesterov momentum is disabled for experimental SGDM")
 
     partition = partition_optimizer_parameters(model)
+    static_multiplier_configuration = None
+    if optimizer_name == "static_per_matrix_sgdm":
+        static_multiplier_configuration = resolve_static_multipliers(
+            partition.eligible_matrices,
+            default_multiplier=static_default_multiplier,
+            matrix_type_multipliers=static_matrix_type_multipliers,
+            exact_parameter_multipliers=static_exact_parameter_multipliers,
+        )
     matrix_optimizer = GlobalSGDM(
         [item.parameter for item in partition.eligible_matrices],
         lr=matrix_learning_rate,
@@ -130,9 +146,15 @@ def configure_optimizer(
         device_type=device_type,
     )
     optimizer = CompositeOptimizer(matrix_optimizer, auxiliary_optimizer)
+    if static_multiplier_configuration is not None:
+        # Task 2.1 resolves and records the mapping. Task 2.2 will introduce
+        # the static scaled-update implementation that consumes it.
+        optimizer.static_multiplier_configuration = (
+            static_multiplier_configuration
+        )
     audit = build_parameter_group_audit(
         partition,
-        eligible_optimizer="global_sgdm",
+        eligible_optimizer=optimizer_name,
         eligible_weight_decay=matrix_weight_decay,
         auxiliary_weight_decay=auxiliary_weight_decay,
         eligible_weight_decay_semantics=matrix_weight_decay_mode,

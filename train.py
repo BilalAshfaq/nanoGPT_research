@@ -21,6 +21,7 @@ import time
 import math
 import pickle
 import json
+import copy
 from contextlib import nullcontext
 
 import numpy as np
@@ -104,6 +105,11 @@ auxiliary_weight_decay = 1e-1
 auxiliary_beta1 = 0.9
 auxiliary_beta2 = 0.95
 auxiliary_weight_decay_mode = 'adamw_decoupled'
+# static per-matrix SGDM multiplier resolution (Task 2.1)
+static_default_multiplier = 1.0
+# Optional keys: attention_qkv, attention_output, mlp_input, mlp_output.
+static_matrix_type_multipliers = {}
+static_exact_parameter_multipliers = {}
 # optional global-SGDM matrix diagnostics
 diagnostics_enabled = False
 diagnostic_steps = '' # comma-separated optimizer-step indices
@@ -123,9 +129,10 @@ device = 'cuda' # examples: 'cpu', 'cuda', 'cuda:0', 'cuda:1' etc., or try 'mps'
 dtype = 'bfloat16' if torch.cuda.is_available() and torch.cuda.is_bf16_supported() else 'float16' # 'float32', 'bfloat16', or 'float16', the latter will auto implement a GradScaler
 compile = True # use PyTorch 2.0 to compile the model to be faster
 # -----------------------------------------------------------------------------
-config_keys = [k for k,v in globals().items() if not k.startswith('_') and isinstance(v, (int, float, bool, str))]
+_config_value_types = (int, float, bool, str, dict, list, tuple)
+config_keys = [k for k,v in globals().items() if not k.startswith('_') and isinstance(v, _config_value_types)]
 exec(open('configurator.py').read()) # overrides from command line or config file
-config = {k: globals()[k] for k in config_keys} # will be useful for logging
+config = {k: copy.deepcopy(globals()[k]) for k in config_keys} # will be useful for logging
 validate_optimizer_name(optimizer_name) # fail before model construction or data loading
 parsed_diagnostic_steps = parse_diagnostic_steps(diagnostic_steps)
 parsed_diagnostic_spectral_names = parse_diagnostic_matrix_names(
@@ -277,6 +284,9 @@ optimizer, optimizer_audit = configure_optimizer(
     matrix_weight_decay_mode=matrix_weight_decay_mode,
     auxiliary_weight_decay_mode=auxiliary_weight_decay_mode,
     matrix_nesterov=matrix_nesterov,
+    static_default_multiplier=static_default_multiplier,
+    static_matrix_type_multipliers=static_matrix_type_multipliers,
+    static_exact_parameter_multipliers=static_exact_parameter_multipliers,
 )
 optimizer_group_signature = build_optimizer_group_signature(model, optimizer)
 if master_process:
@@ -302,6 +312,10 @@ else:
         'auxiliary_weight_decay': auxiliary_weight_decay,
         'auxiliary_weight_decay_mode': auxiliary_weight_decay_mode,
     }
+    if optimizer_name == 'static_per_matrix_sgdm':
+        optimizer_settings['static_multiplier_configuration'] = copy.deepcopy(
+            optimizer.static_multiplier_configuration
+        )
 
 diagnostics = GlobalSGDMDiagnostics(
     enabled=diagnostics_enabled,
