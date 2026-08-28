@@ -12,6 +12,9 @@ from shared_utils.parameter_partition import (
 from static_per_matrix_sgdm.utils.static_multipliers import (
     resolve_static_multipliers,
 )
+from static_per_matrix_sgdm.utils.static_per_matrix_sgdm import (
+    StaticPerMatrixSGDM,
+)
 from tuned_global_sgdm.utils.global_sgdm import GlobalSGDM
 
 
@@ -129,12 +132,21 @@ def configure_optimizer(
             matrix_type_multipliers=static_matrix_type_multipliers,
             exact_parameter_multipliers=static_exact_parameter_multipliers,
         )
-    matrix_optimizer = GlobalSGDM(
-        [item.parameter for item in partition.eligible_matrices],
-        lr=matrix_learning_rate,
-        momentum=matrix_momentum,
-        weight_decay=matrix_weight_decay,
-    )
+    if optimizer_name == "static_per_matrix_sgdm":
+        matrix_optimizer = StaticPerMatrixSGDM(
+            partition.eligible_matrices,
+            static_multiplier_configuration["resolved_multipliers"],
+            lr=matrix_learning_rate,
+            momentum=matrix_momentum,
+            weight_decay=matrix_weight_decay,
+        )
+    else:
+        matrix_optimizer = GlobalSGDM(
+            [item.parameter for item in partition.eligible_matrices],
+            lr=matrix_learning_rate,
+            momentum=matrix_momentum,
+            weight_decay=matrix_weight_decay,
+        )
     for group in matrix_optimizer.param_groups:
         group["optimizer_role"] = "matrix"
         group["base_lr"] = matrix_learning_rate
@@ -147,8 +159,6 @@ def configure_optimizer(
     )
     optimizer = CompositeOptimizer(matrix_optimizer, auxiliary_optimizer)
     if static_multiplier_configuration is not None:
-        # Task 2.1 resolves and records the mapping. Task 2.2 will introduce
-        # the static scaled-update implementation that consumes it.
         optimizer.static_multiplier_configuration = (
             static_multiplier_configuration
         )

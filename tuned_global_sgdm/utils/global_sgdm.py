@@ -2,6 +2,8 @@
 
 import torch
 
+from shared_utils.ema_momentum import update_ema_momentum_buffer
+
 
 class GlobalSGDM(torch.optim.Optimizer):
     """SGDM with EMA momentum and decoupled weight decay.
@@ -43,15 +45,8 @@ class GlobalSGDM(torch.optim.Optimizer):
                 if gradient.is_sparse:
                     raise RuntimeError("GlobalSGDM does not support sparse gradients")
 
-                state = self.state[parameter]
-                momentum_buffer = state.get("momentum_buffer")
-                if momentum_buffer is None:
-                    momentum_buffer = torch.zeros_like(
-                        parameter, memory_format=torch.preserve_format
-                    )
-                    state["momentum_buffer"] = momentum_buffer
-                momentum_buffer.mul_(momentum).add_(
-                    gradient, alpha=1.0 - momentum
+                momentum_buffer = update_ema_momentum_buffer(
+                    self.state[parameter], parameter, gradient, momentum
                 )
 
                 # Decoupled decay acts directly on the pre-update parameter.
