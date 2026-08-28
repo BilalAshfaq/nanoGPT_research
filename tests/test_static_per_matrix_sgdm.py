@@ -1,3 +1,4 @@
+import copy
 import unittest
 
 import torch
@@ -7,7 +8,13 @@ from shared_utils.optimizer_factory import (
     configure_optimizer,
     set_optimizer_learning_rates,
 )
-from shared_utils.parameter_partition import NamedParameter
+from shared_utils.parameter_partition import (
+    NamedParameter,
+    partition_optimizer_parameters,
+)
+from static_per_matrix_sgdm.utils.resume_validation import (
+    validate_static_multiplier_resume,
+)
 from static_per_matrix_sgdm.utils.static_per_matrix_sgdm import (
     StaticPerMatrixSGDM,
 )
@@ -300,6 +307,109 @@ class StaticPerMatrixSGDMIntegrationTests(unittest.TestCase):
             },
             {"static_per_matrix_sgdm"},
         )
+
+    def test_save_resume_preserves_momentum_and_complete_mapping(self):
+        torch.manual_seed(123)
+        uninterrupted_model = make_model()
+        uninterrupted_optimizer, _ = configure_static(uninterrupted_model)
+        for parameter in uninterrupted_model.parameters():
+            parameter.grad = torch.full_like(parameter, 0.25)
+        uninterrupted_optimizer.step()
+
+        configuration = copy.deepcopy(
+            uninterrupted_optimizer.static_multiplier_configuration
+        )
+        checkpoint = {
+            "model": copy.deepcopy(uninterrupted_model.state_dict()),
+            "optimizer": copy.deepcopy(uninterrupted_optimizer.state_dict()),
+            "run_metadata": {
+                "optimizer": {
+                    "settings": {
+                        "static_multiplier_configuration": configuration
+                    }
+                }
+            },
+        }
+
+        restored_model = make_model()
+        restored_model.load_state_dict(checkpoint["model"])
+        restored_optimizer, _ = configure_static(restored_model)
+        validate_static_multiplier_resume(
+            checkpoint,
+            restored_optimizer.static_multiplier_configuration,
+        )
+        restored_optimizer.load_state_dict(checkpoint["optimizer"])
+        self.assertEqual(
+            restored_optimizer.static_multiplier_configuration,
+            configuration,
+        )
+
+        for parameter in uninterrupted_model.parameters():
+            parameter.grad = torch.full_like(parameter, -0.125)
+        for parameter in restored_model.parameters():
+            parameter.grad = torch.full_like(parameter, -0.125)
+        uninterrupted_optimizer.step()
+        restored_optimizer.step()
+
+        for uninterrupted, restored in zip(
+            uninterrupted_model.parameters(), restored_model.parameters()
+        ):
+            torch.testing.assert_close(uninterrupted, restored)
+        uninterrupted_partition = partition_optimizer_parameters(
+            uninterrupted_model
+        )
+        restored_partition = partition_optimizer_parameters(restored_model)
+        for uninterrupted_item, restored_item in zip(
+            uninterrupted_partition.eligible_matrices,
+            restored_partition.eligible_matrices,
+        ):
+            torch.testing.assert_close(
+                uninterrupted_optimizer.matrix_optimizer.state[
+                    uninterrupted_item.parameter
+                ]["momentum_buffer"],
+                restored_optimizer.matrix_optimizer.state[
+                    restored_item.parameter
+                ]["momentum_buffer"],
+            )
+
+    def test_changed_mapping_is_rejected_before_the_next_step(self):
+        model = make_model()
+        optimizer, _ = configure_static(model)
+        checkpoint = {
+            "run_metadata": {
+                "optimizer": {
+                    "settings": {
+                        "static_multiplier_configuration": copy.deepcopy(
+                            optimizer.static_multiplier_configuration
+                        )
+                    }
+                }
+            }
+        }
+        changed_model = make_model()
+        changed_optimizer, _ = configure_static(
+            changed_model,
+            static_matrix_type_multipliers={
+                "attention_qkv": 4.0,
+                "attention_output": 0.25,
+                "mlp_input": 2.0,
+                "mlp_output": 0.5,
+            },
+        )
+        before = {
+            name: parameter.detach().clone()
+            for name, parameter in changed_model.named_parameters()
+        }
+
+        with self.assertRaisesRegex(
+            ValueError, "static multiplier mapping mismatch"
+        ):
+            validate_static_multiplier_resume(
+                checkpoint,
+                changed_optimizer.static_multiplier_configuration,
+            )
+        for name, parameter in changed_model.named_parameters():
+            torch.testing.assert_close(parameter, before[name])
 
 
 if __name__ == "__main__":

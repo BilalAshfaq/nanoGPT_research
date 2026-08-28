@@ -1,5 +1,7 @@
 """Configuration and deterministic resolution of static matrix multipliers."""
 
+import hashlib
+import json
 import math
 from collections.abc import Mapping
 from numbers import Real
@@ -16,6 +18,7 @@ MATRIX_TYPE_SUFFIXES = {
 # overflow while enforcing a single, unambiguous scale split between the base
 # learning rate and the per-matrix multipliers.
 GEOMETRIC_MEAN_LOG_TOLERANCE = 1e-9
+MAPPING_ID_HEX_LENGTH = 12
 
 
 def _validate_mapping(name, value):
@@ -51,6 +54,22 @@ def _matrix_type_for_name(parameter_name):
             "documented matrix type"
         )
     return matches[0]
+
+
+def _mapping_fingerprint(resolved_multipliers):
+    canonical_mapping = json.dumps(
+        resolved_multipliers,
+        sort_keys=True,
+        separators=(",", ":"),
+        allow_nan=False,
+    )
+    return hashlib.sha256(canonical_mapping.encode("utf-8")).hexdigest()
+
+
+def static_scaling_rule(multiplier_configuration):
+    """Return the required run-name scaling-rule component."""
+
+    return f"static-{multiplier_configuration['mapping_id']}"
 
 
 def resolve_static_multipliers(
@@ -140,6 +159,9 @@ def resolve_static_multipliers(
             f"got {geometric_mean:.17g}"
         )
 
+    fingerprint = _mapping_fingerprint(resolved)
+    unique_multipliers = sorted(set(resolved.values()))
+
     return {
         "specification": {
             "default_multiplier": default_value,
@@ -147,6 +169,14 @@ def resolve_static_multipliers(
             "exact_parameter_multipliers": validated_exact_values,
         },
         "resolved_multipliers": resolved,
+        "fingerprint_sha256": fingerprint,
+        "mapping_id": fingerprint[:MAPPING_ID_HEX_LENGTH],
+        "summary": {
+            "eligible_matrix_count": len(resolved),
+            "minimum_multiplier": min(resolved.values()),
+            "maximum_multiplier": max(resolved.values()),
+            "unique_multiplier_count": len(unique_multipliers),
+        },
         "geometric_mean": math.exp(mean_log_multiplier),
         "geometric_mean_log_tolerance": GEOMETRIC_MEAN_LOG_TOLERANCE,
     }

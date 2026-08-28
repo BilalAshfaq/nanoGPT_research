@@ -49,14 +49,18 @@ from shared_utils.run_metadata import (
     validate_resume_compatibility,
     write_run_summary,
 )
-from shared_utils.parameter_partition import partition_optimizer_parameters
-from tuned_global_sgdm.utils.diagnostics import (
-    GlobalSGDMDiagnostics,
+from shared_utils.sgdm_diagnostics import (
+    SGDMUpdateDiagnostics,
     append_diagnostic_record,
     initialize_diagnostic_log,
     parse_diagnostic_matrix_names,
     parse_diagnostic_steps,
 )
+from shared_utils.parameter_partition import partition_optimizer_parameters
+from static_per_matrix_sgdm.utils.resume_validation import (
+    validate_static_multiplier_resume,
+)
+from static_per_matrix_sgdm.utils.static_multipliers import static_scaling_rule
 
 # -----------------------------------------------------------------------------
 # default config values designed to train a gpt2 (124M) on OpenWebText
@@ -110,7 +114,7 @@ static_default_multiplier = 1.0
 # Optional keys: attention_qkv, attention_output, mlp_input, mlp_output.
 static_matrix_type_multipliers = {}
 static_exact_parameter_multipliers = {}
-# optional global-SGDM matrix diagnostics
+# optional SGDM matrix diagnostics
 diagnostics_enabled = False
 diagnostic_steps = '' # comma-separated optimizer-step indices
 diagnostic_spectral_matrix_names = '' # comma-separated exact parameter names
@@ -138,9 +142,12 @@ parsed_diagnostic_steps = parse_diagnostic_steps(diagnostic_steps)
 parsed_diagnostic_spectral_names = parse_diagnostic_matrix_names(
     diagnostic_spectral_matrix_names
 )
-if diagnostics_enabled and optimizer_name != 'global_sgdm':
+if diagnostics_enabled and optimizer_name not in {
+    'global_sgdm',
+    'static_per_matrix_sgdm',
+}:
     raise ValueError(
-        "global SGDM diagnostics require optimizer_name='global_sgdm'"
+        "SGDM diagnostics require global_sgdm or static_per_matrix_sgdm"
     )
 if optimizer_name != 'adamw' and decay_lr and learning_rate <= 0.0:
     raise ValueError(
@@ -316,8 +323,11 @@ else:
         optimizer_settings['static_multiplier_configuration'] = copy.deepcopy(
             optimizer.static_multiplier_configuration
         )
+        optimizer_settings['scaling_rule'] = static_scaling_rule(
+            optimizer.static_multiplier_configuration
+        )
 
-diagnostics = GlobalSGDMDiagnostics(
+diagnostics = SGDMUpdateDiagnostics(
     enabled=diagnostics_enabled,
     steps=parsed_diagnostic_steps,
     spectral_matrix_names=parsed_diagnostic_spectral_names,
@@ -336,6 +346,11 @@ if master_process:
     initialize_evaluation_log(out_dir, resume=init_from == 'resume')
 
 if init_from == 'resume':
+    if optimizer_name == 'static_per_matrix_sgdm':
+        validate_static_multiplier_resume(
+            checkpoint,
+            optimizer.static_multiplier_configuration,
+        )
     validate_resume_compatibility(
         checkpoint,
         optimizer_name=optimizer_name,

@@ -141,7 +141,7 @@ class GlobalSGDMDiagnosticsTests(unittest.TestCase):
         named_parameters = (NamedParameter('matrix.weight', parameter),)
 
         with mock.patch(
-            'tuned_global_sgdm.utils.diagnostics._frobenius_norm',
+            'shared_utils.sgdm_diagnostics._frobenius_norm',
             side_effect=AssertionError('norm should not run'),
         ):
             disabled = GlobalSGDMDiagnostics(enabled=False, steps=(0,))
@@ -199,7 +199,7 @@ class GlobalSGDMDiagnosticsTests(unittest.TestCase):
         )
         diagnostics = GlobalSGDMDiagnostics(enabled=True, steps=(0,))
 
-        with self.assertRaisesRegex(ValueError, 'same global SGDM learning rate'):
+        with self.assertRaisesRegex(ValueError, 'same scheduled base learning rate'):
             diagnostics.begin_step(
                 0,
                 (
