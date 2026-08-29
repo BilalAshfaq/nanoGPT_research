@@ -269,10 +269,11 @@ def resolve_run_config(manifest, run):
     namespace = {}
     with open(config_path, encoding="utf-8") as config_file:
         exec(compile(config_file.read(), config_path, "exec"), namespace)
+    configurable_types = (bool, float, int, str, dict)
     values = {
         key: value
         for key, value in namespace.items()
-        if not key.startswith("_") and isinstance(value, (bool, float, int, str))
+        if not key.startswith("_") and isinstance(value, configurable_types)
     }
     applied = {
         "optimizer_name": run["optimizer_name"],

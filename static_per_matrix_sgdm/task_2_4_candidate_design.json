@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "design_id": "task-2.4-static-candidates-v1",
+  "variant_1_source_manifest_id": "task-1.6-exploratory-v1",
+  "variant_1_winner_group": "global_sgdm",
+  "allowed_variant_1_momenta": [0.9, 0.95, 0.99],
+  "base_learning_rates": [0.03, 0.1, 0.3, 1.0],
+  "exploratory_seed": 1337,
+  "expected_run_count": 12,
+  "selection": {
+    "metric": "validation_loss",
+    "mode": "min",
+    "selection_step": 999,
+    "selection_tokens": 491028480,
+    "tie_break": ["learning_rate", "mapping_order"]
+  },
+  "confirmation_seeds": [2027, 4099],
+  "mapping_profiles": [
+    {
+      "name": "attention_mild",
+      "order": 0,
+      "default_multiplier": 1.0,
+      "matrix_type_multipliers": {
+        "attention_qkv": 1.4142135623730951,
+        "attention_output": 1.4142135623730951,
+        "mlp_input": 0.7071067811865476,
+        "mlp_output": 0.7071067811865476
+      },
+      "exact_parameter_multipliers": {},
+      "mapping_id": "26f16b708d59",
+      "fingerprint_sha256": "26f16b708d599d8350915e6aaa4ec14d449a186038c955fded379092bda2236d"
+    },
+    {
+      "name": "attention_strong",
+      "order": 1,
+      "default_multiplier": 1.0,
+      "matrix_type_multipliers": {
+        "attention_qkv": 2.0,
+        "attention_output": 2.0,
+        "mlp_input": 0.5,
+        "mlp_output": 0.5
+      },
+      "exact_parameter_multipliers": {},
+      "mapping_id": "658ea6e7df4d",
+      "fingerprint_sha256": "658ea6e7df4d0d4cc643c3052582b260f65e3eba6a564f3aeb861b3a9570f2e9"
+    },
+    {
+      "name": "mlp_strong",
+      "order": 2,
+      "default_multiplier": 1.0,
+      "matrix_type_multipliers": {
+        "attention_qkv": 0.5,
+        "attention_output": 0.5,
+        "mlp_input": 2.0,
+        "mlp_output": 2.0
+      },
+      "exact_parameter_multipliers": {},
+      "mapping_id": "2633929b6baf",
+      "fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600"
+    }
+  ]
+}
