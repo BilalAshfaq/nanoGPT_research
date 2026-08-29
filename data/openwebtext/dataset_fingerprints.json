@@ -1,0 +1,14 @@
+{
+  "dataset": "openwebtext",
+  "files": {
+    "data/openwebtext/train.bin": {
+      "bytes": 18071164978,
+      "sha256": "68a352b5dbd52e85b7a8a1556c1ccae65ce14b02e4913788b0883b89ceddc1d1"
+    },
+    "data/openwebtext/val.bin": {
+      "bytes": 8869212,
+      "sha256": "009ecdd6da34f1ae915ff1f0f3aeb0416b02f2252356505b32ce44166dd5cfcc"
+    }
+  },
+  "schema_version": 1
+}
