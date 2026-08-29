@@ -84,8 +84,14 @@ def _variant_1_momentum(selection_report, design):
     return momentum
 
 
-def materialize_manifest(selection_report, design=None, baseline_manifest=None):
-    """Return an unauthorized exact 12-run manifest using the real V1 winner."""
+def materialize_manifest(
+    selection_report,
+    design=None,
+    baseline_manifest=None,
+    *,
+    launch_authorized=False,
+):
+    """Return the exact 12-run manifest using the real Variant 1 winner."""
 
     design = copy.deepcopy(design if design is not None else _read_json(DESIGN_PATH))
     baseline = copy.deepcopy(
@@ -158,16 +164,16 @@ def materialize_manifest(selection_report, design=None, baseline_manifest=None):
         raise ValueError("frozen candidate design does not produce 12 runs")
     manifest = {
         "schema_version": baseline["schema_version"],
-        "manifest_id": "task-2.4-static-exploratory-v1",
+        "manifest_id": "task-2.5-static-exploratory-v1",
         "purpose": "study",
-        "launch_authorized": False,
+        "launch_authorized": launch_authorized,
         "counts_toward_study_budget": True,
         "config_file": "config/task_2_4_static.py",
         "environment_lock": baseline["environment_lock"],
         "preflight_tests": ["tests.test_baseline_preflight"],
         "dataset": copy.deepcopy(baseline["dataset"]),
         "resources": copy.deepcopy(baseline["resources"]),
-        "output_root": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.4",
+        "output_root": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5",
         "expected_run_count": len(runs),
         "selection": {
             "group_by": "optimizer_name",
@@ -177,7 +183,7 @@ def materialize_manifest(selection_report, design=None, baseline_manifest=None):
             "tie_break": design["selection"]["tie_break"],
         },
         "confirmation": {
-            "manifest_id": "task-2.4-static-confirmation-v1",
+            "manifest_id": "task-2.5-static-confirmation-v1",
             "additional_seeds": design["confirmation_seeds"],
             "run_name_template": (
                 "{optimizer_name}_gpt2-124m_lr{learning_rate}_mom{momentum}_"
@@ -201,14 +207,19 @@ def main(argv=None):
     parser = argparse.ArgumentParser()
     parser.add_argument("--variant-1-selection", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument("--launch-authorized", action="store_true")
     args = parser.parse_args(argv)
-    manifest = materialize_manifest(_read_json(args.variant_1_selection))
+    manifest = materialize_manifest(
+        _read_json(args.variant_1_selection),
+        launch_authorized=args.launch_authorized,
+    )
     output_path = os.path.abspath(args.output)
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     with open(output_path, "w", encoding="utf-8") as output_file:
         json.dump(manifest, output_file, indent=2, sort_keys=True)
         output_file.write("\n")
-    print(f"materialized unauthorized manifest: {output_path}")
+    authorization = "authorized" if manifest["launch_authorized"] else "unauthorized"
+    print(f"materialized {authorization} manifest: {output_path}")
     return 0
 
 

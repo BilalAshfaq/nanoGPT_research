@@ -19,7 +19,7 @@ After Variant 1 selection, materialize the exploratory manifest with:
 ```bash
 python -m static_per_matrix_sgdm.utils.study_manifest \
   --variant-1-selection task_1_6_selection.json \
-  --output experiment_manifests/task_2_4_static_exploratory.json
+  --output experiment_manifests/task_2_5_static_exploratory.json
 ```
 
 The materializer accepts only a completed global-SGDM winner whose momentum is

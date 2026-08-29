@@ -30,16 +30,18 @@ STUDY_MANIFEST = os.path.join(
 
 
 class ExperimentManifestTests(unittest.TestCase):
-    def test_checked_in_manifests_are_valid_and_study_is_not_authorized(self):
+    def test_checked_in_manifests_are_valid_and_launch_guard_is_enforced(self):
         pilot = load_manifest(PILOT_MANIFEST)
         study = load_manifest(STUDY_MANIFEST)
 
         self.assertEqual(len(pilot['runs']), 1)
         self.assertEqual(len(study['runs']), 24)
         self.assertTrue(pilot['launch_authorized'])
-        self.assertFalse(study['launch_authorized'])
+        self.assertTrue(study['launch_authorized'])
+        unauthorized_study = copy.deepcopy(study)
+        unauthorized_study['launch_authorized'] = False
         with self.assertRaisesRegex(RuntimeError, 'not authorized'):
-            run_manifest(study)
+            run_manifest(unauthorized_study)
 
     def test_study_materializes_exact_candidate_grids_and_budgets(self):
         study = load_manifest(STUDY_MANIFEST)

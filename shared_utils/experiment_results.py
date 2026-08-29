@@ -63,20 +63,23 @@ def collect_results(manifest):
             }
         records = evaluation_records(output_directory)
         selection_record = records.get(run["selection_step"])
-        results.append(
-            {
-                "run_id": run["run_id"],
-                "run_name": run["run_name"],
-                "optimizer_name": run["optimizer_name"],
-                "seed": run["seed"],
-                "status": outcome["status"] if outcome else "pending",
-                "selection_values": copy.deepcopy(run["selection_values"]),
-                "selection_record": selection_record,
-                "run_summary": summary_view,
-                "run_summary_path": summary_path,
-                "output_directory": output_directory,
-            }
-        )
+        result = {
+            "run_id": run["run_id"],
+            "run_name": run["run_name"],
+            "optimizer_name": run["optimizer_name"],
+            "seed": run["seed"],
+            "status": outcome["status"] if outcome else "pending",
+            "selection_values": copy.deepcopy(run["selection_values"]),
+            "selection_record": selection_record,
+            "run_summary": summary_view,
+            "run_summary_path": summary_path,
+            "output_directory": output_directory,
+        }
+        if "static_multiplier_configuration" in run:
+            result["static_multiplier_configuration"] = copy.deepcopy(
+                run["static_multiplier_configuration"]
+            )
+        results.append(result)
     return results
 
 
@@ -150,24 +153,29 @@ def generate_confirmation_manifest(exploratory_manifest, winners):
                 }
             )
             run_name = confirmation["run_name_template"].format(**values)
-            runs.append(
-                {
-                    "run_id": f"confirm_{group}_seed{seed}",
-                    "run_name": run_name,
-                    "optimizer_name": winning_run["optimizer_name"],
-                    "seed": seed,
-                    "max_iters": winning_run["max_iters"],
-                    "tokens_per_update": winning_run["tokens_per_update"],
-                    "selection_tokens": winning_run["selection_tokens"],
-                    "max_processed_tokens": winning_run["max_processed_tokens"],
-                    "evaluation_steps": winning_run["evaluation_steps"],
-                    "selection_step": winning_run["selection_step"],
-                    "selection_values": copy.deepcopy(
-                        winning_run["selection_values"]
-                    ),
-                    "overrides": copy.deepcopy(winning_run["overrides"]),
-                }
-            )
+            confirmation_run = {
+                "run_id": f"confirm_{group}_seed{seed}",
+                "run_name": run_name,
+                "optimizer_name": winning_run["optimizer_name"],
+                "seed": seed,
+                "max_iters": winning_run["max_iters"],
+                "tokens_per_update": winning_run["tokens_per_update"],
+                "selection_tokens": winning_run["selection_tokens"],
+                "max_processed_tokens": winning_run["max_processed_tokens"],
+                "evaluation_steps": winning_run["evaluation_steps"],
+                "selection_step": winning_run["selection_step"],
+                "selection_values": copy.deepcopy(
+                    winning_run["selection_values"]
+                ),
+                "overrides": copy.deepcopy(winning_run["overrides"]),
+            }
+            if "static_multiplier_configuration" in winning_run:
+                confirmation_run["static_multiplier_configuration"] = (
+                    copy.deepcopy(
+                        winning_run["static_multiplier_configuration"]
+                    )
+                )
+            runs.append(confirmation_run)
 
     return {
         "schema_version": exploratory_manifest["schema_version"],
@@ -269,7 +277,7 @@ def final_report(exploratory_manifest, confirmation_manifest):
                     else None
                 ),
             }
-        report["optimizer_results"][optimizer_name] = {
+        optimizer_result = {
             "winning_configuration": winner["selection_values"],
             "winning_run": exploratory_results[winner["run_id"]],
             "seed_results": seed_results,
@@ -280,6 +288,11 @@ def final_report(exploratory_manifest, confirmation_manifest):
             ),
             "run_metric_aggregates": metric_aggregates,
         }
+        if "static_multiplier_configuration" in winner:
+            optimizer_result["static_multiplier_configuration"] = copy.deepcopy(
+                winner["static_multiplier_configuration"]
+            )
+        report["optimizer_results"][optimizer_name] = optimizer_result
     return report
 
 

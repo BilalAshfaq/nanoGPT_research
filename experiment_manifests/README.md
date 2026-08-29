@@ -98,3 +98,90 @@ python -m shared_utils.experiment_results select \
 
 Pilot results are rejected by the study selector. Failed, divergent, and
 interrupted outcomes remain final and are not automatically replaced.
+
+## Task 2.5 static per-matrix SGDM study
+
+The checked-in exploratory manifest was materialized from
+`task_1_6_selection.json`. It fixes matrix momentum to the seed-1337 Variant 1
+winner (`0.99`) and contains the 12 candidates frozen by Task 2.4. Do not
+submit it until the smoke outcome below is `completed`.
+
+From a clean `experiments-iter-1` checkout on Martin, validate both manifests:
+
+```bash
+python -m shared_utils.experiment_manifest validate \
+  experiment_manifests/task_2_5_static_smoke.json
+python -m shared_utils.experiment_manifest validate \
+  experiment_manifests/task_2_5_static_exploratory.json
+```
+
+Run the required non-budget smoke first:
+
+```bash
+SMOKE_JOB_ID=$(sbatch --parsable \
+  --time=01:00:00 \
+  --export=ALL,MANIFEST_PATH=experiment_manifests/task_2_5_static_smoke.json \
+  run_optimizer_manifest.slurm)
+
+echo "Task 2.5 smoke job: $SMOKE_JOB_ID"
+squeue -j "$SMOKE_JOB_ID"
+```
+
+After it exits, require a completed outcome before proceeding:
+
+```bash
+python - <<'PY'
+import json
+from pathlib import Path
+
+path = Path('/shared/home/bilal.ashfaq/nanogpt-smoke-runs/task-2.5')
+outcomes = list(path.glob('*/outcome.json'))
+if len(outcomes) != 1:
+    raise SystemExit(f'expected one smoke outcome, found {len(outcomes)}')
+outcome = json.loads(outcomes[0].read_text())
+print(outcome)
+if outcome.get('status') != 'completed':
+    raise SystemExit('Task 2.5 smoke did not complete successfully')
+PY
+```
+
+Only after that check succeeds, submit the 12-run exploratory study:
+
+```bash
+STUDY_JOB_ID=$(sbatch --parsable \
+  --time=3-00:00:00 \
+  --export=ALL,MANIFEST_PATH=experiment_manifests/task_2_5_static_exploratory.json \
+  run_optimizer_manifest.slurm)
+
+echo "Task 2.5 exploratory job: $STUDY_JOB_ID"
+squeue -j "$STUDY_JOB_ID"
+```
+
+The manifest runner records and does not replace completed, failed, divergent,
+or interrupted outcomes. Keep the cluster checkout unchanged until the
+sequential manifest job finishes.
+
+After all 12 outcomes are final, select the seed-1337 static winner and
+materialize the still-unauthorized, deferred confirmation manifest:
+
+```bash
+python -m shared_utils.experiment_results select \
+  experiment_manifests/task_2_5_static_exploratory.json \
+  --report task_2_5_static_selection.json \
+  --confirmation-manifest experiment_manifests/task_2_5_static_confirmation.json
+```
+
+Create the explicitly exploratory one-seed comparison with Variant 1:
+
+```bash
+python -m static_per_matrix_sgdm.utils.study_results \
+  --global-manifest experiment_manifests/task_1_6_exploratory.json \
+  --global-selection task_1_6_selection.json \
+  --static-manifest experiment_manifests/task_2_5_static_exploratory.json \
+  --static-selection task_2_5_static_selection.json \
+  --output task_2_5_seed1337_comparison.json
+```
+
+Seeds `2027` and `4099` remain deferred for both selected optimizers. The
+one-seed comparison is exploratory and cannot support a final improvement
+claim.
