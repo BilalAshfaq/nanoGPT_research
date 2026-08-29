@@ -7,8 +7,8 @@
 #SBATCH --time=00:30:00
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=64G
-#SBATCH --output=sgdm_verify-%j.out
-#SBATCH --error=sgdm_verify-%j.err
+#SBATCH --output=logs/sgdm_verify-%j.out
+#SBATCH --error=logs/sgdm_verify-%j.err
 
 set -euo pipefail
 

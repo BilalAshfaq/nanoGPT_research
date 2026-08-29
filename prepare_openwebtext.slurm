@@ -7,8 +7,8 @@
 #SBATCH --time=24:00:00
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=128G
-#SBATCH --output=/shared/home/bilal.ashfaq/nanogpt-job-logs/owt_prepare-%j.out
-#SBATCH --error=/shared/home/bilal.ashfaq/nanogpt-job-logs/owt_prepare-%j.err
+#SBATCH --output=logs/owt_prepare-%j.out
+#SBATCH --error=logs/owt_prepare-%j.err
 
 set -euo pipefail
 

@@ -7,8 +7,8 @@
 #SBATCH --time=01:00:00
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=64G
-#SBATCH --output=sgdm_pilot-%j.out
-#SBATCH --error=sgdm_pilot-%j.err
+#SBATCH --output=logs/sgdm_pilot-%j.out
+#SBATCH --error=logs/sgdm_pilot-%j.err
 
 set -euo pipefail
 

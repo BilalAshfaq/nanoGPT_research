@@ -13,3 +13,5 @@ venv/
 /nanogpt-pilot-runs/
 /nanogpt-smoke-runs/
 /nanogpt-study-runs/
+/logs/*
+!/logs/.gitkeep
