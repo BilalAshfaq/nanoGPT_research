@@ -135,10 +135,13 @@ import json
 from pathlib import Path
 
 path = Path('/shared/home/bilal.ashfaq/nanogpt-smoke-runs/task-2.5')
-outcomes = list(path.glob('*/outcome.json'))
-if len(outcomes) != 1:
-    raise SystemExit(f'expected one smoke outcome, found {len(outcomes)}')
-outcome = json.loads(outcomes[0].read_text())
+outcome_path = path / (
+    'static_per_matrix_sgdm_smoke_retry-v2_lr0.03_mom0.99_'
+    'seed1337_scalestatic-26f16b708d59/outcome.json'
+)
+if not outcome_path.is_file():
+    raise SystemExit(f'missing retry smoke outcome: {outcome_path}')
+outcome = json.loads(outcome_path.read_text())
 print(outcome)
 if outcome.get('status') != 'completed':
     raise SystemExit('Task 2.5 smoke did not complete successfully')

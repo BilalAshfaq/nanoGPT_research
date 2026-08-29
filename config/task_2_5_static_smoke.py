@@ -1,6 +1,6 @@
 # Short two-GPU preflight using the real Task 2.5 model, data, and optimizer.
 with open('config/task_2_4_static.py', encoding='utf-8') as study_config_file:
-    exec(compile(study_config_file.read(), study_config_file.name, 'exec'))
+    exec(study_config_file.read())
 
 out_dir = 'out-task-2-5-static-smoke-placeholder'
 eval_interval = 1

@@ -59,10 +59,29 @@ class StaticStudyExecutionTests(unittest.TestCase):
     def test_real_configuration_smoke_is_short_and_nonbudget(self):
         self.assertTrue(self.smoke_manifest["launch_authorized"])
         self.assertFalse(self.smoke_manifest["counts_toward_study_budget"])
+        self.assertEqual(
+            self.smoke_manifest["manifest_id"], "task-2.5-static-smoke-v2"
+        )
         run = self.smoke_manifest["runs"][0]
+        self.assertIn("retry-v2", run["run_name"])
         self.assertEqual(run["max_iters"], 1)
         self.assertEqual(run["tokens_per_update"], 491_520)
         self.assertEqual(run["evaluation_steps"], [0, 1])
+
+    def test_configs_load_when_train_compile_setting_shadows_builtin(self):
+        for relative_path in (
+            "config/task_2_4_static.py",
+            "config/task_2_5_static_smoke.py",
+        ):
+            with self.subTest(relative_path=relative_path):
+                path = os.path.join(REPOSITORY_ROOT, relative_path)
+                namespace = {"compile": True}
+                with open(path, encoding="utf-8") as config_file:
+                    exec(config_file.read(), namespace)
+                self.assertTrue(namespace["compile"])
+                self.assertEqual(
+                    namespace["optimizer_name"], "static_per_matrix_sgdm"
+                )
 
     def test_confirmation_preserves_complete_static_mapping(self):
         winning_run = self.static_manifest["runs"][0]

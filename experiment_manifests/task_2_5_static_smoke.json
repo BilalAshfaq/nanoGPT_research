@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "manifest_id": "task-2.5-static-smoke-v1",
+  "manifest_id": "task-2.5-static-smoke-v2",
   "purpose": "pilot",
   "launch_authorized": true,
   "counts_toward_study_budget": false,
@@ -25,8 +25,8 @@
   "selection": null,
   "runs": [
     {
-      "run_id": "static_smoke_lr0.03_mom0.99_map26f16b708d59",
-      "run_name": "static_per_matrix_sgdm_smoke_lr0.03_mom0.99_seed1337_scalestatic-26f16b708d59",
+      "run_id": "static_smoke_retry_v2_lr0.03_mom0.99_map26f16b708d59",
+      "run_name": "static_per_matrix_sgdm_smoke_retry-v2_lr0.03_mom0.99_seed1337_scalestatic-26f16b708d59",
       "optimizer_name": "static_per_matrix_sgdm",
       "seed": 1337,
       "max_iters": 1,
