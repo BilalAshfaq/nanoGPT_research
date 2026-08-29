@@ -1,0 +1,366 @@
+===== JOB INFORMATION =====
+Job ID: 22174
+Node: mbz-titan-3
+Started: 2026-08-26T13:38:55+00:00
+===== REPOSITORY CHECK =====
+Branch: experiments-iter-1
+?? sgdm_verify-22174.err
+?? sgdm_verify-22174.out
+===== GPU INFORMATION =====
+CUDA_VISIBLE_DEVICES=0,1
+Wed Aug 26 13:38:55 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.84                 Driver Version: 595.84         CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA RTX PRO 6000 Blac...    On  |   00000000:AE:00.0 Off |                    0 |
+| N/A   32C    P8             35W /  600W |       0MiB /  97887MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA RTX PRO 6000 Blac...    On  |   00000000:AF:00.0 Off |                    0 |
+| N/A   51C    P0             53W /  600W |       0MiB /  97887MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+GPU 0: NVIDIA RTX PRO 6000 Blackwell Server Edition (UUID: GPU-e3dd5554-de7d-e517-9631-d63f5a6f576e)
+GPU 1: NVIDIA RTX PRO 6000 Blackwell Server Edition (UUID: GPU-646977f6-39c9-b0a2-9524-76641b92ba4c)
+===== PYTORCH CHECK =====
+PyTorch: 2.13.0+cu130
+PyTorch CUDA runtime: 13.0
+NumPy: 2.4.6
+CUDA available: True
+CUDA device count: 2
+bfloat16 supported: True
+GPU 0: NVIDIA RTX PRO 6000 Blackwell Server Edition
+GPU 1: NVIDIA RTX PRO 6000 Blackwell Server Edition
+===== UNIT TESTS =====
+number of parameters: 0.00M
+num decayed parameter tensors: 10, with 1,856 parameters
+num non-decayed parameter tensors: 5, with 40 parameters
+using fused AdamW: False
+number of parameters: 0.00M
+using fused auxiliary AdamW: False
+number of parameters: 0.00M
+num decayed parameter tensors: 10, with 1,856 parameters
+num non-decayed parameter tensors: 5, with 40 parameters
+using fused AdamW: False
+number of parameters: 0.00M
+num decayed parameter tensors: 6, with 1,088 parameters
+num non-decayed parameter tensors: 10, with 120 parameters
+using fused AdamW: False
+number of parameters: 0.00M
+using fused auxiliary AdamW: False
+number of parameters: 0.00M
+using fused auxiliary AdamW: False
+number of parameters: 0.00M
+number of parameters: 0.00M
+num decayed parameter tensors: 6, with 1,088 parameters
+num non-decayed parameter tensors: 10, with 120 parameters
+using fused AdamW: False
+num decayed parameter tensors: 6, with 1,088 parameters
+num non-decayed parameter tensors: 10, with 120 parameters
+using fused AdamW: False
+number of parameters: 0.00M
+using fused auxiliary AdamW: False
+number of parameters: 0.00M
+using fused auxiliary AdamW: False
+number of parameters: 0.00M
+number of parameters: 0.00M
+using fused auxiliary AdamW: False
+number of parameters: 0.00M
+using fused auxiliary AdamW: False
+number of parameters: 0.00M
+number of parameters: 0.00M
+number of parameters: 0.00M
+number of parameters: 0.00M
+num decayed parameter tensors: 10, with 1,856 parameters
+num non-decayed parameter tensors: 18, with 224 parameters
+using fused AdamW: False
+number of parameters: 0.00M
+number of parameters: 0.00M
+number of parameters: 0.00M
+===== PREPARING TINY SMOKE DATASET =====
+length of dataset in characters: 1,115,394
+all the unique characters: 
+ !$&',-.3:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+vocab size: 65
+train has 1,003,854 tokens
+val has 111,540 tokens
+===== TWO-GPU GLOBAL SGDM SMOKE TEST =====
+Output directory: /shared/home/bilal.ashfaq/nanogpt-smoke-runs/global-sgdm-22174
+Overriding config with config/smoke_global_sgdm_diagnostics.py:
+# Tiny CPU smoke run for global-SGDM update diagnostics.
+
+exec(open('config/smoke_optimizer.py').read())
+
+out_dir = 'out-global-sgdm-diagnostics-smoke'
+optimizer_name = 'global_sgdm'
+diagnostics_enabled = True
+diagnostic_steps = '0'
+diagnostic_spectral_matrix_names = 'transformer.h.0.attn.c_proj.weight'
+
+Overriding: out_dir = /shared/home/bilal.ashfaq/nanogpt-smoke-runs/global-sgdm-22174
+Overriding: gradient_accumulation_steps = 2
+Overriding: dtype = bfloat16
+Overriding config with config/smoke_global_sgdm_diagnostics.py:
+# Tiny CPU smoke run for global-SGDM update diagnostics.
+
+exec(open('config/smoke_optimizer.py').read())
+
+out_dir = 'out-global-sgdm-diagnostics-smoke'
+optimizer_name = 'global_sgdm'
+diagnostics_enabled = True
+diagnostic_steps = '0'
+diagnostic_spectral_matrix_names = 'transformer.h.0.attn.c_proj.weight'
+
+Overriding: out_dir = /shared/home/bilal.ashfaq/nanogpt-smoke-runs/global-sgdm-22174
+Overriding: gradient_accumulation_steps = 2
+Overriding: dtype = bfloat16
+tokens per iteration will be: 32
+tokens per iteration will be: 32
+found vocab_size = 65 (inside data/shakespeare_char/meta.pkl)
+Initializing a new model from scratch
+found vocab_size = 65 (inside data/shakespeare_char/meta.pkl)
+Initializing a new model from scratch
+number of parameters: 0.00Mnumber of parameters: 0.00M
+
+using fused auxiliary AdamW: True
+using fused auxiliary AdamW: True
+optimizer parameter audit:
+{
+  "parameters": [
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.0.attn.c_attn.bias",
+      "optimizer": "adamw",
+      "parameter_count": 24,
+      "shape": [
+        24
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.0.attn.c_attn.weight",
+      "optimizer": "global_sgdm",
+      "parameter_count": 192,
+      "shape": [
+        24,
+        8
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.0.attn.c_proj.bias",
+      "optimizer": "adamw",
+      "parameter_count": 8,
+      "shape": [
+        8
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.0.attn.c_proj.weight",
+      "optimizer": "global_sgdm",
+      "parameter_count": 64,
+      "shape": [
+        8,
+        8
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.0.ln_1.bias",
+      "optimizer": "adamw",
+      "parameter_count": 8,
+      "shape": [
+        8
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.0.ln_1.weight",
+      "optimizer": "adamw",
+      "parameter_count": 8,
+      "shape": [
+        8
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.0.ln_2.bias",
+      "optimizer": "adamw",
+      "parameter_count": 8,
+      "shape": [
+        8
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.0.ln_2.weight",
+      "optimizer": "adamw",
+      "parameter_count": 8,
+      "shape": [
+        8
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.0.mlp.c_fc.bias",
+      "optimizer": "adamw",
+      "parameter_count": 32,
+      "shape": [
+        32
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.0.mlp.c_fc.weight",
+      "optimizer": "global_sgdm",
+      "parameter_count": 256,
+      "shape": [
+        32,
+        8
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.0.mlp.c_proj.bias",
+      "optimizer": "adamw",
+      "parameter_count": 8,
+      "shape": [
+        8
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.0.mlp.c_proj.weight",
+      "optimizer": "global_sgdm",
+      "parameter_count": 256,
+      "shape": [
+        8,
+        32
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.ln_f.bias",
+      "optimizer": "adamw",
+      "parameter_count": 8,
+      "shape": [
+        8
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.ln_f.weight",
+      "optimizer": "adamw",
+      "parameter_count": 8,
+      "shape": [
+        8
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.wpe.weight",
+      "optimizer": "adamw",
+      "parameter_count": 64,
+      "shape": [
+        8,
+        8
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.wte.weight",
+      "optimizer": "adamw",
+      "parameter_count": 520,
+      "shape": [
+        65,
+        8
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "decay"
+    }
+  ],
+  "tied_parameters": {
+    "aliases": [
+      "transformer.wte.weight",
+      "lm_head.weight"
+    ],
+    "assignment": "auxiliary",
+    "canonical_name": "transformer.wte.weight",
+    "counted_once": true,
+    "optimizer": "adamw"
+  },
+  "totals": {
+    "parameter_count": 1472,
+    "parameter_tensors": 16
+  }
+}
+step 0: train loss 4.1914, val loss 4.1621
+iter 0: loss 4.1719, time 4738.39ms, mfu -100.00%, matrix lr 0.001, auxiliary lr 0.001
+step 1: train loss 4.1621, val loss 4.1777
+saving checkpoint to /shared/home/bilal.ashfaq/nanogpt-smoke-runs/global-sgdm-22174
+iter 1: loss 4.1836, time 341.65ms, mfu -100.00%, matrix lr 0.001, auxiliary lr 0.001
+===== GENERATED ARTIFACTS =====
+/shared/home/bilal.ashfaq/nanogpt-smoke-runs/global-sgdm-22174/ckpt.pt
+/shared/home/bilal.ashfaq/nanogpt-smoke-runs/global-sgdm-22174/run_summary.json
+/shared/home/bilal.ashfaq/nanogpt-smoke-runs/global-sgdm-22174/optimizer_diagnostics.jsonl
+===== VERIFICATION PASSED =====
+Finished: 2026-08-26T13:39:17+00:00

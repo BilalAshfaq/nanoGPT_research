@@ -1,0 +1,553 @@
+===== GLOBAL SGDM PILOT =====
+Job ID: 22284
+Node: mbz-titan-2
+Repository: /shared/home/bilal.ashfaq/nano research/nanoGPT_research
+Started: 2026-08-26T20:12:26+00:00
+PyTorch: 2.13.0+cu130
+CUDA runtime: 13.0
+CUDA devices: 2
+bfloat16 supported: True
+Output directory: /shared/home/bilal.ashfaq/nanogpt-pilot-runs/global-sgdm-22284
+Overriding config with config/pilot_global_sgdm.py:
+# Two-GPU Global SGDM pilot for observing a meaningful Tiny Shakespeare trend.
+# This is an implementation/stability check, not a Task 1.6 tuning result.
+
+out_dir = 'out-global-sgdm-pilot'
+eval_interval = 100
+eval_iters = 50
+log_interval = 10
+always_save_checkpoint = True
+wandb_log = False
+
+dataset = 'shakespeare_char'
+tokenizer = 'character'
+gradient_accumulation_steps = 4
+batch_size = 32
+block_size = 128
+
+n_layer = 4
+n_head = 4
+n_embd = 128
+dropout = 0.0
+bias = False
+
+optimizer_name = 'global_sgdm'
+learning_rate = 6e-4
+matrix_learning_rate = 0.1
+matrix_momentum = 0.95
+matrix_weight_decay = 0.1
+auxiliary_learning_rate = 6e-4
+auxiliary_weight_decay = 0.1
+auxiliary_beta1 = 0.9
+auxiliary_beta2 = 0.95
+
+max_iters = 500
+decay_lr = True
+warmup_iters = 50
+lr_decay_iters = 500
+min_lr = 6e-5
+grad_clip = 1.0
+
+diagnostics_enabled = True
+diagnostic_steps = '0,100,250,500'
+diagnostic_spectral_matrix_names = 'transformer.h.0.attn.c_proj.weight'
+
+seed = 1337
+device = 'cuda'
+dtype = 'bfloat16'
+compile = True
+
+Overriding: out_dir = /shared/home/bilal.ashfaq/nanogpt-pilot-runs/global-sgdm-22284
+Overriding config with config/pilot_global_sgdm.py:
+# Two-GPU Global SGDM pilot for observing a meaningful Tiny Shakespeare trend.
+# This is an implementation/stability check, not a Task 1.6 tuning result.
+
+out_dir = 'out-global-sgdm-pilot'
+eval_interval = 100
+eval_iters = 50
+log_interval = 10
+always_save_checkpoint = True
+wandb_log = False
+
+dataset = 'shakespeare_char'
+tokenizer = 'character'
+gradient_accumulation_steps = 4
+batch_size = 32
+block_size = 128
+
+n_layer = 4
+n_head = 4
+n_embd = 128
+dropout = 0.0
+bias = False
+
+optimizer_name = 'global_sgdm'
+learning_rate = 6e-4
+matrix_learning_rate = 0.1
+matrix_momentum = 0.95
+matrix_weight_decay = 0.1
+auxiliary_learning_rate = 6e-4
+auxiliary_weight_decay = 0.1
+auxiliary_beta1 = 0.9
+auxiliary_beta2 = 0.95
+
+max_iters = 500
+decay_lr = True
+warmup_iters = 50
+lr_decay_iters = 500
+min_lr = 6e-5
+grad_clip = 1.0
+
+diagnostics_enabled = True
+diagnostic_steps = '0,100,250,500'
+diagnostic_spectral_matrix_names = 'transformer.h.0.attn.c_proj.weight'
+
+seed = 1337
+device = 'cuda'
+dtype = 'bfloat16'
+compile = True
+
+Overriding: out_dir = /shared/home/bilal.ashfaq/nanogpt-pilot-runs/global-sgdm-22284
+tokens per iteration will be: 16,384
+tokens per iteration will be: 16,384
+found vocab_size = 65 (inside data/shakespeare_char/meta.pkl)
+Initializing a new model from scratch
+found vocab_size = 65 (inside data/shakespeare_char/meta.pkl)
+Initializing a new model from scratch
+number of parameters: 0.80M
+number of parameters: 0.80M
+using fused auxiliary AdamW: True
+using fused auxiliary AdamW: True
+optimizer parameter audit:
+{
+  "parameters": [
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.0.attn.c_attn.weight",
+      "optimizer": "global_sgdm",
+      "parameter_count": 49152,
+      "shape": [
+        384,
+        128
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.0.attn.c_proj.weight",
+      "optimizer": "global_sgdm",
+      "parameter_count": 16384,
+      "shape": [
+        128,
+        128
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.0.ln_1.weight",
+      "optimizer": "adamw",
+      "parameter_count": 128,
+      "shape": [
+        128
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.0.ln_2.weight",
+      "optimizer": "adamw",
+      "parameter_count": 128,
+      "shape": [
+        128
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.0.mlp.c_fc.weight",
+      "optimizer": "global_sgdm",
+      "parameter_count": 65536,
+      "shape": [
+        512,
+        128
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.0.mlp.c_proj.weight",
+      "optimizer": "global_sgdm",
+      "parameter_count": 65536,
+      "shape": [
+        128,
+        512
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.1.attn.c_attn.weight",
+      "optimizer": "global_sgdm",
+      "parameter_count": 49152,
+      "shape": [
+        384,
+        128
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.1.attn.c_proj.weight",
+      "optimizer": "global_sgdm",
+      "parameter_count": 16384,
+      "shape": [
+        128,
+        128
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.1.ln_1.weight",
+      "optimizer": "adamw",
+      "parameter_count": 128,
+      "shape": [
+        128
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.1.ln_2.weight",
+      "optimizer": "adamw",
+      "parameter_count": 128,
+      "shape": [
+        128
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.1.mlp.c_fc.weight",
+      "optimizer": "global_sgdm",
+      "parameter_count": 65536,
+      "shape": [
+        512,
+        128
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.1.mlp.c_proj.weight",
+      "optimizer": "global_sgdm",
+      "parameter_count": 65536,
+      "shape": [
+        128,
+        512
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.2.attn.c_attn.weight",
+      "optimizer": "global_sgdm",
+      "parameter_count": 49152,
+      "shape": [
+        384,
+        128
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.2.attn.c_proj.weight",
+      "optimizer": "global_sgdm",
+      "parameter_count": 16384,
+      "shape": [
+        128,
+        128
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.2.ln_1.weight",
+      "optimizer": "adamw",
+      "parameter_count": 128,
+      "shape": [
+        128
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.2.ln_2.weight",
+      "optimizer": "adamw",
+      "parameter_count": 128,
+      "shape": [
+        128
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.2.mlp.c_fc.weight",
+      "optimizer": "global_sgdm",
+      "parameter_count": 65536,
+      "shape": [
+        512,
+        128
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.2.mlp.c_proj.weight",
+      "optimizer": "global_sgdm",
+      "parameter_count": 65536,
+      "shape": [
+        128,
+        512
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.3.attn.c_attn.weight",
+      "optimizer": "global_sgdm",
+      "parameter_count": 49152,
+      "shape": [
+        384,
+        128
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.3.attn.c_proj.weight",
+      "optimizer": "global_sgdm",
+      "parameter_count": 16384,
+      "shape": [
+        128,
+        128
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.3.ln_1.weight",
+      "optimizer": "adamw",
+      "parameter_count": 128,
+      "shape": [
+        128
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.3.ln_2.weight",
+      "optimizer": "adamw",
+      "parameter_count": 128,
+      "shape": [
+        128
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.3.mlp.c_fc.weight",
+      "optimizer": "global_sgdm",
+      "parameter_count": 65536,
+      "shape": [
+        512,
+        128
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.3.mlp.c_proj.weight",
+      "optimizer": "global_sgdm",
+      "parameter_count": 65536,
+      "shape": [
+        128,
+        512
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.ln_f.weight",
+      "optimizer": "adamw",
+      "parameter_count": 128,
+      "shape": [
+        128
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.wpe.weight",
+      "optimizer": "adamw",
+      "parameter_count": 16384,
+      "shape": [
+        128,
+        128
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.wte.weight",
+      "optimizer": "adamw",
+      "parameter_count": 8320,
+      "shape": [
+        65,
+        128
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "decay"
+    }
+  ],
+  "tied_parameters": {
+    "aliases": [
+      "transformer.wte.weight",
+      "lm_head.weight"
+    ],
+    "assignment": "auxiliary",
+    "canonical_name": "transformer.wte.weight",
+    "counted_once": true,
+    "optimizer": "adamw"
+  },
+  "totals": {
+    "parameter_count": 812288,
+    "parameter_tensors": 27
+  }
+}
+compiling the model... (takes a ~minute)
+compiling the model... (takes a ~minute)
+step 0: train loss 4.1832, val loss 4.1802
+iter 0: loss 4.1787, time 31524.74ms, mfu -100.00%, matrix lr 0.00196078, auxiliary lr 1.17647e-05
+iter 10: loss 4.0294, time 11.55ms, mfu 1.26%, matrix lr 0.0215686, auxiliary lr 0.000129412
+iter 20: loss 3.6661, time 11.63ms, mfu 1.26%, matrix lr 0.0411765, auxiliary lr 0.000247059
+iter 30: loss 3.4624, time 11.83ms, mfu 1.26%, matrix lr 0.0607843, auxiliary lr 0.000364706
+iter 40: loss 3.2915, time 11.75ms, mfu 1.26%, matrix lr 0.0803922, auxiliary lr 0.000482353
+iter 50: loss 3.1876, time 11.79ms, mfu 1.26%, matrix lr 0.1, auxiliary lr 0.0006
+iter 60: loss 3.0158, time 11.84ms, mfu 1.25%, matrix lr 0.0998904, auxiliary lr 0.000599342
+iter 70: loss 2.8850, time 11.88ms, mfu 1.25%, matrix lr 0.0995621, auxiliary lr 0.000597372
+iter 80: loss 2.7606, time 11.70ms, mfu 1.25%, matrix lr 0.0990166, auxiliary lr 0.0005941
+iter 90: loss 2.7360, time 11.70ms, mfu 1.25%, matrix lr 0.0982568, auxiliary lr 0.000589541
+step 100: train loss 2.6730, val loss 2.6732
+saving checkpoint to /shared/home/bilal.ashfaq/nanogpt-pilot-runs/global-sgdm-22284
+iter 100: loss 2.6676, time 251.18ms, mfu 1.13%, matrix lr 0.0972862, auxiliary lr 0.000583717
+iter 110: loss 2.6235, time 11.71ms, mfu 1.14%, matrix lr 0.0961095, auxiliary lr 0.000576657
+iter 120: loss 2.6169, time 11.83ms, mfu 1.15%, matrix lr 0.0947326, auxiliary lr 0.000568396
+iter 130: loss 2.6115, time 11.98ms, mfu 1.16%, matrix lr 0.0931622, auxiliary lr 0.000558973
+iter 140: loss 2.5656, time 11.83ms, mfu 1.17%, matrix lr 0.0914058, auxiliary lr 0.000548435
+iter 150: loss 2.5566, time 11.89ms, mfu 1.17%, matrix lr 0.089472, auxiliary lr 0.000536832
+iter 160: loss 2.5667, time 11.72ms, mfu 1.18%, matrix lr 0.0873703, auxiliary lr 0.000524222
+iter 170: loss 2.5743, time 10.02ms, mfu 1.21%, matrix lr 0.0851109, auxiliary lr 0.000510665
+iter 180: loss 2.5542, time 10.17ms, mfu 1.23%, matrix lr 0.0827048, auxiliary lr 0.000496229
+iter 190: loss 2.5913, time 10.24ms, mfu 1.25%, matrix lr 0.0801637, auxiliary lr 0.000480982
+step 200: train loss 2.5437, val loss 2.5571
+saving checkpoint to /shared/home/bilal.ashfaq/nanogpt-pilot-runs/global-sgdm-22284
+iter 200: loss 2.5324, time 234.39ms, mfu 1.13%, matrix lr 0.0775, auxiliary lr 0.000465
+iter 210: loss 2.5302, time 10.19ms, mfu 1.16%, matrix lr 0.0747267, auxiliary lr 0.00044836
+iter 220: loss 2.5472, time 10.32ms, mfu 1.19%, matrix lr 0.0718573, auxiliary lr 0.000431144
+iter 230: loss 2.5723, time 10.09ms, mfu 1.21%, matrix lr 0.0689058, auxiliary lr 0.000413435
+iter 240: loss 2.5390, time 10.11ms, mfu 1.24%, matrix lr 0.0658865, auxiliary lr 0.000395319
+iter 250: loss 2.5378, time 16.26ms, mfu 1.20%, matrix lr 0.0628142, auxiliary lr 0.000376885
+iter 260: loss 2.5325, time 10.11ms, mfu 1.23%, matrix lr 0.0597038, auxiliary lr 0.000358223
+iter 270: loss 2.5627, time 10.15ms, mfu 1.25%, matrix lr 0.0565705, auxiliary lr 0.000339423
+iter 280: loss 2.5177, time 10.25ms, mfu 1.27%, matrix lr 0.0534295, auxiliary lr 0.000320577
+iter 290: loss 2.5630, time 10.12ms, mfu 1.28%, matrix lr 0.0502962, auxiliary lr 0.000301777
+step 300: train loss 2.5270, val loss 2.5404
+saving checkpoint to /shared/home/bilal.ashfaq/nanogpt-pilot-runs/global-sgdm-22284
+iter 300: loss 2.5366, time 239.89ms, mfu 1.16%, matrix lr 0.0471858, auxiliary lr 0.000283115
+iter 310: loss 2.5106, time 9.97ms, mfu 1.19%, matrix lr 0.0441135, auxiliary lr 0.000264681
+iter 320: loss 2.5345, time 10.13ms, mfu 1.22%, matrix lr 0.0410942, auxiliary lr 0.000246565
+iter 330: loss 2.5171, time 10.07ms, mfu 1.24%, matrix lr 0.0381427, auxiliary lr 0.000228856
+iter 340: loss 2.5186, time 10.01ms, mfu 1.26%, matrix lr 0.0352733, auxiliary lr 0.00021164
+iter 350: loss 2.4881, time 10.13ms, mfu 1.28%, matrix lr 0.0325, auxiliary lr 0.000195
+iter 360: loss 2.4998, time 10.31ms, mfu 1.29%, matrix lr 0.0298363, auxiliary lr 0.000179018
+iter 370: loss 2.5255, time 10.33ms, mfu 1.31%, matrix lr 0.0272952, auxiliary lr 0.000163771
+iter 380: loss 2.5038, time 10.20ms, mfu 1.32%, matrix lr 0.0248891, auxiliary lr 0.000149335
+iter 390: loss 2.5233, time 10.29ms, mfu 1.33%, matrix lr 0.0226297, auxiliary lr 0.000135778
+step 400: train loss 2.5179, val loss 2.5359
+saving checkpoint to /shared/home/bilal.ashfaq/nanogpt-pilot-runs/global-sgdm-22284
+iter 400: loss 2.5129, time 255.65ms, mfu 1.20%, matrix lr 0.020528, auxiliary lr 0.000123168
+iter 410: loss 2.5023, time 10.11ms, mfu 1.23%, matrix lr 0.0185942, auxiliary lr 0.000111565
+iter 420: loss 2.5228, time 10.20ms, mfu 1.25%, matrix lr 0.0168378, auxiliary lr 0.000101027
+iter 430: loss 2.5240, time 10.22ms, mfu 1.26%, matrix lr 0.0152674, auxiliary lr 9.16041e-05
+iter 440: loss 2.5336, time 10.29ms, mfu 1.28%, matrix lr 0.0138905, auxiliary lr 8.33427e-05
+iter 450: loss 2.4734, time 10.24ms, mfu 1.29%, matrix lr 0.0127138, auxiliary lr 7.6283e-05
+iter 460: loss 2.4801, time 10.18ms, mfu 1.31%, matrix lr 0.0117432, auxiliary lr 7.04593e-05
+iter 470: loss 2.5119, time 10.46ms, mfu 1.32%, matrix lr 0.0109834, auxiliary lr 6.59001e-05
+iter 480: loss 2.5008, time 10.56ms, mfu 1.32%, matrix lr 0.0104379, auxiliary lr 6.26276e-05
+iter 490: loss 2.5350, time 10.11ms, mfu 1.34%, matrix lr 0.0101096, auxiliary lr 6.06577e-05
+step 500: train loss 2.5150, val loss 2.5270
+saving checkpoint to /shared/home/bilal.ashfaq/nanogpt-pilot-runs/global-sgdm-22284
+iter 500: loss 2.4957, time 246.14ms, mfu 1.21%, matrix lr 0.01, auxiliary lr 6e-05
+===== PILOT ARTIFACTS =====
+/shared/home/bilal.ashfaq/nanogpt-pilot-runs/global-sgdm-22284/ckpt.pt
+/shared/home/bilal.ashfaq/nanogpt-pilot-runs/global-sgdm-22284/run_summary.json
+/shared/home/bilal.ashfaq/nanogpt-pilot-runs/global-sgdm-22284/optimizer_diagnostics.jsonl
+/shared/home/bilal.ashfaq/nanogpt-pilot-runs/global-sgdm-22284/cluster_environment.freeze.txt
+===== PILOT COMPLETED =====
+These results verify progress only and are not Task 1.6 selection data.
+Finished: 2026-08-26T20:13:21+00:00

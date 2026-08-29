@@ -1,0 +1,1069 @@
+===== OPTIMIZER MANIFEST RUNNER =====
+Job ID: 22856
+Node: mbz-titan-3
+Repository: /shared/home/bilal.ashfaq/nano research/nanoGPT_research
+Manifest: experiment_manifests/task_2_5_static_smoke.json
+Run ID: all
+Started: 2026-08-29T11:32:56+00:00
+valid manifest: task-2.5-static-smoke-v2
+number of parameters: 0.00M
+num decayed parameter tensors: 10, with 1,856 parameters
+num non-decayed parameter tensors: 5, with 40 parameters
+using fused AdamW: False
+number of parameters: 0.00M
+using fused auxiliary AdamW: False
+number of parameters: 0.00M
+num decayed parameter tensors: 10, with 1,856 parameters
+num non-decayed parameter tensors: 5, with 40 parameters
+using fused AdamW: False
+Launching: torchrun --standalone --nproc_per_node=2 train.py config/task_2_5_static_smoke.py --out_dir=/shared/home/bilal.ashfaq/nanogpt-smoke-runs/task-2.5/static_per_matrix_sgdm_smoke_retry-v2_lr0.03_mom0.99_seed1337_scalestatic-26f16b708d59 --optimizer_name=static_per_matrix_sgdm --seed=1337 --max_iters=1 --init_from=scratch
+Overriding config with config/task_2_5_static_smoke.py:
+# Short two-GPU preflight using the real Task 2.5 model, data, and optimizer.
+with open('config/task_2_4_static.py', encoding='utf-8') as study_config_file:
+    exec(study_config_file.read())
+
+out_dir = 'out-task-2-5-static-smoke-placeholder'
+eval_interval = 1
+eval_iters = 2
+log_interval = 1
+max_iters = 1
+warmup_iters = 0
+lr_decay_iters = 1
+
+matrix_learning_rate = 0.03
+matrix_momentum = 0.99
+static_matrix_type_multipliers = {
+    'attention_qkv': 1.4142135623730951,
+    'attention_output': 1.4142135623730951,
+    'mlp_input': 0.7071067811865476,
+    'mlp_output': 0.7071067811865476,
+}
+
+diagnostics_enabled = True
+diagnostic_steps = '0,1'
+diagnostic_spectral_matrix_names = 'transformer.h.0.attn.c_proj.weight'
+
+Overriding: out_dir = /shared/home/bilal.ashfaq/nanogpt-smoke-runs/task-2.5/static_per_matrix_sgdm_smoke_retry-v2_lr0.03_mom0.99_seed1337_scalestatic-26f16b708d59
+Overriding: optimizer_name = static_per_matrix_sgdm
+Overriding: seed = 1337
+Overriding: max_iters = 1
+Overriding: init_from = scratch
+Overriding config with config/task_2_5_static_smoke.py:
+# Short two-GPU preflight using the real Task 2.5 model, data, and optimizer.
+with open('config/task_2_4_static.py', encoding='utf-8') as study_config_file:
+    exec(study_config_file.read())
+
+out_dir = 'out-task-2-5-static-smoke-placeholder'
+eval_interval = 1
+eval_iters = 2
+log_interval = 1
+max_iters = 1
+warmup_iters = 0
+lr_decay_iters = 1
+
+matrix_learning_rate = 0.03
+matrix_momentum = 0.99
+static_matrix_type_multipliers = {
+    'attention_qkv': 1.4142135623730951,
+    'attention_output': 1.4142135623730951,
+    'mlp_input': 0.7071067811865476,
+    'mlp_output': 0.7071067811865476,
+}
+
+diagnostics_enabled = True
+diagnostic_steps = '0,1'
+diagnostic_spectral_matrix_names = 'transformer.h.0.attn.c_proj.weight'
+
+Overriding: out_dir = /shared/home/bilal.ashfaq/nanogpt-smoke-runs/task-2.5/static_per_matrix_sgdm_smoke_retry-v2_lr0.03_mom0.99_seed1337_scalestatic-26f16b708d59
+Overriding: optimizer_name = static_per_matrix_sgdm
+Overriding: seed = 1337
+Overriding: max_iters = 1
+Overriding: init_from = scratch
+tokens per iteration will be: 491,520
+Initializing a new model from scratch
+defaulting to vocab_size of GPT-2 to 50304 (50257 rounded up for efficiency)
+tokens per iteration will be: 491,520
+Initializing a new model from scratch
+defaulting to vocab_size of GPT-2 to 50304 (50257 rounded up for efficiency)
+number of parameters: 123.59M
+number of parameters: 123.59M
+using fused auxiliary AdamW: True
+using fused auxiliary AdamW: True
+optimizer parameter audit:
+{
+  "parameters": [
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.0.attn.c_attn.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 1769472,
+      "shape": [
+        2304,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.0.attn.c_proj.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 589824,
+      "shape": [
+        768,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.0.ln_1.weight",
+      "optimizer": "adamw",
+      "parameter_count": 768,
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.0.ln_2.weight",
+      "optimizer": "adamw",
+      "parameter_count": 768,
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.0.mlp.c_fc.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 2359296,
+      "shape": [
+        3072,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.0.mlp.c_proj.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 2359296,
+      "shape": [
+        768,
+        3072
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.1.attn.c_attn.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 1769472,
+      "shape": [
+        2304,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.1.attn.c_proj.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 589824,
+      "shape": [
+        768,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.1.ln_1.weight",
+      "optimizer": "adamw",
+      "parameter_count": 768,
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.1.ln_2.weight",
+      "optimizer": "adamw",
+      "parameter_count": 768,
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.1.mlp.c_fc.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 2359296,
+      "shape": [
+        3072,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.1.mlp.c_proj.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 2359296,
+      "shape": [
+        768,
+        3072
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.10.attn.c_attn.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 1769472,
+      "shape": [
+        2304,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.10.attn.c_proj.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 589824,
+      "shape": [
+        768,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.10.ln_1.weight",
+      "optimizer": "adamw",
+      "parameter_count": 768,
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.10.ln_2.weight",
+      "optimizer": "adamw",
+      "parameter_count": 768,
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.10.mlp.c_fc.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 2359296,
+      "shape": [
+        3072,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.10.mlp.c_proj.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 2359296,
+      "shape": [
+        768,
+        3072
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.11.attn.c_attn.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 1769472,
+      "shape": [
+        2304,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.11.attn.c_proj.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 589824,
+      "shape": [
+        768,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.11.ln_1.weight",
+      "optimizer": "adamw",
+      "parameter_count": 768,
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.11.ln_2.weight",
+      "optimizer": "adamw",
+      "parameter_count": 768,
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.11.mlp.c_fc.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 2359296,
+      "shape": [
+        3072,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.11.mlp.c_proj.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 2359296,
+      "shape": [
+        768,
+        3072
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.2.attn.c_attn.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 1769472,
+      "shape": [
+        2304,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.2.attn.c_proj.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 589824,
+      "shape": [
+        768,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.2.ln_1.weight",
+      "optimizer": "adamw",
+      "parameter_count": 768,
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.2.ln_2.weight",
+      "optimizer": "adamw",
+      "parameter_count": 768,
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.2.mlp.c_fc.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 2359296,
+      "shape": [
+        3072,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.2.mlp.c_proj.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 2359296,
+      "shape": [
+        768,
+        3072
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.3.attn.c_attn.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 1769472,
+      "shape": [
+        2304,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.3.attn.c_proj.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 589824,
+      "shape": [
+        768,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.3.ln_1.weight",
+      "optimizer": "adamw",
+      "parameter_count": 768,
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.3.ln_2.weight",
+      "optimizer": "adamw",
+      "parameter_count": 768,
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.3.mlp.c_fc.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 2359296,
+      "shape": [
+        3072,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.3.mlp.c_proj.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 2359296,
+      "shape": [
+        768,
+        3072
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.4.attn.c_attn.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 1769472,
+      "shape": [
+        2304,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.4.attn.c_proj.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 589824,
+      "shape": [
+        768,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.4.ln_1.weight",
+      "optimizer": "adamw",
+      "parameter_count": 768,
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.4.ln_2.weight",
+      "optimizer": "adamw",
+      "parameter_count": 768,
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.4.mlp.c_fc.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 2359296,
+      "shape": [
+        3072,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.4.mlp.c_proj.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 2359296,
+      "shape": [
+        768,
+        3072
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.5.attn.c_attn.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 1769472,
+      "shape": [
+        2304,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.5.attn.c_proj.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 589824,
+      "shape": [
+        768,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.5.ln_1.weight",
+      "optimizer": "adamw",
+      "parameter_count": 768,
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.5.ln_2.weight",
+      "optimizer": "adamw",
+      "parameter_count": 768,
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.5.mlp.c_fc.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 2359296,
+      "shape": [
+        3072,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.5.mlp.c_proj.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 2359296,
+      "shape": [
+        768,
+        3072
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.6.attn.c_attn.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 1769472,
+      "shape": [
+        2304,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.6.attn.c_proj.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 589824,
+      "shape": [
+        768,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.6.ln_1.weight",
+      "optimizer": "adamw",
+      "parameter_count": 768,
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.6.ln_2.weight",
+      "optimizer": "adamw",
+      "parameter_count": 768,
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.6.mlp.c_fc.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 2359296,
+      "shape": [
+        3072,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.6.mlp.c_proj.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 2359296,
+      "shape": [
+        768,
+        3072
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.7.attn.c_attn.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 1769472,
+      "shape": [
+        2304,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.7.attn.c_proj.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 589824,
+      "shape": [
+        768,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.7.ln_1.weight",
+      "optimizer": "adamw",
+      "parameter_count": 768,
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.7.ln_2.weight",
+      "optimizer": "adamw",
+      "parameter_count": 768,
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.7.mlp.c_fc.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 2359296,
+      "shape": [
+        3072,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.7.mlp.c_proj.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 2359296,
+      "shape": [
+        768,
+        3072
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.8.attn.c_attn.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 1769472,
+      "shape": [
+        2304,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.8.attn.c_proj.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 589824,
+      "shape": [
+        768,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.8.ln_1.weight",
+      "optimizer": "adamw",
+      "parameter_count": 768,
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.8.ln_2.weight",
+      "optimizer": "adamw",
+      "parameter_count": 768,
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.8.mlp.c_fc.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 2359296,
+      "shape": [
+        3072,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.8.mlp.c_proj.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 2359296,
+      "shape": [
+        768,
+        3072
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.9.attn.c_attn.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 1769472,
+      "shape": [
+        2304,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.9.attn.c_proj.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 589824,
+      "shape": [
+        768,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.9.ln_1.weight",
+      "optimizer": "adamw",
+      "parameter_count": 768,
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.h.9.ln_2.weight",
+      "optimizer": "adamw",
+      "parameter_count": 768,
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.9.mlp.c_fc.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 2359296,
+      "shape": [
+        3072,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "eligible_matrix",
+      "name": "transformer.h.9.mlp.c_proj.weight",
+      "optimizer": "static_per_matrix_sgdm",
+      "parameter_count": 2359296,
+      "shape": [
+        768,
+        3072
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.ln_f.weight",
+      "optimizer": "adamw",
+      "parameter_count": 768,
+      "shape": [
+        768
+      ],
+      "weight_decay": 0.0,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "no_decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.wpe.weight",
+      "optimizer": "adamw",
+      "parameter_count": 786432,
+      "shape": [
+        1024,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "decay"
+    },
+    {
+      "group": "auxiliary",
+      "name": "transformer.wte.weight",
+      "optimizer": "adamw",
+      "parameter_count": 38633472,
+      "shape": [
+        50304,
+        768
+      ],
+      "weight_decay": 0.1,
+      "weight_decay_semantics": "adamw_decoupled",
+      "weight_decay_treatment": "decay"
+    }
+  ],
+  "tied_parameters": {
+    "aliases": [
+      "transformer.wte.weight",
+      "lm_head.weight"
+    ],
+    "assignment": "auxiliary",
+    "canonical_name": "transformer.wte.weight",
+    "counted_once": true,
+    "optimizer": "adamw"
+  },
+  "totals": {
+    "parameter_count": 124373760,
+    "parameter_tensors": 75
+  }
+}
+compiling the model... (takes a ~minute)
+compiling the model... (takes a ~minute)
+step 0: train loss 10.9972, val loss 10.9846
+iter 0: loss 10.9860, time 24737.83ms, mfu -100.00%, matrix lr 0.03, auxiliary lr 0.0006
+step 1: train loss 10.5398, val loss 10.5464
+saving checkpoint to /shared/home/bilal.ashfaq/nanogpt-smoke-runs/task-2.5/static_per_matrix_sgdm_smoke_retry-v2_lr0.03_mom0.99_seed1337_scalestatic-26f16b708d59
+iter 1: loss 10.5994, time 3843.69ms, mfu -100.00%, matrix lr 0.003, auxiliary lr 6e-05
+===== MANIFEST RUNNER FINISHED =====
+Finished: 2026-08-29T11:34:04+00:00
