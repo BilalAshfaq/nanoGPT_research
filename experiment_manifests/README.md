@@ -96,15 +96,19 @@ python -m shared_utils.experiment_results select \
   --confirmation-manifest experiment_manifests/task_1_6_confirmation.json
 ```
 
+Generated JSON reports are placed automatically in the repository-root
+`reports/` directory, so the command above writes
+`reports/task_1_6_selection.json`.
+
 Pilot results are rejected by the study selector. Failed, divergent, and
 interrupted outcomes remain final and are not automatically replaced.
 
 ## Task 2.5 static per-matrix SGDM study
 
 The checked-in exploratory manifest was materialized from
-`task_1_6_selection.json`. It fixes matrix momentum to the seed-1337 Variant 1
-winner (`0.99`) and contains the 12 candidates frozen by Task 2.4. Do not
-submit it until the smoke outcome below is `completed`.
+`reports/task_1_6_selection.json`. It fixes matrix momentum to the seed-1337
+Variant 1 winner (`0.99`) and contains the 12 candidates frozen by Task 2.4.
+Do not submit it until the smoke outcome below is `completed`.
 
 From a clean `experiments-iter-1` checkout on Martin, validate both manifests:
 
@@ -134,7 +138,7 @@ python - <<'PY'
 import json
 from pathlib import Path
 
-path = Path('/shared/home/bilal.ashfaq/nanogpt-smoke-runs/task-2.5')
+path = Path('nanogpt-smoke-runs/task-2.5').resolve()
 outcome_path = path / (
     'static_per_matrix_sgdm_smoke_retry-v2_lr0.03_mom0.99_'
     'seed1337_scalestatic-26f16b708d59/outcome.json'
@@ -179,11 +183,15 @@ Create the explicitly exploratory one-seed comparison with Variant 1:
 ```bash
 python -m static_per_matrix_sgdm.utils.study_results \
   --global-manifest experiment_manifests/task_1_6_exploratory.json \
-  --global-selection task_1_6_selection.json \
+  --global-selection reports/task_1_6_selection.json \
   --static-manifest experiment_manifests/task_2_5_static_exploratory.json \
-  --static-selection task_2_5_static_selection.json \
+  --static-selection reports/task_2_5_static_selection.json \
   --output task_2_5_seed1337_comparison.json
 ```
+
+The selection and comparison commands place their generated report files in
+`reports/`, including `reports/task_2_5_static_selection.json` and
+`reports/task_2_5_seed1337_comparison.json`.
 
 Seeds `2027` and `4099` remain deferred for both selected optimizers. The
 one-seed comparison is exploratory and cannot support a final improvement

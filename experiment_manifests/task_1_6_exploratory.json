@@ -20,7 +20,7 @@
     "world_size": 2,
     "device_name_contains": "NVIDIA RTX PRO 6000 Blackwell"
   },
-  "output_root": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6",
+  "output_root": "nanogpt-study-runs/task-1.6",
   "expected_run_count": 24,
   "selection": {
     "group_by": "optimizer_name",

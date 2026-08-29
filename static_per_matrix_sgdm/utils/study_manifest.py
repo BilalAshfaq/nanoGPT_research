@@ -173,7 +173,7 @@ def materialize_manifest(
         "preflight_tests": ["tests.test_baseline_preflight"],
         "dataset": copy.deepcopy(baseline["dataset"]),
         "resources": copy.deepcopy(baseline["resources"]),
-        "output_root": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5",
+        "output_root": "nanogpt-study-runs/task-2.5",
         "expected_run_count": len(runs),
         "selection": {
             "group_by": "optimizer_name",

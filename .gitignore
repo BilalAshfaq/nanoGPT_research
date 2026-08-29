@@ -10,3 +10,6 @@ __pycache__/
 input.txt
 env/
 venv/
+/nanogpt-pilot-runs/
+/nanogpt-smoke-runs/
+/nanogpt-study-runs/

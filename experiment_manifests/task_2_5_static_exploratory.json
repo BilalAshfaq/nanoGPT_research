@@ -26,7 +26,7 @@
   "expected_run_count": 12,
   "launch_authorized": true,
   "manifest_id": "task-2.5-static-exploratory-v1",
-  "output_root": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5",
+  "output_root": "nanogpt-study-runs/task-2.5",
   "preflight_tests": [
     "tests.test_baseline_preflight"
   ],

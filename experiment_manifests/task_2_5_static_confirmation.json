@@ -14,7 +14,7 @@
   "expected_run_count": 2,
   "launch_authorized": false,
   "manifest_id": "task-2.5-static-confirmation-v1",
-  "output_root": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5",
+  "output_root": "nanogpt-study-runs/task-2.5",
   "preflight_tests": [
     "tests.test_baseline_preflight"
   ],

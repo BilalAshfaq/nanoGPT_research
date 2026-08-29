@@ -7,8 +7,9 @@ CONDA_SH="/shared/home/bilal.ashfaq/miniconda3/etc/profile.d/conda.sh"
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 ENV_FREEZE="$REPO_DIR/cluster_environment.freeze.txt"
 JOB_LOG_DIR="/shared/home/bilal.ashfaq/nanogpt-job-logs"
-SMOKE_RUN_DIR="/shared/home/bilal.ashfaq/nanogpt-smoke-runs"
-PILOT_RUN_DIR="/shared/home/bilal.ashfaq/nanogpt-pilot-runs"
+SMOKE_RUN_DIR="$REPO_DIR/nanogpt-smoke-runs"
+PILOT_RUN_DIR="$REPO_DIR/nanogpt-pilot-runs"
+STUDY_RUN_DIR="$REPO_DIR/nanogpt-study-runs"
 
 if [[ ! -f "$CONDA_SH" ]]; then
     echo "ERROR: Conda initialization script not found at $CONDA_SH"
@@ -72,7 +73,7 @@ print("W&B:", wandb.__version__)
 print("CUDA visible during setup:", torch.cuda.is_available())
 PY
 
-mkdir -p "$JOB_LOG_DIR" "$SMOKE_RUN_DIR" "$PILOT_RUN_DIR"
+mkdir -p "$JOB_LOG_DIR" "$SMOKE_RUN_DIR" "$PILOT_RUN_DIR" "$STUDY_RUN_DIR"
 
 if [[ ! -f "$ENV_FREEZE" ]]; then
     python -m pip freeze > "$ENV_FREEZE"
@@ -92,3 +93,4 @@ echo "Package snapshot: $ENV_FREEZE"
 echo "Job logs: $JOB_LOG_DIR"
 echo "Smoke outputs: $SMOKE_RUN_DIR"
 echo "Pilot outputs: $PILOT_RUN_DIR"
+echo "Study outputs: $STUDY_RUN_DIR"

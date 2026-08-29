@@ -15,7 +15,7 @@ set -euo pipefail
 REPO_DIR="$SLURM_SUBMIT_DIR"
 CONDA_ENV="nanogpt"
 CONDA_SH="/shared/home/bilal.ashfaq/miniconda3/etc/profile.d/conda.sh"
-SMOKE_ROOT="/shared/home/bilal.ashfaq/nanogpt-smoke-runs"
+SMOKE_ROOT="$REPO_DIR/nanogpt-smoke-runs"
 ENV_FREEZE="$REPO_DIR/cluster_environment.freeze.txt"
 
 cd "$REPO_DIR"

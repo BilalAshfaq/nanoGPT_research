@@ -25,6 +25,13 @@ def _absolute_repository_path(path):
     return os.path.join(repository_root(), path)
 
 
+def resolve_repository_path(path):
+    """Resolve a configured path relative to the repository root."""
+
+    expanded = os.path.expandvars(os.path.expanduser(path))
+    return os.path.abspath(_absolute_repository_path(expanded))
+
+
 def _read_json(path):
     with open(path, encoding="utf-8") as input_file:
         return json.load(input_file)
@@ -355,7 +362,7 @@ def _classify_completed_process(output_directory, run, return_code):
 
 
 def run_manifest_entry(manifest, run, environment, dataset):
-    output_root = os.path.expandvars(os.path.expanduser(manifest["output_root"]))
+    output_root = resolve_repository_path(manifest["output_root"])
     output_directory = os.path.join(output_root, run["run_name"])
     outcome = _read_outcome(output_directory)
     checkpoint_path = os.path.join(output_directory, "ckpt.pt")

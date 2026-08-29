@@ -20,7 +20,7 @@
     "world_size": 2,
     "device_name_contains": "NVIDIA RTX PRO 6000 Blackwell"
   },
-  "output_root": "/shared/home/bilal.ashfaq/nanogpt-pilot-runs",
+  "output_root": "nanogpt-pilot-runs",
   "expected_run_count": 1,
   "selection": null,
   "runs": [

@@ -14,7 +14,7 @@
   "expected_run_count": 4,
   "launch_authorized": false,
   "manifest_id": "task-1.6-confirmation-v1",
-  "output_root": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6",
+  "output_root": "nanogpt-study-runs/task-1.6",
   "preflight_tests": [
     "tests.test_baseline_preflight"
   ],

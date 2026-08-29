@@ -5,6 +5,7 @@ import json
 import os
 
 from shared_utils.experiment_manifest import load_manifest, resolve_run_config
+from shared_utils.experiment_results import report_output_path
 
 
 MATCHED_CONFIG_KEYS = (
@@ -184,7 +185,7 @@ def main(argv=None):
         load_manifest(args.static_manifest),
         _read_json(args.static_selection),
     )
-    output_path = os.path.abspath(args.output)
+    output_path = report_output_path(args.output)
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     with open(output_path, "w", encoding="utf-8") as output_file:
         json.dump(report, output_file, indent=2, sort_keys=True)

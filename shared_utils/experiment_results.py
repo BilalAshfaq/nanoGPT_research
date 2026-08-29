@@ -6,7 +6,28 @@ import json
 import os
 import statistics
 
-from shared_utils.experiment_manifest import FINAL_OUTCOMES, load_manifest
+from shared_utils.experiment_manifest import (
+    FINAL_OUTCOMES,
+    load_manifest,
+    repository_root,
+    resolve_repository_path,
+)
+
+
+REPORTS_DIRECTORY = os.path.join(repository_root(), "reports")
+
+
+def report_output_path(path):
+    """Place a generated JSON report in the repository's reports directory."""
+
+    expanded = os.path.expandvars(os.path.expanduser(path))
+    filename = os.path.basename(expanded)
+    if filename in {"", ".", ".."}:
+        raise ValueError("report output path must include a filename")
+    output_path = os.path.abspath(os.path.join(REPORTS_DIRECTORY, filename))
+    if os.path.dirname(output_path) != os.path.abspath(REPORTS_DIRECTORY):
+        raise ValueError("report output must stay inside the reports directory")
+    return output_path
 
 
 def _read_json(path):
@@ -23,7 +44,7 @@ def _write_json(path, value):
 
 
 def _output_directory(manifest, run):
-    root = os.path.expandvars(os.path.expanduser(manifest["output_root"]))
+    root = resolve_repository_path(manifest["output_root"])
     return os.path.join(root, run["run_name"])
 
 
@@ -317,13 +338,16 @@ def main(argv=None):
         confirmation = generate_confirmation_manifest(
             manifest, report["winners"]
         )
-        _write_json(args.report, report)
+        _write_json(report_output_path(args.report), report)
         _write_json(args.confirmation_manifest, confirmation)
         return 0
 
     exploratory = load_manifest(args.exploratory_manifest)
     confirmation = load_manifest(args.confirmation_manifest)
-    _write_json(args.output, final_report(exploratory, confirmation))
+    _write_json(
+        report_output_path(args.output),
+        final_report(exploratory, confirmation),
+    )
     return 0
 
 
