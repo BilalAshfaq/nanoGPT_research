@@ -1,0 +1,146 @@
+{
+  "claim_status": "confirmation seeds 2027 and 4099 are deferred; no final improvement claim is permitted",
+  "interpretation": null,
+  "matched_controls": {
+    "config_keys": [
+      "dataset",
+      "tokenizer",
+      "gradient_accumulation_steps",
+      "batch_size",
+      "block_size",
+      "n_layer",
+      "n_head",
+      "n_embd",
+      "dropout",
+      "bias",
+      "weight_decay",
+      "matrix_momentum",
+      "matrix_weight_decay",
+      "matrix_momentum_convention",
+      "matrix_weight_decay_mode",
+      "matrix_nesterov",
+      "auxiliary_learning_rate",
+      "auxiliary_weight_decay",
+      "auxiliary_beta1",
+      "auxiliary_beta2",
+      "auxiliary_weight_decay_mode",
+      "max_iters",
+      "decay_lr",
+      "warmup_iters",
+      "lr_decay_iters",
+      "min_lr",
+      "grad_clip",
+      "eval_interval",
+      "eval_iters",
+      "dtype",
+      "compile"
+    ],
+    "dataset_lock": "data/openwebtext/dataset_fingerprints.json",
+    "environment_lock": "cluster_environment.freeze.txt",
+    "runtime_fingerprints": {
+      "dataset_files": {
+        "data/openwebtext/train.bin": {
+          "bytes": 18071164978,
+          "sha256": "68a352b5dbd52e85b7a8a1556c1ccae65ce14b02e4913788b0883b89ceddc1d1"
+        },
+        "data/openwebtext/val.bin": {
+          "bytes": 8869212,
+          "sha256": "009ecdd6da34f1ae915ff1f0f3aeb0416b02f2252356505b32ce44166dd5cfcc"
+        }
+      },
+      "environment_sha256": "436cdfdeda242b640ed4236b0cc01201fc405ed831760de98a7f8acd2cdddea8"
+    },
+    "seed": 1337,
+    "selection_step": 999,
+    "selection_tokens": 491028480,
+    "status": "verified"
+  },
+  "observed_measurements": {
+    "global_sgdm": {
+      "learning_rate": 0.03,
+      "momentum": 0.99,
+      "run_id": "global_sgdm_lr0.03_mom0.99",
+      "validation_loss": 5.410761833190918
+    },
+    "static_per_matrix_sgdm": {
+      "learning_rate": 0.03,
+      "momentum": 0.99,
+      "run_id": "static_lr0.03_mom0.99_map2633929b6baf",
+      "static_multiplier_configuration": {
+        "fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "geometric_mean": 1.0,
+        "geometric_mean_log_tolerance": 1e-09,
+        "mapping_id": "2633929b6baf",
+        "resolved_multipliers": {
+          "transformer.h.0.attn.c_attn.weight": 0.5,
+          "transformer.h.0.attn.c_proj.weight": 0.5,
+          "transformer.h.0.mlp.c_fc.weight": 2.0,
+          "transformer.h.0.mlp.c_proj.weight": 2.0,
+          "transformer.h.1.attn.c_attn.weight": 0.5,
+          "transformer.h.1.attn.c_proj.weight": 0.5,
+          "transformer.h.1.mlp.c_fc.weight": 2.0,
+          "transformer.h.1.mlp.c_proj.weight": 2.0,
+          "transformer.h.10.attn.c_attn.weight": 0.5,
+          "transformer.h.10.attn.c_proj.weight": 0.5,
+          "transformer.h.10.mlp.c_fc.weight": 2.0,
+          "transformer.h.10.mlp.c_proj.weight": 2.0,
+          "transformer.h.11.attn.c_attn.weight": 0.5,
+          "transformer.h.11.attn.c_proj.weight": 0.5,
+          "transformer.h.11.mlp.c_fc.weight": 2.0,
+          "transformer.h.11.mlp.c_proj.weight": 2.0,
+          "transformer.h.2.attn.c_attn.weight": 0.5,
+          "transformer.h.2.attn.c_proj.weight": 0.5,
+          "transformer.h.2.mlp.c_fc.weight": 2.0,
+          "transformer.h.2.mlp.c_proj.weight": 2.0,
+          "transformer.h.3.attn.c_attn.weight": 0.5,
+          "transformer.h.3.attn.c_proj.weight": 0.5,
+          "transformer.h.3.mlp.c_fc.weight": 2.0,
+          "transformer.h.3.mlp.c_proj.weight": 2.0,
+          "transformer.h.4.attn.c_attn.weight": 0.5,
+          "transformer.h.4.attn.c_proj.weight": 0.5,
+          "transformer.h.4.mlp.c_fc.weight": 2.0,
+          "transformer.h.4.mlp.c_proj.weight": 2.0,
+          "transformer.h.5.attn.c_attn.weight": 0.5,
+          "transformer.h.5.attn.c_proj.weight": 0.5,
+          "transformer.h.5.mlp.c_fc.weight": 2.0,
+          "transformer.h.5.mlp.c_proj.weight": 2.0,
+          "transformer.h.6.attn.c_attn.weight": 0.5,
+          "transformer.h.6.attn.c_proj.weight": 0.5,
+          "transformer.h.6.mlp.c_fc.weight": 2.0,
+          "transformer.h.6.mlp.c_proj.weight": 2.0,
+          "transformer.h.7.attn.c_attn.weight": 0.5,
+          "transformer.h.7.attn.c_proj.weight": 0.5,
+          "transformer.h.7.mlp.c_fc.weight": 2.0,
+          "transformer.h.7.mlp.c_proj.weight": 2.0,
+          "transformer.h.8.attn.c_attn.weight": 0.5,
+          "transformer.h.8.attn.c_proj.weight": 0.5,
+          "transformer.h.8.mlp.c_fc.weight": 2.0,
+          "transformer.h.8.mlp.c_proj.weight": 2.0,
+          "transformer.h.9.attn.c_attn.weight": 0.5,
+          "transformer.h.9.attn.c_proj.weight": 0.5,
+          "transformer.h.9.mlp.c_fc.weight": 2.0,
+          "transformer.h.9.mlp.c_proj.weight": 2.0
+        },
+        "specification": {
+          "default_multiplier": 1.0,
+          "exact_parameter_multipliers": {},
+          "matrix_type_multipliers": {
+            "attention_output": 0.5,
+            "attention_qkv": 0.5,
+            "mlp_input": 2.0,
+            "mlp_output": 2.0
+          }
+        },
+        "summary": {
+          "eligible_matrix_count": 48,
+          "maximum_multiplier": 2.0,
+          "minimum_multiplier": 0.5,
+          "unique_multiplier_count": 2
+        }
+      },
+      "validation_loss": 5.401801109313965
+    },
+    "validation_loss_difference_static_minus_global": -0.008960723876953125
+  },
+  "report_type": "exploratory_seed_1337_only"
+}

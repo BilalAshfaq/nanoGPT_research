@@ -1,0 +1,2114 @@
+{
+  "manifest_id": "task-2.5-static-exploratory-v1",
+  "results": [
+    {
+      "optimizer_name": "static_per_matrix_sgdm",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5/static_per_matrix_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scalestatic-26f16b708d59",
+      "run_id": "static_lr0.03_mom0.99_map26f16b708d59",
+      "run_name": "static_per_matrix_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scalestatic-26f16b708d59",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "aeac82e0427f65633ddcff5d8a73c31167321e78",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.003,
+          "gradient_clipping_count": 1000,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 1.0,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.42823600769043,
+          "latest_training_loss": 5.3491586446762085,
+          "latest_validation_loss": 5.4238386154174805,
+          "mean_optimizer_step_time_seconds": 0.0023141235835552215,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.3141235835552214,
+          "peak_gpu_memory_bytes": 10324301824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 955.6076851878315
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5/static_per_matrix_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scalestatic-26f16b708d59/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.003,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.42823600769043,
+        "validation_loss": 5.4238386154174805
+      },
+      "selection_values": {
+        "learning_rate": 0.03,
+        "mapping_fingerprint_sha256": "26f16b708d599d8350915e6aaa4ec14d449a186038c955fded379092bda2236d",
+        "mapping_id": "26f16b708d59",
+        "mapping_name": "attention_mild",
+        "mapping_order": 0,
+        "momentum": 0.99,
+        "scaling_rule": "static-26f16b708d59",
+        "weight_decay": 0.1
+      },
+      "static_multiplier_configuration": {
+        "fingerprint_sha256": "26f16b708d599d8350915e6aaa4ec14d449a186038c955fded379092bda2236d",
+        "geometric_mean": 1.0,
+        "geometric_mean_log_tolerance": 1e-09,
+        "mapping_id": "26f16b708d59",
+        "resolved_multipliers": {
+          "transformer.h.0.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.0.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.0.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.0.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.1.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.1.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.1.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.1.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.10.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.10.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.10.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.10.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.11.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.11.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.11.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.11.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.2.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.2.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.2.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.2.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.3.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.3.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.3.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.3.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.4.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.4.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.4.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.4.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.5.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.5.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.5.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.5.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.6.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.6.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.6.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.6.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.7.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.7.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.7.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.7.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.8.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.8.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.8.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.8.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.9.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.9.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.9.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.9.mlp.c_proj.weight": 0.7071067811865476
+        },
+        "specification": {
+          "default_multiplier": 1.0,
+          "exact_parameter_multipliers": {},
+          "matrix_type_multipliers": {
+            "attention_output": 1.4142135623730951,
+            "attention_qkv": 1.4142135623730951,
+            "mlp_input": 0.7071067811865476,
+            "mlp_output": 0.7071067811865476
+          }
+        },
+        "summary": {
+          "eligible_matrix_count": 48,
+          "maximum_multiplier": 1.4142135623730951,
+          "minimum_multiplier": 0.7071067811865476,
+          "unique_multiplier_count": 2
+        }
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "static_per_matrix_sgdm",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5/static_per_matrix_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scalestatic-658ea6e7df4d",
+      "run_id": "static_lr0.03_mom0.99_map658ea6e7df4d",
+      "run_name": "static_per_matrix_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scalestatic-658ea6e7df4d",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "aeac82e0427f65633ddcff5d8a73c31167321e78",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.003,
+          "gradient_clipping_count": 1000,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 1.0,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.451414108276367,
+          "latest_training_loss": 5.370401740074158,
+          "latest_validation_loss": 5.447302341461182,
+          "mean_optimizer_step_time_seconds": 0.002308844607830047,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.3088446078300473,
+          "peak_gpu_memory_bytes": 10324301824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 955.6646931832656
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5/static_per_matrix_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scalestatic-658ea6e7df4d/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.003,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.451414108276367,
+        "validation_loss": 5.447302341461182
+      },
+      "selection_values": {
+        "learning_rate": 0.03,
+        "mapping_fingerprint_sha256": "658ea6e7df4d0d4cc643c3052582b260f65e3eba6a564f3aeb861b3a9570f2e9",
+        "mapping_id": "658ea6e7df4d",
+        "mapping_name": "attention_strong",
+        "mapping_order": 1,
+        "momentum": 0.99,
+        "scaling_rule": "static-658ea6e7df4d",
+        "weight_decay": 0.1
+      },
+      "static_multiplier_configuration": {
+        "fingerprint_sha256": "658ea6e7df4d0d4cc643c3052582b260f65e3eba6a564f3aeb861b3a9570f2e9",
+        "geometric_mean": 1.0,
+        "geometric_mean_log_tolerance": 1e-09,
+        "mapping_id": "658ea6e7df4d",
+        "resolved_multipliers": {
+          "transformer.h.0.attn.c_attn.weight": 2.0,
+          "transformer.h.0.attn.c_proj.weight": 2.0,
+          "transformer.h.0.mlp.c_fc.weight": 0.5,
+          "transformer.h.0.mlp.c_proj.weight": 0.5,
+          "transformer.h.1.attn.c_attn.weight": 2.0,
+          "transformer.h.1.attn.c_proj.weight": 2.0,
+          "transformer.h.1.mlp.c_fc.weight": 0.5,
+          "transformer.h.1.mlp.c_proj.weight": 0.5,
+          "transformer.h.10.attn.c_attn.weight": 2.0,
+          "transformer.h.10.attn.c_proj.weight": 2.0,
+          "transformer.h.10.mlp.c_fc.weight": 0.5,
+          "transformer.h.10.mlp.c_proj.weight": 0.5,
+          "transformer.h.11.attn.c_attn.weight": 2.0,
+          "transformer.h.11.attn.c_proj.weight": 2.0,
+          "transformer.h.11.mlp.c_fc.weight": 0.5,
+          "transformer.h.11.mlp.c_proj.weight": 0.5,
+          "transformer.h.2.attn.c_attn.weight": 2.0,
+          "transformer.h.2.attn.c_proj.weight": 2.0,
+          "transformer.h.2.mlp.c_fc.weight": 0.5,
+          "transformer.h.2.mlp.c_proj.weight": 0.5,
+          "transformer.h.3.attn.c_attn.weight": 2.0,
+          "transformer.h.3.attn.c_proj.weight": 2.0,
+          "transformer.h.3.mlp.c_fc.weight": 0.5,
+          "transformer.h.3.mlp.c_proj.weight": 0.5,
+          "transformer.h.4.attn.c_attn.weight": 2.0,
+          "transformer.h.4.attn.c_proj.weight": 2.0,
+          "transformer.h.4.mlp.c_fc.weight": 0.5,
+          "transformer.h.4.mlp.c_proj.weight": 0.5,
+          "transformer.h.5.attn.c_attn.weight": 2.0,
+          "transformer.h.5.attn.c_proj.weight": 2.0,
+          "transformer.h.5.mlp.c_fc.weight": 0.5,
+          "transformer.h.5.mlp.c_proj.weight": 0.5,
+          "transformer.h.6.attn.c_attn.weight": 2.0,
+          "transformer.h.6.attn.c_proj.weight": 2.0,
+          "transformer.h.6.mlp.c_fc.weight": 0.5,
+          "transformer.h.6.mlp.c_proj.weight": 0.5,
+          "transformer.h.7.attn.c_attn.weight": 2.0,
+          "transformer.h.7.attn.c_proj.weight": 2.0,
+          "transformer.h.7.mlp.c_fc.weight": 0.5,
+          "transformer.h.7.mlp.c_proj.weight": 0.5,
+          "transformer.h.8.attn.c_attn.weight": 2.0,
+          "transformer.h.8.attn.c_proj.weight": 2.0,
+          "transformer.h.8.mlp.c_fc.weight": 0.5,
+          "transformer.h.8.mlp.c_proj.weight": 0.5,
+          "transformer.h.9.attn.c_attn.weight": 2.0,
+          "transformer.h.9.attn.c_proj.weight": 2.0,
+          "transformer.h.9.mlp.c_fc.weight": 0.5,
+          "transformer.h.9.mlp.c_proj.weight": 0.5
+        },
+        "specification": {
+          "default_multiplier": 1.0,
+          "exact_parameter_multipliers": {},
+          "matrix_type_multipliers": {
+            "attention_output": 2.0,
+            "attention_qkv": 2.0,
+            "mlp_input": 0.5,
+            "mlp_output": 0.5
+          }
+        },
+        "summary": {
+          "eligible_matrix_count": 48,
+          "maximum_multiplier": 2.0,
+          "minimum_multiplier": 0.5,
+          "unique_multiplier_count": 2
+        }
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "static_per_matrix_sgdm",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5/static_per_matrix_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scalestatic-2633929b6baf",
+      "run_id": "static_lr0.03_mom0.99_map2633929b6baf",
+      "run_name": "static_per_matrix_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scalestatic-2633929b6baf",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "aeac82e0427f65633ddcff5d8a73c31167321e78",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.003,
+          "gradient_clipping_count": 996,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.996,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.406810283660889,
+          "latest_training_loss": 5.330531001091003,
+          "latest_validation_loss": 5.401801109313965,
+          "mean_optimizer_step_time_seconds": 0.0023216596484184264,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.3216596484184264,
+          "peak_gpu_memory_bytes": 10324301824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 955.9260203647427
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5/static_per_matrix_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scalestatic-2633929b6baf/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.003,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.406810283660889,
+        "validation_loss": 5.401801109313965
+      },
+      "selection_values": {
+        "learning_rate": 0.03,
+        "mapping_fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "mapping_id": "2633929b6baf",
+        "mapping_name": "mlp_strong",
+        "mapping_order": 2,
+        "momentum": 0.99,
+        "scaling_rule": "static-2633929b6baf",
+        "weight_decay": 0.1
+      },
+      "static_multiplier_configuration": {
+        "fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "geometric_mean": 1.0,
+        "geometric_mean_log_tolerance": 1e-09,
+        "mapping_id": "2633929b6baf",
+        "resolved_multipliers": {
+          "transformer.h.0.attn.c_attn.weight": 0.5,
+          "transformer.h.0.attn.c_proj.weight": 0.5,
+          "transformer.h.0.mlp.c_fc.weight": 2.0,
+          "transformer.h.0.mlp.c_proj.weight": 2.0,
+          "transformer.h.1.attn.c_attn.weight": 0.5,
+          "transformer.h.1.attn.c_proj.weight": 0.5,
+          "transformer.h.1.mlp.c_fc.weight": 2.0,
+          "transformer.h.1.mlp.c_proj.weight": 2.0,
+          "transformer.h.10.attn.c_attn.weight": 0.5,
+          "transformer.h.10.attn.c_proj.weight": 0.5,
+          "transformer.h.10.mlp.c_fc.weight": 2.0,
+          "transformer.h.10.mlp.c_proj.weight": 2.0,
+          "transformer.h.11.attn.c_attn.weight": 0.5,
+          "transformer.h.11.attn.c_proj.weight": 0.5,
+          "transformer.h.11.mlp.c_fc.weight": 2.0,
+          "transformer.h.11.mlp.c_proj.weight": 2.0,
+          "transformer.h.2.attn.c_attn.weight": 0.5,
+          "transformer.h.2.attn.c_proj.weight": 0.5,
+          "transformer.h.2.mlp.c_fc.weight": 2.0,
+          "transformer.h.2.mlp.c_proj.weight": 2.0,
+          "transformer.h.3.attn.c_attn.weight": 0.5,
+          "transformer.h.3.attn.c_proj.weight": 0.5,
+          "transformer.h.3.mlp.c_fc.weight": 2.0,
+          "transformer.h.3.mlp.c_proj.weight": 2.0,
+          "transformer.h.4.attn.c_attn.weight": 0.5,
+          "transformer.h.4.attn.c_proj.weight": 0.5,
+          "transformer.h.4.mlp.c_fc.weight": 2.0,
+          "transformer.h.4.mlp.c_proj.weight": 2.0,
+          "transformer.h.5.attn.c_attn.weight": 0.5,
+          "transformer.h.5.attn.c_proj.weight": 0.5,
+          "transformer.h.5.mlp.c_fc.weight": 2.0,
+          "transformer.h.5.mlp.c_proj.weight": 2.0,
+          "transformer.h.6.attn.c_attn.weight": 0.5,
+          "transformer.h.6.attn.c_proj.weight": 0.5,
+          "transformer.h.6.mlp.c_fc.weight": 2.0,
+          "transformer.h.6.mlp.c_proj.weight": 2.0,
+          "transformer.h.7.attn.c_attn.weight": 0.5,
+          "transformer.h.7.attn.c_proj.weight": 0.5,
+          "transformer.h.7.mlp.c_fc.weight": 2.0,
+          "transformer.h.7.mlp.c_proj.weight": 2.0,
+          "transformer.h.8.attn.c_attn.weight": 0.5,
+          "transformer.h.8.attn.c_proj.weight": 0.5,
+          "transformer.h.8.mlp.c_fc.weight": 2.0,
+          "transformer.h.8.mlp.c_proj.weight": 2.0,
+          "transformer.h.9.attn.c_attn.weight": 0.5,
+          "transformer.h.9.attn.c_proj.weight": 0.5,
+          "transformer.h.9.mlp.c_fc.weight": 2.0,
+          "transformer.h.9.mlp.c_proj.weight": 2.0
+        },
+        "specification": {
+          "default_multiplier": 1.0,
+          "exact_parameter_multipliers": {},
+          "matrix_type_multipliers": {
+            "attention_output": 0.5,
+            "attention_qkv": 0.5,
+            "mlp_input": 2.0,
+            "mlp_output": 2.0
+          }
+        },
+        "summary": {
+          "eligible_matrix_count": 48,
+          "maximum_multiplier": 2.0,
+          "minimum_multiplier": 0.5,
+          "unique_multiplier_count": 2
+        }
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "static_per_matrix_sgdm",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5/static_per_matrix_sgdm_gpt2-124m_lr0.1_mom0.99_wd0.1_seed1337_scalestatic-26f16b708d59",
+      "run_id": "static_lr0.1_mom0.99_map26f16b708d59",
+      "run_name": "static_per_matrix_sgdm_gpt2-124m_lr0.1_mom0.99_wd0.1_seed1337_scalestatic-26f16b708d59",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "aeac82e0427f65633ddcff5d8a73c31167321e78",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.010000000000000002,
+          "gradient_clipping_count": 711,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.711,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.641430854797363,
+          "latest_training_loss": 5.545520782470703,
+          "latest_validation_loss": 5.639410972595215,
+          "mean_optimizer_step_time_seconds": 0.0023257156760692595,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.3257156760692594,
+          "peak_gpu_memory_bytes": 10324301824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 956.0618452043273
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5/static_per_matrix_sgdm_gpt2-124m_lr0.1_mom0.99_wd0.1_seed1337_scalestatic-26f16b708d59/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.010000000000000002,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.641430854797363,
+        "validation_loss": 5.639410972595215
+      },
+      "selection_values": {
+        "learning_rate": 0.1,
+        "mapping_fingerprint_sha256": "26f16b708d599d8350915e6aaa4ec14d449a186038c955fded379092bda2236d",
+        "mapping_id": "26f16b708d59",
+        "mapping_name": "attention_mild",
+        "mapping_order": 0,
+        "momentum": 0.99,
+        "scaling_rule": "static-26f16b708d59",
+        "weight_decay": 0.1
+      },
+      "static_multiplier_configuration": {
+        "fingerprint_sha256": "26f16b708d599d8350915e6aaa4ec14d449a186038c955fded379092bda2236d",
+        "geometric_mean": 1.0,
+        "geometric_mean_log_tolerance": 1e-09,
+        "mapping_id": "26f16b708d59",
+        "resolved_multipliers": {
+          "transformer.h.0.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.0.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.0.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.0.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.1.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.1.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.1.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.1.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.10.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.10.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.10.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.10.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.11.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.11.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.11.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.11.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.2.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.2.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.2.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.2.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.3.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.3.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.3.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.3.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.4.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.4.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.4.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.4.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.5.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.5.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.5.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.5.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.6.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.6.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.6.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.6.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.7.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.7.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.7.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.7.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.8.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.8.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.8.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.8.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.9.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.9.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.9.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.9.mlp.c_proj.weight": 0.7071067811865476
+        },
+        "specification": {
+          "default_multiplier": 1.0,
+          "exact_parameter_multipliers": {},
+          "matrix_type_multipliers": {
+            "attention_output": 1.4142135623730951,
+            "attention_qkv": 1.4142135623730951,
+            "mlp_input": 0.7071067811865476,
+            "mlp_output": 0.7071067811865476
+          }
+        },
+        "summary": {
+          "eligible_matrix_count": 48,
+          "maximum_multiplier": 1.4142135623730951,
+          "minimum_multiplier": 0.7071067811865476,
+          "unique_multiplier_count": 2
+        }
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "static_per_matrix_sgdm",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5/static_per_matrix_sgdm_gpt2-124m_lr0.1_mom0.99_wd0.1_seed1337_scalestatic-658ea6e7df4d",
+      "run_id": "static_lr0.1_mom0.99_map658ea6e7df4d",
+      "run_name": "static_per_matrix_sgdm_gpt2-124m_lr0.1_mom0.99_wd0.1_seed1337_scalestatic-658ea6e7df4d",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "aeac82e0427f65633ddcff5d8a73c31167321e78",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.010000000000000002,
+          "gradient_clipping_count": 772,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.772,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.683681488037109,
+          "latest_training_loss": 5.589081048965454,
+          "latest_validation_loss": 5.682662487030029,
+          "mean_optimizer_step_time_seconds": 0.0023225068826675404,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.3225068826675406,
+          "peak_gpu_memory_bytes": 10324301824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 955.6868024137802
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5/static_per_matrix_sgdm_gpt2-124m_lr0.1_mom0.99_wd0.1_seed1337_scalestatic-658ea6e7df4d/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.010000000000000002,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.683681488037109,
+        "validation_loss": 5.682662487030029
+      },
+      "selection_values": {
+        "learning_rate": 0.1,
+        "mapping_fingerprint_sha256": "658ea6e7df4d0d4cc643c3052582b260f65e3eba6a564f3aeb861b3a9570f2e9",
+        "mapping_id": "658ea6e7df4d",
+        "mapping_name": "attention_strong",
+        "mapping_order": 1,
+        "momentum": 0.99,
+        "scaling_rule": "static-658ea6e7df4d",
+        "weight_decay": 0.1
+      },
+      "static_multiplier_configuration": {
+        "fingerprint_sha256": "658ea6e7df4d0d4cc643c3052582b260f65e3eba6a564f3aeb861b3a9570f2e9",
+        "geometric_mean": 1.0,
+        "geometric_mean_log_tolerance": 1e-09,
+        "mapping_id": "658ea6e7df4d",
+        "resolved_multipliers": {
+          "transformer.h.0.attn.c_attn.weight": 2.0,
+          "transformer.h.0.attn.c_proj.weight": 2.0,
+          "transformer.h.0.mlp.c_fc.weight": 0.5,
+          "transformer.h.0.mlp.c_proj.weight": 0.5,
+          "transformer.h.1.attn.c_attn.weight": 2.0,
+          "transformer.h.1.attn.c_proj.weight": 2.0,
+          "transformer.h.1.mlp.c_fc.weight": 0.5,
+          "transformer.h.1.mlp.c_proj.weight": 0.5,
+          "transformer.h.10.attn.c_attn.weight": 2.0,
+          "transformer.h.10.attn.c_proj.weight": 2.0,
+          "transformer.h.10.mlp.c_fc.weight": 0.5,
+          "transformer.h.10.mlp.c_proj.weight": 0.5,
+          "transformer.h.11.attn.c_attn.weight": 2.0,
+          "transformer.h.11.attn.c_proj.weight": 2.0,
+          "transformer.h.11.mlp.c_fc.weight": 0.5,
+          "transformer.h.11.mlp.c_proj.weight": 0.5,
+          "transformer.h.2.attn.c_attn.weight": 2.0,
+          "transformer.h.2.attn.c_proj.weight": 2.0,
+          "transformer.h.2.mlp.c_fc.weight": 0.5,
+          "transformer.h.2.mlp.c_proj.weight": 0.5,
+          "transformer.h.3.attn.c_attn.weight": 2.0,
+          "transformer.h.3.attn.c_proj.weight": 2.0,
+          "transformer.h.3.mlp.c_fc.weight": 0.5,
+          "transformer.h.3.mlp.c_proj.weight": 0.5,
+          "transformer.h.4.attn.c_attn.weight": 2.0,
+          "transformer.h.4.attn.c_proj.weight": 2.0,
+          "transformer.h.4.mlp.c_fc.weight": 0.5,
+          "transformer.h.4.mlp.c_proj.weight": 0.5,
+          "transformer.h.5.attn.c_attn.weight": 2.0,
+          "transformer.h.5.attn.c_proj.weight": 2.0,
+          "transformer.h.5.mlp.c_fc.weight": 0.5,
+          "transformer.h.5.mlp.c_proj.weight": 0.5,
+          "transformer.h.6.attn.c_attn.weight": 2.0,
+          "transformer.h.6.attn.c_proj.weight": 2.0,
+          "transformer.h.6.mlp.c_fc.weight": 0.5,
+          "transformer.h.6.mlp.c_proj.weight": 0.5,
+          "transformer.h.7.attn.c_attn.weight": 2.0,
+          "transformer.h.7.attn.c_proj.weight": 2.0,
+          "transformer.h.7.mlp.c_fc.weight": 0.5,
+          "transformer.h.7.mlp.c_proj.weight": 0.5,
+          "transformer.h.8.attn.c_attn.weight": 2.0,
+          "transformer.h.8.attn.c_proj.weight": 2.0,
+          "transformer.h.8.mlp.c_fc.weight": 0.5,
+          "transformer.h.8.mlp.c_proj.weight": 0.5,
+          "transformer.h.9.attn.c_attn.weight": 2.0,
+          "transformer.h.9.attn.c_proj.weight": 2.0,
+          "transformer.h.9.mlp.c_fc.weight": 0.5,
+          "transformer.h.9.mlp.c_proj.weight": 0.5
+        },
+        "specification": {
+          "default_multiplier": 1.0,
+          "exact_parameter_multipliers": {},
+          "matrix_type_multipliers": {
+            "attention_output": 2.0,
+            "attention_qkv": 2.0,
+            "mlp_input": 0.5,
+            "mlp_output": 0.5
+          }
+        },
+        "summary": {
+          "eligible_matrix_count": 48,
+          "maximum_multiplier": 2.0,
+          "minimum_multiplier": 0.5,
+          "unique_multiplier_count": 2
+        }
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "static_per_matrix_sgdm",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5/static_per_matrix_sgdm_gpt2-124m_lr0.1_mom0.99_wd0.1_seed1337_scalestatic-2633929b6baf",
+      "run_id": "static_lr0.1_mom0.99_map2633929b6baf",
+      "run_name": "static_per_matrix_sgdm_gpt2-124m_lr0.1_mom0.99_wd0.1_seed1337_scalestatic-2633929b6baf",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "aeac82e0427f65633ddcff5d8a73c31167321e78",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.010000000000000002,
+          "gradient_clipping_count": 619,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.619,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.597800254821777,
+          "latest_training_loss": 5.501007437705994,
+          "latest_validation_loss": 5.595030307769775,
+          "mean_optimizer_step_time_seconds": 0.0023105396423339845,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.3105396423339846,
+          "peak_gpu_memory_bytes": 10324301824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 955.376560212113
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5/static_per_matrix_sgdm_gpt2-124m_lr0.1_mom0.99_wd0.1_seed1337_scalestatic-2633929b6baf/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.010000000000000002,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.597800254821777,
+        "validation_loss": 5.595030307769775
+      },
+      "selection_values": {
+        "learning_rate": 0.1,
+        "mapping_fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "mapping_id": "2633929b6baf",
+        "mapping_name": "mlp_strong",
+        "mapping_order": 2,
+        "momentum": 0.99,
+        "scaling_rule": "static-2633929b6baf",
+        "weight_decay": 0.1
+      },
+      "static_multiplier_configuration": {
+        "fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "geometric_mean": 1.0,
+        "geometric_mean_log_tolerance": 1e-09,
+        "mapping_id": "2633929b6baf",
+        "resolved_multipliers": {
+          "transformer.h.0.attn.c_attn.weight": 0.5,
+          "transformer.h.0.attn.c_proj.weight": 0.5,
+          "transformer.h.0.mlp.c_fc.weight": 2.0,
+          "transformer.h.0.mlp.c_proj.weight": 2.0,
+          "transformer.h.1.attn.c_attn.weight": 0.5,
+          "transformer.h.1.attn.c_proj.weight": 0.5,
+          "transformer.h.1.mlp.c_fc.weight": 2.0,
+          "transformer.h.1.mlp.c_proj.weight": 2.0,
+          "transformer.h.10.attn.c_attn.weight": 0.5,
+          "transformer.h.10.attn.c_proj.weight": 0.5,
+          "transformer.h.10.mlp.c_fc.weight": 2.0,
+          "transformer.h.10.mlp.c_proj.weight": 2.0,
+          "transformer.h.11.attn.c_attn.weight": 0.5,
+          "transformer.h.11.attn.c_proj.weight": 0.5,
+          "transformer.h.11.mlp.c_fc.weight": 2.0,
+          "transformer.h.11.mlp.c_proj.weight": 2.0,
+          "transformer.h.2.attn.c_attn.weight": 0.5,
+          "transformer.h.2.attn.c_proj.weight": 0.5,
+          "transformer.h.2.mlp.c_fc.weight": 2.0,
+          "transformer.h.2.mlp.c_proj.weight": 2.0,
+          "transformer.h.3.attn.c_attn.weight": 0.5,
+          "transformer.h.3.attn.c_proj.weight": 0.5,
+          "transformer.h.3.mlp.c_fc.weight": 2.0,
+          "transformer.h.3.mlp.c_proj.weight": 2.0,
+          "transformer.h.4.attn.c_attn.weight": 0.5,
+          "transformer.h.4.attn.c_proj.weight": 0.5,
+          "transformer.h.4.mlp.c_fc.weight": 2.0,
+          "transformer.h.4.mlp.c_proj.weight": 2.0,
+          "transformer.h.5.attn.c_attn.weight": 0.5,
+          "transformer.h.5.attn.c_proj.weight": 0.5,
+          "transformer.h.5.mlp.c_fc.weight": 2.0,
+          "transformer.h.5.mlp.c_proj.weight": 2.0,
+          "transformer.h.6.attn.c_attn.weight": 0.5,
+          "transformer.h.6.attn.c_proj.weight": 0.5,
+          "transformer.h.6.mlp.c_fc.weight": 2.0,
+          "transformer.h.6.mlp.c_proj.weight": 2.0,
+          "transformer.h.7.attn.c_attn.weight": 0.5,
+          "transformer.h.7.attn.c_proj.weight": 0.5,
+          "transformer.h.7.mlp.c_fc.weight": 2.0,
+          "transformer.h.7.mlp.c_proj.weight": 2.0,
+          "transformer.h.8.attn.c_attn.weight": 0.5,
+          "transformer.h.8.attn.c_proj.weight": 0.5,
+          "transformer.h.8.mlp.c_fc.weight": 2.0,
+          "transformer.h.8.mlp.c_proj.weight": 2.0,
+          "transformer.h.9.attn.c_attn.weight": 0.5,
+          "transformer.h.9.attn.c_proj.weight": 0.5,
+          "transformer.h.9.mlp.c_fc.weight": 2.0,
+          "transformer.h.9.mlp.c_proj.weight": 2.0
+        },
+        "specification": {
+          "default_multiplier": 1.0,
+          "exact_parameter_multipliers": {},
+          "matrix_type_multipliers": {
+            "attention_output": 0.5,
+            "attention_qkv": 0.5,
+            "mlp_input": 2.0,
+            "mlp_output": 2.0
+          }
+        },
+        "summary": {
+          "eligible_matrix_count": 48,
+          "maximum_multiplier": 2.0,
+          "minimum_multiplier": 0.5,
+          "unique_multiplier_count": 2
+        }
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "static_per_matrix_sgdm",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5/static_per_matrix_sgdm_gpt2-124m_lr0.3_mom0.99_wd0.1_seed1337_scalestatic-26f16b708d59",
+      "run_id": "static_lr0.3_mom0.99_map26f16b708d59",
+      "run_name": "static_per_matrix_sgdm_gpt2-124m_lr0.3_mom0.99_wd0.1_seed1337_scalestatic-26f16b708d59",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "aeac82e0427f65633ddcff5d8a73c31167321e78",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.03,
+          "gradient_clipping_count": 669,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.669,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.717067718505859,
+          "latest_training_loss": 5.61479389667511,
+          "latest_validation_loss": 5.715743541717529,
+          "mean_optimizer_step_time_seconds": 0.0023126377923488616,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.3126377923488617,
+          "peak_gpu_memory_bytes": 10324301824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 955.0587716647424
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5/static_per_matrix_sgdm_gpt2-124m_lr0.3_mom0.99_wd0.1_seed1337_scalestatic-26f16b708d59/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.03,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.717067718505859,
+        "validation_loss": 5.715743541717529
+      },
+      "selection_values": {
+        "learning_rate": 0.3,
+        "mapping_fingerprint_sha256": "26f16b708d599d8350915e6aaa4ec14d449a186038c955fded379092bda2236d",
+        "mapping_id": "26f16b708d59",
+        "mapping_name": "attention_mild",
+        "mapping_order": 0,
+        "momentum": 0.99,
+        "scaling_rule": "static-26f16b708d59",
+        "weight_decay": 0.1
+      },
+      "static_multiplier_configuration": {
+        "fingerprint_sha256": "26f16b708d599d8350915e6aaa4ec14d449a186038c955fded379092bda2236d",
+        "geometric_mean": 1.0,
+        "geometric_mean_log_tolerance": 1e-09,
+        "mapping_id": "26f16b708d59",
+        "resolved_multipliers": {
+          "transformer.h.0.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.0.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.0.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.0.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.1.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.1.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.1.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.1.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.10.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.10.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.10.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.10.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.11.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.11.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.11.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.11.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.2.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.2.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.2.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.2.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.3.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.3.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.3.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.3.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.4.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.4.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.4.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.4.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.5.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.5.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.5.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.5.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.6.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.6.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.6.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.6.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.7.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.7.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.7.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.7.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.8.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.8.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.8.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.8.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.9.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.9.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.9.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.9.mlp.c_proj.weight": 0.7071067811865476
+        },
+        "specification": {
+          "default_multiplier": 1.0,
+          "exact_parameter_multipliers": {},
+          "matrix_type_multipliers": {
+            "attention_output": 1.4142135623730951,
+            "attention_qkv": 1.4142135623730951,
+            "mlp_input": 0.7071067811865476,
+            "mlp_output": 0.7071067811865476
+          }
+        },
+        "summary": {
+          "eligible_matrix_count": 48,
+          "maximum_multiplier": 1.4142135623730951,
+          "minimum_multiplier": 0.7071067811865476,
+          "unique_multiplier_count": 2
+        }
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "static_per_matrix_sgdm",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5/static_per_matrix_sgdm_gpt2-124m_lr0.3_mom0.99_wd0.1_seed1337_scalestatic-658ea6e7df4d",
+      "run_id": "static_lr0.3_mom0.99_map658ea6e7df4d",
+      "run_name": "static_per_matrix_sgdm_gpt2-124m_lr0.3_mom0.99_wd0.1_seed1337_scalestatic-658ea6e7df4d",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "aeac82e0427f65633ddcff5d8a73c31167321e78",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.03,
+          "gradient_clipping_count": 660,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.66,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.7368059158325195,
+          "latest_training_loss": 5.635585188865662,
+          "latest_validation_loss": 5.7356858253479,
+          "mean_optimizer_step_time_seconds": 0.0023088666291236877,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.308866629123688,
+          "peak_gpu_memory_bytes": 10324301824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 955.6135942526162
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5/static_per_matrix_sgdm_gpt2-124m_lr0.3_mom0.99_wd0.1_seed1337_scalestatic-658ea6e7df4d/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.03,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.7368059158325195,
+        "validation_loss": 5.7356858253479
+      },
+      "selection_values": {
+        "learning_rate": 0.3,
+        "mapping_fingerprint_sha256": "658ea6e7df4d0d4cc643c3052582b260f65e3eba6a564f3aeb861b3a9570f2e9",
+        "mapping_id": "658ea6e7df4d",
+        "mapping_name": "attention_strong",
+        "mapping_order": 1,
+        "momentum": 0.99,
+        "scaling_rule": "static-658ea6e7df4d",
+        "weight_decay": 0.1
+      },
+      "static_multiplier_configuration": {
+        "fingerprint_sha256": "658ea6e7df4d0d4cc643c3052582b260f65e3eba6a564f3aeb861b3a9570f2e9",
+        "geometric_mean": 1.0,
+        "geometric_mean_log_tolerance": 1e-09,
+        "mapping_id": "658ea6e7df4d",
+        "resolved_multipliers": {
+          "transformer.h.0.attn.c_attn.weight": 2.0,
+          "transformer.h.0.attn.c_proj.weight": 2.0,
+          "transformer.h.0.mlp.c_fc.weight": 0.5,
+          "transformer.h.0.mlp.c_proj.weight": 0.5,
+          "transformer.h.1.attn.c_attn.weight": 2.0,
+          "transformer.h.1.attn.c_proj.weight": 2.0,
+          "transformer.h.1.mlp.c_fc.weight": 0.5,
+          "transformer.h.1.mlp.c_proj.weight": 0.5,
+          "transformer.h.10.attn.c_attn.weight": 2.0,
+          "transformer.h.10.attn.c_proj.weight": 2.0,
+          "transformer.h.10.mlp.c_fc.weight": 0.5,
+          "transformer.h.10.mlp.c_proj.weight": 0.5,
+          "transformer.h.11.attn.c_attn.weight": 2.0,
+          "transformer.h.11.attn.c_proj.weight": 2.0,
+          "transformer.h.11.mlp.c_fc.weight": 0.5,
+          "transformer.h.11.mlp.c_proj.weight": 0.5,
+          "transformer.h.2.attn.c_attn.weight": 2.0,
+          "transformer.h.2.attn.c_proj.weight": 2.0,
+          "transformer.h.2.mlp.c_fc.weight": 0.5,
+          "transformer.h.2.mlp.c_proj.weight": 0.5,
+          "transformer.h.3.attn.c_attn.weight": 2.0,
+          "transformer.h.3.attn.c_proj.weight": 2.0,
+          "transformer.h.3.mlp.c_fc.weight": 0.5,
+          "transformer.h.3.mlp.c_proj.weight": 0.5,
+          "transformer.h.4.attn.c_attn.weight": 2.0,
+          "transformer.h.4.attn.c_proj.weight": 2.0,
+          "transformer.h.4.mlp.c_fc.weight": 0.5,
+          "transformer.h.4.mlp.c_proj.weight": 0.5,
+          "transformer.h.5.attn.c_attn.weight": 2.0,
+          "transformer.h.5.attn.c_proj.weight": 2.0,
+          "transformer.h.5.mlp.c_fc.weight": 0.5,
+          "transformer.h.5.mlp.c_proj.weight": 0.5,
+          "transformer.h.6.attn.c_attn.weight": 2.0,
+          "transformer.h.6.attn.c_proj.weight": 2.0,
+          "transformer.h.6.mlp.c_fc.weight": 0.5,
+          "transformer.h.6.mlp.c_proj.weight": 0.5,
+          "transformer.h.7.attn.c_attn.weight": 2.0,
+          "transformer.h.7.attn.c_proj.weight": 2.0,
+          "transformer.h.7.mlp.c_fc.weight": 0.5,
+          "transformer.h.7.mlp.c_proj.weight": 0.5,
+          "transformer.h.8.attn.c_attn.weight": 2.0,
+          "transformer.h.8.attn.c_proj.weight": 2.0,
+          "transformer.h.8.mlp.c_fc.weight": 0.5,
+          "transformer.h.8.mlp.c_proj.weight": 0.5,
+          "transformer.h.9.attn.c_attn.weight": 2.0,
+          "transformer.h.9.attn.c_proj.weight": 2.0,
+          "transformer.h.9.mlp.c_fc.weight": 0.5,
+          "transformer.h.9.mlp.c_proj.weight": 0.5
+        },
+        "specification": {
+          "default_multiplier": 1.0,
+          "exact_parameter_multipliers": {},
+          "matrix_type_multipliers": {
+            "attention_output": 2.0,
+            "attention_qkv": 2.0,
+            "mlp_input": 0.5,
+            "mlp_output": 0.5
+          }
+        },
+        "summary": {
+          "eligible_matrix_count": 48,
+          "maximum_multiplier": 2.0,
+          "minimum_multiplier": 0.5,
+          "unique_multiplier_count": 2
+        }
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "static_per_matrix_sgdm",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5/static_per_matrix_sgdm_gpt2-124m_lr0.3_mom0.99_wd0.1_seed1337_scalestatic-2633929b6baf",
+      "run_id": "static_lr0.3_mom0.99_map2633929b6baf",
+      "run_name": "static_per_matrix_sgdm_gpt2-124m_lr0.3_mom0.99_wd0.1_seed1337_scalestatic-2633929b6baf",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "aeac82e0427f65633ddcff5d8a73c31167321e78",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.03,
+          "gradient_clipping_count": 417,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.417,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.652215480804443,
+          "latest_training_loss": 5.556624531745911,
+          "latest_validation_loss": 5.654382228851318,
+          "mean_optimizer_step_time_seconds": 0.0023196116139888746,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.3196116139888745,
+          "peak_gpu_memory_bytes": 10324301824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 956.5716869249009
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5/static_per_matrix_sgdm_gpt2-124m_lr0.3_mom0.99_wd0.1_seed1337_scalestatic-2633929b6baf/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.03,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.652215480804443,
+        "validation_loss": 5.654382228851318
+      },
+      "selection_values": {
+        "learning_rate": 0.3,
+        "mapping_fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "mapping_id": "2633929b6baf",
+        "mapping_name": "mlp_strong",
+        "mapping_order": 2,
+        "momentum": 0.99,
+        "scaling_rule": "static-2633929b6baf",
+        "weight_decay": 0.1
+      },
+      "static_multiplier_configuration": {
+        "fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "geometric_mean": 1.0,
+        "geometric_mean_log_tolerance": 1e-09,
+        "mapping_id": "2633929b6baf",
+        "resolved_multipliers": {
+          "transformer.h.0.attn.c_attn.weight": 0.5,
+          "transformer.h.0.attn.c_proj.weight": 0.5,
+          "transformer.h.0.mlp.c_fc.weight": 2.0,
+          "transformer.h.0.mlp.c_proj.weight": 2.0,
+          "transformer.h.1.attn.c_attn.weight": 0.5,
+          "transformer.h.1.attn.c_proj.weight": 0.5,
+          "transformer.h.1.mlp.c_fc.weight": 2.0,
+          "transformer.h.1.mlp.c_proj.weight": 2.0,
+          "transformer.h.10.attn.c_attn.weight": 0.5,
+          "transformer.h.10.attn.c_proj.weight": 0.5,
+          "transformer.h.10.mlp.c_fc.weight": 2.0,
+          "transformer.h.10.mlp.c_proj.weight": 2.0,
+          "transformer.h.11.attn.c_attn.weight": 0.5,
+          "transformer.h.11.attn.c_proj.weight": 0.5,
+          "transformer.h.11.mlp.c_fc.weight": 2.0,
+          "transformer.h.11.mlp.c_proj.weight": 2.0,
+          "transformer.h.2.attn.c_attn.weight": 0.5,
+          "transformer.h.2.attn.c_proj.weight": 0.5,
+          "transformer.h.2.mlp.c_fc.weight": 2.0,
+          "transformer.h.2.mlp.c_proj.weight": 2.0,
+          "transformer.h.3.attn.c_attn.weight": 0.5,
+          "transformer.h.3.attn.c_proj.weight": 0.5,
+          "transformer.h.3.mlp.c_fc.weight": 2.0,
+          "transformer.h.3.mlp.c_proj.weight": 2.0,
+          "transformer.h.4.attn.c_attn.weight": 0.5,
+          "transformer.h.4.attn.c_proj.weight": 0.5,
+          "transformer.h.4.mlp.c_fc.weight": 2.0,
+          "transformer.h.4.mlp.c_proj.weight": 2.0,
+          "transformer.h.5.attn.c_attn.weight": 0.5,
+          "transformer.h.5.attn.c_proj.weight": 0.5,
+          "transformer.h.5.mlp.c_fc.weight": 2.0,
+          "transformer.h.5.mlp.c_proj.weight": 2.0,
+          "transformer.h.6.attn.c_attn.weight": 0.5,
+          "transformer.h.6.attn.c_proj.weight": 0.5,
+          "transformer.h.6.mlp.c_fc.weight": 2.0,
+          "transformer.h.6.mlp.c_proj.weight": 2.0,
+          "transformer.h.7.attn.c_attn.weight": 0.5,
+          "transformer.h.7.attn.c_proj.weight": 0.5,
+          "transformer.h.7.mlp.c_fc.weight": 2.0,
+          "transformer.h.7.mlp.c_proj.weight": 2.0,
+          "transformer.h.8.attn.c_attn.weight": 0.5,
+          "transformer.h.8.attn.c_proj.weight": 0.5,
+          "transformer.h.8.mlp.c_fc.weight": 2.0,
+          "transformer.h.8.mlp.c_proj.weight": 2.0,
+          "transformer.h.9.attn.c_attn.weight": 0.5,
+          "transformer.h.9.attn.c_proj.weight": 0.5,
+          "transformer.h.9.mlp.c_fc.weight": 2.0,
+          "transformer.h.9.mlp.c_proj.weight": 2.0
+        },
+        "specification": {
+          "default_multiplier": 1.0,
+          "exact_parameter_multipliers": {},
+          "matrix_type_multipliers": {
+            "attention_output": 0.5,
+            "attention_qkv": 0.5,
+            "mlp_input": 2.0,
+            "mlp_output": 2.0
+          }
+        },
+        "summary": {
+          "eligible_matrix_count": 48,
+          "maximum_multiplier": 2.0,
+          "minimum_multiplier": 0.5,
+          "unique_multiplier_count": 2
+        }
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "static_per_matrix_sgdm",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5/static_per_matrix_sgdm_gpt2-124m_lr1_mom0.99_wd0.1_seed1337_scalestatic-26f16b708d59",
+      "run_id": "static_lr1_mom0.99_map26f16b708d59",
+      "run_name": "static_per_matrix_sgdm_gpt2-124m_lr1_mom0.99_wd0.1_seed1337_scalestatic-26f16b708d59",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "aeac82e0427f65633ddcff5d8a73c31167321e78",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.1,
+          "gradient_clipping_count": 617,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.617,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.732426166534424,
+          "latest_training_loss": 5.6312960386276245,
+          "latest_validation_loss": 5.732165336608887,
+          "mean_optimizer_step_time_seconds": 0.0023207089900970468,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.320708990097047,
+          "peak_gpu_memory_bytes": 10324301824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 956.0922301309183
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5/static_per_matrix_sgdm_gpt2-124m_lr1_mom0.99_wd0.1_seed1337_scalestatic-26f16b708d59/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.1,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.732426166534424,
+        "validation_loss": 5.732165336608887
+      },
+      "selection_values": {
+        "learning_rate": 1.0,
+        "mapping_fingerprint_sha256": "26f16b708d599d8350915e6aaa4ec14d449a186038c955fded379092bda2236d",
+        "mapping_id": "26f16b708d59",
+        "mapping_name": "attention_mild",
+        "mapping_order": 0,
+        "momentum": 0.99,
+        "scaling_rule": "static-26f16b708d59",
+        "weight_decay": 0.1
+      },
+      "static_multiplier_configuration": {
+        "fingerprint_sha256": "26f16b708d599d8350915e6aaa4ec14d449a186038c955fded379092bda2236d",
+        "geometric_mean": 1.0,
+        "geometric_mean_log_tolerance": 1e-09,
+        "mapping_id": "26f16b708d59",
+        "resolved_multipliers": {
+          "transformer.h.0.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.0.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.0.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.0.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.1.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.1.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.1.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.1.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.10.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.10.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.10.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.10.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.11.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.11.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.11.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.11.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.2.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.2.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.2.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.2.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.3.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.3.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.3.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.3.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.4.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.4.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.4.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.4.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.5.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.5.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.5.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.5.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.6.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.6.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.6.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.6.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.7.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.7.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.7.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.7.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.8.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.8.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.8.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.8.mlp.c_proj.weight": 0.7071067811865476,
+          "transformer.h.9.attn.c_attn.weight": 1.4142135623730951,
+          "transformer.h.9.attn.c_proj.weight": 1.4142135623730951,
+          "transformer.h.9.mlp.c_fc.weight": 0.7071067811865476,
+          "transformer.h.9.mlp.c_proj.weight": 0.7071067811865476
+        },
+        "specification": {
+          "default_multiplier": 1.0,
+          "exact_parameter_multipliers": {},
+          "matrix_type_multipliers": {
+            "attention_output": 1.4142135623730951,
+            "attention_qkv": 1.4142135623730951,
+            "mlp_input": 0.7071067811865476,
+            "mlp_output": 0.7071067811865476
+          }
+        },
+        "summary": {
+          "eligible_matrix_count": 48,
+          "maximum_multiplier": 1.4142135623730951,
+          "minimum_multiplier": 0.7071067811865476,
+          "unique_multiplier_count": 2
+        }
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "static_per_matrix_sgdm",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5/static_per_matrix_sgdm_gpt2-124m_lr1_mom0.99_wd0.1_seed1337_scalestatic-658ea6e7df4d",
+      "run_id": "static_lr1_mom0.99_map658ea6e7df4d",
+      "run_name": "static_per_matrix_sgdm_gpt2-124m_lr1_mom0.99_wd0.1_seed1337_scalestatic-658ea6e7df4d",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "aeac82e0427f65633ddcff5d8a73c31167321e78",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.1,
+          "gradient_clipping_count": 884,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.884,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.843770980834961,
+          "latest_training_loss": 5.7581329345703125,
+          "latest_validation_loss": 5.844682693481445,
+          "mean_optimizer_step_time_seconds": 0.0023216187214851387,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.3216187214851387,
+          "peak_gpu_memory_bytes": 10324301824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 954.8602052200586
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5/static_per_matrix_sgdm_gpt2-124m_lr1_mom0.99_wd0.1_seed1337_scalestatic-658ea6e7df4d/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.1,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.843770980834961,
+        "validation_loss": 5.844682693481445
+      },
+      "selection_values": {
+        "learning_rate": 1.0,
+        "mapping_fingerprint_sha256": "658ea6e7df4d0d4cc643c3052582b260f65e3eba6a564f3aeb861b3a9570f2e9",
+        "mapping_id": "658ea6e7df4d",
+        "mapping_name": "attention_strong",
+        "mapping_order": 1,
+        "momentum": 0.99,
+        "scaling_rule": "static-658ea6e7df4d",
+        "weight_decay": 0.1
+      },
+      "static_multiplier_configuration": {
+        "fingerprint_sha256": "658ea6e7df4d0d4cc643c3052582b260f65e3eba6a564f3aeb861b3a9570f2e9",
+        "geometric_mean": 1.0,
+        "geometric_mean_log_tolerance": 1e-09,
+        "mapping_id": "658ea6e7df4d",
+        "resolved_multipliers": {
+          "transformer.h.0.attn.c_attn.weight": 2.0,
+          "transformer.h.0.attn.c_proj.weight": 2.0,
+          "transformer.h.0.mlp.c_fc.weight": 0.5,
+          "transformer.h.0.mlp.c_proj.weight": 0.5,
+          "transformer.h.1.attn.c_attn.weight": 2.0,
+          "transformer.h.1.attn.c_proj.weight": 2.0,
+          "transformer.h.1.mlp.c_fc.weight": 0.5,
+          "transformer.h.1.mlp.c_proj.weight": 0.5,
+          "transformer.h.10.attn.c_attn.weight": 2.0,
+          "transformer.h.10.attn.c_proj.weight": 2.0,
+          "transformer.h.10.mlp.c_fc.weight": 0.5,
+          "transformer.h.10.mlp.c_proj.weight": 0.5,
+          "transformer.h.11.attn.c_attn.weight": 2.0,
+          "transformer.h.11.attn.c_proj.weight": 2.0,
+          "transformer.h.11.mlp.c_fc.weight": 0.5,
+          "transformer.h.11.mlp.c_proj.weight": 0.5,
+          "transformer.h.2.attn.c_attn.weight": 2.0,
+          "transformer.h.2.attn.c_proj.weight": 2.0,
+          "transformer.h.2.mlp.c_fc.weight": 0.5,
+          "transformer.h.2.mlp.c_proj.weight": 0.5,
+          "transformer.h.3.attn.c_attn.weight": 2.0,
+          "transformer.h.3.attn.c_proj.weight": 2.0,
+          "transformer.h.3.mlp.c_fc.weight": 0.5,
+          "transformer.h.3.mlp.c_proj.weight": 0.5,
+          "transformer.h.4.attn.c_attn.weight": 2.0,
+          "transformer.h.4.attn.c_proj.weight": 2.0,
+          "transformer.h.4.mlp.c_fc.weight": 0.5,
+          "transformer.h.4.mlp.c_proj.weight": 0.5,
+          "transformer.h.5.attn.c_attn.weight": 2.0,
+          "transformer.h.5.attn.c_proj.weight": 2.0,
+          "transformer.h.5.mlp.c_fc.weight": 0.5,
+          "transformer.h.5.mlp.c_proj.weight": 0.5,
+          "transformer.h.6.attn.c_attn.weight": 2.0,
+          "transformer.h.6.attn.c_proj.weight": 2.0,
+          "transformer.h.6.mlp.c_fc.weight": 0.5,
+          "transformer.h.6.mlp.c_proj.weight": 0.5,
+          "transformer.h.7.attn.c_attn.weight": 2.0,
+          "transformer.h.7.attn.c_proj.weight": 2.0,
+          "transformer.h.7.mlp.c_fc.weight": 0.5,
+          "transformer.h.7.mlp.c_proj.weight": 0.5,
+          "transformer.h.8.attn.c_attn.weight": 2.0,
+          "transformer.h.8.attn.c_proj.weight": 2.0,
+          "transformer.h.8.mlp.c_fc.weight": 0.5,
+          "transformer.h.8.mlp.c_proj.weight": 0.5,
+          "transformer.h.9.attn.c_attn.weight": 2.0,
+          "transformer.h.9.attn.c_proj.weight": 2.0,
+          "transformer.h.9.mlp.c_fc.weight": 0.5,
+          "transformer.h.9.mlp.c_proj.weight": 0.5
+        },
+        "specification": {
+          "default_multiplier": 1.0,
+          "exact_parameter_multipliers": {},
+          "matrix_type_multipliers": {
+            "attention_output": 2.0,
+            "attention_qkv": 2.0,
+            "mlp_input": 0.5,
+            "mlp_output": 0.5
+          }
+        },
+        "summary": {
+          "eligible_matrix_count": 48,
+          "maximum_multiplier": 2.0,
+          "minimum_multiplier": 0.5,
+          "unique_multiplier_count": 2
+        }
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "static_per_matrix_sgdm",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5/static_per_matrix_sgdm_gpt2-124m_lr1_mom0.99_wd0.1_seed1337_scalestatic-2633929b6baf",
+      "run_id": "static_lr1_mom0.99_map2633929b6baf",
+      "run_name": "static_per_matrix_sgdm_gpt2-124m_lr1_mom0.99_wd0.1_seed1337_scalestatic-2633929b6baf",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "aeac82e0427f65633ddcff5d8a73c31167321e78",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.1,
+          "gradient_clipping_count": 602,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.602,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.668506622314453,
+          "latest_training_loss": 5.578668713569641,
+          "latest_validation_loss": 5.6709113121032715,
+          "mean_optimizer_step_time_seconds": 0.0023109232301712036,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.3109232301712037,
+          "peak_gpu_memory_bytes": 10324301824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 955.659884557128
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5/static_per_matrix_sgdm_gpt2-124m_lr1_mom0.99_wd0.1_seed1337_scalestatic-2633929b6baf/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.1,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.668506622314453,
+        "validation_loss": 5.6709113121032715
+      },
+      "selection_values": {
+        "learning_rate": 1.0,
+        "mapping_fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "mapping_id": "2633929b6baf",
+        "mapping_name": "mlp_strong",
+        "mapping_order": 2,
+        "momentum": 0.99,
+        "scaling_rule": "static-2633929b6baf",
+        "weight_decay": 0.1
+      },
+      "static_multiplier_configuration": {
+        "fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "geometric_mean": 1.0,
+        "geometric_mean_log_tolerance": 1e-09,
+        "mapping_id": "2633929b6baf",
+        "resolved_multipliers": {
+          "transformer.h.0.attn.c_attn.weight": 0.5,
+          "transformer.h.0.attn.c_proj.weight": 0.5,
+          "transformer.h.0.mlp.c_fc.weight": 2.0,
+          "transformer.h.0.mlp.c_proj.weight": 2.0,
+          "transformer.h.1.attn.c_attn.weight": 0.5,
+          "transformer.h.1.attn.c_proj.weight": 0.5,
+          "transformer.h.1.mlp.c_fc.weight": 2.0,
+          "transformer.h.1.mlp.c_proj.weight": 2.0,
+          "transformer.h.10.attn.c_attn.weight": 0.5,
+          "transformer.h.10.attn.c_proj.weight": 0.5,
+          "transformer.h.10.mlp.c_fc.weight": 2.0,
+          "transformer.h.10.mlp.c_proj.weight": 2.0,
+          "transformer.h.11.attn.c_attn.weight": 0.5,
+          "transformer.h.11.attn.c_proj.weight": 0.5,
+          "transformer.h.11.mlp.c_fc.weight": 2.0,
+          "transformer.h.11.mlp.c_proj.weight": 2.0,
+          "transformer.h.2.attn.c_attn.weight": 0.5,
+          "transformer.h.2.attn.c_proj.weight": 0.5,
+          "transformer.h.2.mlp.c_fc.weight": 2.0,
+          "transformer.h.2.mlp.c_proj.weight": 2.0,
+          "transformer.h.3.attn.c_attn.weight": 0.5,
+          "transformer.h.3.attn.c_proj.weight": 0.5,
+          "transformer.h.3.mlp.c_fc.weight": 2.0,
+          "transformer.h.3.mlp.c_proj.weight": 2.0,
+          "transformer.h.4.attn.c_attn.weight": 0.5,
+          "transformer.h.4.attn.c_proj.weight": 0.5,
+          "transformer.h.4.mlp.c_fc.weight": 2.0,
+          "transformer.h.4.mlp.c_proj.weight": 2.0,
+          "transformer.h.5.attn.c_attn.weight": 0.5,
+          "transformer.h.5.attn.c_proj.weight": 0.5,
+          "transformer.h.5.mlp.c_fc.weight": 2.0,
+          "transformer.h.5.mlp.c_proj.weight": 2.0,
+          "transformer.h.6.attn.c_attn.weight": 0.5,
+          "transformer.h.6.attn.c_proj.weight": 0.5,
+          "transformer.h.6.mlp.c_fc.weight": 2.0,
+          "transformer.h.6.mlp.c_proj.weight": 2.0,
+          "transformer.h.7.attn.c_attn.weight": 0.5,
+          "transformer.h.7.attn.c_proj.weight": 0.5,
+          "transformer.h.7.mlp.c_fc.weight": 2.0,
+          "transformer.h.7.mlp.c_proj.weight": 2.0,
+          "transformer.h.8.attn.c_attn.weight": 0.5,
+          "transformer.h.8.attn.c_proj.weight": 0.5,
+          "transformer.h.8.mlp.c_fc.weight": 2.0,
+          "transformer.h.8.mlp.c_proj.weight": 2.0,
+          "transformer.h.9.attn.c_attn.weight": 0.5,
+          "transformer.h.9.attn.c_proj.weight": 0.5,
+          "transformer.h.9.mlp.c_fc.weight": 2.0,
+          "transformer.h.9.mlp.c_proj.weight": 2.0
+        },
+        "specification": {
+          "default_multiplier": 1.0,
+          "exact_parameter_multipliers": {},
+          "matrix_type_multipliers": {
+            "attention_output": 0.5,
+            "attention_qkv": 0.5,
+            "mlp_input": 2.0,
+            "mlp_output": 2.0
+          }
+        },
+        "summary": {
+          "eligible_matrix_count": 48,
+          "maximum_multiplier": 2.0,
+          "minimum_multiplier": 0.5,
+          "unique_multiplier_count": 2
+        }
+      },
+      "status": "completed"
+    }
+  ],
+  "winners": {
+    "static_per_matrix_sgdm": {
+      "optimizer_name": "static_per_matrix_sgdm",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5/static_per_matrix_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scalestatic-2633929b6baf",
+      "run_id": "static_lr0.03_mom0.99_map2633929b6baf",
+      "run_name": "static_per_matrix_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scalestatic-2633929b6baf",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "aeac82e0427f65633ddcff5d8a73c31167321e78",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.003,
+          "gradient_clipping_count": 996,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.996,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.406810283660889,
+          "latest_training_loss": 5.330531001091003,
+          "latest_validation_loss": 5.401801109313965,
+          "mean_optimizer_step_time_seconds": 0.0023216596484184264,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.3216596484184264,
+          "peak_gpu_memory_bytes": 10324301824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 955.9260203647427
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-2.5/static_per_matrix_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scalestatic-2633929b6baf/run_summary.json",
+      "seed": 1337,
+      "selection_metric": 5.401801109313965,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.003,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.406810283660889,
+        "validation_loss": 5.401801109313965
+      },
+      "selection_values": {
+        "learning_rate": 0.03,
+        "mapping_fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "mapping_id": "2633929b6baf",
+        "mapping_name": "mlp_strong",
+        "mapping_order": 2,
+        "momentum": 0.99,
+        "scaling_rule": "static-2633929b6baf",
+        "weight_decay": 0.1
+      },
+      "static_multiplier_configuration": {
+        "fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "geometric_mean": 1.0,
+        "geometric_mean_log_tolerance": 1e-09,
+        "mapping_id": "2633929b6baf",
+        "resolved_multipliers": {
+          "transformer.h.0.attn.c_attn.weight": 0.5,
+          "transformer.h.0.attn.c_proj.weight": 0.5,
+          "transformer.h.0.mlp.c_fc.weight": 2.0,
+          "transformer.h.0.mlp.c_proj.weight": 2.0,
+          "transformer.h.1.attn.c_attn.weight": 0.5,
+          "transformer.h.1.attn.c_proj.weight": 0.5,
+          "transformer.h.1.mlp.c_fc.weight": 2.0,
+          "transformer.h.1.mlp.c_proj.weight": 2.0,
+          "transformer.h.10.attn.c_attn.weight": 0.5,
+          "transformer.h.10.attn.c_proj.weight": 0.5,
+          "transformer.h.10.mlp.c_fc.weight": 2.0,
+          "transformer.h.10.mlp.c_proj.weight": 2.0,
+          "transformer.h.11.attn.c_attn.weight": 0.5,
+          "transformer.h.11.attn.c_proj.weight": 0.5,
+          "transformer.h.11.mlp.c_fc.weight": 2.0,
+          "transformer.h.11.mlp.c_proj.weight": 2.0,
+          "transformer.h.2.attn.c_attn.weight": 0.5,
+          "transformer.h.2.attn.c_proj.weight": 0.5,
+          "transformer.h.2.mlp.c_fc.weight": 2.0,
+          "transformer.h.2.mlp.c_proj.weight": 2.0,
+          "transformer.h.3.attn.c_attn.weight": 0.5,
+          "transformer.h.3.attn.c_proj.weight": 0.5,
+          "transformer.h.3.mlp.c_fc.weight": 2.0,
+          "transformer.h.3.mlp.c_proj.weight": 2.0,
+          "transformer.h.4.attn.c_attn.weight": 0.5,
+          "transformer.h.4.attn.c_proj.weight": 0.5,
+          "transformer.h.4.mlp.c_fc.weight": 2.0,
+          "transformer.h.4.mlp.c_proj.weight": 2.0,
+          "transformer.h.5.attn.c_attn.weight": 0.5,
+          "transformer.h.5.attn.c_proj.weight": 0.5,
+          "transformer.h.5.mlp.c_fc.weight": 2.0,
+          "transformer.h.5.mlp.c_proj.weight": 2.0,
+          "transformer.h.6.attn.c_attn.weight": 0.5,
+          "transformer.h.6.attn.c_proj.weight": 0.5,
+          "transformer.h.6.mlp.c_fc.weight": 2.0,
+          "transformer.h.6.mlp.c_proj.weight": 2.0,
+          "transformer.h.7.attn.c_attn.weight": 0.5,
+          "transformer.h.7.attn.c_proj.weight": 0.5,
+          "transformer.h.7.mlp.c_fc.weight": 2.0,
+          "transformer.h.7.mlp.c_proj.weight": 2.0,
+          "transformer.h.8.attn.c_attn.weight": 0.5,
+          "transformer.h.8.attn.c_proj.weight": 0.5,
+          "transformer.h.8.mlp.c_fc.weight": 2.0,
+          "transformer.h.8.mlp.c_proj.weight": 2.0,
+          "transformer.h.9.attn.c_attn.weight": 0.5,
+          "transformer.h.9.attn.c_proj.weight": 0.5,
+          "transformer.h.9.mlp.c_fc.weight": 2.0,
+          "transformer.h.9.mlp.c_proj.weight": 2.0
+        },
+        "specification": {
+          "default_multiplier": 1.0,
+          "exact_parameter_multipliers": {},
+          "matrix_type_multipliers": {
+            "attention_output": 0.5,
+            "attention_qkv": 0.5,
+            "mlp_input": 2.0,
+            "mlp_output": 2.0
+          }
+        },
+        "summary": {
+          "eligible_matrix_count": 48,
+          "maximum_multiplier": 2.0,
+          "minimum_multiplier": 0.5,
+          "unique_multiplier_count": 2
+        }
+      },
+      "status": "completed"
+    }
+  }
+}
