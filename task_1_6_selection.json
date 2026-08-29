@@ -1,0 +1,2245 @@
+{
+  "manifest_id": "task-1.6-exploratory-v1",
+  "results": [
+    {
+      "optimizer_name": "global_sgdm",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/global_sgdm_gpt2-124m_lr0.03_mom0.9_wd0.1_seed1337_scaleglobal",
+      "run_id": "global_sgdm_lr0.03_mom0.90",
+      "run_name": "global_sgdm_gpt2-124m_lr0.03_mom0.9_wd0.1_seed1337_scaleglobal",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.003,
+          "gradient_clipping_count": 1000,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 1.0,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.445643424987793,
+          "latest_training_loss": 5.368058681488037,
+          "latest_validation_loss": 5.440924167633057,
+          "mean_optimizer_step_time_seconds": 0.0023494647724628445,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.3494647724628446,
+          "peak_gpu_memory_bytes": 10325962752,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 968.023796656169
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/global_sgdm_gpt2-124m_lr0.03_mom0.9_wd0.1_seed1337_scaleglobal/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.003,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.445643424987793,
+        "validation_loss": 5.440924167633057
+      },
+      "selection_values": {
+        "learning_rate": 0.03,
+        "momentum": 0.9,
+        "scaling_rule": "global",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "global_sgdm",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/global_sgdm_gpt2-124m_lr0.03_mom0.95_wd0.1_seed1337_scaleglobal",
+      "run_id": "global_sgdm_lr0.03_mom0.95",
+      "run_name": "global_sgdm_gpt2-124m_lr0.03_mom0.95_wd0.1_seed1337_scaleglobal",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.003,
+          "gradient_clipping_count": 1000,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 1.0,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.432171821594238,
+          "latest_training_loss": 5.355973243713379,
+          "latest_validation_loss": 5.427633762359619,
+          "mean_optimizer_step_time_seconds": 0.0023190917429924012,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.319091742992401,
+          "peak_gpu_memory_bytes": 10324301824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 958.9052105569281
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/global_sgdm_gpt2-124m_lr0.03_mom0.95_wd0.1_seed1337_scaleglobal/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.003,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.432171821594238,
+        "validation_loss": 5.427633762359619
+      },
+      "selection_values": {
+        "learning_rate": 0.03,
+        "momentum": 0.95,
+        "scaling_rule": "global",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "global_sgdm",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/global_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scaleglobal",
+      "run_id": "global_sgdm_lr0.03_mom0.99",
+      "run_name": "global_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scaleglobal",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.003,
+          "gradient_clipping_count": 1000,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 1.0,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.415630340576172,
+          "latest_training_loss": 5.338506102561951,
+          "latest_validation_loss": 5.410761833190918,
+          "mean_optimizer_step_time_seconds": 0.0023220011801719674,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.3220011801719673,
+          "peak_gpu_memory_bytes": 10324301824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 953.7491091913544
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/global_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scaleglobal/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.003,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.415630340576172,
+        "validation_loss": 5.410761833190918
+      },
+      "selection_values": {
+        "learning_rate": 0.03,
+        "momentum": 0.99,
+        "scaling_rule": "global",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "global_sgdm",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/global_sgdm_gpt2-124m_lr0.1_mom0.9_wd0.1_seed1337_scaleglobal",
+      "run_id": "global_sgdm_lr0.10_mom0.90",
+      "run_name": "global_sgdm_gpt2-124m_lr0.1_mom0.9_wd0.1_seed1337_scaleglobal",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.010000000000000002,
+          "gradient_clipping_count": 893,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.893,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.6309895515441895,
+          "latest_training_loss": 5.532184839248657,
+          "latest_validation_loss": 5.629143714904785,
+          "mean_optimizer_step_time_seconds": 0.002316043009996414,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.316043009996414,
+          "peak_gpu_memory_bytes": 10324301824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 960.3869460029528
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/global_sgdm_gpt2-124m_lr0.1_mom0.9_wd0.1_seed1337_scaleglobal/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.010000000000000002,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.6309895515441895,
+        "validation_loss": 5.629143714904785
+      },
+      "selection_values": {
+        "learning_rate": 0.1,
+        "momentum": 0.9,
+        "scaling_rule": "global",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "global_sgdm",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/global_sgdm_gpt2-124m_lr0.1_mom0.95_wd0.1_seed1337_scaleglobal",
+      "run_id": "global_sgdm_lr0.10_mom0.95",
+      "run_name": "global_sgdm_gpt2-124m_lr0.1_mom0.95_wd0.1_seed1337_scaleglobal",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.010000000000000002,
+          "gradient_clipping_count": 825,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.825,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.629732131958008,
+          "latest_training_loss": 5.528424978256226,
+          "latest_validation_loss": 5.627959728240967,
+          "mean_optimizer_step_time_seconds": 0.0023367365088462827,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.3367365088462826,
+          "peak_gpu_memory_bytes": 10324301824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 952.5463334228843
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/global_sgdm_gpt2-124m_lr0.1_mom0.95_wd0.1_seed1337_scaleglobal/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.010000000000000002,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.629732131958008,
+        "validation_loss": 5.627959728240967
+      },
+      "selection_values": {
+        "learning_rate": 0.1,
+        "momentum": 0.95,
+        "scaling_rule": "global",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "global_sgdm",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/global_sgdm_gpt2-124m_lr0.1_mom0.99_wd0.1_seed1337_scaleglobal",
+      "run_id": "global_sgdm_lr0.10_mom0.99",
+      "run_name": "global_sgdm_gpt2-124m_lr0.1_mom0.99_wd0.1_seed1337_scaleglobal",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.010000000000000002,
+          "gradient_clipping_count": 582,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.582,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.622967720031738,
+          "latest_training_loss": 5.523619651794434,
+          "latest_validation_loss": 5.620533466339111,
+          "mean_optimizer_step_time_seconds": 0.002320995424032212,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.320995424032212,
+          "peak_gpu_memory_bytes": 10324301824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 951.2951275152154
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/global_sgdm_gpt2-124m_lr0.1_mom0.99_wd0.1_seed1337_scaleglobal/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.010000000000000002,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.622967720031738,
+        "validation_loss": 5.620533466339111
+      },
+      "selection_values": {
+        "learning_rate": 0.1,
+        "momentum": 0.99,
+        "scaling_rule": "global",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "global_sgdm",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/global_sgdm_gpt2-124m_lr0.3_mom0.9_wd0.1_seed1337_scaleglobal",
+      "run_id": "global_sgdm_lr0.30_mom0.90",
+      "run_name": "global_sgdm_gpt2-124m_lr0.3_mom0.9_wd0.1_seed1337_scaleglobal",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.03,
+          "gradient_clipping_count": 786,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.786,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.6492228507995605,
+          "latest_training_loss": 5.54945170879364,
+          "latest_validation_loss": 5.648054122924805,
+          "mean_optimizer_step_time_seconds": 0.00231857056260109,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.31857056260109,
+          "peak_gpu_memory_bytes": 10324301824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 958.3221182469279
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/global_sgdm_gpt2-124m_lr0.3_mom0.9_wd0.1_seed1337_scaleglobal/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.03,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.6492228507995605,
+        "validation_loss": 5.648054122924805
+      },
+      "selection_values": {
+        "learning_rate": 0.3,
+        "momentum": 0.9,
+        "scaling_rule": "global",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "global_sgdm",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/global_sgdm_gpt2-124m_lr0.3_mom0.95_wd0.1_seed1337_scaleglobal",
+      "run_id": "global_sgdm_lr0.30_mom0.95",
+      "run_name": "global_sgdm_gpt2-124m_lr0.3_mom0.95_wd0.1_seed1337_scaleglobal",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.03,
+          "gradient_clipping_count": 727,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.727,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.64797830581665,
+          "latest_training_loss": 5.545169711112976,
+          "latest_validation_loss": 5.646438121795654,
+          "mean_optimizer_step_time_seconds": 0.002312402239084244,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.312402239084244,
+          "peak_gpu_memory_bytes": 10324301824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 952.7625983837061
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/global_sgdm_gpt2-124m_lr0.3_mom0.95_wd0.1_seed1337_scaleglobal/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.03,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.64797830581665,
+        "validation_loss": 5.646438121795654
+      },
+      "selection_values": {
+        "learning_rate": 0.3,
+        "momentum": 0.95,
+        "scaling_rule": "global",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "global_sgdm",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/global_sgdm_gpt2-124m_lr0.3_mom0.99_wd0.1_seed1337_scaleglobal",
+      "run_id": "global_sgdm_lr0.30_mom0.99",
+      "run_name": "global_sgdm_gpt2-124m_lr0.3_mom0.99_wd0.1_seed1337_scaleglobal",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.03,
+          "gradient_clipping_count": 613,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.613,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.685391426086426,
+          "latest_training_loss": 5.585536956787109,
+          "latest_validation_loss": 5.684668064117432,
+          "mean_optimizer_step_time_seconds": 0.002315683776855469,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.3156837768554692,
+          "peak_gpu_memory_bytes": 10324301824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 958.4725565640256
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/global_sgdm_gpt2-124m_lr0.3_mom0.99_wd0.1_seed1337_scaleglobal/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.03,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.685391426086426,
+        "validation_loss": 5.684668064117432
+      },
+      "selection_values": {
+        "learning_rate": 0.3,
+        "momentum": 0.99,
+        "scaling_rule": "global",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "global_sgdm",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/global_sgdm_gpt2-124m_lr1.0_mom0.9_wd0.1_seed1337_scaleglobal",
+      "run_id": "global_sgdm_lr1.00_mom0.90",
+      "run_name": "global_sgdm_gpt2-124m_lr1.0_mom0.9_wd0.1_seed1337_scaleglobal",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.1,
+          "gradient_clipping_count": 915,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.915,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.684381484985352,
+          "latest_training_loss": 5.581088066101074,
+          "latest_validation_loss": 5.683244228363037,
+          "mean_optimizer_step_time_seconds": 0.00231702345585823,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.31702345585823,
+          "peak_gpu_memory_bytes": 10324301824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 958.7053054380231
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/global_sgdm_gpt2-124m_lr1.0_mom0.9_wd0.1_seed1337_scaleglobal/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.1,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.684381484985352,
+        "validation_loss": 5.683244228363037
+      },
+      "selection_values": {
+        "learning_rate": 1.0,
+        "momentum": 0.9,
+        "scaling_rule": "global",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "global_sgdm",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/global_sgdm_gpt2-124m_lr1.0_mom0.95_wd0.1_seed1337_scaleglobal",
+      "run_id": "global_sgdm_lr1.00_mom0.95",
+      "run_name": "global_sgdm_gpt2-124m_lr1.0_mom0.95_wd0.1_seed1337_scaleglobal",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.1,
+          "gradient_clipping_count": 936,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.936,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.69442892074585,
+          "latest_training_loss": 5.594346523284912,
+          "latest_validation_loss": 5.6934967041015625,
+          "mean_optimizer_step_time_seconds": 0.0023358379848003384,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.3358379848003383,
+          "peak_gpu_memory_bytes": 10324301824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 954.0202086665668
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/global_sgdm_gpt2-124m_lr1.0_mom0.95_wd0.1_seed1337_scaleglobal/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.1,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.69442892074585,
+        "validation_loss": 5.6934967041015625
+      },
+      "selection_values": {
+        "learning_rate": 1.0,
+        "momentum": 0.95,
+        "scaling_rule": "global",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "global_sgdm",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/global_sgdm_gpt2-124m_lr1.0_mom0.99_wd0.1_seed1337_scaleglobal",
+      "run_id": "global_sgdm_lr1.00_mom0.99",
+      "run_name": "global_sgdm_gpt2-124m_lr1.0_mom0.99_wd0.1_seed1337_scaleglobal",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.1,
+          "gradient_clipping_count": 617,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.617,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.696474075317383,
+          "latest_training_loss": 5.5989521741867065,
+          "latest_validation_loss": 5.6959004402160645,
+          "mean_optimizer_step_time_seconds": 0.002336726528882981,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.336726528882981,
+          "peak_gpu_memory_bytes": 10324301824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 958.3767004380934
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/global_sgdm_gpt2-124m_lr1.0_mom0.99_wd0.1_seed1337_scaleglobal/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.1,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.696474075317383,
+        "validation_loss": 5.6959004402160645
+      },
+      "selection_values": {
+        "learning_rate": 1.0,
+        "momentum": 0.99,
+        "scaling_rule": "global",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "adamw",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/adamw_gpt2-124m_lr0.0003_mom0.85_wd0.1_seed1337_scaleadamw",
+      "run_id": "adamw_lr0.0003_beta1_0.85",
+      "run_name": "adamw_gpt2-124m_lr0.0003_mom0.85_wd0.1_seed1337_scaleadamw",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 3e-05,
+          "effective_matrix_learning_rate": null,
+          "gradient_clipping_count": 80,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.08,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 4.4435200691223145,
+          "latest_training_loss": 4.392215311527252,
+          "latest_validation_loss": 4.447853088378906,
+          "mean_optimizer_step_time_seconds": 0.0028723712615966795,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.8723712615966797,
+          "peak_gpu_memory_bytes": 10666573824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 955.1075857388787
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/adamw_gpt2-124m_lr0.0003_mom0.85_wd0.1_seed1337_scaleadamw/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 3e-05,
+        "matrix_learning_rate": null,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 4.4435200691223145,
+        "validation_loss": 4.447853088378906
+      },
+      "selection_values": {
+        "learning_rate": 0.0003,
+        "momentum": 0.85,
+        "scaling_rule": "adamw",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "adamw",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/adamw_gpt2-124m_lr0.0003_mom0.9_wd0.1_seed1337_scaleadamw",
+      "run_id": "adamw_lr0.0003_beta1_0.90",
+      "run_name": "adamw_gpt2-124m_lr0.0003_mom0.9_wd0.1_seed1337_scaleadamw",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 3e-05,
+          "effective_matrix_learning_rate": null,
+          "gradient_clipping_count": 79,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.079,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 4.376852512359619,
+          "latest_training_loss": 4.345009028911591,
+          "latest_validation_loss": 4.383612155914307,
+          "mean_optimizer_step_time_seconds": 0.002843840639114381,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.843840639114381,
+          "peak_gpu_memory_bytes": 10666573824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 954.3084424249828
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/adamw_gpt2-124m_lr0.0003_mom0.9_wd0.1_seed1337_scaleadamw/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 3e-05,
+        "matrix_learning_rate": null,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 4.376852512359619,
+        "validation_loss": 4.383612155914307
+      },
+      "selection_values": {
+        "learning_rate": 0.0003,
+        "momentum": 0.9,
+        "scaling_rule": "adamw",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "adamw",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/adamw_gpt2-124m_lr0.0003_mom0.95_wd0.1_seed1337_scaleadamw",
+      "run_id": "adamw_lr0.0003_beta1_0.95",
+      "run_name": "adamw_gpt2-124m_lr0.0003_mom0.95_wd0.1_seed1337_scaleadamw",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 3e-05,
+          "effective_matrix_learning_rate": null,
+          "gradient_clipping_count": 127,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.127,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 4.470850944519043,
+          "latest_training_loss": 4.4219970703125,
+          "latest_validation_loss": 4.47574520111084,
+          "mean_optimizer_step_time_seconds": 0.002867479676485063,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.867479676485063,
+          "peak_gpu_memory_bytes": 10666573824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 954.9100788808428
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/adamw_gpt2-124m_lr0.0003_mom0.95_wd0.1_seed1337_scaleadamw/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 3e-05,
+        "matrix_learning_rate": null,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 4.470850944519043,
+        "validation_loss": 4.47574520111084
+      },
+      "selection_values": {
+        "learning_rate": 0.0003,
+        "momentum": 0.95,
+        "scaling_rule": "adamw",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "adamw",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/adamw_gpt2-124m_lr0.0006_mom0.85_wd0.1_seed1337_scaleadamw",
+      "run_id": "adamw_lr0.0006_beta1_0.85",
+      "run_name": "adamw_gpt2-124m_lr0.0006_mom0.85_wd0.1_seed1337_scaleadamw",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 6e-05,
+          "effective_matrix_learning_rate": null,
+          "gradient_clipping_count": 68,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.068,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 4.083097457885742,
+          "latest_training_loss": 4.072285294532776,
+          "latest_validation_loss": 4.090588569641113,
+          "mean_optimizer_step_time_seconds": 0.002881951488256454,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.8819514882564543,
+          "peak_gpu_memory_bytes": 10666573824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 955.5903444411233
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/adamw_gpt2-124m_lr0.0006_mom0.85_wd0.1_seed1337_scaleadamw/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 6e-05,
+        "matrix_learning_rate": null,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 4.083097457885742,
+        "validation_loss": 4.090588569641113
+      },
+      "selection_values": {
+        "learning_rate": 0.0006,
+        "momentum": 0.85,
+        "scaling_rule": "adamw",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "adamw",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/adamw_gpt2-124m_lr0.0006_mom0.9_wd0.1_seed1337_scaleadamw",
+      "run_id": "adamw_lr0.0006_beta1_0.90",
+      "run_name": "adamw_gpt2-124m_lr0.0006_mom0.9_wd0.1_seed1337_scaleadamw",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 6e-05,
+          "effective_matrix_learning_rate": null,
+          "gradient_clipping_count": 44,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.044,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 4.058748245239258,
+          "latest_training_loss": 4.049981236457825,
+          "latest_validation_loss": 4.067068099975586,
+          "mean_optimizer_step_time_seconds": 0.0028767423696517947,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.8767423696517946,
+          "peak_gpu_memory_bytes": 10666573824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 955.8627333473414
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/adamw_gpt2-124m_lr0.0006_mom0.9_wd0.1_seed1337_scaleadamw/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 6e-05,
+        "matrix_learning_rate": null,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 4.058748245239258,
+        "validation_loss": 4.067068099975586
+      },
+      "selection_values": {
+        "learning_rate": 0.0006,
+        "momentum": 0.9,
+        "scaling_rule": "adamw",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "adamw",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/adamw_gpt2-124m_lr0.0006_mom0.95_wd0.1_seed1337_scaleadamw",
+      "run_id": "adamw_lr0.0006_beta1_0.95",
+      "run_name": "adamw_gpt2-124m_lr0.0006_mom0.95_wd0.1_seed1337_scaleadamw",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 6e-05,
+          "effective_matrix_learning_rate": null,
+          "gradient_clipping_count": 38,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.038,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 4.129915714263916,
+          "latest_training_loss": 4.120430052280426,
+          "latest_validation_loss": 4.136833190917969,
+          "mean_optimizer_step_time_seconds": 0.0028920779187679283,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.8920779187679284,
+          "peak_gpu_memory_bytes": 10666573824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 955.5312366508879
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/adamw_gpt2-124m_lr0.0006_mom0.95_wd0.1_seed1337_scaleadamw/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 6e-05,
+        "matrix_learning_rate": null,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 4.129915714263916,
+        "validation_loss": 4.136833190917969
+      },
+      "selection_values": {
+        "learning_rate": 0.0006,
+        "momentum": 0.95,
+        "scaling_rule": "adamw",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "adamw",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/adamw_gpt2-124m_lr0.001_mom0.85_wd0.1_seed1337_scaleadamw",
+      "run_id": "adamw_lr0.001_beta1_0.85",
+      "run_name": "adamw_gpt2-124m_lr0.001_mom0.85_wd0.1_seed1337_scaleadamw",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 0.0001,
+          "effective_matrix_learning_rate": null,
+          "gradient_clipping_count": 56,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.056,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 3.899472713470459,
+          "latest_training_loss": 3.9130163192749023,
+          "latest_validation_loss": 3.9065141677856445,
+          "mean_optimizer_step_time_seconds": 0.002884717471837998,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.884717471837998,
+          "peak_gpu_memory_bytes": 10666573824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 960.885094948113
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/adamw_gpt2-124m_lr0.001_mom0.85_wd0.1_seed1337_scaleadamw/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 0.0001,
+        "matrix_learning_rate": null,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 3.899472713470459,
+        "validation_loss": 3.9065141677856445
+      },
+      "selection_values": {
+        "learning_rate": 0.001,
+        "momentum": 0.85,
+        "scaling_rule": "adamw",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "adamw",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/adamw_gpt2-124m_lr0.001_mom0.9_wd0.1_seed1337_scaleadamw",
+      "run_id": "adamw_lr0.001_beta1_0.90",
+      "run_name": "adamw_gpt2-124m_lr0.001_mom0.9_wd0.1_seed1337_scaleadamw",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 0.0001,
+          "effective_matrix_learning_rate": null,
+          "gradient_clipping_count": 40,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.04,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 3.8832147121429443,
+          "latest_training_loss": 3.889916241168976,
+          "latest_validation_loss": 3.8913583755493164,
+          "mean_optimizer_step_time_seconds": 0.002900610975265502,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.900610975265502,
+          "peak_gpu_memory_bytes": 10666573824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 958.6915149870329
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/adamw_gpt2-124m_lr0.001_mom0.9_wd0.1_seed1337_scaleadamw/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 0.0001,
+        "matrix_learning_rate": null,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 3.8832147121429443,
+        "validation_loss": 3.8913583755493164
+      },
+      "selection_values": {
+        "learning_rate": 0.001,
+        "momentum": 0.9,
+        "scaling_rule": "adamw",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "adamw",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/adamw_gpt2-124m_lr0.001_mom0.95_wd0.1_seed1337_scaleadamw",
+      "run_id": "adamw_lr0.001_beta1_0.95",
+      "run_name": "adamw_gpt2-124m_lr0.001_mom0.95_wd0.1_seed1337_scaleadamw",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 0.0001,
+          "effective_matrix_learning_rate": null,
+          "gradient_clipping_count": 31,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.031,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 3.9402942657470703,
+          "latest_training_loss": 3.946952521800995,
+          "latest_validation_loss": 3.949214458465576,
+          "mean_optimizer_step_time_seconds": 0.002831627166032791,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.831627166032791,
+          "peak_gpu_memory_bytes": 10666573824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 954.207697042264
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/adamw_gpt2-124m_lr0.001_mom0.95_wd0.1_seed1337_scaleadamw/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 0.0001,
+        "matrix_learning_rate": null,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 3.9402942657470703,
+        "validation_loss": 3.949214458465576
+      },
+      "selection_values": {
+        "learning_rate": 0.001,
+        "momentum": 0.95,
+        "scaling_rule": "adamw",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "adamw",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/adamw_gpt2-124m_lr0.002_mom0.85_wd0.1_seed1337_scaleadamw",
+      "run_id": "adamw_lr0.002_beta1_0.85",
+      "run_name": "adamw_gpt2-124m_lr0.002_mom0.85_wd0.1_seed1337_scaleadamw",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 0.0002,
+          "effective_matrix_learning_rate": null,
+          "gradient_clipping_count": 44,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.044,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 3.9043755531311035,
+          "latest_training_loss": 3.901037871837616,
+          "latest_validation_loss": 3.911867141723633,
+          "mean_optimizer_step_time_seconds": 0.002827473983764649,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.8274739837646488,
+          "peak_gpu_memory_bytes": 10666573824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 953.0852823727764
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/adamw_gpt2-124m_lr0.002_mom0.85_wd0.1_seed1337_scaleadamw/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 0.0002,
+        "matrix_learning_rate": null,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 3.9043755531311035,
+        "validation_loss": 3.911867141723633
+      },
+      "selection_values": {
+        "learning_rate": 0.002,
+        "momentum": 0.85,
+        "scaling_rule": "adamw",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "adamw",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/adamw_gpt2-124m_lr0.002_mom0.9_wd0.1_seed1337_scaleadamw",
+      "run_id": "adamw_lr0.002_beta1_0.90",
+      "run_name": "adamw_gpt2-124m_lr0.002_mom0.9_wd0.1_seed1337_scaleadamw",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 0.0002,
+          "effective_matrix_learning_rate": null,
+          "gradient_clipping_count": 35,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.035,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 3.734450578689575,
+          "latest_training_loss": 3.752466142177582,
+          "latest_validation_loss": 3.7430150508880615,
+          "mean_optimizer_step_time_seconds": 0.00289427667427063,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.89427667427063,
+          "peak_gpu_memory_bytes": 10666573824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 955.580207109917
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/adamw_gpt2-124m_lr0.002_mom0.9_wd0.1_seed1337_scaleadamw/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 0.0002,
+        "matrix_learning_rate": null,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 3.734450578689575,
+        "validation_loss": 3.7430150508880615
+      },
+      "selection_values": {
+        "learning_rate": 0.002,
+        "momentum": 0.9,
+        "scaling_rule": "adamw",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "adamw",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/adamw_gpt2-124m_lr0.002_mom0.95_wd0.1_seed1337_scaleadamw",
+      "run_id": "adamw_lr0.002_beta1_0.95",
+      "run_name": "adamw_gpt2-124m_lr0.002_mom0.95_wd0.1_seed1337_scaleadamw",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 0.0002,
+          "effective_matrix_learning_rate": null,
+          "gradient_clipping_count": 37,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.037,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 3.8604788780212402,
+          "latest_training_loss": 3.8795670866966248,
+          "latest_validation_loss": 3.868509531021118,
+          "mean_optimizer_step_time_seconds": 0.002889477215528488,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.889477215528488,
+          "peak_gpu_memory_bytes": 10666573824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 955.4874416822568
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/adamw_gpt2-124m_lr0.002_mom0.95_wd0.1_seed1337_scaleadamw/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 0.0002,
+        "matrix_learning_rate": null,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 3.8604788780212402,
+        "validation_loss": 3.868509531021118
+      },
+      "selection_values": {
+        "learning_rate": 0.002,
+        "momentum": 0.95,
+        "scaling_rule": "adamw",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    }
+  ],
+  "winners": {
+    "adamw": {
+      "optimizer_name": "adamw",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/adamw_gpt2-124m_lr0.002_mom0.9_wd0.1_seed1337_scaleadamw",
+      "run_id": "adamw_lr0.002_beta1_0.90",
+      "run_name": "adamw_gpt2-124m_lr0.002_mom0.9_wd0.1_seed1337_scaleadamw",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 0.0002,
+          "effective_matrix_learning_rate": null,
+          "gradient_clipping_count": 35,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.035,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 3.734450578689575,
+          "latest_training_loss": 3.752466142177582,
+          "latest_validation_loss": 3.7430150508880615,
+          "mean_optimizer_step_time_seconds": 0.00289427667427063,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.89427667427063,
+          "peak_gpu_memory_bytes": 10666573824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 955.580207109917
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/adamw_gpt2-124m_lr0.002_mom0.9_wd0.1_seed1337_scaleadamw/run_summary.json",
+      "seed": 1337,
+      "selection_metric": 3.7430150508880615,
+      "selection_record": {
+        "auxiliary_learning_rate": 0.0002,
+        "matrix_learning_rate": null,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 3.734450578689575,
+        "validation_loss": 3.7430150508880615
+      },
+      "selection_values": {
+        "learning_rate": 0.002,
+        "momentum": 0.9,
+        "scaling_rule": "adamw",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    "global_sgdm": {
+      "optimizer_name": "global_sgdm",
+      "output_directory": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/global_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scaleglobal",
+      "run_id": "global_sgdm_lr0.03_mom0.99",
+      "run_name": "global_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scaleglobal",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.003,
+          "gradient_clipping_count": 1000,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 1.0,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.415630340576172,
+          "latest_training_loss": 5.338506102561951,
+          "latest_validation_loss": 5.410761833190918,
+          "mean_optimizer_step_time_seconds": 0.0023220011801719674,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 2.3220011801719673,
+          "peak_gpu_memory_bytes": 10324301824,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 953.7491091913544
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nanogpt-study-runs/task-1.6/global_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scaleglobal/run_summary.json",
+      "seed": 1337,
+      "selection_metric": 5.410761833190918,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.003,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.415630340576172,
+        "validation_loss": 5.410761833190918
+      },
+      "selection_values": {
+        "learning_rate": 0.03,
+        "momentum": 0.99,
+        "scaling_rule": "global",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    }
+  }
+}
