@@ -4,85 +4,18 @@ import argparse
 import json
 import os
 
-from shared_utils.experiment_manifest import load_manifest, resolve_run_config
+from shared_utils.experiment_manifest import load_manifest
 from shared_utils.experiment_results import report_output_path
-
-
-MATCHED_CONFIG_KEYS = (
-    "dataset",
-    "tokenizer",
-    "gradient_accumulation_steps",
-    "batch_size",
-    "block_size",
-    "n_layer",
-    "n_head",
-    "n_embd",
-    "dropout",
-    "bias",
-    "weight_decay",
-    "matrix_momentum",
-    "matrix_weight_decay",
-    "matrix_momentum_convention",
-    "matrix_weight_decay_mode",
-    "matrix_nesterov",
-    "auxiliary_learning_rate",
-    "auxiliary_weight_decay",
-    "auxiliary_beta1",
-    "auxiliary_beta2",
-    "auxiliary_weight_decay_mode",
-    "max_iters",
-    "decay_lr",
-    "warmup_iters",
-    "lr_decay_iters",
-    "min_lr",
-    "grad_clip",
-    "eval_interval",
-    "eval_iters",
-    "dtype",
-    "compile",
+from shared_utils.study_comparison import (
+    COMMON_MATCHED_CONFIG_KEYS,
+    completed_winner,
+    manifest_run,
+    read_json,
+    verify_matched_controls,
 )
 
 
-def _read_json(path):
-    with open(path, encoding="utf-8") as input_file:
-        return json.load(input_file)
-
-
-def _winner(selection_report, optimizer_name):
-    winner = selection_report.get("winners", {}).get(optimizer_name)
-    if not isinstance(winner, dict) or winner.get("status") != "completed":
-        raise ValueError(f"missing completed {optimizer_name} winner")
-    if winner.get("seed") != 1337:
-        raise ValueError("exploratory comparison requires seed 1337")
-    record = winner.get("selection_record")
-    if not isinstance(record, dict) or record.get("step") != 999:
-        raise ValueError("winner lacks the fixed step-999 selection record")
-    if record.get("processed_tokens") != 491_028_480:
-        raise ValueError("winner selection token count does not match")
-    return winner
-
-
-def _manifest_run(manifest, winner):
-    matches = [
-        run for run in manifest["runs"] if run["run_id"] == winner["run_id"]
-    ]
-    if len(matches) != 1:
-        raise ValueError("winner does not identify exactly one manifest run")
-    return matches[0]
-
-
-def _runtime_locks(winner):
-    path = os.path.join(winner["output_directory"], "resolved_run.json")
-    if not os.path.isfile(path):
-        raise ValueError(f"winner lacks resolved runtime metadata: {path}")
-    resolved = _read_json(path)
-    try:
-        return {
-            "environment_sha256": resolved["environment"]["sha256"],
-            "dataset_files": resolved["dataset"]["files"],
-        }
-    except KeyError as exc:
-        raise ValueError("winner runtime metadata lacks lock fingerprints") from exc
+MATCHED_CONFIG_KEYS = COMMON_MATCHED_CONFIG_KEYS + ("matrix_momentum",)
 
 
 def exploratory_comparison(
@@ -91,39 +24,15 @@ def exploratory_comparison(
     static_manifest,
     static_selection,
 ):
-    global_winner = _winner(global_selection, "global_sgdm")
-    static_winner = _winner(static_selection, "static_per_matrix_sgdm")
-    global_run = _manifest_run(global_manifest, global_winner)
-    static_run = _manifest_run(static_manifest, static_winner)
-
-    global_config = resolve_run_config(global_manifest, global_run)
-    static_config = resolve_run_config(static_manifest, static_run)
-    mismatches = {
-        key: {"global_sgdm": global_config[key], "static": static_config[key]}
-        for key in MATCHED_CONFIG_KEYS
-        if global_config[key] != static_config[key]
-    }
-    if mismatches:
-        raise ValueError(
-            "matched study controls differ: " + ", ".join(sorted(mismatches))
-        )
-    for key in ("environment_lock", "dataset", "resources"):
-        if global_manifest[key] != static_manifest[key]:
-            raise ValueError(f"manifest {key} does not match Variant 1")
-    for key in (
-        "seed",
-        "tokens_per_update",
-        "selection_tokens",
-        "max_processed_tokens",
-        "evaluation_steps",
-        "selection_step",
-    ):
-        if global_run[key] != static_run[key]:
-            raise ValueError(f"run control {key} does not match Variant 1")
-    global_runtime_locks = _runtime_locks(global_winner)
-    static_runtime_locks = _runtime_locks(static_winner)
-    if global_runtime_locks != static_runtime_locks:
-        raise ValueError("runtime environment or dataset fingerprints differ")
+    global_winner = completed_winner(global_selection, "global_sgdm")
+    static_winner = completed_winner(static_selection, "static_per_matrix_sgdm")
+    global_run = manifest_run(global_manifest, global_winner)
+    static_run = manifest_run(static_manifest, static_winner)
+    global_runtime_locks = verify_matched_controls(
+        ("global_sgdm", global_manifest, global_run, global_winner),
+        [("static_per_matrix_sgdm", static_manifest, static_run, static_winner)],
+        MATCHED_CONFIG_KEYS,
+    )
 
     global_loss = global_winner["selection_record"]["validation_loss"]
     static_loss = static_winner["selection_record"]["validation_loss"]
@@ -181,9 +90,9 @@ def main(argv=None):
     args = parser.parse_args(argv)
     report = exploratory_comparison(
         load_manifest(args.global_manifest),
-        _read_json(args.global_selection),
+        read_json(args.global_selection),
         load_manifest(args.static_manifest),
-        _read_json(args.static_selection),
+        read_json(args.static_selection),
     )
     output_path = report_output_path(args.output)
     os.makedirs(os.path.dirname(output_path), exist_ok=True)

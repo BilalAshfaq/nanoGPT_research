@@ -18,6 +18,8 @@ EXPECTED_RUN_ROOTS = {
     "task_2_5_static_smoke.json": "nanogpt-smoke-runs/task-2.5",
     "task_2_5_static_exploratory.json": "nanogpt-study-runs/task-2.5",
     "task_2_5_static_confirmation.json": "nanogpt-study-runs/task-2.5",
+    "task_3_4_frobenius_exploratory.json": "nanogpt-study-runs/task-3.5",
+    "task_3_5_frobenius_smoke.json": "nanogpt-smoke-runs/task-3.5",
 }
 
 

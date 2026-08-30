@@ -196,3 +196,350 @@ The selection and comparison commands place their generated report files in
 Seeds `2027` and `4099` remain deferred for both selected optimizers. The
 one-seed comparison is exploratory and cannot support a final improvement
 claim.
+
+## Task 3.5 Frobenius-normalized SGDM study
+
+Task 3.4 froze exactly 12 seed-1337 candidates: Frobenius base LRs
+`{0.001, 0.003, 0.01, 0.03}` crossed with momenta
+`{0.90, 0.95, 0.99}`. Every run fixes `frobenius_epsilon = 1e-12` and
+`frobenius_shape_factor = 1.0`. The selection checkpoint is step 999 at
+491,028,480 processed tokens, and exact ties are broken by lower Frobenius LR
+and then lower momentum.
+
+The smoke and exploratory manifests are checked in with
+`"launch_authorized": false`. Validation is read-only and may be run now, but
+the runner will refuse compute until the applicable manifest receives a
+separately reviewed authorization change. Smoke authorization does not
+authorize the 12-run study, and study authorization does not authorize the two
+confirmation runs.
+
+### 1. Synchronize and validate without launching
+
+From a clean `experiments-iter-1` checkout on Martin, record the exact commit
+and verify the branch and worktree before using any compute:
+
+```bash
+git branch --show-current
+git status --short
+git rev-parse HEAD
+mkdir -p logs
+
+python -m shared_utils.experiment_manifest validate \
+  experiment_manifests/task_3_5_frobenius_smoke.json
+python -m shared_utils.experiment_manifest validate \
+  experiment_manifests/task_3_4_frobenius_exploratory.json
+```
+
+The first command must print `experiments-iter-1`, `git status --short` must be
+empty, and both manifests must validate. Do not rematerialize or edit the LR
+grid after inspecting Variant 3 results.
+
+Run the focused checks in the locked environment before requesting smoke
+authorization:
+
+```bash
+python -m unittest \
+  tests.test_baseline_preflight \
+  tests.test_frobenius_normalization \
+  tests.test_frobenius_normalized_sgdm \
+  tests.test_frobenius_normalized_diagnostics \
+  tests.test_frobenius_study_protocol \
+  tests.test_frobenius_study_execution -v
+```
+
+This includes the deterministic save/load/next-update coverage. A failed test
+blocks the smoke and study.
+
+### 2. Run the separately authorized smoke
+
+After explicit smoke-compute approval, review a change that sets only the smoke
+manifest's `launch_authorized` field to `true`. Keep the exploratory manifest
+unauthorized. Validate the authorized smoke again, then submit it:
+
+```bash
+python -m shared_utils.experiment_manifest validate \
+  experiment_manifests/task_3_5_frobenius_smoke.json
+
+SMOKE_JOB_ID=$(sbatch --parsable \
+  --time=01:00:00 \
+  --export=ALL,MANIFEST_PATH=experiment_manifests/task_3_5_frobenius_smoke.json \
+  run_optimizer_manifest.slurm)
+
+echo "Task 3.5 smoke job: $SMOKE_JOB_ID"
+squeue -j "$SMOKE_JOB_ID"
+tail -f "logs/optimizer_manifest-${SMOKE_JOB_ID}.out"
+```
+
+After the job exits, run this strict artifact check from the repository root:
+
+```bash
+python - <<'PY'
+import json
+from pathlib import Path
+
+run_name = (
+    'frobenius_normalized_sgdm_smoke_lr0.01_mom0.95_wd0.1_'
+    'seed1337_scalefrobsqrtr-eps1em12-v1'
+)
+run_dir = Path('nanogpt-smoke-runs/task-3.5').resolve() / run_name
+required = (
+    'outcome.json',
+    'resolved_run.json',
+    'run_summary.json',
+    'evaluation_metrics.jsonl',
+    'optimizer_diagnostics.jsonl',
+    'ckpt.pt',
+)
+missing = [name for name in required if not (run_dir / name).is_file()]
+if missing:
+    raise SystemExit(f'missing smoke artifacts: {missing}')
+
+outcome = json.loads((run_dir / 'outcome.json').read_text())
+summary = json.loads((run_dir / 'run_summary.json').read_text())
+resolved = json.loads((run_dir / 'resolved_run.json').read_text())
+evaluations = [
+    json.loads(line)
+    for line in (run_dir / 'evaluation_metrics.jsonl').read_text().splitlines()
+    if line.strip()
+]
+diagnostics = [
+    json.loads(line)
+    for line in (run_dir / 'optimizer_diagnostics.jsonl').read_text().splitlines()
+    if line.strip()
+]
+
+if outcome.get('status') != 'completed' or outcome.get('resumed', False):
+    raise SystemExit(f'ineligible smoke outcome: {outcome}')
+metrics = summary['metrics']
+if metrics.get('numerical_status') != 'ok':
+    raise SystemExit(f'smoke numerical event: {metrics}')
+if metrics.get('divergence_status') != 'not_observed':
+    raise SystemExit(f'smoke divergence: {metrics}')
+if [record['step'] for record in evaluations] != [0, 1]:
+    raise SystemExit(f'unexpected evaluation checkpoints: {evaluations}')
+if [record['step'] for record in diagnostics] != [0, 1]:
+    raise SystemExit(f'unexpected diagnostic checkpoints: {diagnostics}')
+if any(len(record.get('matrices', [])) != 48 for record in diagnostics):
+    raise SystemExit('smoke diagnostics do not contain all 48 eligible matrices')
+
+settings = summary['optimizer']['settings']
+expected = {
+    'frobenius_learning_rate': 0.01,
+    'frobenius_epsilon': 1e-12,
+    'frobenius_shape_factor': 1.0,
+}
+for key, value in expected.items():
+    if settings.get(key) != value:
+        raise SystemExit(f'wrong optimizer setting {key}: {settings.get(key)}')
+if summary['optimizer']['name'] != 'frobenius_normalized_sgdm':
+    raise SystemExit('wrong smoke optimizer')
+if resolved['run']['seed'] != 1337:
+    raise SystemExit('wrong smoke seed')
+
+epsilon_events = sum(
+    matrix.get('epsilon_dominated') is True
+    for record in diagnostics
+    for matrix in record['matrices']
+)
+zero_events = sum(
+    matrix.get('zero_momentum') is True
+    for record in diagnostics
+    for matrix in record['matrices']
+)
+print({
+    'outcome': outcome,
+    'evaluation_steps': [record['step'] for record in evaluations],
+    'diagnostic_steps': [record['step'] for record in diagnostics],
+    'epsilon_dominated_events': epsilon_events,
+    'zero_momentum_events': zero_events,
+    'checkpoint_bytes': (run_dir / 'ckpt.pt').stat().st_size,
+})
+PY
+```
+
+Any missing artifact, resumed execution, instability, divergence, wrong
+optimizer setting, incomplete matrix diagnostics, or failed preflight blocks
+the exploratory study. Do not silently replace the smoke; preserve its outcome
+and diagnose it first.
+
+### 3. Complete the final comparator-code audit
+
+Before authorizing the study, compare both recorded comparator commits with
+the exact clean commit that will launch Variant 3:
+
+```bash
+VARIANT3_COMMIT=$(git rev-parse HEAD)
+
+git diff --name-status \
+  2d5d860120c898157fa95311f0269ff0a143a65e.."$VARIANT3_COMMIT" -- \
+  train.py model.py config/task_1_6_baseline.py shared_utils/
+
+git diff --name-status \
+  aeac82e0427f65633ddcff5d8a73c31167321e78.."$VARIANT3_COMMIT" -- \
+  train.py model.py config/task_1_6_baseline.py shared_utils/
+```
+
+Review the semantic effect of every listed change. If one affects a matched
+training control or measurement, rerun the affected comparator or obtain
+explicit approval for a documented limitation. Artifact-location changes,
+optimizer-name-specific Frobenius branches, outcome classification, and report
+formatting must still be reviewed; they are not exempt merely because they are
+expected.
+
+The implementation-time assessment is preserved in
+`frobenius_normalized_sgdm/task_3_5_implementation_audit.json`. Replace its
+pending commit marker only through a reviewed post-commit audit; the JSON file
+does not substitute for checking the exact clean launch commit.
+
+### 4. Authorize and launch exactly 12 exploratory runs
+
+Only after the smoke and audit pass, obtain explicit approval for the full
+12-run budget. Review a single-field change setting
+`experiment_manifests/task_3_4_frobenius_exploratory.json`'s
+`launch_authorized` field to `true`. Do not change any run, order, override,
+seed, budget, comparator lock, or selection rule.
+
+Validate once more, then submit the sequential manifest job:
+
+```bash
+python -m shared_utils.experiment_manifest validate \
+  experiment_manifests/task_3_4_frobenius_exploratory.json
+
+STUDY_JOB_ID=$(sbatch --parsable \
+  --time=3-00:00:00 \
+  --export=ALL,MANIFEST_PATH=experiment_manifests/task_3_4_frobenius_exploratory.json \
+  run_optimizer_manifest.slurm)
+
+echo "Task 3.5 exploratory job: $STUDY_JOB_ID"
+squeue -j "$STUDY_JOB_ID"
+tail -f "logs/optimizer_manifest-${STUDY_JOB_ID}.out"
+```
+
+Keep the checkout and dataset unchanged until the job finishes. The runner
+records completed, failed, divergent, interrupted, and numerically unstable
+outcomes without replacing them. If a prior `running` outcome resumes from a
+checkpoint, its final outcome records `"resumed": true`; such a run is
+automatically excluded from winner selection because RNG state is not restored.
+
+After the job exits, summarize all 12 outcomes before selection:
+
+```bash
+python - <<'PY'
+import json
+from pathlib import Path
+
+manifest = json.loads(Path(
+    'experiment_manifests/task_3_4_frobenius_exploratory.json'
+).read_text())
+root = Path(manifest['output_root']).resolve()
+rows = []
+for run in manifest['runs']:
+    path = root / run['run_name'] / 'outcome.json'
+    outcome = json.loads(path.read_text()) if path.is_file() else {'status': 'missing'}
+    rows.append({
+        'run_id': run['run_id'],
+        'status': outcome.get('status'),
+        'resumed': outcome.get('resumed', False),
+        'return_code': outcome.get('return_code'),
+    })
+print(json.dumps(rows, indent=2))
+final = {'completed', 'failed', 'divergent', 'interrupted', 'numerically_unstable'}
+if len(rows) != 12 or any(row['status'] not in final for row in rows):
+    raise SystemExit('all 12 candidates must have final recorded outcomes')
+PY
+```
+
+### 5. Select Variant 3 and generate the one-seed comparison
+
+Select solely by the frozen step-999 rule and generate the still-unauthorized
+Frobenius confirmation manifest:
+
+```bash
+python -m shared_utils.experiment_results select \
+  experiment_manifests/task_3_4_frobenius_exploratory.json \
+  --report task_3_5_frobenius_selection.json \
+  --confirmation-manifest experiment_manifests/task_3_5_frobenius_confirmation.json
+```
+
+The report is written to `reports/task_3_5_frobenius_selection.json`. Selection
+fails if any outcome is nonfinal, if no completed uninterrupted candidate
+exists, or if the required optimizer family cannot be selected. The generated
+confirmation manifest contains only seeds 2027 and 4099, preserves the winning
+LR, momentum, epsilon, shape factor, normalization id, comparator locks, audit,
+and claim gate, and remains unauthorized.
+
+Create the direct, explicitly exploratory comparison with the immutable
+Variant 1 and Variant 2 winners:
+
+```bash
+python -m frobenius_normalized_sgdm.utils.study_results exploratory \
+  --global-manifest experiment_manifests/task_1_6_exploratory.json \
+  --global-selection reports/task_1_6_selection.json \
+  --static-manifest experiment_manifests/task_2_5_static_exploratory.json \
+  --static-selection reports/task_2_5_static_selection.json \
+  --frobenius-manifest experiment_manifests/task_3_4_frobenius_exploratory.json \
+  --frobenius-selection reports/task_3_5_frobenius_selection.json \
+  --output task_3_5_seed1337_three_family_comparison.json
+```
+
+This command verifies matched configs, token/evaluation controls, immutable
+comparator identities, the Static mapping fingerprint, the Frobenius rule, and
+runtime environment/dataset fingerprints. The original Variant 1 and 2 winner
+directories referenced by their selection reports must still contain
+`resolved_run.json`. If those runtime artifacts are unavailable, stop and
+record the limitation; do not weaken the check or claim fully matched controls.
+
+The broad study deliberately keeps diagnostics disabled to avoid comparison
+overhead. Its report therefore labels normalization-event counts as not
+collected; the diagnostic event counts from the required smoke are separate
+mechanical evidence and must not be presented as broad-study measurements.
+
+### 6. Confirm only after separate approval
+
+Do not launch `experiment_manifests/task_3_5_frobenius_confirmation.json`
+until the seed-1337 selection and comparison have been reviewed and the two-run
+confirmation budget is explicitly approved. After that approval, review a
+single-field authorization change, validate, and submit:
+
+```bash
+CONFIRM_JOB_ID=$(sbatch --parsable \
+  --time=3-00:00:00 \
+  --export=ALL,MANIFEST_PATH=experiment_manifests/task_3_5_frobenius_confirmation.json \
+  run_optimizer_manifest.slurm)
+
+echo "Task 3.5 Frobenius confirmation job: $CONFIRM_JOB_ID"
+squeue -j "$CONFIRM_JOB_ID"
+```
+
+Generate the Frobenius three-seed summary after both confirmation outcomes are
+final:
+
+```bash
+python -m shared_utils.experiment_results report \
+  experiment_manifests/task_3_4_frobenius_exploratory.json \
+  experiment_manifests/task_3_5_frobenius_confirmation.json \
+  --output task_3_5_frobenius_final.json
+```
+
+Only when the selected Global SGDM, Static Per-Matrix SGDM, and
+Frobenius-Normalized SGDM configurations each have successful, uninterrupted
+seeds 1337, 2027, and 4099 may the final matched report be generated:
+
+```bash
+python -m frobenius_normalized_sgdm.utils.study_results confirmed \
+  --global-manifest experiment_manifests/task_1_6_exploratory.json \
+  --global-selection reports/task_1_6_selection.json \
+  --static-manifest experiment_manifests/task_2_5_static_exploratory.json \
+  --static-selection reports/task_2_5_static_selection.json \
+  --frobenius-manifest experiment_manifests/task_3_4_frobenius_exploratory.json \
+  --frobenius-selection reports/task_3_5_frobenius_selection.json \
+  --global-confirmation-manifest experiment_manifests/task_1_6_confirmation.json \
+  --static-confirmation-manifest experiment_manifests/task_2_5_static_confirmation.json \
+  --frobenius-confirmation-manifest experiment_manifests/task_3_5_frobenius_confirmation.json \
+  --output task_3_5_confirmed_three_family_comparison.json
+```
+
+The final report includes individual seed records, means, sample standard
+deviations, failures or ineligible resumed runs, clipping, numerical status,
+timing, memory, and the exact selected configurations. Its H3 claim gate remains
+blocked unless all three families have three matched successful seeds.

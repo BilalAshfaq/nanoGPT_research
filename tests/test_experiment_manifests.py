@@ -125,7 +125,13 @@ class ExperimentManifestTests(unittest.TestCase):
                     'w',
                     encoding='utf-8',
                 ) as outcome_file:
-                    json.dump({'status': 'completed'}, outcome_file)
+                    json.dump(
+                        {
+                            'status': 'completed',
+                            'resumed': run['seed'] == 2027,
+                        },
+                        outcome_file,
+                    )
                 with open(
                     os.path.join(output_directory, 'evaluation_metrics.jsonl'),
                     'w',
@@ -174,7 +180,13 @@ class ExperimentManifestTests(unittest.TestCase):
                     'w',
                     encoding='utf-8',
                 ) as outcome_file:
-                    json.dump({'status': 'completed'}, outcome_file)
+                    json.dump(
+                        {
+                            'status': 'completed',
+                            'resumed': run['seed'] == 2027,
+                        },
+                        outcome_file,
+                    )
                 with open(
                     os.path.join(output_directory, 'evaluation_metrics.jsonl'),
                     'w',
@@ -210,8 +222,9 @@ class ExperimentManifestTests(unittest.TestCase):
         )
         self.assertEqual(
             report['optimizer_results']['global_sgdm']['completed_seed_count'],
-            3,
+            2,
         )
+        self.assertEqual(len(report['unsuccessful_runs']), 2)
         self.assertIsNotNone(
             report['optimizer_results']['global_sgdm'][
                 'sample_standard_deviation'

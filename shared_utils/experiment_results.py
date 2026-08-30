@@ -90,6 +90,8 @@ def collect_results(manifest):
             "optimizer_name": run["optimizer_name"],
             "seed": run["seed"],
             "status": outcome["status"] if outcome else "pending",
+            "resumed": bool(outcome and outcome.get("resumed", False)),
+            "outcome": copy.deepcopy(outcome),
             "selection_values": copy.deepcopy(run["selection_values"]),
             "selection_record": selection_record,
             "run_summary": summary_view,
@@ -128,7 +130,11 @@ def select_winners(manifest):
     eligible = []
     for result in results:
         record = result["selection_record"]
-        if result["status"] == "completed" and record is not None:
+        if (
+            result["status"] == "completed"
+            and not result["resumed"]
+            and record is not None
+        ):
             result["selection_metric"] = record[metric]
             eligible.append(result)
 
@@ -198,9 +204,10 @@ def generate_confirmation_manifest(exploratory_manifest, winners):
                 )
             runs.append(confirmation_run)
 
-    return {
+    manifest = {
         "schema_version": exploratory_manifest["schema_version"],
         "manifest_id": confirmation["manifest_id"],
+        "source_exploratory_manifest_id": exploratory_manifest["manifest_id"],
         "purpose": "confirmation",
         "launch_authorized": False,
         "counts_toward_study_budget": True,
@@ -216,6 +223,16 @@ def generate_confirmation_manifest(exploratory_manifest, winners):
         "selection": copy.deepcopy(exploratory_manifest["selection"]),
         "runs": runs,
     }
+    for key in (
+        "candidate_design",
+        "comparator_locks",
+        "shared_code_audit",
+        "claim_gate",
+        "outcome_policy",
+    ):
+        if key in exploratory_manifest:
+            manifest[key] = copy.deepcopy(exploratory_manifest[key])
+    return manifest
 
 
 def selection_report(manifest):
@@ -251,7 +268,10 @@ def final_report(exploratory_manifest, confirmation_manifest):
         "unsuccessful_runs": [],
     }
     for result in list(exploratory_results.values()) + confirmation_results:
-        if result["status"] not in {"completed", "pending"}:
+        if (
+            result["status"] not in {"completed", "pending"}
+            or result.get("resumed", False)
+        ):
             report["unsuccessful_runs"].append(result)
 
     metric = exploratory_manifest["selection"]["metric"]
@@ -266,6 +286,7 @@ def final_report(exploratory_manifest, confirmation_manifest):
             result
             for result in seed_results
             if result["status"] == "completed"
+            and not result.get("resumed", False)
             and result["selection_record"] is not None
         ]
         values = [result["selection_record"][metric] for result in completed]

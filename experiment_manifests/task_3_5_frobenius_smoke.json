@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "manifest_id": "task-3.5-frobenius-smoke-v1",
+  "purpose": "pilot",
+  "launch_authorized": false,
+  "counts_toward_study_budget": false,
+  "config_file": "config/task_3_5_frobenius_smoke.py",
+  "environment_lock": "cluster_environment.freeze.txt",
+  "preflight_tests": [
+    "tests.test_baseline_preflight",
+    "tests.test_frobenius_normalization",
+    "tests.test_frobenius_normalized_sgdm",
+    "tests.test_frobenius_normalized_diagnostics",
+    "tests.test_frobenius_study_protocol"
+  ],
+  "dataset": {
+    "name": "openwebtext",
+    "files": [
+      "data/openwebtext/train.bin",
+      "data/openwebtext/val.bin"
+    ],
+    "lock_file": "data/openwebtext/dataset_fingerprints.json",
+    "require_lock": true
+  },
+  "resources": {
+    "world_size": 2,
+    "device_name_contains": "NVIDIA RTX PRO 6000 Blackwell"
+  },
+  "output_root": "nanogpt-smoke-runs/task-3.5",
+  "expected_run_count": 1,
+  "selection": null,
+  "runs": [
+    {
+      "run_id": "frobenius_smoke_lr0.01_mom0.95_frobsqrtr-eps1em12-v1",
+      "run_name": "frobenius_normalized_sgdm_smoke_lr0.01_mom0.95_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "seed": 1337,
+      "max_iters": 1,
+      "tokens_per_update": 491520,
+      "selection_tokens": null,
+      "max_processed_tokens": 983040,
+      "evaluation_steps": [0, 1],
+      "selection_step": null,
+      "selection_values": {},
+      "overrides": {}
+    }
+  ]
+}

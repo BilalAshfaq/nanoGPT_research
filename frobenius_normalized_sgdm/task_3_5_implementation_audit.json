@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "audit_id": "task-3.5-execution-implementation-audit-v1",
+  "base_commit": "56deec3",
+  "final_implementation_commit": "pending_user_approval_and_commit",
+  "training_path_changes": {
+    "train.py": false,
+    "model.py": false,
+    "config/task_1_6_baseline.py": false,
+    "optimizer_implementations": false
+  },
+  "shared_changes": {
+    "shared_utils/experiment_manifest.py": [
+      "Classifies a completed process with a recorded non-ok numerical status as numerically_unstable.",
+      "Does not change training commands, resolved configs, GPU/environment/dataset validation, or optimizer behavior."
+    ],
+    "shared_utils/experiment_results.py": [
+      "Carries the recorded resumed flag into results and excludes resumed completed runs from selection and multi-seed aggregation.",
+      "Preserves frozen protocol, comparator, audit, claim, and outcome metadata in generated confirmation manifests.",
+      "Does not change the validation-loss metric or deterministic tie-break implementation."
+    ],
+    "shared_utils/study_comparison.py": [
+      "Centralizes read-only matched-control, fixed-checkpoint, runtime environment, and dataset fingerprint checks used by Variant 2 and Variant 3 reports."
+    ]
+  },
+  "variant_local_changes": [
+    "Adds an unauthorized diagnostic-enabled non-budget Frobenius smoke configuration and manifest.",
+    "Adds immutable three-family exploratory and confirmed comparison reporting.",
+    "Adds execution regression tests and the staged Martin runbook."
+  ],
+  "comparator_assessment": {
+    "matched_training_control_changed": false,
+    "evaluation_metric_changed": false,
+    "selection_metric_changed": false,
+    "comparator_rerun_required_by_implementation": false
+  },
+  "launch_gate": [
+    "After this implementation is committed, rerun the semantic path audit from comparator commits 2d5d860120c898157fa95311f0269ff0a143a65e and aeac82e0427f65633ddcff5d8a73c31167321e78 through the exact clean launch commit.",
+    "Record the final implementation commit before smoke authorization.",
+    "Any later matched-control or measurement change invalidates this assessment and requires comparator rerun or explicit approval of a documented limitation."
+  ]
+}

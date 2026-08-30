@@ -11,7 +11,13 @@ import sys
 
 
 SCHEMA_VERSION = 1
-FINAL_OUTCOMES = {"completed", "failed", "divergent", "interrupted"}
+FINAL_OUTCOMES = {
+    "completed",
+    "failed",
+    "divergent",
+    "interrupted",
+    "numerically_unstable",
+}
 INTERRUPTED_RETURN_CODES = {-15, -9, -2, 130, 137, 143}
 
 
@@ -352,8 +358,11 @@ def _classify_completed_process(output_directory, run, return_code):
     summary_path = os.path.join(output_directory, "run_summary.json")
     if os.path.isfile(summary_path):
         summary = _read_json(summary_path)
-        if summary.get("metrics", {}).get("divergence_status") == "observed":
+        metrics = summary.get("metrics", {})
+        if metrics.get("divergence_status") == "observed":
             return "divergent"
+        if metrics.get("numerical_status", "ok") != "ok":
+            return "numerically_unstable"
     if return_code != 0:
         return "failed"
     if run["evaluation_steps"][-1] not in _load_evaluation_steps(output_directory):

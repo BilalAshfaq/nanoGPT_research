@@ -110,7 +110,13 @@ class StaticStudyExecutionTests(unittest.TestCase):
             global_output = os.path.join(temporary_directory, "global")
             static_output = os.path.join(temporary_directory, "static")
             runtime = {
-                "environment": {"sha256": "environment-lock"},
+                "environment": {
+                    "sha256": "environment-lock",
+                    "allocated_gpu_names": [
+                        "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+                        "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+                    ],
+                },
                 "dataset": {
                     "files": {
                         "train.bin": {"sha256": "train"},
