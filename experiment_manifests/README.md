@@ -387,9 +387,11 @@ formatting must still be reviewed; they are not exempt merely because they are
 expected.
 
 The implementation-time assessment is preserved in
-`frobenius_normalized_sgdm/task_3_5_implementation_audit.json`. Replace its
-pending commit marker only through a reviewed post-commit audit; the JSON file
-does not substitute for checking the exact clean launch commit.
+`frobenius_normalized_sgdm/task_3_5_implementation_audit.json`, which records
+the committed Task 3.5 implementation as
+`2cbca3a1f83de97de8a4e59e7df26cec5717c6e8`. The JSON file does not substitute
+for checking the exact clean launch commit, including any later reviewed
+reporting or authorization-only commits.
 
 ### 4. Authorize and launch exactly 12 exploratory runs
 
@@ -479,6 +481,7 @@ python -m frobenius_normalized_sgdm.utils.study_results exploratory \
   --static-selection reports/task_2_5_static_selection.json \
   --frobenius-manifest experiment_manifests/task_3_4_frobenius_exploratory.json \
   --frobenius-selection reports/task_3_5_frobenius_selection.json \
+  --frobenius-smoke-manifest experiment_manifests/task_3_5_frobenius_smoke.json \
   --output task_3_5_seed1337_three_family_comparison.json
 ```
 
@@ -490,9 +493,11 @@ directories referenced by their selection reports must still contain
 record the limitation; do not weaken the check or claim fully matched controls.
 
 The broad study deliberately keeps diagnostics disabled to avoid comparison
-overhead. Its report therefore labels normalization-event counts as not
-collected; the diagnostic event counts from the required smoke are separate
-mechanical evidence and must not be presented as broad-study measurements.
+overhead. The command strictly validates the required smoke outcome, resolved
+configuration, runtime locks, checkpoint, evaluation records, and both 48-matrix
+diagnostic checkpoints. It persists the smoke's epsilon-dominated and
+zero-momentum event counts and fractions as separately labelled mechanical
+evidence. Those values are not broad-study measurements or performance evidence.
 
 ### 6. Confirm only after separate approval
 
@@ -533,6 +538,7 @@ python -m frobenius_normalized_sgdm.utils.study_results confirmed \
   --static-selection reports/task_2_5_static_selection.json \
   --frobenius-manifest experiment_manifests/task_3_4_frobenius_exploratory.json \
   --frobenius-selection reports/task_3_5_frobenius_selection.json \
+  --frobenius-smoke-manifest experiment_manifests/task_3_5_frobenius_smoke.json \
   --global-confirmation-manifest experiment_manifests/task_1_6_confirmation.json \
   --static-confirmation-manifest experiment_manifests/task_2_5_static_confirmation.json \
   --frobenius-confirmation-manifest experiment_manifests/task_3_5_frobenius_confirmation.json \

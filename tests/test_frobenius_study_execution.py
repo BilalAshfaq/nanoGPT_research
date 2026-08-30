@@ -8,6 +8,7 @@ import unittest
 from shared_utils.experiment_manifest import (
     _classify_completed_process,
     load_manifest,
+    resolve_run_config,
 )
 from shared_utils.experiment_results import (
     generate_confirmation_manifest,
@@ -162,6 +163,107 @@ def frobenius_winner(run, output_directory, validation_loss=5.0):
     }
 
 
+def write_valid_smoke(smoke_manifest, output_root):
+    manifest = copy.deepcopy(smoke_manifest)
+    manifest["output_root"] = output_root
+    run = manifest["runs"][0]
+    output_directory = os.path.join(output_root, run["run_name"])
+    os.makedirs(output_directory)
+    resolved_config = resolve_run_config(manifest, run)
+    environment_sha256 = STUDY_RESULTS.sha256_file(
+        os.path.join(REPOSITORY_ROOT, manifest["environment_lock"])
+    )
+    dataset_files = read_json(
+        os.path.join(REPOSITORY_ROOT, manifest["dataset"]["lock_file"])
+    )["files"]
+    with open(
+        os.path.join(output_directory, "outcome.json"),
+        "w",
+        encoding="utf-8",
+    ) as output_file:
+        json.dump({"status": "completed", "resumed": False}, output_file)
+    with open(
+        os.path.join(output_directory, "resolved_run.json"),
+        "w",
+        encoding="utf-8",
+    ) as output_file:
+        json.dump(
+            {
+                "manifest_id": manifest["manifest_id"],
+                "run": run,
+                "resolved_config": resolved_config,
+                "environment": {
+                    "sha256": environment_sha256,
+                    "allocated_gpu_names": [
+                        "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+                        "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+                    ],
+                },
+                "dataset": {
+                    "files": dataset_files,
+                },
+            },
+            output_file,
+        )
+    with open(
+        os.path.join(output_directory, "run_summary.json"),
+        "w",
+        encoding="utf-8",
+    ) as output_file:
+        json.dump(
+            {
+                "optimizer": {
+                    "name": "frobenius_normalized_sgdm",
+                    "settings": {
+                        "normalization_version": "additive_epsilon_v1",
+                        "normalization_equation": (
+                            "q*sqrt(min(d_out,d_in))*M/"
+                            "(frobenius_norm(M)+epsilon)"
+                        ),
+                        "matrix_momentum": 0.95,
+                        "frobenius_learning_rate": 0.01,
+                        "frobenius_epsilon": 1e-12,
+                        "frobenius_shape_factor": 1.0,
+                    },
+                },
+                "metrics": {
+                    "numerical_status": "ok",
+                    "divergence_status": "not_observed",
+                },
+            },
+            output_file,
+        )
+    with open(
+        os.path.join(output_directory, "evaluation_metrics.jsonl"),
+        "w",
+        encoding="utf-8",
+    ) as output_file:
+        for step in (0, 1):
+            output_file.write(json.dumps({"step": step}) + "\n")
+    names = [f"matrix.{index}.weight" for index in range(48)]
+    with open(
+        os.path.join(output_directory, "optimizer_diagnostics.jsonl"),
+        "w",
+        encoding="utf-8",
+    ) as output_file:
+        for step in (0, 1):
+            matrices = [
+                {
+                    "name": name,
+                    "momentum_frobenius_norm": float(index + step),
+                    "epsilon_dominated": index == 0 and step == 0,
+                    "zero_momentum": index == 0 and step == 0,
+                }
+                for index, name in enumerate(names)
+            ]
+            output_file.write(
+                json.dumps({"step": step, "matrices": matrices}) + "\n"
+            )
+    with open(os.path.join(output_directory, "ckpt.pt"), "wb") as output_file:
+        output_file.write(b"checkpoint")
+    return manifest
+
+
 class FrobeniusStudyExecutionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -201,6 +303,34 @@ class FrobeniusStudyExecutionTests(unittest.TestCase):
     def test_frozen_exploratory_study_remains_unauthorized(self):
         self.assertFalse(self.frobenius_manifest["launch_authorized"])
         self.assertEqual(len(self.frobenius_manifest["runs"]), 12)
+
+    def test_smoke_normalization_evidence_is_validated_and_summarized(self):
+        with tempfile.TemporaryDirectory() as output_root:
+            manifest = write_valid_smoke(self.smoke_manifest, output_root)
+            evidence = STUDY_RESULTS.smoke_normalization_evidence(manifest)
+        self.assertEqual(evidence["validation_status"], "verified")
+        self.assertEqual(evidence["matrix_record_count"], 96)
+        self.assertEqual(evidence["epsilon_dominated_event_count"], 1)
+        self.assertEqual(evidence["zero_momentum_event_count"], 1)
+        self.assertEqual(evidence["momentum_frobenius_norm_min"], 0.0)
+        self.assertEqual(evidence["momentum_frobenius_norm_max"], 48.0)
+        self.assertIn("not a broad-study outcome", evidence["scope"])
+
+    def test_smoke_evidence_rejects_incomplete_matrix_diagnostics(self):
+        with tempfile.TemporaryDirectory() as output_root:
+            manifest = write_valid_smoke(self.smoke_manifest, output_root)
+            run = manifest["runs"][0]
+            path = os.path.join(
+                output_root, run["run_name"], "optimizer_diagnostics.jsonl"
+            )
+            with open(path, encoding="utf-8") as input_file:
+                records = [json.loads(line) for line in input_file]
+            records[0]["matrices"].pop()
+            with open(path, "w", encoding="utf-8") as output_file:
+                for record in records:
+                    output_file.write(json.dumps(record) + "\n")
+            with self.assertRaisesRegex(ValueError, "all 48 eligible matrices"):
+                STUDY_RESULTS.smoke_normalization_evidence(manifest)
 
     def test_resumed_completed_run_is_selection_ineligible(self):
         manifest = copy.deepcopy(self.frobenius_manifest)
@@ -290,6 +420,10 @@ class FrobeniusStudyExecutionTests(unittest.TestCase):
 
     def test_seed_1337_three_family_comparison_verifies_locks_and_controls(self):
         with tempfile.TemporaryDirectory() as temporary_directory:
+            smoke_manifest = write_valid_smoke(
+                self.smoke_manifest,
+                os.path.join(temporary_directory, "smoke"),
+            )
             directories = {
                 family: os.path.join(temporary_directory, family)
                 for family in STUDY_RESULTS.FAMILIES
@@ -322,6 +456,7 @@ class FrobeniusStudyExecutionTests(unittest.TestCase):
                 static_selection,
                 self.frobenius_manifest,
                 frobenius_selection,
+                smoke_manifest,
             )
         self.assertEqual(
             report["report_type"], "exploratory_seed_1337_three_family"
@@ -346,9 +481,19 @@ class FrobeniusStudyExecutionTests(unittest.TestCase):
                 "collected"
             ]
         )
+        self.assertEqual(
+            report["mechanical_smoke_normalization_evidence"][
+                "epsilon_dominated_event_count"
+            ],
+            1,
+        )
 
     def test_confirmed_report_requires_and_aggregates_three_matched_seeds(self):
         with tempfile.TemporaryDirectory() as temporary_directory:
+            smoke_manifest = write_valid_smoke(
+                self.smoke_manifest,
+                os.path.join(temporary_directory, "smoke"),
+            )
             selected_directories = {
                 family: os.path.join(temporary_directory, "selected", family)
                 for family in STUDY_RESULTS.FAMILIES
@@ -418,6 +563,7 @@ class FrobeniusStudyExecutionTests(unittest.TestCase):
                 static_selection,
                 self.frobenius_manifest,
                 frobenius_selection,
+                smoke_manifest,
                 confirmation_manifests,
             )
         self.assertTrue(report["claim_gate_passed"])
