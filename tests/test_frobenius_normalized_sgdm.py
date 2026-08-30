@@ -443,6 +443,34 @@ class FrobeniusNormalizedSGDMIntegrationTests(unittest.TestCase):
             len(uninterrupted_optimizer.auxiliary_optimizer.state),
             len(restored_optimizer.auxiliary_optimizer.state),
         )
+        uninterrupted_auxiliary = partition_optimizer_parameters(
+            uninterrupted_model
+        ).auxiliary
+        restored_auxiliary = partition_optimizer_parameters(
+            restored_model
+        ).auxiliary
+        for uninterrupted_item, restored_item in zip(
+            uninterrupted_auxiliary,
+            restored_auxiliary,
+        ):
+            uninterrupted_state = (
+                uninterrupted_optimizer.auxiliary_optimizer.state[
+                    uninterrupted_item.parameter
+                ]
+            )
+            restored_state = restored_optimizer.auxiliary_optimizer.state[
+                restored_item.parameter
+            ]
+            self.assertEqual(uninterrupted_state.keys(), restored_state.keys())
+            for key in uninterrupted_state:
+                if torch.is_tensor(uninterrupted_state[key]):
+                    torch.testing.assert_close(
+                        uninterrupted_state[key], restored_state[key]
+                    )
+                else:
+                    self.assertEqual(
+                        uninterrupted_state[key], restored_state[key]
+                    )
 
     def test_cpu_bfloat16_smoke_forward_step_eval_save_and_resume(self):
         if not hasattr(torch, "autocast"):

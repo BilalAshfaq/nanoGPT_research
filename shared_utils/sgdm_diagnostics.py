@@ -127,6 +127,30 @@ class SGDMUpdateDiagnostics:
         return {"step": step, "entries": entries}
 
     @torch.no_grad()
+    def _momentum_diagnostics(
+        self,
+        entry,
+        matrix_optimizer,
+        momentum_buffer,
+        optimizer_step_applied,
+    ):
+        if momentum_buffer is None:
+            momentum_norm = 0.0
+            momentum_update_norm = 0.0
+        else:
+            momentum_norm = _frobenius_norm(momentum_buffer)
+            momentum_update_norm = (
+                abs(entry["effective_matrix_learning_rate"])
+                * momentum_norm
+                if optimizer_step_applied
+                else 0.0
+            )
+        return {
+            "momentum_frobenius_norm": momentum_norm,
+            "momentum_update_frobenius_norm": momentum_update_norm,
+        }
+
+    @torch.no_grad()
     def end_step(self, context, matrix_optimizer, optimizer_step_applied=True):
         if context is None:
             return None
@@ -137,17 +161,12 @@ class SGDMUpdateDiagnostics:
             before = entry["parameter_before"]
             state = matrix_optimizer.state.get(parameter, {})
             momentum_buffer = state.get("momentum_buffer")
-            if momentum_buffer is None:
-                momentum_norm = 0.0
-                momentum_update_norm = 0.0
-            else:
-                momentum_norm = _frobenius_norm(momentum_buffer)
-                momentum_update_norm = (
-                    abs(entry["effective_matrix_learning_rate"])
-                    * momentum_norm
-                    if optimizer_step_applied
-                    else 0.0
-                )
+            momentum_diagnostics = self._momentum_diagnostics(
+                entry,
+                matrix_optimizer,
+                momentum_buffer,
+                optimizer_step_applied,
+            )
 
             applied_update = parameter.detach() - before
             weight_norm = _frobenius_norm(before)
@@ -165,8 +184,12 @@ class SGDMUpdateDiagnostics:
                 "name": entry["name"],
                 "weight_frobenius_norm": weight_norm,
                 "gradient_frobenius_norm": entry["gradient_frobenius_norm"],
-                "momentum_frobenius_norm": momentum_norm,
-                "momentum_update_frobenius_norm": momentum_update_norm,
+                "momentum_frobenius_norm": momentum_diagnostics[
+                    "momentum_frobenius_norm"
+                ],
+                "momentum_update_frobenius_norm": momentum_diagnostics[
+                    "momentum_update_frobenius_norm"
+                ],
                 "applied_update_frobenius_norm": applied_update_norm,
                 "update_to_weight_ratio": (
                     applied_update_norm / (weight_norm + self.epsilon)
@@ -181,6 +204,7 @@ class SGDMUpdateDiagnostics:
                 "optimizer_step_applied": optimizer_step_applied,
                 "gradient_stage": "post_clipping_unscaled",
             }
+            record.update(momentum_diagnostics)
             if entry["name"] in self.spectral_matrix_names:
                 record["applied_update_spectral_norm"] = _spectral_norm(
                     applied_update

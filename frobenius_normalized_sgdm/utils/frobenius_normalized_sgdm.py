@@ -89,6 +89,98 @@ class FrobeniusNormalizedSGDM(torch.optim.Optimizer):
             "weight_decay": weight_decay,
         }
         super().__init__(parameters, defaults)
+        self._diagnostic_parameter_ids = frozenset()
+        self._diagnostic_scalars = {}
+
+    def request_step_diagnostics(self, parameters):
+        """Capture scalar normalization evidence during the next step only."""
+
+        if self._diagnostic_parameter_ids or self._diagnostic_scalars:
+            raise RuntimeError("Frobenius step diagnostics are already pending")
+        requested = tuple(parameters)
+        requested_ids = {id(parameter) for parameter in requested}
+        if len(requested_ids) != len(requested):
+            raise ValueError("diagnostic parameters must be unique")
+        owned_ids = {
+            id(parameter)
+            for group in self.param_groups
+            for parameter in group["params"]
+        }
+        if not requested_ids <= owned_ids:
+            raise ValueError(
+                "diagnostic parameters must be owned by FrobeniusNormalizedSGDM"
+            )
+        self._diagnostic_parameter_ids = frozenset(requested_ids)
+
+    def pop_step_diagnostics(self, parameter):
+        """Return and release captured scalar evidence for one parameter."""
+
+        parameter_id = id(parameter)
+        try:
+            return self._diagnostic_scalars.pop(parameter_id)
+        except KeyError as exc:
+            raise RuntimeError(
+                "Frobenius normalization diagnostics were not captured"
+            ) from exc
+
+    def clear_step_diagnostics(self):
+        """Release all transient diagnostic requests and scalar evidence."""
+
+        self._diagnostic_parameter_ids = frozenset()
+        self._diagnostic_scalars.clear()
+
+    def has_pending_step_diagnostics(self):
+        return bool(self._diagnostic_parameter_ids or self._diagnostic_scalars)
+
+    @staticmethod
+    def _normalization_diagnostic_scalars(
+        momentum_buffer,
+        normalization,
+        learning_rate,
+    ):
+        calculation_dtype = normalization.raw_frobenius_norm.dtype
+        working_momentum = momentum_buffer.to(dtype=calculation_dtype)
+        working_normalized = normalization.normalized_matrix.to(
+            dtype=calculation_dtype
+        )
+        normalized_norm = torch.linalg.vector_norm(working_normalized)
+        cosine_denominator = (
+            normalization.raw_frobenius_norm * normalized_norm
+        )
+        cosine = torch.where(
+            cosine_denominator == 0,
+            torch.full_like(cosine_denominator, float("nan")),
+            -torch.sum(working_normalized * working_momentum)
+            / cosine_denominator,
+        )
+        return {
+            "momentum_frobenius_norm": normalization.raw_frobenius_norm,
+            "normalization_denominator": normalization.denominator,
+            "retained_rank": normalization.retained_rank,
+            "frobenius_epsilon": normalization.epsilon,
+            "frobenius_shape_factor": normalization.fixed_shape_factor,
+            "nominal_normalized_matrix_target_norm": (
+                normalization.nominal_target_norm
+            ),
+            "epsilon_adjusted_expected_normalized_matrix_norm": (
+                normalization.epsilon_adjusted_expected_norm
+            ),
+            "scheduled_frobenius_learning_rate": learning_rate,
+            "expected_momentum_derived_step_norm": (
+                abs(learning_rate)
+                * normalization.epsilon_adjusted_expected_norm
+            ),
+            "normalization_multiplier": (
+                normalization.applied_normalization_multiplier
+            ),
+            "full_effective_multiplier": (
+                learning_rate
+                * normalization.applied_normalization_multiplier
+            ),
+            "zero_momentum": normalization.zero_momentum,
+            "epsilon_dominated": normalization.epsilon_dominated,
+            "momentum_update_frobenius_cosine": cosine.detach(),
+        }
 
     @torch.no_grad()
     def step(self, closure=None):
@@ -120,6 +212,15 @@ class FrobeniusNormalizedSGDM(torch.optim.Optimizer):
                     epsilon=epsilon,
                     fixed_shape_factor=fixed_shape_factor,
                 )
+                parameter_id = id(parameter)
+                if parameter_id in self._diagnostic_parameter_ids:
+                    self._diagnostic_scalars[parameter_id] = (
+                        self._normalization_diagnostic_scalars(
+                            momentum_buffer,
+                            normalization,
+                            learning_rate,
+                        )
+                    )
 
                 if weight_decay != 0.0:
                     parameter.mul_(1.0 - learning_rate * weight_decay)

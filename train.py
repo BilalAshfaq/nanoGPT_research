@@ -30,6 +30,9 @@ from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.distributed import init_process_group, destroy_process_group
 
 from model import GPTConfig, GPT
+from frobenius_normalized_sgdm.utils.diagnostics import (
+    FrobeniusNormalizedSGDMDiagnostics,
+)
 from shared_utils.optimizer_factory import (
     configure_optimizer,
     get_effective_learning_rates,
@@ -149,9 +152,11 @@ parsed_diagnostic_spectral_names = parse_diagnostic_matrix_names(
 if diagnostics_enabled and optimizer_name not in {
     'global_sgdm',
     'static_per_matrix_sgdm',
+    'frobenius_normalized_sgdm',
 }:
     raise ValueError(
-        "SGDM diagnostics require global_sgdm or static_per_matrix_sgdm"
+        "SGDM diagnostics require global_sgdm, static_per_matrix_sgdm, "
+        "or frobenius_normalized_sgdm"
     )
 if optimizer_name != 'adamw' and decay_lr and learning_rate <= 0.0:
     raise ValueError(
@@ -339,7 +344,12 @@ else:
             optimizer.static_multiplier_configuration
         )
 
-diagnostics = SGDMUpdateDiagnostics(
+diagnostics_class = (
+    FrobeniusNormalizedSGDMDiagnostics
+    if optimizer_name == 'frobenius_normalized_sgdm'
+    else SGDMUpdateDiagnostics
+)
+diagnostics = diagnostics_class(
     enabled=diagnostics_enabled,
     steps=parsed_diagnostic_steps,
     spectral_matrix_names=parsed_diagnostic_spectral_names,
