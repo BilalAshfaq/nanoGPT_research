@@ -1,0 +1,543 @@
+{
+  "candidate_design": {
+    "design_id": "task-3.4-frobenius-candidates-v1",
+    "path": "frobenius_normalized_sgdm/task_3_4_candidate_design.json",
+    "sha256": "ee338e9f6f254189cd4206494c5529d2da6ceb8cf6bdd90d2b2524385c13ca75"
+  },
+  "claim_gate": {
+    "families": [
+      "global_sgdm",
+      "static_per_matrix_sgdm",
+      "frobenius_normalized_sgdm"
+    ],
+    "h3_blocked_until_gate_passes": true,
+    "required_successful_matched_seeds_per_family": 3
+  },
+  "comparator_locks": {
+    "global_sgdm": {
+      "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+      "overrides": {
+        "learning_rate": 0.0006,
+        "matrix_learning_rate": 0.03,
+        "matrix_momentum": 0.99,
+        "min_lr": 6e-05
+      },
+      "run_id": "global_sgdm_lr0.03_mom0.99",
+      "run_name": "global_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scaleglobal",
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.003,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.415630340576172,
+        "validation_loss": 5.410761833190918
+      },
+      "selection_report_path": "reports/task_1_6_selection.json",
+      "selection_report_sha256": "ff254012befa189160423dda42c3b6086149b7fa4af65ef734e8750900a455ff",
+      "selection_values": {
+        "learning_rate": 0.03,
+        "momentum": 0.99,
+        "scaling_rule": "global",
+        "weight_decay": 0.1
+      },
+      "source_manifest_id": "task-1.6-exploratory-v1",
+      "source_manifest_path": "experiment_manifests/task_1_6_exploratory.json",
+      "source_manifest_sha256": "5920488065f5607f6027c93b8153d93066724ba95f0c47a34015df3e2b1efe22",
+      "winner_group": "global_sgdm"
+    },
+    "static_per_matrix_sgdm": {
+      "git_commit": "aeac82e0427f65633ddcff5d8a73c31167321e78",
+      "mapping_fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+      "mapping_id": "2633929b6baf",
+      "overrides": {
+        "matrix_learning_rate": 0.03,
+        "matrix_momentum": 0.99,
+        "static_default_multiplier": 1.0,
+        "static_exact_parameter_multipliers": {},
+        "static_matrix_type_multipliers": {
+          "attention_output": 0.5,
+          "attention_qkv": 0.5,
+          "mlp_input": 2.0,
+          "mlp_output": 2.0
+        }
+      },
+      "run_id": "static_lr0.03_mom0.99_map2633929b6baf",
+      "run_name": "static_per_matrix_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scalestatic-2633929b6baf",
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.003,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.406810283660889,
+        "validation_loss": 5.401801109313965
+      },
+      "selection_report_path": "reports/task_2_5_static_selection.json",
+      "selection_report_sha256": "c0d60a9fddb68efde089337fa7288b9f2c98af28608c729eb879c24286e1a650",
+      "selection_values": {
+        "learning_rate": 0.03,
+        "mapping_fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "mapping_id": "2633929b6baf",
+        "mapping_name": "mlp_strong",
+        "mapping_order": 2,
+        "momentum": 0.99,
+        "scaling_rule": "static-2633929b6baf",
+        "weight_decay": 0.1
+      },
+      "source_manifest_id": "task-2.5-static-exploratory-v1",
+      "source_manifest_path": "experiment_manifests/task_2_5_static_exploratory.json",
+      "source_manifest_sha256": "5a591d6aefdc0477e269a0ba1c0ff933fdc6b5a2aa249287c6ab8830045ac62d",
+      "winner_group": "static_per_matrix_sgdm"
+    }
+  },
+  "config_file": "config/task_3_4_frobenius.py",
+  "confirmation": {
+    "additional_seeds": [
+      2027,
+      4099
+    ],
+    "manifest_id": "task-3.5-frobenius-confirmation-v1",
+    "run_name_template": "{optimizer_name}_gpt2-124m_lr{frobenius_learning_rate}_mom{momentum}_wd{weight_decay}_seed{seed}_scale{normalization_rule_id}"
+  },
+  "counts_toward_study_budget": true,
+  "dataset": {
+    "files": [
+      "data/openwebtext/train.bin",
+      "data/openwebtext/val.bin"
+    ],
+    "lock_file": "data/openwebtext/dataset_fingerprints.json",
+    "name": "openwebtext",
+    "require_lock": true
+  },
+  "environment_lock": "cluster_environment.freeze.txt",
+  "expected_run_count": 12,
+  "launch_authorized": false,
+  "manifest_id": "task-3.4-frobenius-exploratory-v1",
+  "outcome_policy": {
+    "record": [
+      "completed",
+      "failed",
+      "divergent",
+      "interrupted",
+      "resumed",
+      "numerically_unstable"
+    ],
+    "replacement": "forbidden_without_separately_approved_follow_up_protocol",
+    "resume_limitation": "The repository does not restore RNG state; resumed runs are not matched-data-order results.",
+    "selection_eligibility": "completed_uninterrupted_only"
+  },
+  "output_root": "nanogpt-study-runs/task-3.5",
+  "preflight_tests": [
+    "tests.test_baseline_preflight",
+    "tests.test_frobenius_normalization",
+    "tests.test_frobenius_normalized_sgdm",
+    "tests.test_frobenius_normalized_diagnostics",
+    "tests.test_frobenius_study_protocol"
+  ],
+  "purpose": "study",
+  "resources": {
+    "device_name_contains": "NVIDIA RTX PRO 6000 Blackwell",
+    "world_size": 2
+  },
+  "runs": [
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "overrides": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.001,
+        "frobenius_shape_factor": 1.0,
+        "matrix_momentum": 0.9
+      },
+      "run_id": "frobenius_lr0.001_mom0.9_frobsqrtr-eps1em12-v1",
+      "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.001_mom0.9_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.001,
+        "frobenius_shape_factor": 1.0,
+        "momentum": 0.9,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "weight_decay": 0.1
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "overrides": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.001,
+        "frobenius_shape_factor": 1.0,
+        "matrix_momentum": 0.95
+      },
+      "run_id": "frobenius_lr0.001_mom0.95_frobsqrtr-eps1em12-v1",
+      "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.001_mom0.95_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.001,
+        "frobenius_shape_factor": 1.0,
+        "momentum": 0.95,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "weight_decay": 0.1
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "overrides": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.001,
+        "frobenius_shape_factor": 1.0,
+        "matrix_momentum": 0.99
+      },
+      "run_id": "frobenius_lr0.001_mom0.99_frobsqrtr-eps1em12-v1",
+      "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.001_mom0.99_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.001,
+        "frobenius_shape_factor": 1.0,
+        "momentum": 0.99,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "weight_decay": 0.1
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "overrides": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.003,
+        "frobenius_shape_factor": 1.0,
+        "matrix_momentum": 0.9
+      },
+      "run_id": "frobenius_lr0.003_mom0.9_frobsqrtr-eps1em12-v1",
+      "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.003_mom0.9_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.003,
+        "frobenius_shape_factor": 1.0,
+        "momentum": 0.9,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "weight_decay": 0.1
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "overrides": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.003,
+        "frobenius_shape_factor": 1.0,
+        "matrix_momentum": 0.95
+      },
+      "run_id": "frobenius_lr0.003_mom0.95_frobsqrtr-eps1em12-v1",
+      "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.003_mom0.95_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.003,
+        "frobenius_shape_factor": 1.0,
+        "momentum": 0.95,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "weight_decay": 0.1
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "overrides": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.003,
+        "frobenius_shape_factor": 1.0,
+        "matrix_momentum": 0.99
+      },
+      "run_id": "frobenius_lr0.003_mom0.99_frobsqrtr-eps1em12-v1",
+      "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.003_mom0.99_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.003,
+        "frobenius_shape_factor": 1.0,
+        "momentum": 0.99,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "weight_decay": 0.1
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "overrides": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.01,
+        "frobenius_shape_factor": 1.0,
+        "matrix_momentum": 0.9
+      },
+      "run_id": "frobenius_lr0.01_mom0.9_frobsqrtr-eps1em12-v1",
+      "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.01_mom0.9_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.01,
+        "frobenius_shape_factor": 1.0,
+        "momentum": 0.9,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "weight_decay": 0.1
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "overrides": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.01,
+        "frobenius_shape_factor": 1.0,
+        "matrix_momentum": 0.95
+      },
+      "run_id": "frobenius_lr0.01_mom0.95_frobsqrtr-eps1em12-v1",
+      "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.01_mom0.95_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.01,
+        "frobenius_shape_factor": 1.0,
+        "momentum": 0.95,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "weight_decay": 0.1
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "overrides": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.01,
+        "frobenius_shape_factor": 1.0,
+        "matrix_momentum": 0.99
+      },
+      "run_id": "frobenius_lr0.01_mom0.99_frobsqrtr-eps1em12-v1",
+      "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.01_mom0.99_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.01,
+        "frobenius_shape_factor": 1.0,
+        "momentum": 0.99,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "weight_decay": 0.1
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "overrides": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.03,
+        "frobenius_shape_factor": 1.0,
+        "matrix_momentum": 0.9
+      },
+      "run_id": "frobenius_lr0.03_mom0.9_frobsqrtr-eps1em12-v1",
+      "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.03_mom0.9_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.03,
+        "frobenius_shape_factor": 1.0,
+        "momentum": 0.9,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "weight_decay": 0.1
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "overrides": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.03,
+        "frobenius_shape_factor": 1.0,
+        "matrix_momentum": 0.95
+      },
+      "run_id": "frobenius_lr0.03_mom0.95_frobsqrtr-eps1em12-v1",
+      "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.03_mom0.95_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.03,
+        "frobenius_shape_factor": 1.0,
+        "momentum": 0.95,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "weight_decay": 0.1
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "overrides": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.03,
+        "frobenius_shape_factor": 1.0,
+        "matrix_momentum": 0.99
+      },
+      "run_id": "frobenius_lr0.03_mom0.99_frobsqrtr-eps1em12-v1",
+      "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.03,
+        "frobenius_shape_factor": 1.0,
+        "momentum": 0.99,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "weight_decay": 0.1
+      },
+      "tokens_per_update": 491520
+    }
+  ],
+  "schema_version": 1,
+  "selection": {
+    "expected_groups": [
+      "frobenius_normalized_sgdm"
+    ],
+    "group_by": "optimizer_name",
+    "metric": "validation_loss",
+    "mode": "min",
+    "tie_break": [
+      "frobenius_learning_rate",
+      "momentum"
+    ]
+  },
+  "shared_code_audit": {
+    "artifact_path": "frobenius_normalized_sgdm/task_3_4_shared_code_audit.json",
+    "artifact_sha256": "67bb6f0a54c6bd8c38f632cd0f7834537be8f067c8a0dd1c21b7761f7ca79690",
+    "audited_through_commit": "b773aa4",
+    "final_launch_recheck_required": true,
+    "paths": [
+      "train.py",
+      "model.py",
+      "config/task_1_6_baseline.py",
+      "shared_utils/"
+    ],
+    "required_before_launch": true,
+    "rule": "Audit each comparator git_commit through the clean Variant 3 launch commit. If a change affects a matched control or measurement, rerun that comparator or obtain approval for a documented limitation before comparison.",
+    "variant_3_commit": "record_clean_launch_commit_after_task_3_4_approval"
+  }
+}

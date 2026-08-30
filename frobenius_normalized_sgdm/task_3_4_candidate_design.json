@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "design_id": "task-3.4-frobenius-candidates-v1",
+  "normalization": {
+    "equation": "sqrt(min(d_out,d_in))*M/(frobenius_norm(M)+epsilon)",
+    "rule_id": "frobsqrtr-eps1em12-v1",
+    "frobenius_epsilon": 1e-12,
+    "frobenius_shape_factor": 1.0
+  },
+  "learning_rate_design": {
+    "values": [0.001, 0.003, 0.01, 0.03],
+    "basis": "For every eligible GPT-2 124M projection matrix, min(d_out,d_in)=768 and the nominal normalized momentum norm is sqrt(768)=27.712812921102035. The grid therefore searches nominal full-scale momentum-derived step norms of approximately 0.0277, 0.0831, 0.2771, and 0.8314. It is a fresh logarithmic grid for normalized updates, not the raw Global SGDM grid, and was fixed without Variant 3 result inspection or calibration runs."
+  },
+  "momentum_values": [0.9, 0.95, 0.99],
+  "exploratory_seed": 1337,
+  "confirmation_seeds": [2027, 4099],
+  "expected_run_count": 12,
+  "budget": {
+    "max_iters": 999,
+    "attempted_updates": 1000,
+    "tokens_per_update": 491520,
+    "selection_step": 999,
+    "selection_tokens": 491028480,
+    "max_processed_tokens": 491520000,
+    "evaluation_steps": [0, 333, 666, 999]
+  },
+  "selection": {
+    "metric": "validation_loss",
+    "mode": "min",
+    "tie_break": ["frobenius_learning_rate", "momentum"],
+    "metric_precision": "unrounded"
+  },
+  "outcome_policy": {
+    "record": ["completed", "failed", "divergent", "interrupted", "resumed", "numerically_unstable"],
+    "replacement": "forbidden_without_separately_approved_follow_up_protocol",
+    "selection_eligibility": "completed_uninterrupted_only",
+    "resume_limitation": "The repository does not restore RNG state; resumed runs are not matched-data-order results."
+  },
+  "matched_control_keys": [
+    "dataset", "tokenizer", "gradient_accumulation_steps", "batch_size",
+    "block_size", "n_layer", "n_head", "n_embd", "dropout", "bias",
+    "matrix_weight_decay", "matrix_momentum_convention",
+    "matrix_weight_decay_mode", "matrix_nesterov",
+    "auxiliary_learning_rate", "auxiliary_weight_decay", "auxiliary_beta1",
+    "auxiliary_beta2", "auxiliary_weight_decay_mode", "decay_lr",
+    "warmup_iters", "lr_decay_iters", "learning_rate", "min_lr", "grad_clip",
+    "eval_interval", "eval_iters", "dtype", "compile"
+  ],
+  "study_locks": {
+    "environment_lock": "cluster_environment.freeze.txt",
+    "dataset_lock": "data/openwebtext/dataset_fingerprints.json",
+    "world_size": 2,
+    "device_name_contains": "NVIDIA RTX PRO 6000 Blackwell",
+    "diagnostics_enabled_for_study": false
+  },
+  "comparators": {
+    "global_sgdm": {
+      "source_manifest_path": "experiment_manifests/task_1_6_exploratory.json",
+      "source_manifest_id": "task-1.6-exploratory-v1",
+      "source_manifest_sha256": "5920488065f5607f6027c93b8153d93066724ba95f0c47a34015df3e2b1efe22",
+      "selection_report_path": "reports/task_1_6_selection.json",
+      "selection_report_sha256": "ff254012befa189160423dda42c3b6086149b7fa4af65ef734e8750900a455ff",
+      "winner_group": "global_sgdm",
+      "run_id": "global_sgdm_lr0.03_mom0.99",
+      "run_name": "global_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scaleglobal",
+      "git_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+      "selection_values": {
+        "learning_rate": 0.03,
+        "momentum": 0.99,
+        "weight_decay": 0.1,
+        "scaling_rule": "global"
+      },
+      "overrides": {
+        "learning_rate": 0.0006,
+        "min_lr": 0.00006,
+        "matrix_learning_rate": 0.03,
+        "matrix_momentum": 0.99
+      },
+      "selection_record": {
+        "step": 999,
+        "processed_tokens": 491028480,
+        "train_loss": 5.415630340576172,
+        "validation_loss": 5.410761833190918,
+        "matrix_learning_rate": 0.003,
+        "auxiliary_learning_rate": 5.9999999999999995e-05
+      }
+    },
+    "static_per_matrix_sgdm": {
+      "source_manifest_path": "experiment_manifests/task_2_5_static_exploratory.json",
+      "source_manifest_id": "task-2.5-static-exploratory-v1",
+      "source_manifest_sha256": "5a591d6aefdc0477e269a0ba1c0ff933fdc6b5a2aa249287c6ab8830045ac62d",
+      "selection_report_path": "reports/task_2_5_static_selection.json",
+      "selection_report_sha256": "c0d60a9fddb68efde089337fa7288b9f2c98af28608c729eb879c24286e1a650",
+      "winner_group": "static_per_matrix_sgdm",
+      "run_id": "static_lr0.03_mom0.99_map2633929b6baf",
+      "run_name": "static_per_matrix_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scalestatic-2633929b6baf",
+      "git_commit": "aeac82e0427f65633ddcff5d8a73c31167321e78",
+      "mapping_id": "2633929b6baf",
+      "mapping_fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+      "selection_values": {
+        "learning_rate": 0.03,
+        "mapping_fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "mapping_id": "2633929b6baf",
+        "mapping_name": "mlp_strong",
+        "mapping_order": 2,
+        "momentum": 0.99,
+        "weight_decay": 0.1,
+        "scaling_rule": "static-2633929b6baf"
+      },
+      "overrides": {
+        "matrix_learning_rate": 0.03,
+        "matrix_momentum": 0.99,
+        "static_default_multiplier": 1.0,
+        "static_exact_parameter_multipliers": {},
+        "static_matrix_type_multipliers": {
+          "attention_output": 0.5,
+          "attention_qkv": 0.5,
+          "mlp_input": 2.0,
+          "mlp_output": 2.0
+        }
+      },
+      "selection_record": {
+        "step": 999,
+        "processed_tokens": 491028480,
+        "train_loss": 5.406810283660889,
+        "validation_loss": 5.401801109313965,
+        "matrix_learning_rate": 0.003,
+        "auxiliary_learning_rate": 5.9999999999999995e-05
+      }
+    }
+  },
+  "shared_code_audit": {
+    "required_before_launch": true,
+    "artifact_path": "frobenius_normalized_sgdm/task_3_4_shared_code_audit.json",
+    "artifact_sha256": "67bb6f0a54c6bd8c38f632cd0f7834537be8f067c8a0dd1c21b7761f7ca79690",
+    "audited_through_commit": "b773aa4",
+    "final_launch_recheck_required": true,
+    "variant_3_commit": "record_clean_launch_commit_after_task_3_4_approval",
+    "paths": [
+      "train.py", "model.py", "config/task_1_6_baseline.py", "shared_utils/"
+    ],
+    "rule": "Audit each comparator git_commit through the clean Variant 3 launch commit. If a change affects a matched control or measurement, rerun that comparator or obtain approval for a documented limitation before comparison."
+  },
+  "claim_gate": {
+    "required_successful_matched_seeds_per_family": 3,
+    "families": ["global_sgdm", "static_per_matrix_sgdm", "frobenius_normalized_sgdm"],
+    "h3_blocked_until_gate_passes": true
+  }
+}

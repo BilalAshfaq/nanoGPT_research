@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "audit_id": "task-3.4-comparator-shared-code-audit-v1",
+  "audited_through_commit": "b773aa4",
+  "audited_paths": [
+    "train.py",
+    "model.py",
+    "config/task_1_6_baseline.py",
+    "shared_utils/"
+  ],
+  "comparators": {
+    "global_sgdm": {
+      "recorded_commit": "2d5d860120c898157fa95311f0269ff0a143a65e",
+      "changed_paths": [
+        "shared_utils/ema_momentum.py",
+        "shared_utils/experiment_manifest.py",
+        "shared_utils/experiment_results.py",
+        "shared_utils/optimizer_factory.py",
+        "shared_utils/sgdm_diagnostics.py",
+        "train.py"
+      ],
+      "assessment": [
+        "EMA momentum was extracted into a shared primitive while retaining the existing convention; protected Global SGDM equation and state tests cover the path.",
+        "Static and Frobenius optimizer dispatch and metadata were added behind distinct optimizer_name branches; the Global SGDM branch retains its learning rate, momentum, weight decay, partition, scheduler, and auxiliary AdamW behavior.",
+        "Diagnostic support was generalized, but diagnostics remain disabled in study configs and therefore does not add study-path tensor work.",
+        "Manifest run roots and generated reports now resolve under the repository root; this changes artifact location, not training controls, evaluation records, or selection ordering.",
+        "Static mapping metadata was added to reports without changing the validation-loss selection algorithm."
+      ],
+      "matched_control_or_measurement_change": false,
+      "rerun_required_by_this_audit": false
+    },
+    "static_per_matrix_sgdm": {
+      "recorded_commit": "aeac82e0427f65633ddcff5d8a73c31167321e78",
+      "changed_paths": [
+        "shared_utils/experiment_manifest.py",
+        "shared_utils/experiment_results.py",
+        "shared_utils/optimizer_factory.py",
+        "shared_utils/sgdm_diagnostics.py",
+        "train.py"
+      ],
+      "assessment": [
+        "Frobenius optimizer dispatch and metadata were added behind a distinct optimizer_name branch; the Static optimizer branch and locked multiplier configuration remain unchanged.",
+        "The shared diagnostic class gained an overridable momentum-diagnostic hook; the Static default implementation preserves its prior scalar calculations, and diagnostics remain disabled in study configs.",
+        "Manifest run roots and generated reports now resolve under the repository root; this changes artifact location only.",
+        "The result utility retains the same validation-loss ranking and deterministic tie-break implementation."
+      ],
+      "matched_control_or_measurement_change": false,
+      "rerun_required_by_this_audit": false
+    }
+  },
+  "conclusion": "No audited change through b773aa4 alters a matched training control, evaluation metric, or comparator selection rule, so this audit does not require a comparator rerun.",
+  "limitations": [
+    "The eventual clean Variant 3 launch commit does not yet exist.",
+    "Before launch, repeat the path audit from both comparator commits through that exact clean commit and update this artifact if any additional audited path changed.",
+    "The local workstation lacks PyTorch, so optimizer-path tests must be rerun in the locked cluster environment before smoke authorization."
+  ]
+}
