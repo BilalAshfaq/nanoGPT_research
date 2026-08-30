@@ -2,9 +2,10 @@ import copy
 import importlib.util
 import json
 import os
+import tempfile
 import unittest
 
-from shared_utils.experiment_manifest import resolve_run_config
+from shared_utils.experiment_manifest import resolve_run_config, sha256_json_file
 from shared_utils.experiment_results import generate_confirmation_manifest
 
 
@@ -70,6 +71,19 @@ class FrobeniusStudyProtocolTests(unittest.TestCase):
         self.assertEqual(
             materialize_manifest(self.design, self.baseline), self.manifest
         )
+
+    def test_json_artifact_hashes_are_line_ending_independent(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            lf_path = os.path.join(temporary_directory, "lf.json")
+            crlf_path = os.path.join(temporary_directory, "crlf.json")
+            with open(lf_path, "wb") as output_file:
+                output_file.write(b'{\n  "value": 1\n}\n')
+            with open(crlf_path, "wb") as output_file:
+                output_file.write(b'{\r\n  "value": 1\r\n}\r\n')
+            self.assertEqual(
+                sha256_json_file(lf_path),
+                sha256_json_file(crlf_path),
+            )
 
     def test_normalization_settings_and_names_are_frozen(self):
         rule_id = "frobsqrtr-eps1em12-v1"

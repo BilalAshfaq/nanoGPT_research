@@ -2,7 +2,7 @@
   "candidate_design": {
     "design_id": "task-3.4-frobenius-candidates-v1",
     "path": "frobenius_normalized_sgdm/task_3_4_candidate_design.json",
-    "sha256": "ee338e9f6f254189cd4206494c5529d2da6ceb8cf6bdd90d2b2524385c13ca75"
+    "sha256": "817c63dc41ce6094d55417f1b2e2a215b5ecac789c13a3821e82c7809ae028b1"
   },
   "claim_gate": {
     "families": [
@@ -33,7 +33,7 @@
         "validation_loss": 5.410761833190918
       },
       "selection_report_path": "reports/task_1_6_selection.json",
-      "selection_report_sha256": "ff254012befa189160423dda42c3b6086149b7fa4af65ef734e8750900a455ff",
+      "selection_report_sha256": "105c1771adf905cbad6afc5b8a5505849fa43b490d70a292da5c186cc7c646e5",
       "selection_values": {
         "learning_rate": 0.03,
         "momentum": 0.99,
@@ -42,7 +42,7 @@
       },
       "source_manifest_id": "task-1.6-exploratory-v1",
       "source_manifest_path": "experiment_manifests/task_1_6_exploratory.json",
-      "source_manifest_sha256": "5920488065f5607f6027c93b8153d93066724ba95f0c47a34015df3e2b1efe22",
+      "source_manifest_sha256": "58ee344723fc11f93beb7901119deb3fae148ab778c3a0e69272848bc09b10ae",
       "winner_group": "global_sgdm"
     },
     "static_per_matrix_sgdm": {
@@ -72,7 +72,7 @@
         "validation_loss": 5.401801109313965
       },
       "selection_report_path": "reports/task_2_5_static_selection.json",
-      "selection_report_sha256": "c0d60a9fddb68efde089337fa7288b9f2c98af28608c729eb879c24286e1a650",
+      "selection_report_sha256": "a489e7aa041c4d7cd2b63415686f53a7c9594e0926981aee093faf292832ef52",
       "selection_values": {
         "learning_rate": 0.03,
         "mapping_fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
@@ -85,7 +85,7 @@
       },
       "source_manifest_id": "task-2.5-static-exploratory-v1",
       "source_manifest_path": "experiment_manifests/task_2_5_static_exploratory.json",
-      "source_manifest_sha256": "5a591d6aefdc0477e269a0ba1c0ff933fdc6b5a2aa249287c6ab8830045ac62d",
+      "source_manifest_sha256": "795ac117cd3a90e21cb22c8d804de1e88bcc38c2766b8ff3f680a0e44f266e9d",
       "winner_group": "static_per_matrix_sgdm"
     }
   },
@@ -527,7 +527,7 @@
   },
   "shared_code_audit": {
     "artifact_path": "frobenius_normalized_sgdm/task_3_4_shared_code_audit.json",
-    "artifact_sha256": "67bb6f0a54c6bd8c38f632cd0f7834537be8f067c8a0dd1c21b7761f7ca79690",
+    "artifact_sha256": "92d3c78fc2b9f6e2499d97f0b82af0c87a6444a622b9377c8eae7132a2428ebf",
     "audited_through_commit": "b773aa4",
     "final_launch_recheck_required": true,
     "paths": [

@@ -5,7 +5,7 @@ import copy
 import json
 import os
 
-from shared_utils.experiment_manifest import sha256_file, validate_manifest
+from shared_utils.experiment_manifest import sha256_json_file, validate_manifest
 
 
 REPOSITORY_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
@@ -33,9 +33,9 @@ def _validate_comparator_locks(design):
     for family, lock in design["comparators"].items():
         manifest_path = _repository_path(lock["source_manifest_path"])
         report_path = _repository_path(lock["selection_report_path"])
-        if sha256_file(manifest_path) != lock["source_manifest_sha256"]:
+        if sha256_json_file(manifest_path) != lock["source_manifest_sha256"]:
             raise ValueError(f"locked {family} source manifest changed")
-        if sha256_file(report_path) != lock["selection_report_sha256"]:
+        if sha256_json_file(report_path) != lock["selection_report_sha256"]:
             raise ValueError(f"locked {family} selection report changed")
 
         source_manifest = _read_json(manifest_path)
@@ -86,12 +86,15 @@ def materialize_manifest(design=None, baseline_manifest=None):
     comparators = _validate_comparator_locks(design)
     audit = design["shared_code_audit"]
     audit_path = _repository_path(audit["artifact_path"])
-    if sha256_file(audit_path) != audit["artifact_sha256"]:
+    if sha256_json_file(audit_path) != audit["artifact_sha256"]:
         raise ValueError("locked shared-code audit artifact changed")
     global_lock = comparators["global_sgdm"]
     if baseline.get("manifest_id") != global_lock["source_manifest_id"]:
         raise ValueError("locked common-control source manifest is unavailable")
-    if sha256_file(BASELINE_MANIFEST_PATH) != global_lock["source_manifest_sha256"]:
+    if (
+        sha256_json_file(BASELINE_MANIFEST_PATH)
+        != global_lock["source_manifest_sha256"]
+    ):
         raise ValueError("locked common-control source manifest changed")
 
     normalization = design["normalization"]
@@ -179,7 +182,7 @@ def materialize_manifest(design=None, baseline_manifest=None):
         "candidate_design": {
             "design_id": design["design_id"],
             "path": os.path.relpath(DESIGN_PATH, REPOSITORY_ROOT).replace("\\", "/"),
-            "sha256": sha256_file(DESIGN_PATH),
+            "sha256": sha256_json_file(DESIGN_PATH),
         },
         "comparator_locks": comparators,
         "shared_code_audit": copy.deepcopy(design["shared_code_audit"]),

@@ -64,6 +64,21 @@ def sha256_file(path):
     return digest.hexdigest()
 
 
+def sha256_json_file(path):
+    """Hash JSON content canonically so checkout line endings do not matter."""
+
+    with open(path, encoding="utf-8") as input_file:
+        value = json.load(input_file)
+    canonical = json.dumps(
+        value,
+        ensure_ascii=False,
+        allow_nan=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return hashlib.sha256(canonical).hexdigest()
+
+
 def load_manifest(path):
     manifest_path = _absolute_repository_path(path)
     manifest = _read_json(manifest_path)

@@ -12,6 +12,7 @@ from shared_utils.experiment_manifest import (
     repository_root,
     resolve_run_config,
     sha256_file,
+    sha256_json_file,
 )
 from shared_utils.experiment_results import collect_results, report_output_path
 from shared_utils.study_comparison import (
@@ -51,13 +52,13 @@ def _verify_comparator_locks(
 ):
     candidate = frobenius_manifest["candidate_design"]
     design_path = _repository_path(candidate["path"])
-    if sha256_file(design_path) != candidate["sha256"]:
+    if sha256_json_file(design_path) != candidate["sha256"]:
         raise ValueError("locked Frobenius candidate design changed")
     design = read_json(design_path)
     if frobenius_manifest["comparator_locks"] != design["comparators"]:
         raise ValueError("Frobenius manifest comparator locks changed")
     audit = frobenius_manifest["shared_code_audit"]
-    if sha256_file(_repository_path(audit["artifact_path"])) != audit[
+    if sha256_json_file(_repository_path(audit["artifact_path"])) != audit[
         "artifact_sha256"
     ]:
         raise ValueError("locked Task 3.4 shared-code audit changed")
@@ -67,11 +68,11 @@ def _verify_comparator_locks(
     }
     for family, lock in frobenius_manifest["comparator_locks"].items():
         manifest, selection = supplied[family]
-        if sha256_file(_repository_path(lock["source_manifest_path"])) != lock[
+        if sha256_json_file(_repository_path(lock["source_manifest_path"])) != lock[
             "source_manifest_sha256"
         ]:
             raise ValueError(f"locked {family} source manifest changed")
-        if sha256_file(_repository_path(lock["selection_report_path"])) != lock[
+        if sha256_json_file(_repository_path(lock["selection_report_path"])) != lock[
             "selection_report_sha256"
         ]:
             raise ValueError(f"locked {family} selection report changed")

@@ -227,6 +227,7 @@ class FrobeniusNormalizationTests(unittest.TestCase):
             normalize_frobenius_momentum(
                 valid,
                 torch.finfo(torch.float32).tiny,
+                fixed_shape_factor=4.0,
             )
         with self.assertRaisesRegex(ValueError, "target norm"):
             normalize_frobenius_momentum(
