@@ -4,9 +4,17 @@ from frobenius_normalized_sgdm.utils.frobenius_normalization import (
     FrobeniusNormalizationResult,
     normalize_frobenius_momentum,
 )
+from frobenius_normalized_sgdm.utils.frobenius_normalized_sgdm import (
+    FROBENIUS_NORMALIZATION_EQUATION,
+    FROBENIUS_NORMALIZATION_VERSION,
+    FrobeniusNormalizedSGDM,
+)
 
 
 __all__ = (
     "FrobeniusNormalizationResult",
+    "FrobeniusNormalizedSGDM",
+    "FROBENIUS_NORMALIZATION_EQUATION",
+    "FROBENIUS_NORMALIZATION_VERSION",
     "normalize_frobenius_momentum",
 )

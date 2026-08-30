@@ -9,6 +9,11 @@ from shared_utils.parameter_partition import (
     build_parameter_group_audit,
     partition_optimizer_parameters,
 )
+from frobenius_normalized_sgdm.utils.frobenius_normalized_sgdm import (
+    FROBENIUS_NORMALIZATION_EQUATION,
+    FROBENIUS_NORMALIZATION_VERSION,
+    FrobeniusNormalizedSGDM,
+)
 from static_per_matrix_sgdm.utils.static_multipliers import (
     resolve_static_multipliers,
 )
@@ -18,7 +23,12 @@ from static_per_matrix_sgdm.utils.static_per_matrix_sgdm import (
 from tuned_global_sgdm.utils.global_sgdm import GlobalSGDM
 
 
-SUPPORTED_OPTIMIZERS = ("adamw", "global_sgdm", "static_per_matrix_sgdm")
+SUPPORTED_OPTIMIZERS = (
+    "adamw",
+    "global_sgdm",
+    "static_per_matrix_sgdm",
+    "frobenius_normalized_sgdm",
+)
 GLOBAL_SGDM_MOMENTUM_CONVENTION = "ema"
 GLOBAL_SGDM_WEIGHT_DECAY_MODE = "decoupled"
 AUXILIARY_ADAMW_WEIGHT_DECAY_MODE = "adamw_decoupled"
@@ -89,6 +99,9 @@ def configure_optimizer(
     static_default_multiplier=1.0,
     static_matrix_type_multipliers=None,
     static_exact_parameter_multipliers=None,
+    frobenius_learning_rate=None,
+    frobenius_epsilon=1e-12,
+    frobenius_shape_factor=1.0,
 ):
     """Construct the selected optimizer and its optional partition audit."""
 
@@ -140,6 +153,20 @@ def configure_optimizer(
             momentum=matrix_momentum,
             weight_decay=matrix_weight_decay,
         )
+    elif optimizer_name == "frobenius_normalized_sgdm":
+        if frobenius_learning_rate is None:
+            raise ValueError(
+                "frobenius_learning_rate is required for "
+                "frobenius_normalized_sgdm"
+            )
+        matrix_optimizer = FrobeniusNormalizedSGDM(
+            [item.parameter for item in partition.eligible_matrices],
+            lr=frobenius_learning_rate,
+            momentum=matrix_momentum,
+            epsilon=frobenius_epsilon,
+            fixed_shape_factor=frobenius_shape_factor,
+            weight_decay=matrix_weight_decay,
+        )
     else:
         matrix_optimizer = GlobalSGDM(
             [item.parameter for item in partition.eligible_matrices],
@@ -147,9 +174,14 @@ def configure_optimizer(
             momentum=matrix_momentum,
             weight_decay=matrix_weight_decay,
         )
+    matrix_base_learning_rate = (
+        frobenius_learning_rate
+        if optimizer_name == "frobenius_normalized_sgdm"
+        else matrix_learning_rate
+    )
     for group in matrix_optimizer.param_groups:
         group["optimizer_role"] = "matrix"
-        group["base_lr"] = matrix_learning_rate
+        group["base_lr"] = matrix_base_learning_rate
     auxiliary_optimizer = _configure_auxiliary_adamw(
         partition,
         learning_rate=auxiliary_learning_rate,
@@ -162,6 +194,16 @@ def configure_optimizer(
         optimizer.static_multiplier_configuration = (
             static_multiplier_configuration
         )
+    if optimizer_name == "frobenius_normalized_sgdm":
+        optimizer.frobenius_configuration = {
+            "normalization_version": FROBENIUS_NORMALIZATION_VERSION,
+            "normalization_equation": FROBENIUS_NORMALIZATION_EQUATION,
+            "frobenius_learning_rate": float(frobenius_learning_rate),
+            "frobenius_epsilon": matrix_optimizer.param_groups[0]["epsilon"],
+            "frobenius_shape_factor": matrix_optimizer.param_groups[0][
+                "fixed_shape_factor"
+            ],
+        }
     audit = build_parameter_group_audit(
         partition,
         eligible_optimizer=optimizer_name,

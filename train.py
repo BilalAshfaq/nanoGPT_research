@@ -114,6 +114,10 @@ static_default_multiplier = 1.0
 # Optional keys: attention_qkv, attention_output, mlp_input, mlp_output.
 static_matrix_type_multipliers = {}
 static_exact_parameter_multipliers = {}
+# Frobenius-normalized SGDM settings (Variant 3)
+frobenius_learning_rate = 6e-4
+frobenius_epsilon = 1e-12
+frobenius_shape_factor = 1.0
 # optional SGDM matrix diagnostics
 diagnostics_enabled = False
 diagnostic_steps = '' # comma-separated optimizer-step indices
@@ -294,6 +298,9 @@ optimizer, optimizer_audit = configure_optimizer(
     static_default_multiplier=static_default_multiplier,
     static_matrix_type_multipliers=static_matrix_type_multipliers,
     static_exact_parameter_multipliers=static_exact_parameter_multipliers,
+    frobenius_learning_rate=frobenius_learning_rate,
+    frobenius_epsilon=frobenius_epsilon,
+    frobenius_shape_factor=frobenius_shape_factor,
 )
 optimizer_group_signature = build_optimizer_group_signature(model, optimizer)
 if master_process:
@@ -308,7 +315,6 @@ if optimizer_name == 'adamw':
     }
 else:
     optimizer_settings = {
-        'matrix_learning_rate': matrix_learning_rate,
         'matrix_momentum': matrix_momentum,
         'matrix_momentum_convention': matrix_momentum_convention,
         'matrix_nesterov': matrix_nesterov,
@@ -319,6 +325,12 @@ else:
         'auxiliary_weight_decay': auxiliary_weight_decay,
         'auxiliary_weight_decay_mode': auxiliary_weight_decay_mode,
     }
+    if optimizer_name == 'frobenius_normalized_sgdm':
+        optimizer_settings.update(
+            copy.deepcopy(optimizer.frobenius_configuration)
+        )
+    else:
+        optimizer_settings['matrix_learning_rate'] = matrix_learning_rate
     if optimizer_name == 'static_per_matrix_sgdm':
         optimizer_settings['static_multiplier_configuration'] = copy.deepcopy(
             optimizer.static_multiplier_configuration

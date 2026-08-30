@@ -56,19 +56,12 @@ def _validate_momentum_matrix(momentum_matrix):
         )
 
 
-@torch.no_grad()
-def normalize_frobenius_momentum(
+def validate_frobenius_normalization_inputs(
     momentum_matrix,
     epsilon,
     fixed_shape_factor=1.0,
 ):
-    """Apply the exact additive-epsilon Frobenius normalization rule.
-
-    Scalar arithmetic uses float32 for float16, bfloat16, and float32 inputs,
-    and float64 for float64 inputs. Scalar evidence remains as detached
-    zero-dimensional tensors on the input device, avoiding forced host
-    synchronization in a future optimizer integration.
-    """
+    """Validate normalization inputs without allocating another matrix."""
 
     _validate_momentum_matrix(momentum_matrix)
     epsilon = _positive_finite_scalar("epsilon", epsilon)
@@ -105,6 +98,41 @@ def normalize_frobenius_momentum(
             "epsilon is too small to keep the normalization multiplier "
             f"finite in {calculation_dtype}"
         )
+
+    return (
+        epsilon,
+        fixed_shape_factor,
+        calculation_dtype,
+        retained_rank,
+        nominal_target,
+    )
+
+
+@torch.no_grad()
+def normalize_frobenius_momentum(
+    momentum_matrix,
+    epsilon,
+    fixed_shape_factor=1.0,
+):
+    """Apply the exact additive-epsilon Frobenius normalization rule.
+
+    Scalar arithmetic uses float32 for float16, bfloat16, and float32 inputs,
+    and float64 for float64 inputs. Scalar evidence remains as detached
+    zero-dimensional tensors on the input device, avoiding forced host
+    synchronization in a future optimizer integration.
+    """
+
+    (
+        epsilon,
+        fixed_shape_factor,
+        calculation_dtype,
+        retained_rank,
+        nominal_target,
+    ) = validate_frobenius_normalization_inputs(
+        momentum_matrix,
+        epsilon,
+        fixed_shape_factor,
+    )
 
     working_matrix = momentum_matrix.to(dtype=calculation_dtype)
     raw_norm = torch.linalg.vector_norm(working_matrix)
