@@ -1,0 +1,2145 @@
+{
+  "candidate_design": {
+    "design_id": "zero-matrix-decay-followup-v1",
+    "path": "zero_matrix_decay_followup/task_zero_matrix_decay_candidate_design.json"
+  },
+  "claim_gate": {
+    "families": [
+      "global_sgdm",
+      "static_per_matrix_sgdm",
+      "frobenius_normalized_sgdm"
+    ],
+    "required_successful_matched_seeds_per_family": 3
+  },
+  "config_file": "config/zero_matrix_decay_followup.py",
+  "confirmation": {
+    "additional_seeds": [
+      2027,
+      4099
+    ],
+    "manifest_id": "zero-matrix-decay-followup-confirmation-v1",
+    "run_name_template": "zero_matrix_decay_{optimizer_name}_gpt2-124m_lr{learning_rate}_mom{momentum}_mwd0_seed{seed}_scale{scaling_rule}"
+  },
+  "counts_toward_study_budget": true,
+  "dataset": {
+    "files": [
+      "data/openwebtext/train.bin",
+      "data/openwebtext/val.bin"
+    ],
+    "lock_file": "data/openwebtext/dataset_fingerprints.json",
+    "name": "openwebtext",
+    "require_lock": true
+  },
+  "environment_lock": "cluster_environment.freeze.txt",
+  "expected_run_count": 36,
+  "launch_authorized": false,
+  "manifest_id": "zero-matrix-decay-followup-exploratory-v1",
+  "outcome_policy": {
+    "replacement": "forbidden_without_separately_approved_follow_up",
+    "selection_eligibility": "completed_uninterrupted_only"
+  },
+  "output_root": "nanogpt-study-runs/zero-matrix-decay-followup-v1",
+  "preflight_tests": [
+    "tests.test_baseline_preflight",
+    "tests.test_parameter_partition",
+    "tests.test_zero_matrix_decay_followup"
+  ],
+  "protected_artifacts": {
+    "experiment_manifests/task_1_6_exploratory.json": "5920488065f5607f6027c93b8153d93066724ba95f0c47a34015df3e2b1efe22",
+    "experiment_manifests/task_2_5_static_exploratory.json": "5a591d6aefdc0477e269a0ba1c0ff933fdc6b5a2aa249287c6ab8830045ac62d",
+    "experiment_manifests/task_3_4_frobenius_exploratory.json": "02253e1b76bb05b64bf8ebb6a2a7dd0aeea43936a0994280126fa8c82be20604",
+    "reports/task_1_6_selection.json": "ff254012befa189160423dda42c3b6086149b7fa4af65ef734e8750900a455ff",
+    "reports/task_2_5_static_selection.json": "c0d60a9fddb68efde089337fa7288b9f2c98af28608c729eb879c24286e1a650",
+    "reports/task_3_5_frobenius_selection.json": "84d7d2bc83a7d011f819c07c189b1dbdd4bcddfa51948c6276c8866d943be738"
+  },
+  "purpose": "study",
+  "report_names": {
+    "final": "zero_matrix_decay_followup_final.json",
+    "selection": "zero_matrix_decay_followup_selection.json"
+  },
+  "resources": {
+    "device_name_contains": "NVIDIA RTX PRO 6000 Blackwell",
+    "world_size": 2
+  },
+  "runs": [
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "global_sgdm",
+      "overrides": {
+        "matrix_learning_rate": 0.01,
+        "matrix_momentum": 0.9
+      },
+      "run_id": "zero_wd_global_sgdm_lr0.01_mom0.9",
+      "run_name": "zero_matrix_decay_global_sgdm_gpt2-124m_lr0.01_mom0.9_mwd0_seed1337_scaleglobal-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.01,
+        "learning_rate": 0.01,
+        "momentum": 0.9,
+        "scaling_rule": "global-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "global_sgdm",
+      "overrides": {
+        "matrix_learning_rate": 0.01,
+        "matrix_momentum": 0.95
+      },
+      "run_id": "zero_wd_global_sgdm_lr0.01_mom0.95",
+      "run_name": "zero_matrix_decay_global_sgdm_gpt2-124m_lr0.01_mom0.95_mwd0_seed1337_scaleglobal-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.01,
+        "learning_rate": 0.01,
+        "momentum": 0.95,
+        "scaling_rule": "global-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "global_sgdm",
+      "overrides": {
+        "matrix_learning_rate": 0.01,
+        "matrix_momentum": 0.99
+      },
+      "run_id": "zero_wd_global_sgdm_lr0.01_mom0.99",
+      "run_name": "zero_matrix_decay_global_sgdm_gpt2-124m_lr0.01_mom0.99_mwd0_seed1337_scaleglobal-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.01,
+        "learning_rate": 0.01,
+        "momentum": 0.99,
+        "scaling_rule": "global-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "global_sgdm",
+      "overrides": {
+        "matrix_learning_rate": 0.03,
+        "matrix_momentum": 0.9
+      },
+      "run_id": "zero_wd_global_sgdm_lr0.03_mom0.9",
+      "run_name": "zero_matrix_decay_global_sgdm_gpt2-124m_lr0.03_mom0.9_mwd0_seed1337_scaleglobal-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.03,
+        "learning_rate": 0.03,
+        "momentum": 0.9,
+        "scaling_rule": "global-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "global_sgdm",
+      "overrides": {
+        "matrix_learning_rate": 0.03,
+        "matrix_momentum": 0.95
+      },
+      "run_id": "zero_wd_global_sgdm_lr0.03_mom0.95",
+      "run_name": "zero_matrix_decay_global_sgdm_gpt2-124m_lr0.03_mom0.95_mwd0_seed1337_scaleglobal-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.03,
+        "learning_rate": 0.03,
+        "momentum": 0.95,
+        "scaling_rule": "global-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "global_sgdm",
+      "overrides": {
+        "matrix_learning_rate": 0.03,
+        "matrix_momentum": 0.99
+      },
+      "run_id": "zero_wd_global_sgdm_lr0.03_mom0.99",
+      "run_name": "zero_matrix_decay_global_sgdm_gpt2-124m_lr0.03_mom0.99_mwd0_seed1337_scaleglobal-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.03,
+        "learning_rate": 0.03,
+        "momentum": 0.99,
+        "scaling_rule": "global-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "global_sgdm",
+      "overrides": {
+        "matrix_learning_rate": 0.1,
+        "matrix_momentum": 0.9
+      },
+      "run_id": "zero_wd_global_sgdm_lr0.1_mom0.9",
+      "run_name": "zero_matrix_decay_global_sgdm_gpt2-124m_lr0.1_mom0.9_mwd0_seed1337_scaleglobal-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.1,
+        "learning_rate": 0.1,
+        "momentum": 0.9,
+        "scaling_rule": "global-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "global_sgdm",
+      "overrides": {
+        "matrix_learning_rate": 0.1,
+        "matrix_momentum": 0.95
+      },
+      "run_id": "zero_wd_global_sgdm_lr0.1_mom0.95",
+      "run_name": "zero_matrix_decay_global_sgdm_gpt2-124m_lr0.1_mom0.95_mwd0_seed1337_scaleglobal-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.1,
+        "learning_rate": 0.1,
+        "momentum": 0.95,
+        "scaling_rule": "global-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "global_sgdm",
+      "overrides": {
+        "matrix_learning_rate": 0.1,
+        "matrix_momentum": 0.99
+      },
+      "run_id": "zero_wd_global_sgdm_lr0.1_mom0.99",
+      "run_name": "zero_matrix_decay_global_sgdm_gpt2-124m_lr0.1_mom0.99_mwd0_seed1337_scaleglobal-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.1,
+        "learning_rate": 0.1,
+        "momentum": 0.99,
+        "scaling_rule": "global-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "global_sgdm",
+      "overrides": {
+        "matrix_learning_rate": 0.3,
+        "matrix_momentum": 0.9
+      },
+      "run_id": "zero_wd_global_sgdm_lr0.3_mom0.9",
+      "run_name": "zero_matrix_decay_global_sgdm_gpt2-124m_lr0.3_mom0.9_mwd0_seed1337_scaleglobal-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.3,
+        "learning_rate": 0.3,
+        "momentum": 0.9,
+        "scaling_rule": "global-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "global_sgdm",
+      "overrides": {
+        "matrix_learning_rate": 0.3,
+        "matrix_momentum": 0.95
+      },
+      "run_id": "zero_wd_global_sgdm_lr0.3_mom0.95",
+      "run_name": "zero_matrix_decay_global_sgdm_gpt2-124m_lr0.3_mom0.95_mwd0_seed1337_scaleglobal-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.3,
+        "learning_rate": 0.3,
+        "momentum": 0.95,
+        "scaling_rule": "global-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "global_sgdm",
+      "overrides": {
+        "matrix_learning_rate": 0.3,
+        "matrix_momentum": 0.99
+      },
+      "run_id": "zero_wd_global_sgdm_lr0.3_mom0.99",
+      "run_name": "zero_matrix_decay_global_sgdm_gpt2-124m_lr0.3_mom0.99_mwd0_seed1337_scaleglobal-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.3,
+        "learning_rate": 0.3,
+        "momentum": 0.99,
+        "scaling_rule": "global-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "static_per_matrix_sgdm",
+      "overrides": {
+        "matrix_learning_rate": 0.01,
+        "matrix_momentum": 0.9,
+        "static_default_multiplier": 1.0,
+        "static_exact_parameter_multipliers": {},
+        "static_matrix_type_multipliers": {
+          "attention_output": 0.5,
+          "attention_qkv": 0.5,
+          "mlp_input": 2.0,
+          "mlp_output": 2.0
+        }
+      },
+      "run_id": "zero_wd_static_per_matrix_sgdm_lr0.01_mom0.9",
+      "run_name": "zero_matrix_decay_static_per_matrix_sgdm_gpt2-124m_lr0.01_mom0.9_mwd0_seed1337_scalestatic-2633929b6baf-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.01,
+        "learning_rate": 0.01,
+        "mapping_fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "mapping_id": "2633929b6baf",
+        "mapping_name": "mlp_strong",
+        "momentum": 0.9,
+        "scaling_rule": "static-2633929b6baf-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "static_multiplier_configuration": {
+        "fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "geometric_mean": 1.0,
+        "geometric_mean_log_tolerance": 1e-09,
+        "mapping_id": "2633929b6baf",
+        "resolved_multipliers": {
+          "transformer.h.0.attn.c_attn.weight": 0.5,
+          "transformer.h.0.attn.c_proj.weight": 0.5,
+          "transformer.h.0.mlp.c_fc.weight": 2.0,
+          "transformer.h.0.mlp.c_proj.weight": 2.0,
+          "transformer.h.1.attn.c_attn.weight": 0.5,
+          "transformer.h.1.attn.c_proj.weight": 0.5,
+          "transformer.h.1.mlp.c_fc.weight": 2.0,
+          "transformer.h.1.mlp.c_proj.weight": 2.0,
+          "transformer.h.10.attn.c_attn.weight": 0.5,
+          "transformer.h.10.attn.c_proj.weight": 0.5,
+          "transformer.h.10.mlp.c_fc.weight": 2.0,
+          "transformer.h.10.mlp.c_proj.weight": 2.0,
+          "transformer.h.11.attn.c_attn.weight": 0.5,
+          "transformer.h.11.attn.c_proj.weight": 0.5,
+          "transformer.h.11.mlp.c_fc.weight": 2.0,
+          "transformer.h.11.mlp.c_proj.weight": 2.0,
+          "transformer.h.2.attn.c_attn.weight": 0.5,
+          "transformer.h.2.attn.c_proj.weight": 0.5,
+          "transformer.h.2.mlp.c_fc.weight": 2.0,
+          "transformer.h.2.mlp.c_proj.weight": 2.0,
+          "transformer.h.3.attn.c_attn.weight": 0.5,
+          "transformer.h.3.attn.c_proj.weight": 0.5,
+          "transformer.h.3.mlp.c_fc.weight": 2.0,
+          "transformer.h.3.mlp.c_proj.weight": 2.0,
+          "transformer.h.4.attn.c_attn.weight": 0.5,
+          "transformer.h.4.attn.c_proj.weight": 0.5,
+          "transformer.h.4.mlp.c_fc.weight": 2.0,
+          "transformer.h.4.mlp.c_proj.weight": 2.0,
+          "transformer.h.5.attn.c_attn.weight": 0.5,
+          "transformer.h.5.attn.c_proj.weight": 0.5,
+          "transformer.h.5.mlp.c_fc.weight": 2.0,
+          "transformer.h.5.mlp.c_proj.weight": 2.0,
+          "transformer.h.6.attn.c_attn.weight": 0.5,
+          "transformer.h.6.attn.c_proj.weight": 0.5,
+          "transformer.h.6.mlp.c_fc.weight": 2.0,
+          "transformer.h.6.mlp.c_proj.weight": 2.0,
+          "transformer.h.7.attn.c_attn.weight": 0.5,
+          "transformer.h.7.attn.c_proj.weight": 0.5,
+          "transformer.h.7.mlp.c_fc.weight": 2.0,
+          "transformer.h.7.mlp.c_proj.weight": 2.0,
+          "transformer.h.8.attn.c_attn.weight": 0.5,
+          "transformer.h.8.attn.c_proj.weight": 0.5,
+          "transformer.h.8.mlp.c_fc.weight": 2.0,
+          "transformer.h.8.mlp.c_proj.weight": 2.0,
+          "transformer.h.9.attn.c_attn.weight": 0.5,
+          "transformer.h.9.attn.c_proj.weight": 0.5,
+          "transformer.h.9.mlp.c_fc.weight": 2.0,
+          "transformer.h.9.mlp.c_proj.weight": 2.0
+        },
+        "specification": {
+          "default_multiplier": 1.0,
+          "exact_parameter_multipliers": {},
+          "matrix_type_multipliers": {
+            "attention_output": 0.5,
+            "attention_qkv": 0.5,
+            "mlp_input": 2.0,
+            "mlp_output": 2.0
+          }
+        },
+        "summary": {
+          "eligible_matrix_count": 48,
+          "maximum_multiplier": 2.0,
+          "minimum_multiplier": 0.5,
+          "unique_multiplier_count": 2
+        }
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "static_per_matrix_sgdm",
+      "overrides": {
+        "matrix_learning_rate": 0.01,
+        "matrix_momentum": 0.95,
+        "static_default_multiplier": 1.0,
+        "static_exact_parameter_multipliers": {},
+        "static_matrix_type_multipliers": {
+          "attention_output": 0.5,
+          "attention_qkv": 0.5,
+          "mlp_input": 2.0,
+          "mlp_output": 2.0
+        }
+      },
+      "run_id": "zero_wd_static_per_matrix_sgdm_lr0.01_mom0.95",
+      "run_name": "zero_matrix_decay_static_per_matrix_sgdm_gpt2-124m_lr0.01_mom0.95_mwd0_seed1337_scalestatic-2633929b6baf-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.01,
+        "learning_rate": 0.01,
+        "mapping_fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "mapping_id": "2633929b6baf",
+        "mapping_name": "mlp_strong",
+        "momentum": 0.95,
+        "scaling_rule": "static-2633929b6baf-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "static_multiplier_configuration": {
+        "fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "geometric_mean": 1.0,
+        "geometric_mean_log_tolerance": 1e-09,
+        "mapping_id": "2633929b6baf",
+        "resolved_multipliers": {
+          "transformer.h.0.attn.c_attn.weight": 0.5,
+          "transformer.h.0.attn.c_proj.weight": 0.5,
+          "transformer.h.0.mlp.c_fc.weight": 2.0,
+          "transformer.h.0.mlp.c_proj.weight": 2.0,
+          "transformer.h.1.attn.c_attn.weight": 0.5,
+          "transformer.h.1.attn.c_proj.weight": 0.5,
+          "transformer.h.1.mlp.c_fc.weight": 2.0,
+          "transformer.h.1.mlp.c_proj.weight": 2.0,
+          "transformer.h.10.attn.c_attn.weight": 0.5,
+          "transformer.h.10.attn.c_proj.weight": 0.5,
+          "transformer.h.10.mlp.c_fc.weight": 2.0,
+          "transformer.h.10.mlp.c_proj.weight": 2.0,
+          "transformer.h.11.attn.c_attn.weight": 0.5,
+          "transformer.h.11.attn.c_proj.weight": 0.5,
+          "transformer.h.11.mlp.c_fc.weight": 2.0,
+          "transformer.h.11.mlp.c_proj.weight": 2.0,
+          "transformer.h.2.attn.c_attn.weight": 0.5,
+          "transformer.h.2.attn.c_proj.weight": 0.5,
+          "transformer.h.2.mlp.c_fc.weight": 2.0,
+          "transformer.h.2.mlp.c_proj.weight": 2.0,
+          "transformer.h.3.attn.c_attn.weight": 0.5,
+          "transformer.h.3.attn.c_proj.weight": 0.5,
+          "transformer.h.3.mlp.c_fc.weight": 2.0,
+          "transformer.h.3.mlp.c_proj.weight": 2.0,
+          "transformer.h.4.attn.c_attn.weight": 0.5,
+          "transformer.h.4.attn.c_proj.weight": 0.5,
+          "transformer.h.4.mlp.c_fc.weight": 2.0,
+          "transformer.h.4.mlp.c_proj.weight": 2.0,
+          "transformer.h.5.attn.c_attn.weight": 0.5,
+          "transformer.h.5.attn.c_proj.weight": 0.5,
+          "transformer.h.5.mlp.c_fc.weight": 2.0,
+          "transformer.h.5.mlp.c_proj.weight": 2.0,
+          "transformer.h.6.attn.c_attn.weight": 0.5,
+          "transformer.h.6.attn.c_proj.weight": 0.5,
+          "transformer.h.6.mlp.c_fc.weight": 2.0,
+          "transformer.h.6.mlp.c_proj.weight": 2.0,
+          "transformer.h.7.attn.c_attn.weight": 0.5,
+          "transformer.h.7.attn.c_proj.weight": 0.5,
+          "transformer.h.7.mlp.c_fc.weight": 2.0,
+          "transformer.h.7.mlp.c_proj.weight": 2.0,
+          "transformer.h.8.attn.c_attn.weight": 0.5,
+          "transformer.h.8.attn.c_proj.weight": 0.5,
+          "transformer.h.8.mlp.c_fc.weight": 2.0,
+          "transformer.h.8.mlp.c_proj.weight": 2.0,
+          "transformer.h.9.attn.c_attn.weight": 0.5,
+          "transformer.h.9.attn.c_proj.weight": 0.5,
+          "transformer.h.9.mlp.c_fc.weight": 2.0,
+          "transformer.h.9.mlp.c_proj.weight": 2.0
+        },
+        "specification": {
+          "default_multiplier": 1.0,
+          "exact_parameter_multipliers": {},
+          "matrix_type_multipliers": {
+            "attention_output": 0.5,
+            "attention_qkv": 0.5,
+            "mlp_input": 2.0,
+            "mlp_output": 2.0
+          }
+        },
+        "summary": {
+          "eligible_matrix_count": 48,
+          "maximum_multiplier": 2.0,
+          "minimum_multiplier": 0.5,
+          "unique_multiplier_count": 2
+        }
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "static_per_matrix_sgdm",
+      "overrides": {
+        "matrix_learning_rate": 0.01,
+        "matrix_momentum": 0.99,
+        "static_default_multiplier": 1.0,
+        "static_exact_parameter_multipliers": {},
+        "static_matrix_type_multipliers": {
+          "attention_output": 0.5,
+          "attention_qkv": 0.5,
+          "mlp_input": 2.0,
+          "mlp_output": 2.0
+        }
+      },
+      "run_id": "zero_wd_static_per_matrix_sgdm_lr0.01_mom0.99",
+      "run_name": "zero_matrix_decay_static_per_matrix_sgdm_gpt2-124m_lr0.01_mom0.99_mwd0_seed1337_scalestatic-2633929b6baf-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.01,
+        "learning_rate": 0.01,
+        "mapping_fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "mapping_id": "2633929b6baf",
+        "mapping_name": "mlp_strong",
+        "momentum": 0.99,
+        "scaling_rule": "static-2633929b6baf-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "static_multiplier_configuration": {
+        "fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "geometric_mean": 1.0,
+        "geometric_mean_log_tolerance": 1e-09,
+        "mapping_id": "2633929b6baf",
+        "resolved_multipliers": {
+          "transformer.h.0.attn.c_attn.weight": 0.5,
+          "transformer.h.0.attn.c_proj.weight": 0.5,
+          "transformer.h.0.mlp.c_fc.weight": 2.0,
+          "transformer.h.0.mlp.c_proj.weight": 2.0,
+          "transformer.h.1.attn.c_attn.weight": 0.5,
+          "transformer.h.1.attn.c_proj.weight": 0.5,
+          "transformer.h.1.mlp.c_fc.weight": 2.0,
+          "transformer.h.1.mlp.c_proj.weight": 2.0,
+          "transformer.h.10.attn.c_attn.weight": 0.5,
+          "transformer.h.10.attn.c_proj.weight": 0.5,
+          "transformer.h.10.mlp.c_fc.weight": 2.0,
+          "transformer.h.10.mlp.c_proj.weight": 2.0,
+          "transformer.h.11.attn.c_attn.weight": 0.5,
+          "transformer.h.11.attn.c_proj.weight": 0.5,
+          "transformer.h.11.mlp.c_fc.weight": 2.0,
+          "transformer.h.11.mlp.c_proj.weight": 2.0,
+          "transformer.h.2.attn.c_attn.weight": 0.5,
+          "transformer.h.2.attn.c_proj.weight": 0.5,
+          "transformer.h.2.mlp.c_fc.weight": 2.0,
+          "transformer.h.2.mlp.c_proj.weight": 2.0,
+          "transformer.h.3.attn.c_attn.weight": 0.5,
+          "transformer.h.3.attn.c_proj.weight": 0.5,
+          "transformer.h.3.mlp.c_fc.weight": 2.0,
+          "transformer.h.3.mlp.c_proj.weight": 2.0,
+          "transformer.h.4.attn.c_attn.weight": 0.5,
+          "transformer.h.4.attn.c_proj.weight": 0.5,
+          "transformer.h.4.mlp.c_fc.weight": 2.0,
+          "transformer.h.4.mlp.c_proj.weight": 2.0,
+          "transformer.h.5.attn.c_attn.weight": 0.5,
+          "transformer.h.5.attn.c_proj.weight": 0.5,
+          "transformer.h.5.mlp.c_fc.weight": 2.0,
+          "transformer.h.5.mlp.c_proj.weight": 2.0,
+          "transformer.h.6.attn.c_attn.weight": 0.5,
+          "transformer.h.6.attn.c_proj.weight": 0.5,
+          "transformer.h.6.mlp.c_fc.weight": 2.0,
+          "transformer.h.6.mlp.c_proj.weight": 2.0,
+          "transformer.h.7.attn.c_attn.weight": 0.5,
+          "transformer.h.7.attn.c_proj.weight": 0.5,
+          "transformer.h.7.mlp.c_fc.weight": 2.0,
+          "transformer.h.7.mlp.c_proj.weight": 2.0,
+          "transformer.h.8.attn.c_attn.weight": 0.5,
+          "transformer.h.8.attn.c_proj.weight": 0.5,
+          "transformer.h.8.mlp.c_fc.weight": 2.0,
+          "transformer.h.8.mlp.c_proj.weight": 2.0,
+          "transformer.h.9.attn.c_attn.weight": 0.5,
+          "transformer.h.9.attn.c_proj.weight": 0.5,
+          "transformer.h.9.mlp.c_fc.weight": 2.0,
+          "transformer.h.9.mlp.c_proj.weight": 2.0
+        },
+        "specification": {
+          "default_multiplier": 1.0,
+          "exact_parameter_multipliers": {},
+          "matrix_type_multipliers": {
+            "attention_output": 0.5,
+            "attention_qkv": 0.5,
+            "mlp_input": 2.0,
+            "mlp_output": 2.0
+          }
+        },
+        "summary": {
+          "eligible_matrix_count": 48,
+          "maximum_multiplier": 2.0,
+          "minimum_multiplier": 0.5,
+          "unique_multiplier_count": 2
+        }
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "static_per_matrix_sgdm",
+      "overrides": {
+        "matrix_learning_rate": 0.03,
+        "matrix_momentum": 0.9,
+        "static_default_multiplier": 1.0,
+        "static_exact_parameter_multipliers": {},
+        "static_matrix_type_multipliers": {
+          "attention_output": 0.5,
+          "attention_qkv": 0.5,
+          "mlp_input": 2.0,
+          "mlp_output": 2.0
+        }
+      },
+      "run_id": "zero_wd_static_per_matrix_sgdm_lr0.03_mom0.9",
+      "run_name": "zero_matrix_decay_static_per_matrix_sgdm_gpt2-124m_lr0.03_mom0.9_mwd0_seed1337_scalestatic-2633929b6baf-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.03,
+        "learning_rate": 0.03,
+        "mapping_fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "mapping_id": "2633929b6baf",
+        "mapping_name": "mlp_strong",
+        "momentum": 0.9,
+        "scaling_rule": "static-2633929b6baf-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "static_multiplier_configuration": {
+        "fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "geometric_mean": 1.0,
+        "geometric_mean_log_tolerance": 1e-09,
+        "mapping_id": "2633929b6baf",
+        "resolved_multipliers": {
+          "transformer.h.0.attn.c_attn.weight": 0.5,
+          "transformer.h.0.attn.c_proj.weight": 0.5,
+          "transformer.h.0.mlp.c_fc.weight": 2.0,
+          "transformer.h.0.mlp.c_proj.weight": 2.0,
+          "transformer.h.1.attn.c_attn.weight": 0.5,
+          "transformer.h.1.attn.c_proj.weight": 0.5,
+          "transformer.h.1.mlp.c_fc.weight": 2.0,
+          "transformer.h.1.mlp.c_proj.weight": 2.0,
+          "transformer.h.10.attn.c_attn.weight": 0.5,
+          "transformer.h.10.attn.c_proj.weight": 0.5,
+          "transformer.h.10.mlp.c_fc.weight": 2.0,
+          "transformer.h.10.mlp.c_proj.weight": 2.0,
+          "transformer.h.11.attn.c_attn.weight": 0.5,
+          "transformer.h.11.attn.c_proj.weight": 0.5,
+          "transformer.h.11.mlp.c_fc.weight": 2.0,
+          "transformer.h.11.mlp.c_proj.weight": 2.0,
+          "transformer.h.2.attn.c_attn.weight": 0.5,
+          "transformer.h.2.attn.c_proj.weight": 0.5,
+          "transformer.h.2.mlp.c_fc.weight": 2.0,
+          "transformer.h.2.mlp.c_proj.weight": 2.0,
+          "transformer.h.3.attn.c_attn.weight": 0.5,
+          "transformer.h.3.attn.c_proj.weight": 0.5,
+          "transformer.h.3.mlp.c_fc.weight": 2.0,
+          "transformer.h.3.mlp.c_proj.weight": 2.0,
+          "transformer.h.4.attn.c_attn.weight": 0.5,
+          "transformer.h.4.attn.c_proj.weight": 0.5,
+          "transformer.h.4.mlp.c_fc.weight": 2.0,
+          "transformer.h.4.mlp.c_proj.weight": 2.0,
+          "transformer.h.5.attn.c_attn.weight": 0.5,
+          "transformer.h.5.attn.c_proj.weight": 0.5,
+          "transformer.h.5.mlp.c_fc.weight": 2.0,
+          "transformer.h.5.mlp.c_proj.weight": 2.0,
+          "transformer.h.6.attn.c_attn.weight": 0.5,
+          "transformer.h.6.attn.c_proj.weight": 0.5,
+          "transformer.h.6.mlp.c_fc.weight": 2.0,
+          "transformer.h.6.mlp.c_proj.weight": 2.0,
+          "transformer.h.7.attn.c_attn.weight": 0.5,
+          "transformer.h.7.attn.c_proj.weight": 0.5,
+          "transformer.h.7.mlp.c_fc.weight": 2.0,
+          "transformer.h.7.mlp.c_proj.weight": 2.0,
+          "transformer.h.8.attn.c_attn.weight": 0.5,
+          "transformer.h.8.attn.c_proj.weight": 0.5,
+          "transformer.h.8.mlp.c_fc.weight": 2.0,
+          "transformer.h.8.mlp.c_proj.weight": 2.0,
+          "transformer.h.9.attn.c_attn.weight": 0.5,
+          "transformer.h.9.attn.c_proj.weight": 0.5,
+          "transformer.h.9.mlp.c_fc.weight": 2.0,
+          "transformer.h.9.mlp.c_proj.weight": 2.0
+        },
+        "specification": {
+          "default_multiplier": 1.0,
+          "exact_parameter_multipliers": {},
+          "matrix_type_multipliers": {
+            "attention_output": 0.5,
+            "attention_qkv": 0.5,
+            "mlp_input": 2.0,
+            "mlp_output": 2.0
+          }
+        },
+        "summary": {
+          "eligible_matrix_count": 48,
+          "maximum_multiplier": 2.0,
+          "minimum_multiplier": 0.5,
+          "unique_multiplier_count": 2
+        }
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "static_per_matrix_sgdm",
+      "overrides": {
+        "matrix_learning_rate": 0.03,
+        "matrix_momentum": 0.95,
+        "static_default_multiplier": 1.0,
+        "static_exact_parameter_multipliers": {},
+        "static_matrix_type_multipliers": {
+          "attention_output": 0.5,
+          "attention_qkv": 0.5,
+          "mlp_input": 2.0,
+          "mlp_output": 2.0
+        }
+      },
+      "run_id": "zero_wd_static_per_matrix_sgdm_lr0.03_mom0.95",
+      "run_name": "zero_matrix_decay_static_per_matrix_sgdm_gpt2-124m_lr0.03_mom0.95_mwd0_seed1337_scalestatic-2633929b6baf-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.03,
+        "learning_rate": 0.03,
+        "mapping_fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "mapping_id": "2633929b6baf",
+        "mapping_name": "mlp_strong",
+        "momentum": 0.95,
+        "scaling_rule": "static-2633929b6baf-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "static_multiplier_configuration": {
+        "fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "geometric_mean": 1.0,
+        "geometric_mean_log_tolerance": 1e-09,
+        "mapping_id": "2633929b6baf",
+        "resolved_multipliers": {
+          "transformer.h.0.attn.c_attn.weight": 0.5,
+          "transformer.h.0.attn.c_proj.weight": 0.5,
+          "transformer.h.0.mlp.c_fc.weight": 2.0,
+          "transformer.h.0.mlp.c_proj.weight": 2.0,
+          "transformer.h.1.attn.c_attn.weight": 0.5,
+          "transformer.h.1.attn.c_proj.weight": 0.5,
+          "transformer.h.1.mlp.c_fc.weight": 2.0,
+          "transformer.h.1.mlp.c_proj.weight": 2.0,
+          "transformer.h.10.attn.c_attn.weight": 0.5,
+          "transformer.h.10.attn.c_proj.weight": 0.5,
+          "transformer.h.10.mlp.c_fc.weight": 2.0,
+          "transformer.h.10.mlp.c_proj.weight": 2.0,
+          "transformer.h.11.attn.c_attn.weight": 0.5,
+          "transformer.h.11.attn.c_proj.weight": 0.5,
+          "transformer.h.11.mlp.c_fc.weight": 2.0,
+          "transformer.h.11.mlp.c_proj.weight": 2.0,
+          "transformer.h.2.attn.c_attn.weight": 0.5,
+          "transformer.h.2.attn.c_proj.weight": 0.5,
+          "transformer.h.2.mlp.c_fc.weight": 2.0,
+          "transformer.h.2.mlp.c_proj.weight": 2.0,
+          "transformer.h.3.attn.c_attn.weight": 0.5,
+          "transformer.h.3.attn.c_proj.weight": 0.5,
+          "transformer.h.3.mlp.c_fc.weight": 2.0,
+          "transformer.h.3.mlp.c_proj.weight": 2.0,
+          "transformer.h.4.attn.c_attn.weight": 0.5,
+          "transformer.h.4.attn.c_proj.weight": 0.5,
+          "transformer.h.4.mlp.c_fc.weight": 2.0,
+          "transformer.h.4.mlp.c_proj.weight": 2.0,
+          "transformer.h.5.attn.c_attn.weight": 0.5,
+          "transformer.h.5.attn.c_proj.weight": 0.5,
+          "transformer.h.5.mlp.c_fc.weight": 2.0,
+          "transformer.h.5.mlp.c_proj.weight": 2.0,
+          "transformer.h.6.attn.c_attn.weight": 0.5,
+          "transformer.h.6.attn.c_proj.weight": 0.5,
+          "transformer.h.6.mlp.c_fc.weight": 2.0,
+          "transformer.h.6.mlp.c_proj.weight": 2.0,
+          "transformer.h.7.attn.c_attn.weight": 0.5,
+          "transformer.h.7.attn.c_proj.weight": 0.5,
+          "transformer.h.7.mlp.c_fc.weight": 2.0,
+          "transformer.h.7.mlp.c_proj.weight": 2.0,
+          "transformer.h.8.attn.c_attn.weight": 0.5,
+          "transformer.h.8.attn.c_proj.weight": 0.5,
+          "transformer.h.8.mlp.c_fc.weight": 2.0,
+          "transformer.h.8.mlp.c_proj.weight": 2.0,
+          "transformer.h.9.attn.c_attn.weight": 0.5,
+          "transformer.h.9.attn.c_proj.weight": 0.5,
+          "transformer.h.9.mlp.c_fc.weight": 2.0,
+          "transformer.h.9.mlp.c_proj.weight": 2.0
+        },
+        "specification": {
+          "default_multiplier": 1.0,
+          "exact_parameter_multipliers": {},
+          "matrix_type_multipliers": {
+            "attention_output": 0.5,
+            "attention_qkv": 0.5,
+            "mlp_input": 2.0,
+            "mlp_output": 2.0
+          }
+        },
+        "summary": {
+          "eligible_matrix_count": 48,
+          "maximum_multiplier": 2.0,
+          "minimum_multiplier": 0.5,
+          "unique_multiplier_count": 2
+        }
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "static_per_matrix_sgdm",
+      "overrides": {
+        "matrix_learning_rate": 0.03,
+        "matrix_momentum": 0.99,
+        "static_default_multiplier": 1.0,
+        "static_exact_parameter_multipliers": {},
+        "static_matrix_type_multipliers": {
+          "attention_output": 0.5,
+          "attention_qkv": 0.5,
+          "mlp_input": 2.0,
+          "mlp_output": 2.0
+        }
+      },
+      "run_id": "zero_wd_static_per_matrix_sgdm_lr0.03_mom0.99",
+      "run_name": "zero_matrix_decay_static_per_matrix_sgdm_gpt2-124m_lr0.03_mom0.99_mwd0_seed1337_scalestatic-2633929b6baf-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.03,
+        "learning_rate": 0.03,
+        "mapping_fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "mapping_id": "2633929b6baf",
+        "mapping_name": "mlp_strong",
+        "momentum": 0.99,
+        "scaling_rule": "static-2633929b6baf-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "static_multiplier_configuration": {
+        "fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "geometric_mean": 1.0,
+        "geometric_mean_log_tolerance": 1e-09,
+        "mapping_id": "2633929b6baf",
+        "resolved_multipliers": {
+          "transformer.h.0.attn.c_attn.weight": 0.5,
+          "transformer.h.0.attn.c_proj.weight": 0.5,
+          "transformer.h.0.mlp.c_fc.weight": 2.0,
+          "transformer.h.0.mlp.c_proj.weight": 2.0,
+          "transformer.h.1.attn.c_attn.weight": 0.5,
+          "transformer.h.1.attn.c_proj.weight": 0.5,
+          "transformer.h.1.mlp.c_fc.weight": 2.0,
+          "transformer.h.1.mlp.c_proj.weight": 2.0,
+          "transformer.h.10.attn.c_attn.weight": 0.5,
+          "transformer.h.10.attn.c_proj.weight": 0.5,
+          "transformer.h.10.mlp.c_fc.weight": 2.0,
+          "transformer.h.10.mlp.c_proj.weight": 2.0,
+          "transformer.h.11.attn.c_attn.weight": 0.5,
+          "transformer.h.11.attn.c_proj.weight": 0.5,
+          "transformer.h.11.mlp.c_fc.weight": 2.0,
+          "transformer.h.11.mlp.c_proj.weight": 2.0,
+          "transformer.h.2.attn.c_attn.weight": 0.5,
+          "transformer.h.2.attn.c_proj.weight": 0.5,
+          "transformer.h.2.mlp.c_fc.weight": 2.0,
+          "transformer.h.2.mlp.c_proj.weight": 2.0,
+          "transformer.h.3.attn.c_attn.weight": 0.5,
+          "transformer.h.3.attn.c_proj.weight": 0.5,
+          "transformer.h.3.mlp.c_fc.weight": 2.0,
+          "transformer.h.3.mlp.c_proj.weight": 2.0,
+          "transformer.h.4.attn.c_attn.weight": 0.5,
+          "transformer.h.4.attn.c_proj.weight": 0.5,
+          "transformer.h.4.mlp.c_fc.weight": 2.0,
+          "transformer.h.4.mlp.c_proj.weight": 2.0,
+          "transformer.h.5.attn.c_attn.weight": 0.5,
+          "transformer.h.5.attn.c_proj.weight": 0.5,
+          "transformer.h.5.mlp.c_fc.weight": 2.0,
+          "transformer.h.5.mlp.c_proj.weight": 2.0,
+          "transformer.h.6.attn.c_attn.weight": 0.5,
+          "transformer.h.6.attn.c_proj.weight": 0.5,
+          "transformer.h.6.mlp.c_fc.weight": 2.0,
+          "transformer.h.6.mlp.c_proj.weight": 2.0,
+          "transformer.h.7.attn.c_attn.weight": 0.5,
+          "transformer.h.7.attn.c_proj.weight": 0.5,
+          "transformer.h.7.mlp.c_fc.weight": 2.0,
+          "transformer.h.7.mlp.c_proj.weight": 2.0,
+          "transformer.h.8.attn.c_attn.weight": 0.5,
+          "transformer.h.8.attn.c_proj.weight": 0.5,
+          "transformer.h.8.mlp.c_fc.weight": 2.0,
+          "transformer.h.8.mlp.c_proj.weight": 2.0,
+          "transformer.h.9.attn.c_attn.weight": 0.5,
+          "transformer.h.9.attn.c_proj.weight": 0.5,
+          "transformer.h.9.mlp.c_fc.weight": 2.0,
+          "transformer.h.9.mlp.c_proj.weight": 2.0
+        },
+        "specification": {
+          "default_multiplier": 1.0,
+          "exact_parameter_multipliers": {},
+          "matrix_type_multipliers": {
+            "attention_output": 0.5,
+            "attention_qkv": 0.5,
+            "mlp_input": 2.0,
+            "mlp_output": 2.0
+          }
+        },
+        "summary": {
+          "eligible_matrix_count": 48,
+          "maximum_multiplier": 2.0,
+          "minimum_multiplier": 0.5,
+          "unique_multiplier_count": 2
+        }
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "static_per_matrix_sgdm",
+      "overrides": {
+        "matrix_learning_rate": 0.1,
+        "matrix_momentum": 0.9,
+        "static_default_multiplier": 1.0,
+        "static_exact_parameter_multipliers": {},
+        "static_matrix_type_multipliers": {
+          "attention_output": 0.5,
+          "attention_qkv": 0.5,
+          "mlp_input": 2.0,
+          "mlp_output": 2.0
+        }
+      },
+      "run_id": "zero_wd_static_per_matrix_sgdm_lr0.1_mom0.9",
+      "run_name": "zero_matrix_decay_static_per_matrix_sgdm_gpt2-124m_lr0.1_mom0.9_mwd0_seed1337_scalestatic-2633929b6baf-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.1,
+        "learning_rate": 0.1,
+        "mapping_fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "mapping_id": "2633929b6baf",
+        "mapping_name": "mlp_strong",
+        "momentum": 0.9,
+        "scaling_rule": "static-2633929b6baf-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "static_multiplier_configuration": {
+        "fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "geometric_mean": 1.0,
+        "geometric_mean_log_tolerance": 1e-09,
+        "mapping_id": "2633929b6baf",
+        "resolved_multipliers": {
+          "transformer.h.0.attn.c_attn.weight": 0.5,
+          "transformer.h.0.attn.c_proj.weight": 0.5,
+          "transformer.h.0.mlp.c_fc.weight": 2.0,
+          "transformer.h.0.mlp.c_proj.weight": 2.0,
+          "transformer.h.1.attn.c_attn.weight": 0.5,
+          "transformer.h.1.attn.c_proj.weight": 0.5,
+          "transformer.h.1.mlp.c_fc.weight": 2.0,
+          "transformer.h.1.mlp.c_proj.weight": 2.0,
+          "transformer.h.10.attn.c_attn.weight": 0.5,
+          "transformer.h.10.attn.c_proj.weight": 0.5,
+          "transformer.h.10.mlp.c_fc.weight": 2.0,
+          "transformer.h.10.mlp.c_proj.weight": 2.0,
+          "transformer.h.11.attn.c_attn.weight": 0.5,
+          "transformer.h.11.attn.c_proj.weight": 0.5,
+          "transformer.h.11.mlp.c_fc.weight": 2.0,
+          "transformer.h.11.mlp.c_proj.weight": 2.0,
+          "transformer.h.2.attn.c_attn.weight": 0.5,
+          "transformer.h.2.attn.c_proj.weight": 0.5,
+          "transformer.h.2.mlp.c_fc.weight": 2.0,
+          "transformer.h.2.mlp.c_proj.weight": 2.0,
+          "transformer.h.3.attn.c_attn.weight": 0.5,
+          "transformer.h.3.attn.c_proj.weight": 0.5,
+          "transformer.h.3.mlp.c_fc.weight": 2.0,
+          "transformer.h.3.mlp.c_proj.weight": 2.0,
+          "transformer.h.4.attn.c_attn.weight": 0.5,
+          "transformer.h.4.attn.c_proj.weight": 0.5,
+          "transformer.h.4.mlp.c_fc.weight": 2.0,
+          "transformer.h.4.mlp.c_proj.weight": 2.0,
+          "transformer.h.5.attn.c_attn.weight": 0.5,
+          "transformer.h.5.attn.c_proj.weight": 0.5,
+          "transformer.h.5.mlp.c_fc.weight": 2.0,
+          "transformer.h.5.mlp.c_proj.weight": 2.0,
+          "transformer.h.6.attn.c_attn.weight": 0.5,
+          "transformer.h.6.attn.c_proj.weight": 0.5,
+          "transformer.h.6.mlp.c_fc.weight": 2.0,
+          "transformer.h.6.mlp.c_proj.weight": 2.0,
+          "transformer.h.7.attn.c_attn.weight": 0.5,
+          "transformer.h.7.attn.c_proj.weight": 0.5,
+          "transformer.h.7.mlp.c_fc.weight": 2.0,
+          "transformer.h.7.mlp.c_proj.weight": 2.0,
+          "transformer.h.8.attn.c_attn.weight": 0.5,
+          "transformer.h.8.attn.c_proj.weight": 0.5,
+          "transformer.h.8.mlp.c_fc.weight": 2.0,
+          "transformer.h.8.mlp.c_proj.weight": 2.0,
+          "transformer.h.9.attn.c_attn.weight": 0.5,
+          "transformer.h.9.attn.c_proj.weight": 0.5,
+          "transformer.h.9.mlp.c_fc.weight": 2.0,
+          "transformer.h.9.mlp.c_proj.weight": 2.0
+        },
+        "specification": {
+          "default_multiplier": 1.0,
+          "exact_parameter_multipliers": {},
+          "matrix_type_multipliers": {
+            "attention_output": 0.5,
+            "attention_qkv": 0.5,
+            "mlp_input": 2.0,
+            "mlp_output": 2.0
+          }
+        },
+        "summary": {
+          "eligible_matrix_count": 48,
+          "maximum_multiplier": 2.0,
+          "minimum_multiplier": 0.5,
+          "unique_multiplier_count": 2
+        }
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "static_per_matrix_sgdm",
+      "overrides": {
+        "matrix_learning_rate": 0.1,
+        "matrix_momentum": 0.95,
+        "static_default_multiplier": 1.0,
+        "static_exact_parameter_multipliers": {},
+        "static_matrix_type_multipliers": {
+          "attention_output": 0.5,
+          "attention_qkv": 0.5,
+          "mlp_input": 2.0,
+          "mlp_output": 2.0
+        }
+      },
+      "run_id": "zero_wd_static_per_matrix_sgdm_lr0.1_mom0.95",
+      "run_name": "zero_matrix_decay_static_per_matrix_sgdm_gpt2-124m_lr0.1_mom0.95_mwd0_seed1337_scalestatic-2633929b6baf-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.1,
+        "learning_rate": 0.1,
+        "mapping_fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "mapping_id": "2633929b6baf",
+        "mapping_name": "mlp_strong",
+        "momentum": 0.95,
+        "scaling_rule": "static-2633929b6baf-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "static_multiplier_configuration": {
+        "fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "geometric_mean": 1.0,
+        "geometric_mean_log_tolerance": 1e-09,
+        "mapping_id": "2633929b6baf",
+        "resolved_multipliers": {
+          "transformer.h.0.attn.c_attn.weight": 0.5,
+          "transformer.h.0.attn.c_proj.weight": 0.5,
+          "transformer.h.0.mlp.c_fc.weight": 2.0,
+          "transformer.h.0.mlp.c_proj.weight": 2.0,
+          "transformer.h.1.attn.c_attn.weight": 0.5,
+          "transformer.h.1.attn.c_proj.weight": 0.5,
+          "transformer.h.1.mlp.c_fc.weight": 2.0,
+          "transformer.h.1.mlp.c_proj.weight": 2.0,
+          "transformer.h.10.attn.c_attn.weight": 0.5,
+          "transformer.h.10.attn.c_proj.weight": 0.5,
+          "transformer.h.10.mlp.c_fc.weight": 2.0,
+          "transformer.h.10.mlp.c_proj.weight": 2.0,
+          "transformer.h.11.attn.c_attn.weight": 0.5,
+          "transformer.h.11.attn.c_proj.weight": 0.5,
+          "transformer.h.11.mlp.c_fc.weight": 2.0,
+          "transformer.h.11.mlp.c_proj.weight": 2.0,
+          "transformer.h.2.attn.c_attn.weight": 0.5,
+          "transformer.h.2.attn.c_proj.weight": 0.5,
+          "transformer.h.2.mlp.c_fc.weight": 2.0,
+          "transformer.h.2.mlp.c_proj.weight": 2.0,
+          "transformer.h.3.attn.c_attn.weight": 0.5,
+          "transformer.h.3.attn.c_proj.weight": 0.5,
+          "transformer.h.3.mlp.c_fc.weight": 2.0,
+          "transformer.h.3.mlp.c_proj.weight": 2.0,
+          "transformer.h.4.attn.c_attn.weight": 0.5,
+          "transformer.h.4.attn.c_proj.weight": 0.5,
+          "transformer.h.4.mlp.c_fc.weight": 2.0,
+          "transformer.h.4.mlp.c_proj.weight": 2.0,
+          "transformer.h.5.attn.c_attn.weight": 0.5,
+          "transformer.h.5.attn.c_proj.weight": 0.5,
+          "transformer.h.5.mlp.c_fc.weight": 2.0,
+          "transformer.h.5.mlp.c_proj.weight": 2.0,
+          "transformer.h.6.attn.c_attn.weight": 0.5,
+          "transformer.h.6.attn.c_proj.weight": 0.5,
+          "transformer.h.6.mlp.c_fc.weight": 2.0,
+          "transformer.h.6.mlp.c_proj.weight": 2.0,
+          "transformer.h.7.attn.c_attn.weight": 0.5,
+          "transformer.h.7.attn.c_proj.weight": 0.5,
+          "transformer.h.7.mlp.c_fc.weight": 2.0,
+          "transformer.h.7.mlp.c_proj.weight": 2.0,
+          "transformer.h.8.attn.c_attn.weight": 0.5,
+          "transformer.h.8.attn.c_proj.weight": 0.5,
+          "transformer.h.8.mlp.c_fc.weight": 2.0,
+          "transformer.h.8.mlp.c_proj.weight": 2.0,
+          "transformer.h.9.attn.c_attn.weight": 0.5,
+          "transformer.h.9.attn.c_proj.weight": 0.5,
+          "transformer.h.9.mlp.c_fc.weight": 2.0,
+          "transformer.h.9.mlp.c_proj.weight": 2.0
+        },
+        "specification": {
+          "default_multiplier": 1.0,
+          "exact_parameter_multipliers": {},
+          "matrix_type_multipliers": {
+            "attention_output": 0.5,
+            "attention_qkv": 0.5,
+            "mlp_input": 2.0,
+            "mlp_output": 2.0
+          }
+        },
+        "summary": {
+          "eligible_matrix_count": 48,
+          "maximum_multiplier": 2.0,
+          "minimum_multiplier": 0.5,
+          "unique_multiplier_count": 2
+        }
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "static_per_matrix_sgdm",
+      "overrides": {
+        "matrix_learning_rate": 0.1,
+        "matrix_momentum": 0.99,
+        "static_default_multiplier": 1.0,
+        "static_exact_parameter_multipliers": {},
+        "static_matrix_type_multipliers": {
+          "attention_output": 0.5,
+          "attention_qkv": 0.5,
+          "mlp_input": 2.0,
+          "mlp_output": 2.0
+        }
+      },
+      "run_id": "zero_wd_static_per_matrix_sgdm_lr0.1_mom0.99",
+      "run_name": "zero_matrix_decay_static_per_matrix_sgdm_gpt2-124m_lr0.1_mom0.99_mwd0_seed1337_scalestatic-2633929b6baf-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.1,
+        "learning_rate": 0.1,
+        "mapping_fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "mapping_id": "2633929b6baf",
+        "mapping_name": "mlp_strong",
+        "momentum": 0.99,
+        "scaling_rule": "static-2633929b6baf-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "static_multiplier_configuration": {
+        "fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "geometric_mean": 1.0,
+        "geometric_mean_log_tolerance": 1e-09,
+        "mapping_id": "2633929b6baf",
+        "resolved_multipliers": {
+          "transformer.h.0.attn.c_attn.weight": 0.5,
+          "transformer.h.0.attn.c_proj.weight": 0.5,
+          "transformer.h.0.mlp.c_fc.weight": 2.0,
+          "transformer.h.0.mlp.c_proj.weight": 2.0,
+          "transformer.h.1.attn.c_attn.weight": 0.5,
+          "transformer.h.1.attn.c_proj.weight": 0.5,
+          "transformer.h.1.mlp.c_fc.weight": 2.0,
+          "transformer.h.1.mlp.c_proj.weight": 2.0,
+          "transformer.h.10.attn.c_attn.weight": 0.5,
+          "transformer.h.10.attn.c_proj.weight": 0.5,
+          "transformer.h.10.mlp.c_fc.weight": 2.0,
+          "transformer.h.10.mlp.c_proj.weight": 2.0,
+          "transformer.h.11.attn.c_attn.weight": 0.5,
+          "transformer.h.11.attn.c_proj.weight": 0.5,
+          "transformer.h.11.mlp.c_fc.weight": 2.0,
+          "transformer.h.11.mlp.c_proj.weight": 2.0,
+          "transformer.h.2.attn.c_attn.weight": 0.5,
+          "transformer.h.2.attn.c_proj.weight": 0.5,
+          "transformer.h.2.mlp.c_fc.weight": 2.0,
+          "transformer.h.2.mlp.c_proj.weight": 2.0,
+          "transformer.h.3.attn.c_attn.weight": 0.5,
+          "transformer.h.3.attn.c_proj.weight": 0.5,
+          "transformer.h.3.mlp.c_fc.weight": 2.0,
+          "transformer.h.3.mlp.c_proj.weight": 2.0,
+          "transformer.h.4.attn.c_attn.weight": 0.5,
+          "transformer.h.4.attn.c_proj.weight": 0.5,
+          "transformer.h.4.mlp.c_fc.weight": 2.0,
+          "transformer.h.4.mlp.c_proj.weight": 2.0,
+          "transformer.h.5.attn.c_attn.weight": 0.5,
+          "transformer.h.5.attn.c_proj.weight": 0.5,
+          "transformer.h.5.mlp.c_fc.weight": 2.0,
+          "transformer.h.5.mlp.c_proj.weight": 2.0,
+          "transformer.h.6.attn.c_attn.weight": 0.5,
+          "transformer.h.6.attn.c_proj.weight": 0.5,
+          "transformer.h.6.mlp.c_fc.weight": 2.0,
+          "transformer.h.6.mlp.c_proj.weight": 2.0,
+          "transformer.h.7.attn.c_attn.weight": 0.5,
+          "transformer.h.7.attn.c_proj.weight": 0.5,
+          "transformer.h.7.mlp.c_fc.weight": 2.0,
+          "transformer.h.7.mlp.c_proj.weight": 2.0,
+          "transformer.h.8.attn.c_attn.weight": 0.5,
+          "transformer.h.8.attn.c_proj.weight": 0.5,
+          "transformer.h.8.mlp.c_fc.weight": 2.0,
+          "transformer.h.8.mlp.c_proj.weight": 2.0,
+          "transformer.h.9.attn.c_attn.weight": 0.5,
+          "transformer.h.9.attn.c_proj.weight": 0.5,
+          "transformer.h.9.mlp.c_fc.weight": 2.0,
+          "transformer.h.9.mlp.c_proj.weight": 2.0
+        },
+        "specification": {
+          "default_multiplier": 1.0,
+          "exact_parameter_multipliers": {},
+          "matrix_type_multipliers": {
+            "attention_output": 0.5,
+            "attention_qkv": 0.5,
+            "mlp_input": 2.0,
+            "mlp_output": 2.0
+          }
+        },
+        "summary": {
+          "eligible_matrix_count": 48,
+          "maximum_multiplier": 2.0,
+          "minimum_multiplier": 0.5,
+          "unique_multiplier_count": 2
+        }
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "static_per_matrix_sgdm",
+      "overrides": {
+        "matrix_learning_rate": 0.3,
+        "matrix_momentum": 0.9,
+        "static_default_multiplier": 1.0,
+        "static_exact_parameter_multipliers": {},
+        "static_matrix_type_multipliers": {
+          "attention_output": 0.5,
+          "attention_qkv": 0.5,
+          "mlp_input": 2.0,
+          "mlp_output": 2.0
+        }
+      },
+      "run_id": "zero_wd_static_per_matrix_sgdm_lr0.3_mom0.9",
+      "run_name": "zero_matrix_decay_static_per_matrix_sgdm_gpt2-124m_lr0.3_mom0.9_mwd0_seed1337_scalestatic-2633929b6baf-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.3,
+        "learning_rate": 0.3,
+        "mapping_fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "mapping_id": "2633929b6baf",
+        "mapping_name": "mlp_strong",
+        "momentum": 0.9,
+        "scaling_rule": "static-2633929b6baf-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "static_multiplier_configuration": {
+        "fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "geometric_mean": 1.0,
+        "geometric_mean_log_tolerance": 1e-09,
+        "mapping_id": "2633929b6baf",
+        "resolved_multipliers": {
+          "transformer.h.0.attn.c_attn.weight": 0.5,
+          "transformer.h.0.attn.c_proj.weight": 0.5,
+          "transformer.h.0.mlp.c_fc.weight": 2.0,
+          "transformer.h.0.mlp.c_proj.weight": 2.0,
+          "transformer.h.1.attn.c_attn.weight": 0.5,
+          "transformer.h.1.attn.c_proj.weight": 0.5,
+          "transformer.h.1.mlp.c_fc.weight": 2.0,
+          "transformer.h.1.mlp.c_proj.weight": 2.0,
+          "transformer.h.10.attn.c_attn.weight": 0.5,
+          "transformer.h.10.attn.c_proj.weight": 0.5,
+          "transformer.h.10.mlp.c_fc.weight": 2.0,
+          "transformer.h.10.mlp.c_proj.weight": 2.0,
+          "transformer.h.11.attn.c_attn.weight": 0.5,
+          "transformer.h.11.attn.c_proj.weight": 0.5,
+          "transformer.h.11.mlp.c_fc.weight": 2.0,
+          "transformer.h.11.mlp.c_proj.weight": 2.0,
+          "transformer.h.2.attn.c_attn.weight": 0.5,
+          "transformer.h.2.attn.c_proj.weight": 0.5,
+          "transformer.h.2.mlp.c_fc.weight": 2.0,
+          "transformer.h.2.mlp.c_proj.weight": 2.0,
+          "transformer.h.3.attn.c_attn.weight": 0.5,
+          "transformer.h.3.attn.c_proj.weight": 0.5,
+          "transformer.h.3.mlp.c_fc.weight": 2.0,
+          "transformer.h.3.mlp.c_proj.weight": 2.0,
+          "transformer.h.4.attn.c_attn.weight": 0.5,
+          "transformer.h.4.attn.c_proj.weight": 0.5,
+          "transformer.h.4.mlp.c_fc.weight": 2.0,
+          "transformer.h.4.mlp.c_proj.weight": 2.0,
+          "transformer.h.5.attn.c_attn.weight": 0.5,
+          "transformer.h.5.attn.c_proj.weight": 0.5,
+          "transformer.h.5.mlp.c_fc.weight": 2.0,
+          "transformer.h.5.mlp.c_proj.weight": 2.0,
+          "transformer.h.6.attn.c_attn.weight": 0.5,
+          "transformer.h.6.attn.c_proj.weight": 0.5,
+          "transformer.h.6.mlp.c_fc.weight": 2.0,
+          "transformer.h.6.mlp.c_proj.weight": 2.0,
+          "transformer.h.7.attn.c_attn.weight": 0.5,
+          "transformer.h.7.attn.c_proj.weight": 0.5,
+          "transformer.h.7.mlp.c_fc.weight": 2.0,
+          "transformer.h.7.mlp.c_proj.weight": 2.0,
+          "transformer.h.8.attn.c_attn.weight": 0.5,
+          "transformer.h.8.attn.c_proj.weight": 0.5,
+          "transformer.h.8.mlp.c_fc.weight": 2.0,
+          "transformer.h.8.mlp.c_proj.weight": 2.0,
+          "transformer.h.9.attn.c_attn.weight": 0.5,
+          "transformer.h.9.attn.c_proj.weight": 0.5,
+          "transformer.h.9.mlp.c_fc.weight": 2.0,
+          "transformer.h.9.mlp.c_proj.weight": 2.0
+        },
+        "specification": {
+          "default_multiplier": 1.0,
+          "exact_parameter_multipliers": {},
+          "matrix_type_multipliers": {
+            "attention_output": 0.5,
+            "attention_qkv": 0.5,
+            "mlp_input": 2.0,
+            "mlp_output": 2.0
+          }
+        },
+        "summary": {
+          "eligible_matrix_count": 48,
+          "maximum_multiplier": 2.0,
+          "minimum_multiplier": 0.5,
+          "unique_multiplier_count": 2
+        }
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "static_per_matrix_sgdm",
+      "overrides": {
+        "matrix_learning_rate": 0.3,
+        "matrix_momentum": 0.95,
+        "static_default_multiplier": 1.0,
+        "static_exact_parameter_multipliers": {},
+        "static_matrix_type_multipliers": {
+          "attention_output": 0.5,
+          "attention_qkv": 0.5,
+          "mlp_input": 2.0,
+          "mlp_output": 2.0
+        }
+      },
+      "run_id": "zero_wd_static_per_matrix_sgdm_lr0.3_mom0.95",
+      "run_name": "zero_matrix_decay_static_per_matrix_sgdm_gpt2-124m_lr0.3_mom0.95_mwd0_seed1337_scalestatic-2633929b6baf-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.3,
+        "learning_rate": 0.3,
+        "mapping_fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "mapping_id": "2633929b6baf",
+        "mapping_name": "mlp_strong",
+        "momentum": 0.95,
+        "scaling_rule": "static-2633929b6baf-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "static_multiplier_configuration": {
+        "fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "geometric_mean": 1.0,
+        "geometric_mean_log_tolerance": 1e-09,
+        "mapping_id": "2633929b6baf",
+        "resolved_multipliers": {
+          "transformer.h.0.attn.c_attn.weight": 0.5,
+          "transformer.h.0.attn.c_proj.weight": 0.5,
+          "transformer.h.0.mlp.c_fc.weight": 2.0,
+          "transformer.h.0.mlp.c_proj.weight": 2.0,
+          "transformer.h.1.attn.c_attn.weight": 0.5,
+          "transformer.h.1.attn.c_proj.weight": 0.5,
+          "transformer.h.1.mlp.c_fc.weight": 2.0,
+          "transformer.h.1.mlp.c_proj.weight": 2.0,
+          "transformer.h.10.attn.c_attn.weight": 0.5,
+          "transformer.h.10.attn.c_proj.weight": 0.5,
+          "transformer.h.10.mlp.c_fc.weight": 2.0,
+          "transformer.h.10.mlp.c_proj.weight": 2.0,
+          "transformer.h.11.attn.c_attn.weight": 0.5,
+          "transformer.h.11.attn.c_proj.weight": 0.5,
+          "transformer.h.11.mlp.c_fc.weight": 2.0,
+          "transformer.h.11.mlp.c_proj.weight": 2.0,
+          "transformer.h.2.attn.c_attn.weight": 0.5,
+          "transformer.h.2.attn.c_proj.weight": 0.5,
+          "transformer.h.2.mlp.c_fc.weight": 2.0,
+          "transformer.h.2.mlp.c_proj.weight": 2.0,
+          "transformer.h.3.attn.c_attn.weight": 0.5,
+          "transformer.h.3.attn.c_proj.weight": 0.5,
+          "transformer.h.3.mlp.c_fc.weight": 2.0,
+          "transformer.h.3.mlp.c_proj.weight": 2.0,
+          "transformer.h.4.attn.c_attn.weight": 0.5,
+          "transformer.h.4.attn.c_proj.weight": 0.5,
+          "transformer.h.4.mlp.c_fc.weight": 2.0,
+          "transformer.h.4.mlp.c_proj.weight": 2.0,
+          "transformer.h.5.attn.c_attn.weight": 0.5,
+          "transformer.h.5.attn.c_proj.weight": 0.5,
+          "transformer.h.5.mlp.c_fc.weight": 2.0,
+          "transformer.h.5.mlp.c_proj.weight": 2.0,
+          "transformer.h.6.attn.c_attn.weight": 0.5,
+          "transformer.h.6.attn.c_proj.weight": 0.5,
+          "transformer.h.6.mlp.c_fc.weight": 2.0,
+          "transformer.h.6.mlp.c_proj.weight": 2.0,
+          "transformer.h.7.attn.c_attn.weight": 0.5,
+          "transformer.h.7.attn.c_proj.weight": 0.5,
+          "transformer.h.7.mlp.c_fc.weight": 2.0,
+          "transformer.h.7.mlp.c_proj.weight": 2.0,
+          "transformer.h.8.attn.c_attn.weight": 0.5,
+          "transformer.h.8.attn.c_proj.weight": 0.5,
+          "transformer.h.8.mlp.c_fc.weight": 2.0,
+          "transformer.h.8.mlp.c_proj.weight": 2.0,
+          "transformer.h.9.attn.c_attn.weight": 0.5,
+          "transformer.h.9.attn.c_proj.weight": 0.5,
+          "transformer.h.9.mlp.c_fc.weight": 2.0,
+          "transformer.h.9.mlp.c_proj.weight": 2.0
+        },
+        "specification": {
+          "default_multiplier": 1.0,
+          "exact_parameter_multipliers": {},
+          "matrix_type_multipliers": {
+            "attention_output": 0.5,
+            "attention_qkv": 0.5,
+            "mlp_input": 2.0,
+            "mlp_output": 2.0
+          }
+        },
+        "summary": {
+          "eligible_matrix_count": 48,
+          "maximum_multiplier": 2.0,
+          "minimum_multiplier": 0.5,
+          "unique_multiplier_count": 2
+        }
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "static_per_matrix_sgdm",
+      "overrides": {
+        "matrix_learning_rate": 0.3,
+        "matrix_momentum": 0.99,
+        "static_default_multiplier": 1.0,
+        "static_exact_parameter_multipliers": {},
+        "static_matrix_type_multipliers": {
+          "attention_output": 0.5,
+          "attention_qkv": 0.5,
+          "mlp_input": 2.0,
+          "mlp_output": 2.0
+        }
+      },
+      "run_id": "zero_wd_static_per_matrix_sgdm_lr0.3_mom0.99",
+      "run_name": "zero_matrix_decay_static_per_matrix_sgdm_gpt2-124m_lr0.3_mom0.99_mwd0_seed1337_scalestatic-2633929b6baf-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.3,
+        "learning_rate": 0.3,
+        "mapping_fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "mapping_id": "2633929b6baf",
+        "mapping_name": "mlp_strong",
+        "momentum": 0.99,
+        "scaling_rule": "static-2633929b6baf-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "static_multiplier_configuration": {
+        "fingerprint_sha256": "2633929b6bafc6556341f36a0c5318003a647fe2795298f030b9e26330c6b600",
+        "geometric_mean": 1.0,
+        "geometric_mean_log_tolerance": 1e-09,
+        "mapping_id": "2633929b6baf",
+        "resolved_multipliers": {
+          "transformer.h.0.attn.c_attn.weight": 0.5,
+          "transformer.h.0.attn.c_proj.weight": 0.5,
+          "transformer.h.0.mlp.c_fc.weight": 2.0,
+          "transformer.h.0.mlp.c_proj.weight": 2.0,
+          "transformer.h.1.attn.c_attn.weight": 0.5,
+          "transformer.h.1.attn.c_proj.weight": 0.5,
+          "transformer.h.1.mlp.c_fc.weight": 2.0,
+          "transformer.h.1.mlp.c_proj.weight": 2.0,
+          "transformer.h.10.attn.c_attn.weight": 0.5,
+          "transformer.h.10.attn.c_proj.weight": 0.5,
+          "transformer.h.10.mlp.c_fc.weight": 2.0,
+          "transformer.h.10.mlp.c_proj.weight": 2.0,
+          "transformer.h.11.attn.c_attn.weight": 0.5,
+          "transformer.h.11.attn.c_proj.weight": 0.5,
+          "transformer.h.11.mlp.c_fc.weight": 2.0,
+          "transformer.h.11.mlp.c_proj.weight": 2.0,
+          "transformer.h.2.attn.c_attn.weight": 0.5,
+          "transformer.h.2.attn.c_proj.weight": 0.5,
+          "transformer.h.2.mlp.c_fc.weight": 2.0,
+          "transformer.h.2.mlp.c_proj.weight": 2.0,
+          "transformer.h.3.attn.c_attn.weight": 0.5,
+          "transformer.h.3.attn.c_proj.weight": 0.5,
+          "transformer.h.3.mlp.c_fc.weight": 2.0,
+          "transformer.h.3.mlp.c_proj.weight": 2.0,
+          "transformer.h.4.attn.c_attn.weight": 0.5,
+          "transformer.h.4.attn.c_proj.weight": 0.5,
+          "transformer.h.4.mlp.c_fc.weight": 2.0,
+          "transformer.h.4.mlp.c_proj.weight": 2.0,
+          "transformer.h.5.attn.c_attn.weight": 0.5,
+          "transformer.h.5.attn.c_proj.weight": 0.5,
+          "transformer.h.5.mlp.c_fc.weight": 2.0,
+          "transformer.h.5.mlp.c_proj.weight": 2.0,
+          "transformer.h.6.attn.c_attn.weight": 0.5,
+          "transformer.h.6.attn.c_proj.weight": 0.5,
+          "transformer.h.6.mlp.c_fc.weight": 2.0,
+          "transformer.h.6.mlp.c_proj.weight": 2.0,
+          "transformer.h.7.attn.c_attn.weight": 0.5,
+          "transformer.h.7.attn.c_proj.weight": 0.5,
+          "transformer.h.7.mlp.c_fc.weight": 2.0,
+          "transformer.h.7.mlp.c_proj.weight": 2.0,
+          "transformer.h.8.attn.c_attn.weight": 0.5,
+          "transformer.h.8.attn.c_proj.weight": 0.5,
+          "transformer.h.8.mlp.c_fc.weight": 2.0,
+          "transformer.h.8.mlp.c_proj.weight": 2.0,
+          "transformer.h.9.attn.c_attn.weight": 0.5,
+          "transformer.h.9.attn.c_proj.weight": 0.5,
+          "transformer.h.9.mlp.c_fc.weight": 2.0,
+          "transformer.h.9.mlp.c_proj.weight": 2.0
+        },
+        "specification": {
+          "default_multiplier": 1.0,
+          "exact_parameter_multipliers": {},
+          "matrix_type_multipliers": {
+            "attention_output": 0.5,
+            "attention_qkv": 0.5,
+            "mlp_input": 2.0,
+            "mlp_output": 2.0
+          }
+        },
+        "summary": {
+          "eligible_matrix_count": 48,
+          "maximum_multiplier": 2.0,
+          "minimum_multiplier": 0.5,
+          "unique_multiplier_count": 2
+        }
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "overrides": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.001,
+        "frobenius_shape_factor": 1.0,
+        "matrix_momentum": 0.8
+      },
+      "run_id": "zero_wd_frobenius_normalized_sgdm_lr0.001_mom0.8",
+      "run_name": "zero_matrix_decay_frobenius_normalized_sgdm_gpt2-124m_lr0.001_mom0.8_mwd0_seed1337_scalefrobsqrtr-eps1em12-v1-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.001,
+        "frobenius_epsilon": 1e-12,
+        "frobenius_shape_factor": 1.0,
+        "learning_rate": 0.001,
+        "momentum": 0.8,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "scaling_rule": "frobsqrtr-eps1em12-v1-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "overrides": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.001,
+        "frobenius_shape_factor": 1.0,
+        "matrix_momentum": 0.9
+      },
+      "run_id": "zero_wd_frobenius_normalized_sgdm_lr0.001_mom0.9",
+      "run_name": "zero_matrix_decay_frobenius_normalized_sgdm_gpt2-124m_lr0.001_mom0.9_mwd0_seed1337_scalefrobsqrtr-eps1em12-v1-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.001,
+        "frobenius_epsilon": 1e-12,
+        "frobenius_shape_factor": 1.0,
+        "learning_rate": 0.001,
+        "momentum": 0.9,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "scaling_rule": "frobsqrtr-eps1em12-v1-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "overrides": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.001,
+        "frobenius_shape_factor": 1.0,
+        "matrix_momentum": 0.95
+      },
+      "run_id": "zero_wd_frobenius_normalized_sgdm_lr0.001_mom0.95",
+      "run_name": "zero_matrix_decay_frobenius_normalized_sgdm_gpt2-124m_lr0.001_mom0.95_mwd0_seed1337_scalefrobsqrtr-eps1em12-v1-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.001,
+        "frobenius_epsilon": 1e-12,
+        "frobenius_shape_factor": 1.0,
+        "learning_rate": 0.001,
+        "momentum": 0.95,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "scaling_rule": "frobsqrtr-eps1em12-v1-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "overrides": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.003,
+        "frobenius_shape_factor": 1.0,
+        "matrix_momentum": 0.8
+      },
+      "run_id": "zero_wd_frobenius_normalized_sgdm_lr0.003_mom0.8",
+      "run_name": "zero_matrix_decay_frobenius_normalized_sgdm_gpt2-124m_lr0.003_mom0.8_mwd0_seed1337_scalefrobsqrtr-eps1em12-v1-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.003,
+        "frobenius_epsilon": 1e-12,
+        "frobenius_shape_factor": 1.0,
+        "learning_rate": 0.003,
+        "momentum": 0.8,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "scaling_rule": "frobsqrtr-eps1em12-v1-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "overrides": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.003,
+        "frobenius_shape_factor": 1.0,
+        "matrix_momentum": 0.9
+      },
+      "run_id": "zero_wd_frobenius_normalized_sgdm_lr0.003_mom0.9",
+      "run_name": "zero_matrix_decay_frobenius_normalized_sgdm_gpt2-124m_lr0.003_mom0.9_mwd0_seed1337_scalefrobsqrtr-eps1em12-v1-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.003,
+        "frobenius_epsilon": 1e-12,
+        "frobenius_shape_factor": 1.0,
+        "learning_rate": 0.003,
+        "momentum": 0.9,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "scaling_rule": "frobsqrtr-eps1em12-v1-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "overrides": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.003,
+        "frobenius_shape_factor": 1.0,
+        "matrix_momentum": 0.95
+      },
+      "run_id": "zero_wd_frobenius_normalized_sgdm_lr0.003_mom0.95",
+      "run_name": "zero_matrix_decay_frobenius_normalized_sgdm_gpt2-124m_lr0.003_mom0.95_mwd0_seed1337_scalefrobsqrtr-eps1em12-v1-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.003,
+        "frobenius_epsilon": 1e-12,
+        "frobenius_shape_factor": 1.0,
+        "learning_rate": 0.003,
+        "momentum": 0.95,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "scaling_rule": "frobsqrtr-eps1em12-v1-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "overrides": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.01,
+        "frobenius_shape_factor": 1.0,
+        "matrix_momentum": 0.8
+      },
+      "run_id": "zero_wd_frobenius_normalized_sgdm_lr0.01_mom0.8",
+      "run_name": "zero_matrix_decay_frobenius_normalized_sgdm_gpt2-124m_lr0.01_mom0.8_mwd0_seed1337_scalefrobsqrtr-eps1em12-v1-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.01,
+        "frobenius_epsilon": 1e-12,
+        "frobenius_shape_factor": 1.0,
+        "learning_rate": 0.01,
+        "momentum": 0.8,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "scaling_rule": "frobsqrtr-eps1em12-v1-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "overrides": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.01,
+        "frobenius_shape_factor": 1.0,
+        "matrix_momentum": 0.9
+      },
+      "run_id": "zero_wd_frobenius_normalized_sgdm_lr0.01_mom0.9",
+      "run_name": "zero_matrix_decay_frobenius_normalized_sgdm_gpt2-124m_lr0.01_mom0.9_mwd0_seed1337_scalefrobsqrtr-eps1em12-v1-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.01,
+        "frobenius_epsilon": 1e-12,
+        "frobenius_shape_factor": 1.0,
+        "learning_rate": 0.01,
+        "momentum": 0.9,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "scaling_rule": "frobsqrtr-eps1em12-v1-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "overrides": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.01,
+        "frobenius_shape_factor": 1.0,
+        "matrix_momentum": 0.95
+      },
+      "run_id": "zero_wd_frobenius_normalized_sgdm_lr0.01_mom0.95",
+      "run_name": "zero_matrix_decay_frobenius_normalized_sgdm_gpt2-124m_lr0.01_mom0.95_mwd0_seed1337_scalefrobsqrtr-eps1em12-v1-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.01,
+        "frobenius_epsilon": 1e-12,
+        "frobenius_shape_factor": 1.0,
+        "learning_rate": 0.01,
+        "momentum": 0.95,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "scaling_rule": "frobsqrtr-eps1em12-v1-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "overrides": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.03,
+        "frobenius_shape_factor": 1.0,
+        "matrix_momentum": 0.8
+      },
+      "run_id": "zero_wd_frobenius_normalized_sgdm_lr0.03_mom0.8",
+      "run_name": "zero_matrix_decay_frobenius_normalized_sgdm_gpt2-124m_lr0.03_mom0.8_mwd0_seed1337_scalefrobsqrtr-eps1em12-v1-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.03,
+        "frobenius_epsilon": 1e-12,
+        "frobenius_shape_factor": 1.0,
+        "learning_rate": 0.03,
+        "momentum": 0.8,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "scaling_rule": "frobsqrtr-eps1em12-v1-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "overrides": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.03,
+        "frobenius_shape_factor": 1.0,
+        "matrix_momentum": 0.9
+      },
+      "run_id": "zero_wd_frobenius_normalized_sgdm_lr0.03_mom0.9",
+      "run_name": "zero_matrix_decay_frobenius_normalized_sgdm_gpt2-124m_lr0.03_mom0.9_mwd0_seed1337_scalefrobsqrtr-eps1em12-v1-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.03,
+        "frobenius_epsilon": 1e-12,
+        "frobenius_shape_factor": 1.0,
+        "learning_rate": 0.03,
+        "momentum": 0.9,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "scaling_rule": "frobsqrtr-eps1em12-v1-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "tokens_per_update": 491520
+    },
+    {
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "max_iters": 999,
+      "max_processed_tokens": 491520000,
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "overrides": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.03,
+        "frobenius_shape_factor": 1.0,
+        "matrix_momentum": 0.95
+      },
+      "run_id": "zero_wd_frobenius_normalized_sgdm_lr0.03_mom0.95",
+      "run_name": "zero_matrix_decay_frobenius_normalized_sgdm_gpt2-124m_lr0.03_mom0.95_mwd0_seed1337_scalefrobsqrtr-eps1em12-v1-zero-matrix-wd",
+      "seed": 1337,
+      "selection_step": 999,
+      "selection_tokens": 491028480,
+      "selection_values": {
+        "family_learning_rate": 0.03,
+        "frobenius_epsilon": 1e-12,
+        "frobenius_shape_factor": 1.0,
+        "learning_rate": 0.03,
+        "momentum": 0.95,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "scaling_rule": "frobsqrtr-eps1em12-v1-zero-matrix-wd",
+        "weight_decay": 0.0
+      },
+      "tokens_per_update": 491520
+    }
+  ],
+  "schema_version": 1,
+  "selection": {
+    "expected_groups": [
+      "global_sgdm",
+      "static_per_matrix_sgdm",
+      "frobenius_normalized_sgdm"
+    ],
+    "group_by": "optimizer_name",
+    "metric": "validation_loss",
+    "mode": "min",
+    "tie_break": [
+      "family_learning_rate",
+      "momentum"
+    ]
+  }
+}

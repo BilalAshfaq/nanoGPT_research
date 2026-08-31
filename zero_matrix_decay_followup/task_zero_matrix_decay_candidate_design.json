@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "design_id": "zero-matrix-decay-followup-v1",
+  "purpose": "Rerun the three SGDM families with eligible-matrix weight decay fixed to zero while preserving the original weight-decay-0.1 artifacts.",
+  "config_file": "config/zero_matrix_decay_followup.py",
+  "matrix_weight_decay": 0.0,
+  "historical_matrix_weight_decay": 0.1,
+  "auxiliary_adamw": {
+    "learning_rate": 0.0006,
+    "betas": [0.9, 0.95],
+    "weight_decay": 0.1
+  },
+  "families": {
+    "global_sgdm": {
+      "learning_rates": [0.01, 0.03, 0.1, 0.3],
+      "momenta": [0.9, 0.95, 0.99],
+      "scaling_rule": "global-zero-matrix-wd"
+    },
+    "static_per_matrix_sgdm": {
+      "learning_rates": [0.01, 0.03, 0.1, 0.3],
+      "momenta": [0.9, 0.95, 0.99],
+      "mapping_name": "mlp_strong",
+      "mapping_id": "2633929b6baf",
+      "source_run_id": "static_lr0.03_mom0.99_map2633929b6baf",
+      "source_manifest": "experiment_manifests/task_2_5_static_exploratory.json",
+      "scaling_rule": "static-2633929b6baf-zero-matrix-wd"
+    },
+    "frobenius_normalized_sgdm": {
+      "learning_rates": [0.001, 0.003, 0.01, 0.03],
+      "momenta": [0.8, 0.9, 0.95],
+      "frobenius_epsilon": 1e-12,
+      "frobenius_shape_factor": 1.0,
+      "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+      "scaling_rule": "frobsqrtr-eps1em12-v1-zero-matrix-wd"
+    }
+  },
+  "budget": {
+    "exploratory_seed": 1337,
+    "confirmation_seeds": [2027, 4099],
+    "candidates_per_family": 12,
+    "total_exploratory_candidates": 36,
+    "max_iters": 999,
+    "tokens_per_update": 491520,
+    "selection_step": 999,
+    "selection_tokens": 491028480,
+    "max_processed_tokens": 491520000,
+    "evaluation_steps": [0, 333, 666, 999]
+  },
+  "artifact_names": {
+    "exploratory_manifest": "experiment_manifests/zero_matrix_decay_followup_exploratory.json",
+    "confirmation_manifest": "experiment_manifests/zero_matrix_decay_followup_confirmation.json",
+    "output_root": "nanogpt-study-runs/zero-matrix-decay-followup-v1",
+    "selection_report": "zero_matrix_decay_followup_selection.json",
+    "final_report": "zero_matrix_decay_followup_final.json",
+    "log_prefix": "zero_matrix_decay_followup_v1"
+  },
+  "protected_artifacts": {
+    "experiment_manifests/task_1_6_exploratory.json": "5920488065f5607f6027c93b8153d93066724ba95f0c47a34015df3e2b1efe22",
+    "experiment_manifests/task_2_5_static_exploratory.json": "5a591d6aefdc0477e269a0ba1c0ff933fdc6b5a2aa249287c6ab8830045ac62d",
+    "experiment_manifests/task_3_4_frobenius_exploratory.json": "02253e1b76bb05b64bf8ebb6a2a7dd0aeea43936a0994280126fa8c82be20604",
+    "reports/task_1_6_selection.json": "ff254012befa189160423dda42c3b6086149b7fa4af65ef734e8750900a455ff",
+    "reports/task_2_5_static_selection.json": "c0d60a9fddb68efde089337fa7288b9f2c98af28608c729eb879c24286e1a650",
+    "reports/task_3_5_frobenius_selection.json": "84d7d2bc83a7d011f819c07c189b1dbdd4bcddfa51948c6276c8866d943be738"
+  }
+}
