@@ -110,7 +110,7 @@
   },
   "environment_lock": "cluster_environment.freeze.txt",
   "expected_run_count": 12,
-  "launch_authorized": false,
+  "launch_authorized": true,
   "manifest_id": "task-3.4-frobenius-exploratory-v1",
   "outcome_policy": {
     "record": [

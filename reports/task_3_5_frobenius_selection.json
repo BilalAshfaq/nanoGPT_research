@@ -1,0 +1,1295 @@
+{
+  "manifest_id": "task-3.4-frobenius-exploratory-v1",
+  "results": [
+    {
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "outcome": {
+        "optimizer_name": "frobenius_normalized_sgdm",
+        "resumed": false,
+        "return_code": 0,
+        "run_id": "frobenius_lr0.001_mom0.9_frobsqrtr-eps1em12-v1",
+        "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.001_mom0.9_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+        "started_at": "2026-08-31T06:47:33.941892+00:00",
+        "status": "completed",
+        "updated_at": "2026-08-31T07:03:54.167774+00:00"
+      },
+      "output_directory": "/shared/home/bilal.ashfaq/nano research/nanoGPT_research/nanogpt-study-runs/task-3.5/frobenius_normalized_sgdm_gpt2-124m_lr0.001_mom0.9_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "resumed": false,
+      "run_id": "frobenius_lr0.001_mom0.9_frobsqrtr-eps1em12-v1",
+      "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.001_mom0.9_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "f9a44918b638dd3c620aa02318bd050d65600c06",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.0001,
+          "gradient_clipping_count": 237,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.237,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 4.593271255493164,
+          "latest_training_loss": 4.535403847694397,
+          "latest_validation_loss": 4.58680534362793,
+          "mean_optimizer_step_time_seconds": 0.00969758819103241,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 9.69758819103241,
+          "peak_gpu_memory_bytes": 10326923264,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 967.3590537062846
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nano research/nanoGPT_research/nanogpt-study-runs/task-3.5/frobenius_normalized_sgdm_gpt2-124m_lr0.001_mom0.9_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.0001,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 4.593271255493164,
+        "validation_loss": 4.58680534362793
+      },
+      "selection_values": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.001,
+        "frobenius_shape_factor": 1.0,
+        "momentum": 0.9,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "outcome": {
+        "optimizer_name": "frobenius_normalized_sgdm",
+        "resumed": false,
+        "return_code": 0,
+        "run_id": "frobenius_lr0.001_mom0.95_frobsqrtr-eps1em12-v1",
+        "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.001_mom0.95_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+        "started_at": "2026-08-31T07:03:54.200842+00:00",
+        "status": "completed",
+        "updated_at": "2026-08-31T07:20:22.967801+00:00"
+      },
+      "output_directory": "/shared/home/bilal.ashfaq/nano research/nanoGPT_research/nanogpt-study-runs/task-3.5/frobenius_normalized_sgdm_gpt2-124m_lr0.001_mom0.95_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "resumed": false,
+      "run_id": "frobenius_lr0.001_mom0.95_frobsqrtr-eps1em12-v1",
+      "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.001_mom0.95_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "f9a44918b638dd3c620aa02318bd050d65600c06",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.0001,
+          "gradient_clipping_count": 83,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.083,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 4.5431718826293945,
+          "latest_training_loss": 4.482366144657135,
+          "latest_validation_loss": 4.539528846740723,
+          "mean_optimizer_step_time_seconds": 0.009655190240859987,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 9.655190240859987,
+          "peak_gpu_memory_bytes": 10326923264,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 966.2123115020804
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nano research/nanoGPT_research/nanogpt-study-runs/task-3.5/frobenius_normalized_sgdm_gpt2-124m_lr0.001_mom0.95_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.0001,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 4.5431718826293945,
+        "validation_loss": 4.539528846740723
+      },
+      "selection_values": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.001,
+        "frobenius_shape_factor": 1.0,
+        "momentum": 0.95,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "outcome": {
+        "optimizer_name": "frobenius_normalized_sgdm",
+        "resumed": false,
+        "return_code": 0,
+        "run_id": "frobenius_lr0.001_mom0.99_frobsqrtr-eps1em12-v1",
+        "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.001_mom0.99_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+        "started_at": "2026-08-31T07:20:22.988103+00:00",
+        "status": "completed",
+        "updated_at": "2026-08-31T07:36:47.314424+00:00"
+      },
+      "output_directory": "/shared/home/bilal.ashfaq/nano research/nanoGPT_research/nanogpt-study-runs/task-3.5/frobenius_normalized_sgdm_gpt2-124m_lr0.001_mom0.99_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "resumed": false,
+      "run_id": "frobenius_lr0.001_mom0.99_frobsqrtr-eps1em12-v1",
+      "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.001_mom0.99_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "f9a44918b638dd3c620aa02318bd050d65600c06",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.0001,
+          "gradient_clipping_count": 69,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.069,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.191035747528076,
+          "latest_training_loss": 5.103577375411987,
+          "latest_validation_loss": 5.1898627281188965,
+          "mean_optimizer_step_time_seconds": 0.009686659985542297,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 9.686659985542297,
+          "peak_gpu_memory_bytes": 10326923264,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 967.967823005747
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nano research/nanoGPT_research/nanogpt-study-runs/task-3.5/frobenius_normalized_sgdm_gpt2-124m_lr0.001_mom0.99_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.0001,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.191035747528076,
+        "validation_loss": 5.1898627281188965
+      },
+      "selection_values": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.001,
+        "frobenius_shape_factor": 1.0,
+        "momentum": 0.99,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "outcome": {
+        "optimizer_name": "frobenius_normalized_sgdm",
+        "resumed": false,
+        "return_code": 0,
+        "run_id": "frobenius_lr0.003_mom0.9_frobsqrtr-eps1em12-v1",
+        "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.003_mom0.9_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+        "started_at": "2026-08-31T07:36:47.333378+00:00",
+        "status": "completed",
+        "updated_at": "2026-08-31T07:53:08.986153+00:00"
+      },
+      "output_directory": "/shared/home/bilal.ashfaq/nano research/nanoGPT_research/nanogpt-study-runs/task-3.5/frobenius_normalized_sgdm_gpt2-124m_lr0.003_mom0.9_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "resumed": false,
+      "run_id": "frobenius_lr0.003_mom0.9_frobsqrtr-eps1em12-v1",
+      "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.003_mom0.9_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "f9a44918b638dd3c620aa02318bd050d65600c06",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.00030000000000000003,
+          "gradient_clipping_count": 69,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.069,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 4.269000053405762,
+          "latest_training_loss": 4.253183305263519,
+          "latest_validation_loss": 4.2768731117248535,
+          "mean_optimizer_step_time_seconds": 0.009682242061614997,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 9.682242061614996,
+          "peak_gpu_memory_bytes": 10326923264,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 966.0294775222428
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nano research/nanoGPT_research/nanogpt-study-runs/task-3.5/frobenius_normalized_sgdm_gpt2-124m_lr0.003_mom0.9_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.00030000000000000003,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 4.269000053405762,
+        "validation_loss": 4.2768731117248535
+      },
+      "selection_values": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.003,
+        "frobenius_shape_factor": 1.0,
+        "momentum": 0.9,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "outcome": {
+        "optimizer_name": "frobenius_normalized_sgdm",
+        "resumed": false,
+        "return_code": 0,
+        "run_id": "frobenius_lr0.003_mom0.95_frobsqrtr-eps1em12-v1",
+        "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.003_mom0.95_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+        "started_at": "2026-08-31T07:53:09.006087+00:00",
+        "status": "completed",
+        "updated_at": "2026-08-31T08:09:26.425122+00:00"
+      },
+      "output_directory": "/shared/home/bilal.ashfaq/nano research/nanoGPT_research/nanogpt-study-runs/task-3.5/frobenius_normalized_sgdm_gpt2-124m_lr0.003_mom0.95_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "resumed": false,
+      "run_id": "frobenius_lr0.003_mom0.95_frobsqrtr-eps1em12-v1",
+      "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.003_mom0.95_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "f9a44918b638dd3c620aa02318bd050d65600c06",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.00030000000000000003,
+          "gradient_clipping_count": 49,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.049,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 4.321784496307373,
+          "latest_training_loss": 4.287570118904114,
+          "latest_validation_loss": 4.328773021697998,
+          "mean_optimizer_step_time_seconds": 0.009312448540687562,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 9.312448540687562,
+          "peak_gpu_memory_bytes": 10326923264,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 961.5486970827915
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nano research/nanoGPT_research/nanogpt-study-runs/task-3.5/frobenius_normalized_sgdm_gpt2-124m_lr0.003_mom0.95_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.00030000000000000003,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 4.321784496307373,
+        "validation_loss": 4.328773021697998
+      },
+      "selection_values": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.003,
+        "frobenius_shape_factor": 1.0,
+        "momentum": 0.95,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "outcome": {
+        "optimizer_name": "frobenius_normalized_sgdm",
+        "resumed": false,
+        "return_code": 0,
+        "run_id": "frobenius_lr0.003_mom0.99_frobsqrtr-eps1em12-v1",
+        "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.003_mom0.99_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+        "started_at": "2026-08-31T08:09:26.450191+00:00",
+        "status": "completed",
+        "updated_at": "2026-08-31T08:25:50.104136+00:00"
+      },
+      "output_directory": "/shared/home/bilal.ashfaq/nano research/nanoGPT_research/nanogpt-study-runs/task-3.5/frobenius_normalized_sgdm_gpt2-124m_lr0.003_mom0.99_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "resumed": false,
+      "run_id": "frobenius_lr0.003_mom0.99_frobsqrtr-eps1em12-v1",
+      "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.003_mom0.99_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "f9a44918b638dd3c620aa02318bd050d65600c06",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.00030000000000000003,
+          "gradient_clipping_count": 34,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.034,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.354344367980957,
+          "latest_training_loss": 5.264489054679871,
+          "latest_validation_loss": 5.350141525268555,
+          "mean_optimizer_step_time_seconds": 0.009342251940727232,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 9.342251940727232,
+          "peak_gpu_memory_bytes": 10326923264,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 964.6951880832203
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nano research/nanoGPT_research/nanogpt-study-runs/task-3.5/frobenius_normalized_sgdm_gpt2-124m_lr0.003_mom0.99_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.00030000000000000003,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.354344367980957,
+        "validation_loss": 5.350141525268555
+      },
+      "selection_values": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.003,
+        "frobenius_shape_factor": 1.0,
+        "momentum": 0.99,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "outcome": {
+        "optimizer_name": "frobenius_normalized_sgdm",
+        "resumed": false,
+        "return_code": 0,
+        "run_id": "frobenius_lr0.01_mom0.9_frobsqrtr-eps1em12-v1",
+        "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.01_mom0.9_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+        "started_at": "2026-08-31T08:25:50.116613+00:00",
+        "status": "completed",
+        "updated_at": "2026-08-31T08:42:05.641652+00:00"
+      },
+      "output_directory": "/shared/home/bilal.ashfaq/nano research/nanoGPT_research/nanogpt-study-runs/task-3.5/frobenius_normalized_sgdm_gpt2-124m_lr0.01_mom0.9_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "resumed": false,
+      "run_id": "frobenius_lr0.01_mom0.9_frobsqrtr-eps1em12-v1",
+      "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.01_mom0.9_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "f9a44918b638dd3c620aa02318bd050d65600c06",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.001,
+          "gradient_clipping_count": 57,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.057,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 4.967316150665283,
+          "latest_training_loss": 4.886468946933746,
+          "latest_validation_loss": 4.962184429168701,
+          "mean_optimizer_step_time_seconds": 0.009258608061790467,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 9.258608061790467,
+          "peak_gpu_memory_bytes": 10326923264,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 962.5458419448696
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nano research/nanoGPT_research/nanogpt-study-runs/task-3.5/frobenius_normalized_sgdm_gpt2-124m_lr0.01_mom0.9_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.001,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 4.967316150665283,
+        "validation_loss": 4.962184429168701
+      },
+      "selection_values": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.01,
+        "frobenius_shape_factor": 1.0,
+        "momentum": 0.9,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "outcome": {
+        "optimizer_name": "frobenius_normalized_sgdm",
+        "resumed": false,
+        "return_code": 0,
+        "run_id": "frobenius_lr0.01_mom0.95_frobsqrtr-eps1em12-v1",
+        "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.01_mom0.95_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+        "started_at": "2026-08-31T08:42:05.675099+00:00",
+        "status": "completed",
+        "updated_at": "2026-08-31T08:58:28.780118+00:00"
+      },
+      "output_directory": "/shared/home/bilal.ashfaq/nano research/nanoGPT_research/nanogpt-study-runs/task-3.5/frobenius_normalized_sgdm_gpt2-124m_lr0.01_mom0.95_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "resumed": false,
+      "run_id": "frobenius_lr0.01_mom0.95_frobsqrtr-eps1em12-v1",
+      "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.01_mom0.95_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "f9a44918b638dd3c620aa02318bd050d65600c06",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.001,
+          "gradient_clipping_count": 37,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.037,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.399919509887695,
+          "latest_training_loss": 5.284409523010254,
+          "latest_validation_loss": 5.395148277282715,
+          "mean_optimizer_step_time_seconds": 0.009340779686927796,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 9.340779686927796,
+          "peak_gpu_memory_bytes": 10326923264,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 962.5760122230276
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nano research/nanoGPT_research/nanogpt-study-runs/task-3.5/frobenius_normalized_sgdm_gpt2-124m_lr0.01_mom0.95_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.001,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.399919509887695,
+        "validation_loss": 5.395148277282715
+      },
+      "selection_values": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.01,
+        "frobenius_shape_factor": 1.0,
+        "momentum": 0.95,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "outcome": {
+        "optimizer_name": "frobenius_normalized_sgdm",
+        "resumed": false,
+        "return_code": 0,
+        "run_id": "frobenius_lr0.01_mom0.99_frobsqrtr-eps1em12-v1",
+        "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.01_mom0.99_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+        "started_at": "2026-08-31T08:58:28.785938+00:00",
+        "status": "completed",
+        "updated_at": "2026-08-31T09:14:43.427500+00:00"
+      },
+      "output_directory": "/shared/home/bilal.ashfaq/nano research/nanoGPT_research/nanogpt-study-runs/task-3.5/frobenius_normalized_sgdm_gpt2-124m_lr0.01_mom0.99_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "resumed": false,
+      "run_id": "frobenius_lr0.01_mom0.99_frobsqrtr-eps1em12-v1",
+      "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.01_mom0.99_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "f9a44918b638dd3c620aa02318bd050d65600c06",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.001,
+          "gradient_clipping_count": 646,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.646,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 6.2660603523254395,
+          "latest_training_loss": 6.1376869678497314,
+          "latest_validation_loss": 6.2704901695251465,
+          "mean_optimizer_step_time_seconds": 0.009286173931121827,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 9.286173931121827,
+          "peak_gpu_memory_bytes": 10326923264,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 962.5328108253889
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nano research/nanoGPT_research/nanogpt-study-runs/task-3.5/frobenius_normalized_sgdm_gpt2-124m_lr0.01_mom0.99_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.001,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 6.2660603523254395,
+        "validation_loss": 6.2704901695251465
+      },
+      "selection_values": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.01,
+        "frobenius_shape_factor": 1.0,
+        "momentum": 0.99,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "outcome": {
+        "optimizer_name": "frobenius_normalized_sgdm",
+        "resumed": false,
+        "return_code": 0,
+        "run_id": "frobenius_lr0.03_mom0.9_frobsqrtr-eps1em12-v1",
+        "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.03_mom0.9_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+        "started_at": "2026-08-31T09:14:43.449087+00:00",
+        "status": "completed",
+        "updated_at": "2026-08-31T09:30:59.145974+00:00"
+      },
+      "output_directory": "/shared/home/bilal.ashfaq/nano research/nanoGPT_research/nanogpt-study-runs/task-3.5/frobenius_normalized_sgdm_gpt2-124m_lr0.03_mom0.9_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "resumed": false,
+      "run_id": "frobenius_lr0.03_mom0.9_frobsqrtr-eps1em12-v1",
+      "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.03_mom0.9_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "f9a44918b638dd3c620aa02318bd050d65600c06",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.003,
+          "gradient_clipping_count": 337,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.337,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 5.814938545227051,
+          "latest_training_loss": 5.681694149971008,
+          "latest_validation_loss": 5.813374042510986,
+          "mean_optimizer_step_time_seconds": 0.009393176388740541,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 9.39317638874054,
+          "peak_gpu_memory_bytes": 10326923264,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 962.1182271307334
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nano research/nanoGPT_research/nanogpt-study-runs/task-3.5/frobenius_normalized_sgdm_gpt2-124m_lr0.03_mom0.9_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.003,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 5.814938545227051,
+        "validation_loss": 5.813374042510986
+      },
+      "selection_values": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.03,
+        "frobenius_shape_factor": 1.0,
+        "momentum": 0.9,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "outcome": {
+        "optimizer_name": "frobenius_normalized_sgdm",
+        "resumed": false,
+        "return_code": 0,
+        "run_id": "frobenius_lr0.03_mom0.95_frobsqrtr-eps1em12-v1",
+        "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.03_mom0.95_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+        "started_at": "2026-08-31T09:30:59.151067+00:00",
+        "status": "completed",
+        "updated_at": "2026-08-31T09:47:12.551073+00:00"
+      },
+      "output_directory": "/shared/home/bilal.ashfaq/nano research/nanoGPT_research/nanogpt-study-runs/task-3.5/frobenius_normalized_sgdm_gpt2-124m_lr0.03_mom0.95_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "resumed": false,
+      "run_id": "frobenius_lr0.03_mom0.95_frobsqrtr-eps1em12-v1",
+      "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.03_mom0.95_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "f9a44918b638dd3c620aa02318bd050d65600c06",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.003,
+          "gradient_clipping_count": 567,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.567,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 6.138974666595459,
+          "latest_training_loss": 5.990233421325684,
+          "latest_validation_loss": 6.141674041748047,
+          "mean_optimizer_step_time_seconds": 0.009451167133331304,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 9.451167133331305,
+          "peak_gpu_memory_bytes": 10326923264,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 961.7125631282106
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nano research/nanoGPT_research/nanogpt-study-runs/task-3.5/frobenius_normalized_sgdm_gpt2-124m_lr0.03_mom0.95_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.003,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 6.138974666595459,
+        "validation_loss": 6.141674041748047
+      },
+      "selection_values": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.03,
+        "frobenius_shape_factor": 1.0,
+        "momentum": 0.95,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    },
+    {
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "outcome": {
+        "optimizer_name": "frobenius_normalized_sgdm",
+        "resumed": false,
+        "return_code": 0,
+        "run_id": "frobenius_lr0.03_mom0.99_frobsqrtr-eps1em12-v1",
+        "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+        "started_at": "2026-08-31T09:47:12.566633+00:00",
+        "status": "completed",
+        "updated_at": "2026-08-31T10:03:29.794664+00:00"
+      },
+      "output_directory": "/shared/home/bilal.ashfaq/nano research/nanoGPT_research/nanogpt-study-runs/task-3.5/frobenius_normalized_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "resumed": false,
+      "run_id": "frobenius_lr0.03_mom0.99_frobsqrtr-eps1em12-v1",
+      "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "f9a44918b638dd3c620aa02318bd050d65600c06",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.003,
+          "gradient_clipping_count": 853,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.853,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 6.818234920501709,
+          "latest_training_loss": 6.683909296989441,
+          "latest_validation_loss": 6.819665908813477,
+          "mean_optimizer_step_time_seconds": 0.009294980275154116,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 9.294980275154115,
+          "peak_gpu_memory_bytes": 10326923264,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 962.452178326901
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nano research/nanoGPT_research/nanogpt-study-runs/task-3.5/frobenius_normalized_sgdm_gpt2-124m_lr0.03_mom0.99_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1/run_summary.json",
+      "seed": 1337,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.003,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 6.818234920501709,
+        "validation_loss": 6.819665908813477
+      },
+      "selection_values": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.03,
+        "frobenius_shape_factor": 1.0,
+        "momentum": 0.99,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    }
+  ],
+  "winners": {
+    "frobenius_normalized_sgdm": {
+      "optimizer_name": "frobenius_normalized_sgdm",
+      "outcome": {
+        "optimizer_name": "frobenius_normalized_sgdm",
+        "resumed": false,
+        "return_code": 0,
+        "run_id": "frobenius_lr0.003_mom0.9_frobsqrtr-eps1em12-v1",
+        "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.003_mom0.9_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+        "started_at": "2026-08-31T07:36:47.333378+00:00",
+        "status": "completed",
+        "updated_at": "2026-08-31T07:53:08.986153+00:00"
+      },
+      "output_directory": "/shared/home/bilal.ashfaq/nano research/nanoGPT_research/nanogpt-study-runs/task-3.5/frobenius_normalized_sgdm_gpt2-124m_lr0.003_mom0.9_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "resumed": false,
+      "run_id": "frobenius_lr0.003_mom0.9_frobsqrtr-eps1em12-v1",
+      "run_name": "frobenius_normalized_sgdm_gpt2-124m_lr0.003_mom0.9_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1",
+      "run_summary": {
+        "data": {
+          "dataset": "openwebtext",
+          "ddp_world_size": 2,
+          "effective_batch_size": 480,
+          "gradient_accumulation_steps_per_process": 20,
+          "micro_batch_size": 12,
+          "sequence_length": 1024,
+          "tokenizer": "gpt2",
+          "tokens_per_iteration": 491520
+        },
+        "git_commit": "f9a44918b638dd3c620aa02318bd050d65600c06",
+        "hardware": {
+          "cpu_count": 512,
+          "cuda": {
+            "compute_capability": [
+              12,
+              0
+            ],
+            "device_count": 2,
+            "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "total_memory_bytes": 101975851008
+          },
+          "device": "cuda:0",
+          "device_type": "cuda",
+          "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+          "processor": "x86_64",
+          "torch_version": "2.13.0+cu130"
+        },
+        "metrics": {
+          "divergence_status": "not_observed",
+          "effective_auxiliary_learning_rate": 5.9999999999999995e-05,
+          "effective_matrix_learning_rate": 0.00030000000000000003,
+          "gradient_clipping_count": 69,
+          "gradient_clipping_enabled": true,
+          "gradient_clipping_frequency": 0.069,
+          "latest_evaluation_step": 999,
+          "latest_evaluation_train_loss": 4.269000053405762,
+          "latest_training_loss": 4.253183305263519,
+          "latest_validation_loss": 4.2768731117248535,
+          "mean_optimizer_step_time_seconds": 0.009682242061614997,
+          "numerical_event_count": 0,
+          "numerical_status": "ok",
+          "optimizer_step_time_samples": 1000,
+          "optimizer_step_time_total_seconds": 9.682242061614996,
+          "peak_gpu_memory_bytes": 10326923264,
+          "peak_gpu_memory_status": "measured",
+          "total_wall_time_seconds": 966.0294775222428
+        },
+        "precision": {
+          "allow_tf32": true,
+          "dtype": "bfloat16",
+          "grad_scaler_enabled": false
+        },
+        "progress": {
+          "configured_max_iters": 999,
+          "configured_token_budget": 491520000,
+          "optimizer_step_attempts": 1000,
+          "optimizer_steps": 1000,
+          "planned_optimizer_step_attempts": 1000,
+          "processed_tokens": 491520000
+        }
+      },
+      "run_summary_path": "/shared/home/bilal.ashfaq/nano research/nanoGPT_research/nanogpt-study-runs/task-3.5/frobenius_normalized_sgdm_gpt2-124m_lr0.003_mom0.9_wd0.1_seed1337_scalefrobsqrtr-eps1em12-v1/run_summary.json",
+      "seed": 1337,
+      "selection_metric": 4.2768731117248535,
+      "selection_record": {
+        "auxiliary_learning_rate": 5.9999999999999995e-05,
+        "matrix_learning_rate": 0.00030000000000000003,
+        "processed_tokens": 491028480,
+        "step": 999,
+        "train_loss": 4.269000053405762,
+        "validation_loss": 4.2768731117248535
+      },
+      "selection_values": {
+        "frobenius_epsilon": 1e-12,
+        "frobenius_learning_rate": 0.003,
+        "frobenius_shape_factor": 1.0,
+        "momentum": 0.9,
+        "normalization_rule_id": "frobsqrtr-eps1em12-v1",
+        "weight_decay": 0.1
+      },
+      "status": "completed"
+    }
+  }
+}

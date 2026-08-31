@@ -2,7 +2,7 @@
   "schema_version": 1,
   "manifest_id": "task-3.5-frobenius-smoke-v1",
   "purpose": "pilot",
-  "launch_authorized": false,
+  "launch_authorized": true,
   "counts_toward_study_budget": false,
   "config_file": "config/task_3_5_frobenius_smoke.py",
   "environment_lock": "cluster_environment.freeze.txt",
