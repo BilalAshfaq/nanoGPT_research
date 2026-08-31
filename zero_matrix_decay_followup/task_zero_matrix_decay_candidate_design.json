@@ -55,11 +55,11 @@
     "log_prefix": "zero_matrix_decay_followup_v1"
   },
   "protected_artifacts": {
-    "experiment_manifests/task_1_6_exploratory.json": "5920488065f5607f6027c93b8153d93066724ba95f0c47a34015df3e2b1efe22",
-    "experiment_manifests/task_2_5_static_exploratory.json": "5a591d6aefdc0477e269a0ba1c0ff933fdc6b5a2aa249287c6ab8830045ac62d",
-    "experiment_manifests/task_3_4_frobenius_exploratory.json": "02253e1b76bb05b64bf8ebb6a2a7dd0aeea43936a0994280126fa8c82be20604",
-    "reports/task_1_6_selection.json": "ff254012befa189160423dda42c3b6086149b7fa4af65ef734e8750900a455ff",
-    "reports/task_2_5_static_selection.json": "c0d60a9fddb68efde089337fa7288b9f2c98af28608c729eb879c24286e1a650",
-    "reports/task_3_5_frobenius_selection.json": "84d7d2bc83a7d011f819c07c189b1dbdd4bcddfa51948c6276c8866d943be738"
+    "experiment_manifests/task_1_6_exploratory.json": "58ee344723fc11f93beb7901119deb3fae148ab778c3a0e69272848bc09b10ae",
+    "experiment_manifests/task_2_5_static_exploratory.json": "795ac117cd3a90e21cb22c8d804de1e88bcc38c2766b8ff3f680a0e44f266e9d",
+    "experiment_manifests/task_3_4_frobenius_exploratory.json": "d920ec4992d79b321c8b6a4a240b8234e8cdf27023264dc6f93dfc16b70c8496",
+    "reports/task_1_6_selection.json": "105c1771adf905cbad6afc5b8a5505849fa43b490d70a292da5c186cc7c646e5",
+    "reports/task_2_5_static_selection.json": "a489e7aa041c4d7cd2b63415686f53a7c9594e0926981aee093faf292832ef52",
+    "reports/task_3_5_frobenius_selection.json": "bd7a8c333d0c7a8bf0d4374416659bb8a45f23e3431a11d0b3f437f592957ba0"
   }
 }

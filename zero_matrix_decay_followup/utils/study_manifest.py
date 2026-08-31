@@ -2,11 +2,14 @@
 
 import argparse
 import copy
-import hashlib
 import json
 import os
 
-from shared_utils.experiment_manifest import repository_root, validate_manifest
+from shared_utils.experiment_manifest import (
+    repository_root,
+    sha256_json_file,
+    validate_manifest,
+)
 
 
 DESIGN_PATH = os.path.join(
@@ -21,14 +24,6 @@ def _read_json(path):
         return json.load(input_file)
 
 
-def _sha256(path):
-    digest = hashlib.sha256()
-    with open(path, "rb") as input_file:
-        for chunk in iter(lambda: input_file.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
-
-
 def _repository_path(relative_path):
     return os.path.join(repository_root(), *relative_path.split("/"))
 
@@ -40,7 +35,7 @@ def verify_protected_artifacts(design):
         path = _repository_path(relative_path)
         if not os.path.isfile(path):
             raise FileNotFoundError(f"missing protected artifact: {relative_path}")
-        actual_hash = _sha256(path)
+        actual_hash = sha256_json_file(path)
         if actual_hash != expected_hash:
             raise ValueError(f"protected artifact changed: {relative_path}")
 

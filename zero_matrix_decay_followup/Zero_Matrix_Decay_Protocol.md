@@ -35,8 +35,9 @@ momentum `0.8` below its former boundary winner.
 - Final report: `reports/zero_matrix_decay_followup_final.json`
 - Scheduler log prefix: `logs/zero_matrix_decay_followup_v1-<job-id>`
 
-The candidate design records SHA-256 hashes for all original manifests and
-selection reports. Materialization fails if any protected artifact changed.
+The candidate design records canonical JSON SHA-256 hashes for all original
+manifests and selection reports. Canonical hashing is independent of checkout
+line endings, and materialization fails if protected JSON content changed.
 
 ## Authorization and claims
 

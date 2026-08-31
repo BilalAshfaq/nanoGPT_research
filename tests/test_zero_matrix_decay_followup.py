@@ -1,10 +1,13 @@
 import copy
-import hashlib
 import json
 import os
 import unittest
 
-from shared_utils.experiment_manifest import resolve_run_config, validate_manifest
+from shared_utils.experiment_manifest import (
+    resolve_run_config,
+    sha256_json_file,
+    validate_manifest,
+)
 from shared_utils.experiment_results import generate_confirmation_manifest
 from zero_matrix_decay_followup.utils.study_manifest import (
     DESIGN_PATH,
@@ -26,14 +29,6 @@ def read_json(path):
         return json.load(input_file)
 
 
-def sha256(path):
-    digest = hashlib.sha256()
-    with open(path, "rb") as input_file:
-        for chunk in iter(lambda: input_file.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
-
-
 class ZeroMatrixDecayFollowupTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -46,7 +41,9 @@ class ZeroMatrixDecayFollowupTests(unittest.TestCase):
             "protected_artifacts"
         ].items():
             path = os.path.join(REPOSITORY_ROOT, *relative_path.split("/"))
-            self.assertEqual(sha256(path), expected_hash, relative_path)
+            self.assertEqual(
+                sha256_json_file(path), expected_hash, relative_path
+            )
 
     def test_original_baseline_retains_weight_decay_and_followup_sets_zero(self):
         baseline_namespace = {}
