@@ -32,7 +32,7 @@
   },
   "environment_lock": "cluster_environment.freeze.txt",
   "expected_run_count": 36,
-  "launch_authorized": false,
+  "launch_authorized": true,
   "manifest_id": "zero-matrix-decay-followup-exploratory-v1",
   "outcome_policy": {
     "replacement": "forbidden_without_separately_approved_follow_up",
