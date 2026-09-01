@@ -255,14 +255,29 @@ def _serialized_json(value):
     return json.dumps(value, indent=2, sort_keys=True) + "\n"
 
 
+def authorization_independent_manifest(manifest):
+    """Return the frozen protocol view, excluding the launch gate state."""
+
+    normalized = copy.deepcopy(manifest)
+    authorization = normalized.get("launch_authorized")
+    if not isinstance(authorization, bool):
+        raise ValueError("manifest launch_authorized must be a boolean")
+    normalized["launch_authorized"] = False
+    return normalized
+
+
 def write_new_or_identical(path, value):
-    """Create a new artifact, or accept an existing byte-identical artifact."""
+    """Create a new manifest or preserve an authorization-only gate change."""
 
     serialized = _serialized_json(value)
     if os.path.exists(path):
-        with open(path, encoding="utf-8") as existing_file:
-            if existing_file.read() != serialized:
-                raise FileExistsError(f"refusing to overwrite changed artifact: {path}")
+        current = _read_json(path)
+        validate_manifest(current)
+        if authorization_independent_manifest(current) != value:
+            raise FileExistsError(
+                "refusing to overwrite a manifest changed outside the "
+                f"launch_authorized gate: {path}"
+            )
         return "unchanged"
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "x", encoding="utf-8", newline="\n") as output_file:
@@ -286,10 +301,17 @@ def main(argv=None):
     if args.check:
         if not os.path.isfile(output_path):
             raise FileNotFoundError(f"missing materialized manifest: {output_path}")
-        with open(output_path, encoding="utf-8") as input_file:
-            if input_file.read() != _serialized_json(manifest):
-                raise ValueError("materialized zero-decay manifest changed")
-        print(f"valid manifest: {manifest['manifest_id']}")
+        current = _read_json(output_path)
+        validate_manifest(current)
+        if authorization_independent_manifest(current) != manifest:
+            raise ValueError(
+                "materialized zero-decay protocol changed outside the "
+                "launch_authorized gate"
+            )
+        print(
+            f"valid manifest: {manifest['manifest_id']} "
+            f"(launch_authorized={current['launch_authorized']})"
+        )
         return 0
     status = write_new_or_identical(output_path, manifest)
     print(f"{status}: {output_path}")

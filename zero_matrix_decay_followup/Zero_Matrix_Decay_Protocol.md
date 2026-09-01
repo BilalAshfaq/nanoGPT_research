@@ -43,7 +43,10 @@ line endings, and materialization fails if protected JSON content changed.
 
 The exploratory manifest is materialized with `launch_authorized = false`.
 Preparing or validating it launches no compute. After separate authorization,
-all 36 candidates must receive final recorded outcomes before selection.
+that single gate may change to `true`; protocol validation deliberately ignores
+only the gate value and continues to require every candidate, override, seed,
+budget, and path to match the frozen design. All 36 candidates must receive
+final recorded outcomes before selection.
 
 Seed `1337` is exploratory. The selected configuration from each family must
 also complete uninterrupted at seeds `2027` and `4099` before a three-family

@@ -1,6 +1,7 @@
 import copy
 import json
 import os
+import tempfile
 import unittest
 
 from shared_utils.experiment_manifest import (
@@ -11,8 +12,10 @@ from shared_utils.experiment_manifest import (
 from shared_utils.experiment_results import generate_confirmation_manifest
 from zero_matrix_decay_followup.utils.study_manifest import (
     DESIGN_PATH,
+    authorization_independent_manifest,
     materialize_manifest,
     verify_protected_artifacts,
+    write_new_or_identical,
 )
 
 
@@ -68,11 +71,13 @@ class ZeroMatrixDecayFollowupTests(unittest.TestCase):
         self.assertEqual(followup_namespace["auxiliary_beta1"], 0.9)
         self.assertEqual(followup_namespace["auxiliary_beta2"], 0.95)
 
-    def test_materialized_manifest_is_frozen_valid_and_unauthorized(self):
+    def test_materialized_manifest_is_frozen_except_for_authorization_gate(self):
         expected = materialize_manifest(self.design)
-        self.assertEqual(self.manifest, expected)
+        self.assertEqual(
+            authorization_independent_manifest(self.manifest), expected
+        )
         validate_manifest(self.manifest)
-        self.assertFalse(self.manifest["launch_authorized"])
+        self.assertIsInstance(self.manifest["launch_authorized"], bool)
         self.assertEqual(self.manifest["expected_run_count"], 36)
         self.assertEqual(
             self.manifest["output_root"],
@@ -85,6 +90,34 @@ class ZeroMatrixDecayFollowupTests(unittest.TestCase):
                 "final": "zero_matrix_decay_followup_final.json",
             },
         )
+
+    def test_authorization_gate_may_change_without_changing_protocol(self):
+        expected = materialize_manifest(self.design)
+        authorized = copy.deepcopy(expected)
+        authorized["launch_authorized"] = True
+        self.assertEqual(
+            authorization_independent_manifest(authorized), expected
+        )
+
+        changed_run = copy.deepcopy(authorized)
+        changed_run["runs"][0]["seed"] = 999
+        self.assertNotEqual(
+            authorization_independent_manifest(changed_run), expected
+        )
+
+    def test_materializer_preserves_an_authorized_existing_manifest(self):
+        expected = materialize_manifest(self.design)
+        authorized = copy.deepcopy(expected)
+        authorized["launch_authorized"] = True
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            path = os.path.join(temporary_directory, "manifest.json")
+            with open(path, "w", encoding="utf-8") as output_file:
+                json.dump(authorized, output_file, indent=2, sort_keys=True)
+                output_file.write("\n")
+            self.assertEqual(
+                write_new_or_identical(path, expected), "unchanged"
+            )
+            self.assertTrue(read_json(path)["launch_authorized"])
 
     def test_each_family_has_equal_budget_and_expected_grid(self):
         families = self.design["families"]
