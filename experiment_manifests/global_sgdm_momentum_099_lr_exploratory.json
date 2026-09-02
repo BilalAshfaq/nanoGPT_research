@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "manifest_id": "global-sgdm-momentum-099-lr-exploratory-v1",
+  "purpose": "study",
+  "launch_authorized": false,
+  "counts_toward_study_budget": true,
+  "config_file": "config/zero_matrix_decay_followup.py",
+  "environment_lock": "cluster_environment.freeze.txt",
+  "preflight_tests": [
+    "tests.test_baseline_preflight",
+    "tests.test_parameter_partition"
+  ],
+  "dataset": {
+    "name": "openwebtext",
+    "files": [
+      "data/openwebtext/train.bin",
+      "data/openwebtext/val.bin"
+    ],
+    "lock_file": "data/openwebtext/dataset_fingerprints.json",
+    "require_lock": true
+  },
+  "resources": {
+    "world_size": 2,
+    "device_name_contains": "NVIDIA RTX PRO 6000 Blackwell"
+  },
+  "output_root": "nanogpt-study-runs/global-sgdm-momentum-099-lr-exploratory-v1",
+  "expected_run_count": 5,
+  "selection": {
+    "group_by": "optimizer_name",
+    "expected_groups": [
+      "global_sgdm"
+    ],
+    "metric": "validation_loss",
+    "mode": "min",
+    "tie_break": [
+      "learning_rate"
+    ]
+  },
+  "runs": [
+    {
+      "run_id": "global_sgdm_lr0.1_mom0.99_mwd0",
+      "run_name": "global_sgdm_gpt2-124m_lr0.1_mom0.99_mwd0_seed1337_scaleglobal",
+      "optimizer_name": "global_sgdm",
+      "seed": 1337,
+      "max_iters": 999,
+      "tokens_per_update": 491520,
+      "selection_tokens": 491028480,
+      "max_processed_tokens": 491520000,
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "selection_step": 999,
+      "selection_values": {
+        "learning_rate": 0.1,
+        "momentum": 0.99,
+        "weight_decay": 0.0,
+        "scaling_rule": "global"
+      },
+      "overrides": {
+        "matrix_learning_rate": 0.1,
+        "matrix_momentum": 0.99
+      }
+    },
+    {
+      "run_id": "global_sgdm_lr0.01_mom0.99_mwd0",
+      "run_name": "global_sgdm_gpt2-124m_lr0.01_mom0.99_mwd0_seed1337_scaleglobal",
+      "optimizer_name": "global_sgdm",
+      "seed": 1337,
+      "max_iters": 999,
+      "tokens_per_update": 491520,
+      "selection_tokens": 491028480,
+      "max_processed_tokens": 491520000,
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "selection_step": 999,
+      "selection_values": {
+        "learning_rate": 0.01,
+        "momentum": 0.99,
+        "weight_decay": 0.0,
+        "scaling_rule": "global"
+      },
+      "overrides": {
+        "matrix_learning_rate": 0.01,
+        "matrix_momentum": 0.99
+      }
+    },
+    {
+      "run_id": "global_sgdm_lr0.001_mom0.99_mwd0",
+      "run_name": "global_sgdm_gpt2-124m_lr0.001_mom0.99_mwd0_seed1337_scaleglobal",
+      "optimizer_name": "global_sgdm",
+      "seed": 1337,
+      "max_iters": 999,
+      "tokens_per_update": 491520,
+      "selection_tokens": 491028480,
+      "max_processed_tokens": 491520000,
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "selection_step": 999,
+      "selection_values": {
+        "learning_rate": 0.001,
+        "momentum": 0.99,
+        "weight_decay": 0.0,
+        "scaling_rule": "global"
+      },
+      "overrides": {
+        "matrix_learning_rate": 0.001,
+        "matrix_momentum": 0.99
+      }
+    },
+    {
+      "run_id": "global_sgdm_lr0.0001_mom0.99_mwd0",
+      "run_name": "global_sgdm_gpt2-124m_lr0.0001_mom0.99_mwd0_seed1337_scaleglobal",
+      "optimizer_name": "global_sgdm",
+      "seed": 1337,
+      "max_iters": 999,
+      "tokens_per_update": 491520,
+      "selection_tokens": 491028480,
+      "max_processed_tokens": 491520000,
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "selection_step": 999,
+      "selection_values": {
+        "learning_rate": 0.0001,
+        "momentum": 0.99,
+        "weight_decay": 0.0,
+        "scaling_rule": "global"
+      },
+      "overrides": {
+        "matrix_learning_rate": 0.0001,
+        "matrix_momentum": 0.99
+      }
+    },
+    {
+      "run_id": "global_sgdm_lr0.00001_mom0.99_mwd0",
+      "run_name": "global_sgdm_gpt2-124m_lr0.00001_mom0.99_mwd0_seed1337_scaleglobal",
+      "optimizer_name": "global_sgdm",
+      "seed": 1337,
+      "max_iters": 999,
+      "tokens_per_update": 491520,
+      "selection_tokens": 491028480,
+      "max_processed_tokens": 491520000,
+      "evaluation_steps": [
+        0,
+        333,
+        666,
+        999
+      ],
+      "selection_step": 999,
+      "selection_values": {
+        "learning_rate": 0.00001,
+        "momentum": 0.99,
+        "weight_decay": 0.0,
+        "scaling_rule": "global"
+      },
+      "overrides": {
+        "matrix_learning_rate": 0.00001,
+        "matrix_momentum": 0.99
+      }
+    }
+  ]
+}
