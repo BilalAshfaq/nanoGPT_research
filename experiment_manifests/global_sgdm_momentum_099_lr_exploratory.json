@@ -2,7 +2,7 @@
   "schema_version": 1,
   "manifest_id": "global-sgdm-momentum-099-lr-exploratory-v1",
   "purpose": "study",
-  "launch_authorized": false,
+  "launch_authorized": true,
   "counts_toward_study_budget": true,
   "config_file": "config/zero_matrix_decay_followup.py",
   "environment_lock": "cluster_environment.freeze.txt",
