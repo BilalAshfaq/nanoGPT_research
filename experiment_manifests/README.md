@@ -647,3 +647,18 @@ sbatch \
 
 The five runs write only under
 `nanogpt-study-runs/global-sgdm-momentum-099-lr-exploratory-v1`.
+
+After all five entries have final outcomes, select the winner using unrounded
+step-999 validation loss and write the selection report into `reports/`:
+
+```bash
+python -m shared_utils.experiment_results select \
+  experiment_manifests/global_sgdm_momentum_099_lr_exploratory.json \
+  --report global_sgdm_momentum_099_lr_selection.json \
+  --confirmation-manifest experiment_manifests/global_sgdm_momentum_099_lr_confirmation.json
+```
+
+This produces `reports/global_sgdm_momentum_099_lr_selection.json`, containing
+all five outcomes and the selected `global_sgdm` winner. It also materializes
+an unauthorized confirmation manifest for seeds `2027` and `4099`; generating
+that file does not authorize or launch those runs.

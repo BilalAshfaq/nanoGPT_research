@@ -36,6 +36,14 @@
       "learning_rate"
     ]
   },
+  "confirmation": {
+    "manifest_id": "global-sgdm-momentum-099-lr-confirmation-v1",
+    "additional_seeds": [
+      2027,
+      4099
+    ],
+    "run_name_template": "global_sgdm_gpt2-124m_lr{learning_rate}_mom{momentum}_mwd0_seed{seed}_scale{scaling_rule}"
+  },
   "runs": [
     {
       "run_id": "global_sgdm_lr0.1_mom0.99_mwd0",
